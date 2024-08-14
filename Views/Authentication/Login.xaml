@@ -5,33 +5,78 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
     xmlns:vm="clr-namespace:FlavorHub.ViewModel"
-    Title="Login">
+    Title="hello">
+    <Shell.TitleView>
+        <StackLayout Padding="10" BackgroundColor="#FF5722">
+            <Label
+                FontAttributes="Bold"
+                FontSize="24"
+                HorizontalOptions="Center"
+                Text="FlavorHub"
+                TextColor="White" />
+        </StackLayout>
+    </Shell.TitleView>
     <ContentPage.BindingContext>
         <vm:LoginViewModel />
     </ContentPage.BindingContext>
-    <VerticalStackLayout Padding="20">
-        <Label Text="Register">
+
+    <AbsoluteLayout Padding="20">
+        <!--  Background Image  -->
+        <Image
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All"
+            Source="background.png" />
+        <!--  Register Label positioned at the top right  -->
+        <Label
+            AbsoluteLayout.LayoutBounds="0.95, 0, AutoSize, AutoSize"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            HorizontalOptions="End"
+            Text="Register">
             <Label.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding NavigateToRegisterCommand}" />
             </Label.GestureRecognizers>
         </Label>
-        <Label Style="{StaticResource Header}" Text="Login" />
 
-        <VerticalStackLayout Spacing="10">
-            <controls:InputFieldContentView
-                EntryData="{Binding Email}"
-                HorizontalOptions="FillAndExpand"
-                Keyboard="Text"
-                Placeholder="Enter Email" />
-            <VerticalStackLayout>
+        <!--  Main Content  -->
+        <VerticalStackLayout
+            AbsoluteLayout.LayoutBounds="0, 0.1, 1, Autosize"
+            AbsoluteLayout.LayoutFlags="All"
+            BackgroundColor="Transparent"
+            Spacing="10"
+            VerticalOptions="FillAndExpand">
+
+            <!--  header  -->
+            <VerticalStackLayout Spacing="25">
+                <Label Style="{StaticResource Header}" Text="Login" />
+                <Label Margin="0,0,0,15" Text="Login to share your flavor journey!" />
+            </VerticalStackLayout>
+
+            <!--  form  -->
+            <VerticalStackLayout
+                AbsoluteLayout.LayoutBounds="0, 200, 1, 400"
+                AbsoluteLayout.LayoutFlags="WidthProportional,PositionProportional"
+                Spacing="10">
                 <controls:InputFieldContentView
-                    EntryData="{Binding Password}"
+                    EntryData="{Binding Email}"
                     HorizontalOptions="FillAndExpand"
-                    IsPassword="True"
                     Keyboard="Text"
                     Placeholder="Enter Email" />
-                <Label HorizontalOptions="End" Text="Forgot Pasword?" />
+
+                <VerticalStackLayout Spacing="10">
+                    <controls:InputFieldContentView
+                        EntryData="{Binding Password}"
+                        HorizontalOptions="FillAndExpand"
+                        IsPassword="True"
+                        Keyboard="Text"
+                        Placeholder="Enter Password" />
+                    <Label
+                        Margin="0,0,0,30"
+                        HorizontalOptions="End"
+                        Text="Forgot Password?" />
+                    <!--  loginbutton  -->
+                    <controls:ButtonContentView ButtonText="Login" />
+                </VerticalStackLayout>
             </VerticalStackLayout>
         </VerticalStackLayout>
-    </VerticalStackLayout>
+    </AbsoluteLayout>
 </ContentPage>

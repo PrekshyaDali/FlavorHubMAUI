@@ -5,67 +5,90 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
     xmlns:vm="clr-namespace:FlavorHub.ViewModel">
-    <!--<ContentPage.BindingContext>
-        <vm:RegisterViewModel />
-    </ContentPage.BindingContext>-->
-    <VerticalStackLayout
-        Padding="20"
-        HorizontalOptions="FillAndExpand"
-        Spacing="10">
 
-        <Label HorizontalOptions="End" Text="Login" />
-        <Label
-            HorizontalOptions="Center"
-            LineBreakMode="NoWrap"
-            Style="{DynamicResource Header}"
-            Text="Register"
-            VerticalOptions="Center">
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding NavigateToLoginPage}" />
-            </Label.GestureRecognizers>
-        </Label>
+    <AbsoluteLayout Padding="20">
+        <!--  Background Image  -->
+        <Image
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All"
+            Source="background.png" />
+        <VerticalStackLayout
+            AbsoluteLayout.LayoutBounds="0, 0, 1, AutoSize"
+            AbsoluteLayout.LayoutFlags="All"
+            HorizontalOptions="FillAndExpand"
+            Spacing="10"
+            VerticalOptions="FillAndExpand">
 
-        <FlexLayout JustifyContent="SpaceBetween">
+            <Label HorizontalOptions="End" Text="Login" />
+
+            <VerticalStackLayout Margin="0,0,0,15" Spacing="15">
+                <Label
+                    Style="{DynamicResource Header}"
+                    Text="Register"
+                    VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToLoginPage}" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Text="Your culinary journey starts here—let's share our flavors!" />
+            </VerticalStackLayout>
+
+            <FlexLayout JustifyContent="SpaceBetween">
+                <controls:InputFieldContentView
+                    EntryData="{Binding FirstName}"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Text"
+                    Placeholder="Enter First Name"
+                    WidthRequest="165" />
+
+                <controls:InputFieldContentView
+                    EntryData="{Binding LastName}"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Text"
+                    Placeholder="Enter Last Name"
+                    WidthRequest="165" />
+            </FlexLayout>
+
             <controls:InputFieldContentView
-                EntryData="{Binding FirstName}"
-                HorizontalOptions="FillAndExpand"
+                EntryData="{Binding PhoneNumber}"
                 Keyboard="Text"
-                Placeholder="Enter First Name"
-                WidthRequest="165" />
-
+                Placeholder="Enter PhoneNumber" />
             <controls:InputFieldContentView
-                EntryData="{Binding LastName}"
-                HorizontalOptions="FillAndExpand"
+                EntryData="{Binding Email}"
                 Keyboard="Text"
-                Placeholder="Enter Last Name"
-                WidthRequest="165" />
-        </FlexLayout>
+                Placeholder="Enter Email" />
+            <controls:InputFieldContentView
+                EntryData="{Binding Password}"
+                IsPassword="True"
+                Keyboard="Text"
+                Placeholder="Password" />
+            <controls:InputFieldContentView
+                EntryData="{Binding ConfirmPassword}"
+                IsPassword="True"
+                Keyboard="Text"
+                Placeholder="Confirm Password" />
 
-        <controls:InputFieldContentView
-            EntryData="{Binding PhoneNumber}"
-            Keyboard="Text"
-            Placeholder="Enter PhoneNumber" />
-        <controls:InputFieldContentView
-            EntryData="{Binding Email}"
-            Keyboard="Text"
-            Placeholder="Enter Email" />
-        <controls:InputFieldContentView
-            EntryData="{Binding Password}"
-            IsPassword="True"
-            Keyboard="Text"
-            Placeholder="Enter Email" />
-        <controls:InputFieldContentView
-            EntryData="{Binding ConfirmPassword}"
-            IsPassword="True"
-            Keyboard="Text"
-            Placeholder="Enter Email" />
+            <!--  for button and terms and condition  -->
+            <VerticalStackLayout
+                Margin="0,30,0,0"
+                AbsoluteLayout.LayoutBounds="0, 1, 1, AutoSize"
+                AbsoluteLayout.LayoutFlags="All"
+                Spacing="10"
+                VerticalOptions="End">
 
-        <VerticalStackLayout VerticalOptions="End">
-            <Label Text="By registering you agree to our Terms and Conditions" />
-            <controls:ButtonContentView
-                ButtonCommand="{Binding SaveCommand}"
-                ButtonText="Save"
-                ButtonTextColor="Black" />
+                <Label
+                    FontSize="Small"
+                    HorizontalTextAlignment="Center"
+                    Text="By registering you agree to our Terms and Conditions"
+                    TextColor="{DynamicResource SecondaryTextColor}"
+                    VerticalTextAlignment="Center"
+                    WidthRequest="200" />
+                <controls:ButtonContentView
+                    ButtonCommand="{Binding SaveCommand}"
+                    ButtonText="Save"
+                    ButtonTextColor="Black" />
+            </VerticalStackLayout>
         </VerticalStackLayout>
-    </VerticalStackLayout>
+    </AbsoluteLayout>
+
 </ContentPage>
