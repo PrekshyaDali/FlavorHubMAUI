@@ -3,9 +3,13 @@
     x:Class="FlavorHub.Views.Authentication.Login"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:controls="clr-namespace:FlavorHub.Views.ContentView"
+    xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel"
     Title="Login">
-    <VerticalStackLayout>
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel />
+    </ContentPage.BindingContext>
+    <VerticalStackLayout Padding="20">
         <Label Text="Register">
             <Label.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding NavigateToRegisterCommand}" />

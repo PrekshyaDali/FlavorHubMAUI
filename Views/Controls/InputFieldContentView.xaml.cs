@@ -1,8 +1,8 @@
 using Microsoft.Maui.Controls;
 
-namespace FlavorHub.Views.ContentView
+namespace FlavorHub.Views.Controls
 {
-    public partial class InputFieldContentView : IContentView
+    public partial class InputFieldContentView : ContentView
     {
         // Bindable property for entry fields
         public static readonly BindableProperty EntryDataProperty = BindableProperty.Create(

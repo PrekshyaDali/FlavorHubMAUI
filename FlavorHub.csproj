@@ -83,10 +83,10 @@
 	  <MauiXaml Update="Views\Authentication\Register.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ContentView\ButtonContentView.xaml">
+	  <MauiXaml Update="Views\Controls\ButtonContentView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ContentView\InputFieldContentView.xaml">
+	  <MauiXaml Update="Views\Controls\InputFieldContentView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
