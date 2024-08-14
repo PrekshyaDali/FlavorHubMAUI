@@ -1,4 +1,6 @@
-﻿namespace FlavorHub
+﻿using FlavorHub.Views.Authentication;
+
+namespace FlavorHub
 {
     public partial class App : Application
     {
@@ -6,7 +8,8 @@
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            //MainPage = new AppShell();
+            MainPage = new NavigationPage(new Register());
         }
     }
 }

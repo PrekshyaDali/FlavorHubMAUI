@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FlavorHub.Views.Authentication.Login"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:FlavorHub.Views.ContentView"
+    Title="Login">
+    <VerticalStackLayout>
+        <Label Text="Register">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding NavigateToRegisterCommand}" />
+            </Label.GestureRecognizers>
+        </Label>
+        <Label Style="{StaticResource Header}" Text="Login" />
+
+        <VerticalStackLayout Spacing="10">
+            <controls:InputFieldContentView
+                EntryData="{Binding Email}"
+                HorizontalOptions="FillAndExpand"
+                Keyboard="Text"
+                Placeholder="Enter Email" />
+            <VerticalStackLayout>
+                <controls:InputFieldContentView
+                    EntryData="{Binding Password}"
+                    HorizontalOptions="FillAndExpand"
+                    IsPassword="True"
+                    Keyboard="Text"
+                    Placeholder="Enter Email" />
+                <Label HorizontalOptions="End" Text="Forgot Pasword?" />
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

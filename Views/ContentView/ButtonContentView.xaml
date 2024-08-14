@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="FlavorHub.Views.ContentView.ButtonContentView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="this">
+    <VerticalStackLayout>
+        <Button
+            BackgroundColor="{Binding ButtonBackgroundColor}"
+            Command="{Binding ButtonCommand}"
+            HorizontalOptions="FillAndExpand"
+            Text="{Binding ButtonText}"
+            TextColor="{DynamicResource PrimaryColor}"
+            VerticalOptions="Center" />
+    </VerticalStackLayout>
+</ContentView>

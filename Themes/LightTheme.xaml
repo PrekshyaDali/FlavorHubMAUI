@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    x:Class="FlavorHub.NewFolder.LightTheme"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Color x:Key="PageBackgroundColor">#D5EEEE</Color>
+    <!--  Light background color  -->
+    <Color x:Key="PrimaryColor">#3FB4B1</Color>
+    <!--  Main color  -->
+    <Color x:Key="SecondaryColor">#D5EEEE</Color>
+    <!--  Accent color  -->
+    <Color x:Key="PrimaryTextColor">Black</Color>
+    <!--  Main text color  -->
+    <Color x:Key="SecondaryTextColor">Gray</Color>
+</ResourceDictionary>
