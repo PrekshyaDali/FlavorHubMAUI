@@ -45,6 +45,8 @@
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splashscreenbackground.svg" Color="#3FB4B1" BaseSize="1024,1024" />
 		<!-- Images -->
+		<MauiImage Include="Resources\Images\TabBarIcons\*" />
+		<MauiImage Include="Resources\Images\HomePage\*" />
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
 
@@ -57,6 +59,12 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\background.png" />
+	  <None Remove="Resources\Images\HomePage\clock.png" />
+	  <None Remove="Resources\Images\HomePage\food.png" />
+	  <None Remove="Resources\Images\HomePage\fullscreen.png" />
+	  <None Remove="Resources\Images\HomePage\heart.png" />
+	  <None Remove="Resources\Images\HomePage\Ingredients.png" />
+	  <None Remove="Resources\Images\HomePage\level.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -91,6 +99,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Controls\InputFieldContentView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

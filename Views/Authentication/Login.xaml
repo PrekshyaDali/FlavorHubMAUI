@@ -4,18 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
-    xmlns:vm="clr-namespace:FlavorHub.ViewModel"
-    Title="hello">
-    <Shell.TitleView>
-        <StackLayout Padding="10" BackgroundColor="#FF5722">
-            <Label
-                FontAttributes="Bold"
-                FontSize="24"
-                HorizontalOptions="Center"
-                Text="FlavorHub"
-                TextColor="White" />
-        </StackLayout>
-    </Shell.TitleView>
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel">
+
     <ContentPage.BindingContext>
         <vm:LoginViewModel />
     </ContentPage.BindingContext>

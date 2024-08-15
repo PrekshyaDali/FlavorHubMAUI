@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using FlavorHub.Views.Authentication;
 using Microsoft.Maui.Controls;
 using System;
@@ -10,22 +11,13 @@ using System.Windows.Input;
 
 namespace FlavorHub.ViewModel
 {
-    public class RegisterViewModel
+    public partial class RegisterViewModel 
     {
-        public ICommand NavigateToLoginPage {  get; set; }
-        public INavigation _Navigation { get; set; }
-        public RegisterViewModel(INavigation navigation)
+        
+        public RegisterViewModel()
         {
-            _Navigation = navigation;
-            NavigateToLoginPage = new RelayCommand(ToNavigateToLogin);
         }
-        private async void ToNavigateToLogin()
-        {
-            if (_Navigation != null)
-            {
-                await _Navigation.PushAsync(new Login());
-            }
-        }
+     
 
     }
 }

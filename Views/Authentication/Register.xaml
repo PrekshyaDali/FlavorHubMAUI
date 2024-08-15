@@ -5,6 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
     xmlns:vm="clr-namespace:FlavorHub.ViewModel">
+    <!--<ContentPage.BindingContext>
+        <vm:RegisterViewModel />
+    </ContentPage.BindingContext>-->
 
     <AbsoluteLayout Padding="20">
         <!--  Background Image  -->
@@ -19,17 +22,11 @@
             Spacing="10"
             VerticalOptions="FillAndExpand">
 
-            <Label HorizontalOptions="End" Text="Login" />
-
             <VerticalStackLayout Margin="0,0,0,15" Spacing="15">
                 <Label
                     Style="{DynamicResource Header}"
                     Text="Register"
-                    VerticalOptions="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding NavigateToLoginPage}" />
-                    </Label.GestureRecognizers>
-                </Label>
+                    VerticalOptions="Center" />
                 <Label Text="Your culinary journey starts here—let's share our flavors!" />
             </VerticalStackLayout>
 
@@ -90,5 +87,4 @@
             </VerticalStackLayout>
         </VerticalStackLayout>
     </AbsoluteLayout>
-
 </ContentPage>

@@ -9,6 +9,11 @@
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
     </Style>
+    <Style x:Key="SubHeader" TargetType="Label">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+    </Style>
     <Style x:Key="EntryField" TargetType="Entry">
         <Setter Property="BackgroundColor" Value="{DynamicResource SecondaryColor}" />
     </Style>

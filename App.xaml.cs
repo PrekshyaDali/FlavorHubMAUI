@@ -1,4 +1,5 @@
-﻿using FlavorHub.Views.Authentication;
+﻿using FlavorHub.Views;
+using FlavorHub.Views.Authentication;
 
 namespace FlavorHub
 {
@@ -8,8 +9,8 @@ namespace FlavorHub
         {
             InitializeComponent();
 
-            //MainPage = new AppShell();
-            MainPage = new NavigationPage(new Register());
+            MainPage = new AppShell();
+            //MainPage = new NavigationPage(new HomePage());
         }
     }
 }

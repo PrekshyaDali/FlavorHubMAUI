@@ -4,9 +4,9 @@ namespace FlavorHub.Views.Authentication;
 
 public partial class Register : ContentPage
 {
-	public Register()
+    public Register()
 	{
 		InitializeComponent();
-        BindingContext = new RegisterViewModel(Navigation);
+        BindingContext = new RegisterViewModel();
     }
 }
