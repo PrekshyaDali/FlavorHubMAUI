@@ -16,15 +16,14 @@ namespace FlavorHub.ViewModel
         private TimeSpan _PreparationTime;
         public ICommand NavigateToAddRecipeInformation {  get; set; }  
         public ICommand NavigateToIngredientsPage { get; set; }
-        public ICommand NavigateToDirections {  get; set; }
         public ICommand ServingSizeIncrease { get; set; }
         public ICommand ServingSizeDecrease { get; set; }
+
         public AddRecipeViewModel()
         {
             Console.WriteLine("I am here");
             NavigateToAddRecipeInformation = new AsyncRelayCommand(NavigateRecipeInformation);
             NavigateToIngredientsPage = new AsyncRelayCommand(NavigateRecipeIngredient);
-            NavigateToDirections = new AsyncRelayCommand(NavigateToRecipeDirections);
         }
         [RelayCommand]
         public async Task NavigateRecipeInformation()
@@ -37,13 +36,6 @@ namespace FlavorHub.ViewModel
         {
             await Shell.Current.GoToAsync("AddRecipeIngredient");
         }
-        [RelayCommand]
-        public async Task NavigateToRecipeDirections()
-        {
-            await Shell.Current.GoToAsync("AddRecipeDirections");
-        }
-
-
-
+    
     }
 }

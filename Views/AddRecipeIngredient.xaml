@@ -4,18 +4,19 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
-    xmlns:vm="clr-namespace:FlavorHub.ViewModel"
+    xmlns:models="clr-namespace:FlavorHub.Models.RecipeFormModels"
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel.RecipeFormViewModels"
     Title="AddRecipeIngredient">
+
     <ContentPage.BindingContext>
-        <vm:AddRecipeViewModel />
+        <vm:IngredientViewModel />
     </ContentPage.BindingContext>
+
     <Shell.TitleView>
         <Grid Padding="20,5,20,0" HorizontalOptions="FillAndExpand">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <!--  Takes available space  -->
                 <ColumnDefinition Width="Auto" />
-                <!--  Content takes its natural size  -->
             </Grid.ColumnDefinitions>
             <Label
                 Grid.Column="0"
@@ -38,48 +39,38 @@
             </Border>
         </Grid>
     </Shell.TitleView>
+
     <VerticalStackLayout Padding="20,50,20,0" Spacing="20">
         <FlexLayout JustifyContent="SpaceBetween">
             <Label Style="{StaticResource Header}" Text="Ingredients" />
             <controls:ButtonContentView
+                ButtonCommand="{Binding AddIngredientCommand}"
                 ButtonText="Add more +"
                 HorizontalOptions="End"
                 WidthRequest="100" />
         </FlexLayout>
-        <Grid
-            ColumnDefinitions=".6*, .3*"
-            ColumnSpacing="10"
-            HeightRequest="250"
-            RowDefinitions="*, *, *"
-            RowSpacing="20"
-            VerticalOptions="FillAndExpand">
-            <controls:InputFieldContentView
-                Grid.Row="0"
-                Grid.Column="0"
-                Placeholder="Ingredient 1" />
-            <controls:InputFieldContentView
-                Grid.Row="1"
-                Grid.Column="0"
-                Placeholder="Ingredient 2" />
-            <controls:InputFieldContentView
-                Grid.Row="2"
-                Grid.Column="0"
-                Placeholder="Ingredient 3" />
 
-            <!--<Label Text="Measurements"></Label>-->
-            <controls:InputFieldContentView
-                Grid.Row="0"
-                Grid.Column="1"
-                Placeholder="Ingredient 1" />
-            <controls:InputFieldContentView
-                Grid.Row="1"
-                Grid.Column="1"
-                Placeholder="Ingredient" />
-            <controls:InputFieldContentView
-                Grid.Row="2"
-                Grid.Column="1"
-                Placeholder="Ingredient 3" />
-        </Grid>
+        <CollectionView ItemsSource="{Binding Ingredients}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:IngredientModel">
+                    <FlexLayout Margin="0,0,0,10" JustifyContent="SpaceBetween">
+                        <controls:InputFieldContentView
+                            EntryData="{Binding IngredientName}"
+                            Placeholder="Ingredient Name"
+                            WidthRequest="200" />
+                        <controls:InputFieldContentView
+                            EntryData="{Binding Measurement}"
+                            Placeholder="measurement"
+                            WidthRequest="70" />
+                        <ImageButton
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:IngredientViewModel}}, Path=RemoveIngredientCommand}"
+                            CommandParameter="{Binding .}"
+                            Source="/TabBarIcons/profile.png" />
+                    </FlexLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
         <controls:ButtonContentView ButtonCommand="{Binding NavigateToDirections}" ButtonText="Next" />
     </VerticalStackLayout>
 </ContentPage>

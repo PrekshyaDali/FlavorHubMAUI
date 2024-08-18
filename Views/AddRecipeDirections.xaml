@@ -4,10 +4,11 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
-    xmlns:vm="clr-namespace:FlavorHub.ViewModel"
+    xmlns:models="clr-namespace:FlavorHub.Models.RecipeFormModels"
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel.RecipeFormViewModels"
     Title="AddRecipeDirections">
     <ContentPage.BindingContext>
-        <vm:AddRecipeViewModel />
+        <vm:DirectionViewModel />
     </ContentPage.BindingContext>
     <Shell.TitleView>
         <Grid Padding="20,5,20,0" HorizontalOptions="FillAndExpand">
@@ -42,20 +43,28 @@
         <FlexLayout JustifyContent="SpaceBetween">
             <Label Style="{StaticResource Header}" Text="Directions" />
             <controls:ButtonContentView
+                ButtonCommand="{Binding AddDirectionCommand}"
                 ButtonText="Add more"
                 HorizontalOptions="End"
                 WidthRequest="100" />
         </FlexLayout>
-        <Grid
-            ColumnSpacing="10"
-            HeightRequest="250"
-            RowDefinitions="*, *, *"
-            RowSpacing="20"
-            VerticalOptions="FillAndExpand">
-            <controls:InputFieldContentView Grid.Row="0" Placeholder="Directions 1" />
-            <controls:InputFieldContentView Grid.Row="1" Placeholder="Directions 1" />
-            <controls:InputFieldContentView Grid.Row="2" Placeholder="Directions 1" />
-        </Grid>
-        <controls:ButtonContentView ButtonCommand="{Binding NavigateToFinalStep}" ButtonText="Next" />
+        <CollectionView ItemsSource="{Binding Directions}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:DirectionModel">
+                    <FlexLayout Margin="0,0,0,10" JustifyContent="SpaceBetween">
+                        <controls:InputFieldContentView
+                            EntryData="{Binding DirectionDescription}"
+                            Placeholder="Ingredient Name"
+                            WidthRequest="300" />
+                        <ImageButton
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:DirectionViewModel}}, Path=RemoveDirectionCommand}"
+                            CommandParameter="{Binding .}"
+                            Source="/TabBarIcons/profile.png"
+                            WidthRequest="50" />
+                    </FlexLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <controls:ButtonContentView ButtonCommand="{Binding NavigateToAddUploads}" ButtonText="Next" />
     </VerticalStackLayout>
 </ContentPage>

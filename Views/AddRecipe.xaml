@@ -44,10 +44,11 @@
             StrokeThickness="0"
             Style="{DynamicResource EntryField}"
             VerticalOptions="Center">
-            <Entry
+            <Editor
                 HeightRequest="200"
                 HorizontalOptions="FillAndExpand"
-                Placeholder="Upload your recipe image"
+                MaxLength="250"
+                Placeholder="Short description here"
                 PlaceholderColor="{StaticResource PrimaryTextColor}"
                 Text="{Binding RecipeImage, Mode=TwoWay}" />
         </Border>
