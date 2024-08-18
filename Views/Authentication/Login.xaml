@@ -6,10 +6,6 @@
     xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
     xmlns:vm="clr-namespace:FlavorHub.ViewModel">
 
-    <ContentPage.BindingContext>
-        <vm:LoginViewModel />
-    </ContentPage.BindingContext>
-
     <AbsoluteLayout Padding="20">
         <!--  Background Image  -->
         <Image
@@ -46,6 +42,14 @@
                 AbsoluteLayout.LayoutBounds="0, 200, 1, 400"
                 AbsoluteLayout.LayoutFlags="WidthProportional,PositionProportional"
                 Spacing="10">
+
+
+                <Frame>
+                    <Editor Placeholder="here" />
+                </Frame>
+                <Frame>
+                    <Editor Placeholder="here" />
+                </Frame>
                 <controls:InputFieldContentView
                     EntryData="{Binding Email}"
                     HorizontalOptions="FillAndExpand"
@@ -64,7 +68,7 @@
                         HorizontalOptions="End"
                         Text="Forgot Password?" />
                     <!--  loginbutton  -->
-                    <controls:ButtonContentView ButtonText="Login" />
+                    <controls:ButtonContentView ButtonText="Login" ButtonCommand="{Binding NavigateToHome}" />
                 </VerticalStackLayout>
             </VerticalStackLayout>
         </VerticalStackLayout>

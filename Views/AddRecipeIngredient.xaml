@@ -10,7 +10,7 @@
         <vm:AddRecipeViewModel />
     </ContentPage.BindingContext>
     <Shell.TitleView>
-        <Grid Padding="20,10,20,0" HorizontalOptions="FillAndExpand">
+        <Grid Padding="20,5,20,0" HorizontalOptions="FillAndExpand">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <!--  Takes available space  -->
@@ -38,12 +38,14 @@
             </Border>
         </Grid>
     </Shell.TitleView>
-    <VerticalStackLayout Padding="20" Spacing="20">
-        <Label Style="{StaticResource Header}" Text="Ingredients" />
-        <controls:ButtonContentView
-            ButtonText="Add more +"
-            HorizontalOptions="End"
-            WidthRequest="100" />
+    <VerticalStackLayout Padding="20,50,20,0" Spacing="20">
+        <FlexLayout JustifyContent="SpaceBetween">
+            <Label Style="{StaticResource Header}" Text="Ingredients" />
+            <controls:ButtonContentView
+                ButtonText="Add more +"
+                HorizontalOptions="End"
+                WidthRequest="100" />
+        </FlexLayout>
         <Grid
             ColumnDefinitions=".6*, .3*"
             ColumnSpacing="10"
@@ -78,6 +80,6 @@
                 Grid.Column="1"
                 Placeholder="Ingredient 3" />
         </Grid>
-        <controls:ButtonContentView ButtonText="Next" ButtonCommand="{Binding NavigateToDirections}" />
+        <controls:ButtonContentView ButtonCommand="{Binding NavigateToDirections}" ButtonText="Next" />
     </VerticalStackLayout>
 </ContentPage>

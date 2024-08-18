@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:FlavorHub.Views.Controls">
     <Shell.TitleView>
-        <Grid Padding="20,15,20,0" HorizontalOptions="FillAndExpand">
+        <Grid Padding="20,5,20,0" HorizontalOptions="FillAndExpand">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <!--  Takes available space  -->
@@ -13,11 +13,11 @@
                 <!--  Content takes its natural size  -->
             </Grid.ColumnDefinitions>
             <Label
-                VerticalOptions="Center"
                 Grid.Column="0"
                 HorizontalOptions="Center"
                 Style="{StaticResource SubHeader}"
-                Text="Add Recipe" />
+                Text="Add Recipe"
+                VerticalOptions="Center" />
             <Border
                 Grid.Column="1"
                 BackgroundColor="{DynamicResource SecondaryColor}"
@@ -33,10 +33,9 @@
             </Border>
         </Grid>
     </Shell.TitleView>
-    <VerticalStackLayout Padding="20" Spacing="20">
+    <VerticalStackLayout Padding="20,50,20,0" Spacing="20">
         <Label Style="{StaticResource Header}" Text="Title" />
         <controls:InputFieldContentView EntryData="{Binding Title}" Placeholder="Title" />
-
         <Border
             Padding="10,5,10,5"
             BindingContext="{x:Reference this}"
@@ -53,6 +52,6 @@
                 Text="{Binding RecipeImage, Mode=TwoWay}" />
         </Border>
 
-        <controls:ButtonContentView ButtonText="Next" ButtonCommand="{Binding NavigateToAddRecipeInformation}" />
+        <controls:ButtonContentView ButtonCommand="{Binding NavigateToAddRecipeInformation}" ButtonText="Next" />
     </VerticalStackLayout>
 </ContentPage>

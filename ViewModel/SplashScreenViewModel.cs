@@ -6,25 +6,31 @@ using System.Windows.Input;
 
 namespace FlavorHub.ViewModel
 {
-    public class SplashScreenViewModel
+    public partial class SplashScreenViewModel
     {
-        public ICommand NavigateToLogin { get; }
+        //public ICommand NavigateToLogin { get; }
         public ICommand NavigateToSecondSplashScreen { get; }
         public ICommand NavigateToThirdSplashScreen { get; }
+        public ICommand NavigateToHome {  get; }
 
         public SplashScreenViewModel()
         {
             // Initialize commands with the correct method references
-            NavigateToLogin = new AsyncRelayCommand(LoginNavigate);
+            //NavigateToLogin = new AsyncRelayCommand(LoginNavigate);
             NavigateToSecondSplashScreen = new AsyncRelayCommand(SecondSplashScreenNavigate);
             NavigateToThirdSplashScreen = new AsyncRelayCommand(ThirdSplashScreenNavigate);
+            NavigateToHome = new RelayCommand(NavigateToHomePage);
         }
-
-        // Navigate to the login page
-        private async Task LoginNavigate()
+        [RelayCommand]
+        public async void NavigateToHomePage()
         {
-            await Shell.Current.GoToAsync("Login");
+            await Shell.Current.GoToAsync("//HomePage");
         }
+        // Navigate to the login page
+        //private async Task LoginNavigate()
+        //{
+        //    await Shell.Current.GoToAsync("Login");
+        //}
 
         // Navigate to the second splash screen
         private async Task SecondSplashScreenNavigate()

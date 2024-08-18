@@ -30,26 +30,12 @@
                 <Label Text="Your culinary journey starts here—let's share our flavors!" />
             </VerticalStackLayout>
 
-            <FlexLayout JustifyContent="SpaceBetween">
-                <controls:InputFieldContentView
-                    EntryData="{Binding FirstName}"
-                    HorizontalOptions="FillAndExpand"
-                    Keyboard="Text"
-                    Placeholder="Enter First Name"
-                    WidthRequest="165" />
-
-                <controls:InputFieldContentView
-                    EntryData="{Binding LastName}"
-                    HorizontalOptions="FillAndExpand"
-                    Keyboard="Text"
-                    Placeholder="Enter Last Name"
-                    WidthRequest="165" />
-            </FlexLayout>
-
             <controls:InputFieldContentView
-                EntryData="{Binding PhoneNumber}"
+                EntryData="{Binding UserName}"
+                HorizontalOptions="FillAndExpand"
                 Keyboard="Text"
-                Placeholder="Enter PhoneNumber" />
+                Placeholder="Enter Username" />
+
             <controls:InputFieldContentView
                 EntryData="{Binding Email}"
                 Keyboard="Text"
