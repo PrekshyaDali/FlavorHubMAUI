@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FlavorHub.Views.AddRecipeIngredient"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel"
+    Title="AddRecipeIngredient">
+    <ContentPage.BindingContext>
+        <vm:AddRecipeViewModel />
+    </ContentPage.BindingContext>
+    <Shell.TitleView>
+        <Grid Padding="20,10,20,0" HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <!--  Takes available space  -->
+                <ColumnDefinition Width="Auto" />
+                <!--  Content takes its natural size  -->
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Column="0"
+                HorizontalOptions="Center"
+                Style="{StaticResource SubHeader}"
+                Text="Add Recipe"
+                VerticalOptions="Center" />
+            <Border
+                Grid.Column="1"
+                BackgroundColor="{DynamicResource SecondaryColor}"
+                HeightRequest="50"
+                HorizontalOptions="End"
+                StrokeShape="RoundRectangle 20"
+                StrokeThickness="0"
+                WidthRequest="80">
+                <Label
+                    HorizontalOptions="Center"
+                    Text="3/5"
+                    VerticalOptions="Center" />
+            </Border>
+        </Grid>
+    </Shell.TitleView>
+    <VerticalStackLayout Padding="20" Spacing="20">
+        <Label Style="{StaticResource Header}" Text="Ingredients" />
+        <controls:ButtonContentView
+            ButtonText="Add more +"
+            HorizontalOptions="End"
+            WidthRequest="100" />
+        <Grid
+            ColumnDefinitions=".6*, .3*"
+            ColumnSpacing="10"
+            HeightRequest="250"
+            RowDefinitions="*, *, *"
+            RowSpacing="20"
+            VerticalOptions="FillAndExpand">
+            <controls:InputFieldContentView
+                Grid.Row="0"
+                Grid.Column="0"
+                Placeholder="Ingredient 1" />
+            <controls:InputFieldContentView
+                Grid.Row="1"
+                Grid.Column="0"
+                Placeholder="Ingredient 2" />
+            <controls:InputFieldContentView
+                Grid.Row="2"
+                Grid.Column="0"
+                Placeholder="Ingredient 3" />
+
+            <!--<Label Text="Measurements"></Label>-->
+            <controls:InputFieldContentView
+                Grid.Row="0"
+                Grid.Column="1"
+                Placeholder="Ingredient 1" />
+            <controls:InputFieldContentView
+                Grid.Row="1"
+                Grid.Column="1"
+                Placeholder="Ingredient" />
+            <controls:InputFieldContentView
+                Grid.Row="2"
+                Grid.Column="1"
+                Placeholder="Ingredient 3" />
+        </Grid>
+        <controls:ButtonContentView ButtonText="Next" ButtonCommand="{Binding NavigateToDirections}" />
+    </VerticalStackLayout>
+</ContentPage>

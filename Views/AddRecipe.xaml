@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FlavorHub.Views.AddRecipe"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:FlavorHub.Views.Controls">
+    <Shell.TitleView>
+        <Grid Padding="20,15,20,0" HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <!--  Takes available space  -->
+                <ColumnDefinition Width="Auto" />
+                <!--  Content takes its natural size  -->
+            </Grid.ColumnDefinitions>
+            <Label
+                VerticalOptions="Center"
+                Grid.Column="0"
+                HorizontalOptions="Center"
+                Style="{StaticResource SubHeader}"
+                Text="Add Recipe" />
+            <Border
+                Grid.Column="1"
+                BackgroundColor="{DynamicResource SecondaryColor}"
+                HeightRequest="50"
+                HorizontalOptions="End"
+                StrokeShape="RoundRectangle 20"
+                StrokeThickness="0"
+                WidthRequest="80">
+                <Label
+                    HorizontalOptions="Center"
+                    Text="1/5"
+                    VerticalOptions="Center" />
+            </Border>
+        </Grid>
+    </Shell.TitleView>
+    <VerticalStackLayout Padding="20" Spacing="20">
+        <Label Style="{StaticResource Header}" Text="Title" />
+        <controls:InputFieldContentView EntryData="{Binding Title}" Placeholder="Title" />
+
+        <Border
+            Padding="10,5,10,5"
+            BindingContext="{x:Reference this}"
+            HorizontalOptions="FillAndExpand"
+            StrokeShape="RoundRectangle 10"
+            StrokeThickness="0"
+            Style="{DynamicResource EntryField}"
+            VerticalOptions="Center">
+            <Entry
+                HeightRequest="200"
+                HorizontalOptions="FillAndExpand"
+                Placeholder="Upload your recipe image"
+                PlaceholderColor="{StaticResource PrimaryTextColor}"
+                Text="{Binding RecipeImage, Mode=TwoWay}" />
+        </Border>
+
+        <controls:ButtonContentView ButtonText="Next" ButtonCommand="{Binding NavigateToAddRecipeInformation}" />
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FlavorHub.Views.AddRecipeDirections"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel"
+    Title="AddRecipeDirections">
+    <ContentPage.BindingContext>
+        <vm:AddRecipeViewModel />
+    </ContentPage.BindingContext>
+    <Shell.TitleView>
+        <Grid Padding="20,10,20,0" HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <!--  Takes available space  -->
+                <ColumnDefinition Width="Auto" />
+                <!--  Content takes its natural size  -->
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Column="0"
+                HorizontalOptions="Center"
+                Style="{StaticResource SubHeader}"
+                Text="Add Recipe"
+                VerticalOptions="Center" />
+            <Border
+                Grid.Column="1"
+                BackgroundColor="{DynamicResource SecondaryColor}"
+                HeightRequest="50"
+                HorizontalOptions="End"
+                StrokeShape="RoundRectangle 20"
+                StrokeThickness="0"
+                WidthRequest="80">
+                <Label
+                    HorizontalOptions="Center"
+                    Text="4/5"
+                    VerticalOptions="Center" />
+            </Border>
+        </Grid>
+    </Shell.TitleView>
+    <VerticalStackLayout Padding="20,50,20,0" Spacing="20">
+        <controls:ButtonContentView
+            ButtonText="Add more"
+            HorizontalOptions="End"
+            WidthRequest="100" />
+        <Label Style="{StaticResource Header}" Text="Directions" />
+        <Grid
+            ColumnSpacing="10"
+            HeightRequest="250"
+            RowDefinitions="*, *, *"
+            RowSpacing="20"
+            VerticalOptions="FillAndExpand">
+            <controls:InputFieldContentView Grid.Row="0" Placeholder="Directions 1" />
+            <controls:InputFieldContentView Grid.Row="1" Placeholder="Directions 1" />
+            <controls:InputFieldContentView Grid.Row="2" Placeholder="Directions 1" />
+        </Grid>
+        <controls:ButtonContentView ButtonCommand="{Binding NavigateToFinalStep}" ButtonText="Next" />
+    </VerticalStackLayout>
+</ContentPage>

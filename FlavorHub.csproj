@@ -45,6 +45,8 @@
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splashscreenbackground.svg" Color="#3FB4B1" BaseSize="1024,1024" />
 		<!-- Images -->
+		<MauiImage Include="Resources\Images\Splashes\*" />
+		<MauiImage Include="Resources\Images\Icons\*" />
 		<MauiImage Include="Resources\Images\TabBarIcons\*" />
 		<MauiImage Include="Resources\Images\HomePage\*" />
 		<MauiImage Include="Resources\Images\*" />
@@ -65,6 +67,8 @@
 	  <None Remove="Resources\Images\HomePage\heart.png" />
 	  <None Remove="Resources\Images\HomePage\Ingredients.png" />
 	  <None Remove="Resources\Images\HomePage\level.png" />
+	  <None Remove="Resources\Images\HomePage\pasta.jpg" />
+	  <None Remove="Resources\Images\HomePage\sandwich.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -89,6 +93,18 @@
 	  <MauiXaml Update="Resources\Styles\CustomStyles.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\AddRecipe.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\AddRecipeDirections.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\AddRecipeInformation.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\AddRecipeIngredient.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Authentication\Login.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -101,9 +117,23 @@
 	  <MauiXaml Update="Views\Controls\InputFieldContentView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Controls\RecipeUIContentView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\SplashScreens\FirstSplashScreen.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\SplashScreens\SecondSplashScreen.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\SplashScreens\ThirdSplashScreen.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
+
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionFlavorHubHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 
 </Project>

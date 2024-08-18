@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="FlavorHub.Views.Controls.RecipeUIContentView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="this">
+
+    <Border
+        BindingContext="{x:Reference this}"
+        HeightRequest="250"
+        StrokeShape="RoundRectangle 20"
+        WidthRequest="{Binding ContentWidth}">
+        <AbsoluteLayout>
+            <Image
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                Aspect="AspectFill"
+                Source="{Binding RecipeImage}" />
+            <RoundRectangle
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                CornerRadius="20"
+                Opacity=".7">
+                <RoundRectangle.Fill>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Offset="0" Color="Transparent" />
+                        <GradientStop Offset="1" Color="#000000" />
+                    </LinearGradientBrush>
+                </RoundRectangle.Fill>
+            </RoundRectangle>
+            <Grid
+                Padding="20"
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                ColumnDefinitions="*"
+                RowDefinitions=".1*,*, .4*">
+                <FlexLayout Grid.Row="0" JustifyContent="SpaceBetween">
+                    <Border
+                        BackgroundColor="#807A5242"
+                        HeightRequest="40"
+                        MinimumWidthRequest="100"
+                        Opacity="100"
+                        StrokeShape="RoundRectangle 30"
+                        StrokeThickness="0">
+                        <HorizontalStackLayout
+                            Padding="5,3,5,3"
+                            Spacing="3"
+                            VerticalOptions="Center">
+                            <Border StrokeShape="RoundRectangle 30">
+                                <Image Source="{Binding ProfileImage}" />
+                            </Border>
+                            <Label Text="{Binding UserName}" TextColor="{StaticResource White}" />
+                        </HorizontalStackLayout>
+                    </Border>
+                    <Border
+                        Padding="5"
+                        BackgroundColor="#807A5242"
+                        HeightRequest="35"
+                        Opacity="100"
+                        StrokeShape="RoundRectangle 30"
+                        StrokeThickness="0"
+                        WidthRequest="35">
+                        <Image
+                            Aspect="AspectFill"
+                            HorizontalOptions="Center"
+                            Source="/Homepage/heart.png"
+                            VerticalOptions="Center" />
+                    </Border>
+                </FlexLayout>
+
+                <!--  for the cooking details  -->
+                <VerticalStackLayout Grid.Row="2" Spacing="8">
+                    <HorizontalStackLayout Spacing="10">
+                        <HorizontalStackLayout
+                            HorizontalOptions="Center"
+                            Spacing="10"
+                            VerticalOptions="Center">
+                            <Image Source="/HomePage/clock.png" VerticalOptions="Center" />
+                            <Label
+                                FontSize="Micro"
+                                Text="12 min"
+                                TextColor="white" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout
+                            HorizontalOptions="Center"
+                            Spacing="10"
+                            VerticalOptions="Center">
+                            <Image Source="/HomePage/level.png" />
+                            <Label
+                                FontSize="Micro"
+                                Text="Easy"
+                                TextColor="white" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout
+                            HorizontalOptions="Center"
+                            Spacing="10"
+                            VerticalOptions="Center">
+                            <Image Source="/HomePage/ingredients.png" />
+                            <Label
+                                FontSize="Micro"
+                                Text="Ingredients"
+                                TextColor="white" />
+                        </HorizontalStackLayout>
+                    </HorizontalStackLayout>
+                    <Label
+                        Style="{DynamicResource SubHeader}"
+                        Text="{Binding RecipeFoodName}"
+                        TextColor="{StaticResource SecondaryColor}" />
+                </VerticalStackLayout>
+
+
+                <!--  for full screen  -->
+                <Border
+                    Grid.Row="2"
+                    Padding="10"
+                    BackgroundColor="#807A5242"
+                    HeightRequest="40"
+                    HorizontalOptions="End"
+                    Opacity="100"
+                    StrokeShape="RoundRectangle 30"
+                    StrokeThickness="0"
+                    WidthRequest="40">
+                    <Image Aspect="AspectFit" Source="/HomePage/fullscreen.png" />
+                </Border>
+            </Grid>
+        </AbsoluteLayout>
+    </Border>
+</ContentView>

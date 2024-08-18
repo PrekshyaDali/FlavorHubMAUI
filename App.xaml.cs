@@ -1,5 +1,6 @@
 ﻿using FlavorHub.Views;
 using FlavorHub.Views.Authentication;
+using FlavorHub.Views.SplashScreens;
 
 namespace FlavorHub
 {
@@ -11,6 +12,16 @@ namespace FlavorHub
 
             MainPage = new AppShell();
             //MainPage = new NavigationPage(new HomePage());
+        }
+
+        protected override async void OnStart()
+        {
+            base.OnStart();
+            // Ensure the Shell has been fully initialized before navigating
+            if (Shell.Current != null)
+            {
+                await Shell.Current.GoToAsync("//FirstSplashScreen");
+            }
         }
     }
 }

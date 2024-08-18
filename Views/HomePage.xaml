@@ -2,7 +2,8 @@
 <ContentPage
     x:Class="FlavorHub.Views.HomePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:FlavorHub.Views.Controls">
     <Shell.TitleView>
         <Border>
             <Grid>
@@ -23,13 +24,13 @@
         </Border>
     </Shell.TitleView>
     <ScrollView Padding="30">
-        <Grid RowDefinitions=".4*,.4*,*,*" RowSpacing="10">
+        <Grid RowDefinitions=".4*,.4*,*,*" RowSpacing="20">
             <!--  for sub heading  -->
-            <Border Grid.Row="0">
+            <Border Grid.Row="0" StrokeThickness="0">
                 <Label Style="{StaticResource SubHeader}" Text="What do you want to cook today?" />
             </Border>
             <!--  for filters  -->
-            <Border Grid.Row="1">
+            <Border Grid.Row="1" StrokeThickness="0">
                 <ScrollView Orientation="Horizontal" VerticalOptions="Center">
                     <HorizontalStackLayout Spacing="10">
                         <Border
@@ -79,118 +80,58 @@
                     </HorizontalStackLayout>
                 </ScrollView>
             </Border>
-            <Border
-                Grid.Row="2"
-                HeightRequest="250"
-                StrokeShape="RoundRectangle 20">
-                <AbsoluteLayout>
-                    <Image
-                        AbsoluteLayout.LayoutBounds="0,0,1,1"
-                        AbsoluteLayout.LayoutFlags="All"
-                        Aspect="AspectFill"
-                        Source="/HomePage/food.png" />
-                    <RoundRectangle
-                        AbsoluteLayout.LayoutBounds="0,0,1,1"
-                        AbsoluteLayout.LayoutFlags="All"
-                        CornerRadius="20"
-                        Opacity=".7">
-                        <RoundRectangle.Fill>
-                            <LinearGradientBrush EndPoint="0,1">
-                                <GradientStop Offset="0" Color="Transparent" />
-                                <GradientStop Offset="1" Color="#030005" />
-                            </LinearGradientBrush>
-                        </RoundRectangle.Fill>
-                    </RoundRectangle>
-                    <Grid
-                        Padding="20"
-                        AbsoluteLayout.LayoutBounds="0,0,1,1"
-                        AbsoluteLayout.LayoutFlags="All"
-                        ColumnDefinitions="*"
-                        RowDefinitions=".1*,*, .4*">
-                        <FlexLayout Grid.Row="0" JustifyContent="SpaceBetween">
-                            <Border
-                                BackgroundColor="#807A5242"
-                                HeightRequest="40"
-                                Opacity="100"
-                                StrokeShape="RoundRectangle 30"
-                                StrokeThickness="0">
-                                <HorizontalStackLayout
-                                    Padding="5,3,5,3"
-                                    Spacing="3"
-                                    VerticalOptions="Center">
-                                    <Border StrokeShape="RoundRectangle 30">
-                                        <Image Source="/TabBarIcons/Profile.png" />
-                                    </Border>
-                                    <Label Text="Prekshya" TextColor="{StaticResource White}" />
-                                </HorizontalStackLayout>
-                            </Border>
-                            <HorizontalStackLayout>
-                                <Border
-                                    Padding="10"
-                                    BackgroundColor="#807A5242"
-                                    HeightRequest="40"
-                                    Opacity="100"
-                                    StrokeShape="RoundRectangle 30"
-                                    StrokeThickness="0"
-                                    WidthRequest="40">
-                                    <Image Aspect="AspectFill" Source="/Homepage/heart.png" />
-                                </Border>
-                            </HorizontalStackLayout>
-                        </FlexLayout>
 
-                        <!--  for the cooking details  -->
-                        <VerticalStackLayout Grid.Row="2" Spacing="8">
-                            <HorizontalStackLayout Spacing="10">
-                                <HorizontalStackLayout Spacing="10">
-                                    <Image Source="/HomePage/clock.png" />
-                                    <Label
-                                        FontSize="Micro"
-                                        Text="12 min"
-                                        TextColor="white" />
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout Spacing="10">
-                                    <Image Source="/HomePage/level.png" />
-                                    <Label
-                                        FontSize="Micro"
-                                        Text="Easy"
-                                        TextColor="white" />
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout Spacing="10">
-                                    <Image Source="/HomePage/ingredients.png" />
-                                    <Label
-                                        FontSize="Micro"
-                                        Text="Ingredients"
-                                        TextColor="white" />
-                                </HorizontalStackLayout>
-                            </HorizontalStackLayout>
-                            <Label
-                                Style="{DynamicResource SubHeader}"
-                                Text="White Bread Naan"
-                                TextColor="{StaticResource SecondaryColor}" />
-                        </VerticalStackLayout>
+            <ScrollView Grid.Row="2" Orientation="Horizontal">
+                <HorizontalStackLayout Spacing="10">
+                    <controls:RecipeUIContentView
+                        ProfileImage="/TabBarIcons/profile.png"
+                        RecipeFoodName="White Bread Naan"
+                        RecipeImage="/HomePage/food.png"
+                        UserName="Prekshya" />
+                    <controls:RecipeUIContentView
+                        ProfileImage="/TabBarIcons/profile.png"
+                        RecipeFoodName="Pasta"
+                        RecipeImage="/HomePage/food.png"
+                        UserName="Avantika" />
+                    <controls:RecipeUIContentView
+                        ProfileImage="/TabBarIcons/profile.png"
+                        RecipeFoodName="Sandwich"
+                        RecipeImage="/HomePage/food.png"
+                        UserName="Bitisha" />
+                </HorizontalStackLayout>
+            </ScrollView>
 
-
-                        <!--  for full screen  -->
-                        <Border
-                            Grid.Row="2"
-                            Padding="10"
-                            BackgroundColor="#807A5242"
-                            HeightRequest="40"
-                            HorizontalOptions="End"
-                            Opacity="100"
-                            StrokeShape="RoundRectangle 30"
-                            StrokeThickness="0"
-                            WidthRequest="40">
-                            <Image Aspect="AspectFit" Source="/HomePage/fullscreen.png" />
-                        </Border>
-                    </Grid>
-                </AbsoluteLayout>
-            </Border>
-            <Border Grid.Row="3" Padding="10">
-                <FlexLayout JustifyContent="SpaceBetween">
-                    <Label Style="{DynamicResource SubHeader}" Text="Popular Recipes" />
-                    <Label Text="view all" />
-                </FlexLayout>
+            <Border Grid.Row="3" StrokeThickness="0">
+                <VerticalStackLayout Spacing="20">
+                    <FlexLayout JustifyContent="SpaceBetween">
+                        <Label Style="{DynamicResource SubHeader}" Text="Popular Recipes" />
+                        <Label Text="view all" />
+                    </FlexLayout>
+                    <controls:RecipeUIContentView
+                        ContentWidth="330"
+                        ProfileImage="/TabBarIcons/profile.png"
+                        RecipeFoodName="Sandwich"
+                        RecipeImage="/HomePage/food.png"
+                        UserName="Bitisha" />
+                    <controls:RecipeUIContentView
+                        ContentWidth="330"
+                        ProfileImage="/TabBarIcons/profile.png"
+                        RecipeFoodName="Sandwich"
+                        RecipeImage="/HomePage/food.png"
+                        UserName="Bitisha" />
+                    <controls:RecipeUIContentView
+                        ContentWidth="330"
+                        ProfileImage="/TabBarIcons/profile.png"
+                        RecipeFoodName="Sandwich"
+                        RecipeImage="/HomePage/food.png"
+                        UserName="Bitisha" />
+                    <controls:RecipeUIContentView
+                        ContentWidth="330"
+                        ProfileImage="/TabBarIcons/profile.png"
+                        RecipeFoodName="Sandwich"
+                        RecipeImage="/HomePage/food.png"
+                        UserName="Bitisha" />
+                </VerticalStackLayout>
             </Border>
         </Grid>
     </ScrollView>

@@ -38,6 +38,14 @@ namespace FlavorHub
                 handler.PlatformView.BackgroundTintList= Android.Content.Res.ColorStateList.ValueOf(Android.Graphics.Color.Transparent);
 #endif
             });
+            Microsoft.Maui.Handlers.StepperHandler.Mapper.AppendToMapping("MyCustomization", (handler, view) =>
+            {
+#if ANDROID
+             Android.Widget.LinearLayout linearLayout= handler.PlatformView as Android.Widget.LinearLayout;
+            linearLayout.GetChildAt(0).SetBackgroundColor(Android.Graphics.Color.Transparent);
+            linearLayout.GetChildAt(1).SetBackgroundColor(Android.Graphics.Color.Transparent);
+#endif
+            });
 
 
 #if DEBUG
