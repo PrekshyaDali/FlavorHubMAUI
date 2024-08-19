@@ -1,9 +1,13 @@
+using FlavorHub.Models;
+
 namespace FlavorHub.Views;
 
 public partial class HomePage : ContentPage
 {
-	public HomePage()
+	private readonly HomePageViewModel _HomePageViewModel;
+	public HomePage(HomePageViewModel homePageViewModel)
 	{
 		InitializeComponent();
-	}
+		BindingContext = _HomePageViewModel = homePageViewModel;
+    }
 }

@@ -4,6 +4,8 @@ using Firebase.Auth;
 using Firebase.Auth.Providers;
 using FlavorHub.ViewModel;
 using FlavorHub.Views.Authentication;
+using FlavorHub.Models;
+using FlavorHub.Views;
 
 namespace FlavorHub
 {
@@ -22,7 +24,7 @@ namespace FlavorHub
                 });
 
             builder.Services.AddSingleton(new FirebaseAuthClient(new FirebaseAuthConfig(){
-                ApiKey= "\r\nAIzaSyCVa-EY5LQBifY8gKCcsS7AYY3qpOCyCeo",
+                ApiKey= "AIzaSyBQBIS3Z8z6ENR9j1YNsDXdA4JtfAAL1fI",
                 AuthDomain = "flavorhub-authentication.firebaseapp.com",
                 Providers = [new EmailProvider()]
             }));
@@ -30,10 +32,12 @@ namespace FlavorHub
             //viewModels
             builder.Services.AddSingleton<RegisterViewModel>();
             builder.Services.AddSingleton<LoginViewModel>();
+            builder.Services.AddSingleton<HomePageViewModel>();
 
             //pages
             builder.Services.AddSingleton<Register>();
             builder.Services.AddSingleton<Login>();
+            builder.Services.AddSingleton<HomePage>();
 
             Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping(nameof(Entry), (handler, view) =>
             {

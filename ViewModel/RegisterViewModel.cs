@@ -48,7 +48,5 @@ namespace FlavorHub.ViewModel
             }
         }
 
-
-
     }
 }

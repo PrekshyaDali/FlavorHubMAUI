@@ -19,12 +19,12 @@ namespace FlavorHub
 
             Routing.RegisterRoute("SecondSplashScreen", typeof(SecondSplashScreen));
             Routing.RegisterRoute("ThirdSplashScreen", typeof(ThirdSplashScreen));
-            Routing.RegisterRoute("Login", typeof(Login));
+            //Routing.RegisterRoute("Login", typeof(Login));
             Routing.RegisterRoute("Register", typeof(Register));
 
 
 
-
+   
 
         }
     }

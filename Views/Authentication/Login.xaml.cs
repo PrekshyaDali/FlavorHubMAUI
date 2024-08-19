@@ -10,10 +10,4 @@ public partial class Login : ContentPage
 		InitializeComponent();
 		BindingContext = _LoginViewModel = loginViewModel;
 	}
-    //private static int calls = 0;
-
-    //private void Entry_Completed(object sender, EventArgs e)
-    //{
-    //    System.Diagnostics.Debug.WriteLine($">>> In OnCompleted ({++calls})");
-    //}
 }

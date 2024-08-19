@@ -15,10 +15,7 @@
                         WidthRequest="50">
                         <Image Aspect="AspectFill" Source="Resources/Images/TabBarIcons/profile.png" />
                     </Border>
-                    <Label
-                        FontSize="Medium"
-                        Text="hello"
-                        VerticalOptions="Center" />
+                    <ImageButton Command="{Binding LogOutCommand}" Source="/TabBarIcons/profile.png" />
                 </FlexLayout>
             </Grid>
         </Border>

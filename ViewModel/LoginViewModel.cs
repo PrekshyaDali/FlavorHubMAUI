@@ -16,7 +16,7 @@ namespace FlavorHub.ViewModel
     {
         public ICommand NavigateToRegisterCommand { get; set; }
         private readonly FirebaseAuthClient _FireBaseAuthClient;
-
+       
         public LoginViewModel(FirebaseAuthClient firebaseAuthClient)
         {
             _FireBaseAuthClient = firebaseAuthClient;
@@ -36,7 +36,7 @@ namespace FlavorHub.ViewModel
                 if (!string.IsNullOrWhiteSpace(result?.User?.Info?.Email))
                 {
                     await Shell.Current.GoToAsync("//HomePage");
-                    await App.Current.MainPage.DisplayAlert("ok", "You havesuccessfully logged in", "ok");
+                    await Application.Current.MainPage.DisplayAlert("ok", "You have successfully logged in", "ok");
                 }
             }
             catch (Exception ex)
@@ -49,6 +49,6 @@ namespace FlavorHub.ViewModel
         {
             await Shell.Current.GoToAsync("Register");
         }
-
+         
     }
 }
