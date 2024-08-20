@@ -37,13 +37,7 @@
                 IsPassword="True"
                 Keyboard="Text"
                 Placeholder="Password" />
-            <!--<controls:InputFieldContentView
-                EntryData="{Binding ConfirmPassword}"
-                IsPassword="True"
-                Keyboard="Text"
-                Placeholder="Confirm Password" />-->
 
-            <!--  for button and terms and condition  -->
             <VerticalStackLayout
                 Margin="0,30,0,0"
                 Spacing="10"

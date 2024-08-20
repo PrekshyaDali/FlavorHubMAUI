@@ -44,5 +44,4 @@
             <ShellContent ContentTemplate="{DataTemplate views:HomePage}" Route="MainPage" />
         </Tab>
     </TabBar>
-
 </Shell>

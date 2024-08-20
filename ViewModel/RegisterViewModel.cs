@@ -25,10 +25,18 @@ namespace FlavorHub.ViewModel
         [ObservableProperty]
         private RegisterModel _RegisterModel = new();
 
+        [ObservableProperty]
+        private string _EmailErrorMessage;
+        [ObservableProperty]
+        private string _PasswordErrorMessage;
+
         //Command for signup
         [RelayCommand]
         private async Task SignUp()
         {
+            // Reset error messages
+            EmailErrorMessage = string.Empty;
+            PasswordErrorMessage = string.Empty;
             try
             {
                 var result = await _FirebaseAuthClient.CreateUserWithEmailAndPasswordAsync(
@@ -44,6 +52,8 @@ namespace FlavorHub.ViewModel
             }
             catch (Exception ex)
             {
+                var _d = ex.Data;
+                //await Application.Current.MainPage.DisplayAlert("")
                 Console.WriteLine($"Signup failed, {ex.ToString()}");
             }
         }

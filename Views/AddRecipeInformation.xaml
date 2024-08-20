@@ -57,22 +57,6 @@
                 Text="Cooking Time"
                 VerticalOptions="Center" />
 
-            <!--<HorizontalStackLayout Grid.Row="0" Grid.Column="1">
-                <Border
-                    BackgroundColor="{DynamicResource SecondaryColor}"
-                    StrokeShape="RoundRectangle 10"
-                    StrokeThickness="0">
-                    <controls:InputFieldContentView EntryData="{Binding CookingHours, FallbackValue=00}" />
-                </Border>
-                <Label Text="hrs" VerticalOptions="End" />
-                <Border
-                    BackgroundColor="{DynamicResource SecondaryColor}"
-                    StrokeShape="RoundRectangle 10"
-                    StrokeThickness="0">
-                    <controls:InputFieldContentView EntryData="{Binding CookingMins, FallbackValue=00}" />
-                </Border>
-                <Label Text="hrs" VerticalOptions="End" />
-            </HorizontalStackLayout>-->
             <FlexLayout
                 Grid.Row="0"
                 Grid.Column="1"

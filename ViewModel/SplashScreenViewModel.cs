@@ -11,7 +11,6 @@ namespace FlavorHub.ViewModel
         public ICommand NavigateToLogin { get; }
         public ICommand NavigateToSecondSplashScreen { get; }
         public ICommand NavigateToThirdSplashScreen { get; }
-        //public ICommand NavigateToHome {  get; }
 
         public SplashScreenViewModel()
         {
@@ -19,14 +18,8 @@ namespace FlavorHub.ViewModel
             NavigateToLogin = new AsyncRelayCommand(LoginNavigate);
             NavigateToSecondSplashScreen = new AsyncRelayCommand(SecondSplashScreenNavigate);
             NavigateToThirdSplashScreen = new AsyncRelayCommand(ThirdSplashScreenNavigate);
-            //NavigateToHome = new RelayCommand(NavigateToHomePage);
         }
-        //[RelayCommand]
-        //public async void NavigateToHomePage()
-        //{
-        //    await Shell.Current.GoToAsync("//HomePage");
-        //}
-        // Navigate to the login page
+      
         private async Task LoginNavigate()
         {
             await Shell.Current.GoToAsync("///Login");

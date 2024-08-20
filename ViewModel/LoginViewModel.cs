@@ -5,8 +5,11 @@ using FlavorHub.Models.AuthModels;
 using FlavorHub.Views.Authentication;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -35,6 +38,7 @@ namespace FlavorHub.ViewModel
 
                 if (!string.IsNullOrWhiteSpace(result?.User?.Info?.Email))
                 {
+                    ClearLoginModel();
                     await Shell.Current.GoToAsync("//HomePage");
                     await Application.Current.MainPage.DisplayAlert("ok", "You have successfully logged in", "ok");
                 }
@@ -44,11 +48,13 @@ namespace FlavorHub.ViewModel
                 Console.WriteLine($"Login Failed,{ex.Message}");
             }
         }
-
+        private void ClearLoginModel() {
+            _LoginModel = new LoginModel();
+        }
+          
         private async void NavigateToRegister()
         {
             await Shell.Current.GoToAsync("Register");
         }
-         
     }
 }

@@ -29,6 +29,7 @@
             <!--  form  -->
             <VerticalStackLayout Spacing="10">
                 <controls:InputFieldContentView
+                    x:Name="Email"
                     EntryData="{Binding LoginModel.Email}"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Text"
@@ -36,6 +37,7 @@
 
                 <VerticalStackLayout Spacing="10">
                     <controls:InputFieldContentView
+                        x:Name="Password"
                         EntryData="{Binding LoginModel.Password}"
                         HorizontalOptions="FillAndExpand"
                         IsPassword="True"

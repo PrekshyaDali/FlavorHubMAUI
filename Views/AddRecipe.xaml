@@ -52,7 +52,6 @@
                 PlaceholderColor="{StaticResource PrimaryTextColor}"
                 Text="{Binding RecipeImage, Mode=TwoWay}" />
         </Border>
-
         <controls:ButtonContentView ButtonCommand="{Binding NavigateToAddRecipeInformation}" ButtonText="Next" />
     </VerticalStackLayout>
 </ContentPage>
