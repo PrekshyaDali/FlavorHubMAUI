@@ -4,20 +4,12 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
-    xmlns:vm="clr-namespace:FlavorHub.ViewModel">
-    <!--<ContentPage.BindingContext>
-        <vm:RegisterViewModel />
-    </ContentPage.BindingContext>-->
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel"
+    x:DataType="vm:RegisterViewModel">
 
     <AbsoluteLayout Padding="20">
         <!--  Background Image  -->
-        <Image
-            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
-            AbsoluteLayout.LayoutFlags="All"
-            Source="background.png" />
         <VerticalStackLayout
-            AbsoluteLayout.LayoutBounds="0, 0, 1, AutoSize"
-            AbsoluteLayout.LayoutFlags="All"
             HorizontalOptions="FillAndExpand"
             Spacing="10"
             VerticalOptions="FillAndExpand">
@@ -30,46 +22,24 @@
                 <Label Text="Your culinary journey starts here—let's share our flavors!" />
             </VerticalStackLayout>
 
-            <FlexLayout JustifyContent="SpaceBetween">
-                <controls:InputFieldContentView
-                    EntryData="{Binding FirstName}"
-                    HorizontalOptions="FillAndExpand"
-                    Keyboard="Text"
-                    Placeholder="Enter First Name"
-                    WidthRequest="165" />
-
-                <controls:InputFieldContentView
-                    EntryData="{Binding LastName}"
-                    HorizontalOptions="FillAndExpand"
-                    Keyboard="Text"
-                    Placeholder="Enter Last Name"
-                    WidthRequest="165" />
-            </FlexLayout>
-
             <controls:InputFieldContentView
-                EntryData="{Binding PhoneNumber}"
+                EntryData="{Binding RegisterModel.UserName}"
+                HorizontalOptions="FillAndExpand"
                 Keyboard="Text"
-                Placeholder="Enter PhoneNumber" />
+                Placeholder="Enter Username" />
+
             <controls:InputFieldContentView
-                EntryData="{Binding Email}"
+                EntryData="{Binding RegisterModel.Email}"
                 Keyboard="Text"
                 Placeholder="Enter Email" />
             <controls:InputFieldContentView
-                EntryData="{Binding Password}"
+                EntryData="{Binding RegisterModel.Password}"
                 IsPassword="True"
                 Keyboard="Text"
                 Placeholder="Password" />
-            <controls:InputFieldContentView
-                EntryData="{Binding ConfirmPassword}"
-                IsPassword="True"
-                Keyboard="Text"
-                Placeholder="Confirm Password" />
 
-            <!--  for button and terms and condition  -->
             <VerticalStackLayout
                 Margin="0,30,0,0"
-                AbsoluteLayout.LayoutBounds="0, 1, 1, AutoSize"
-                AbsoluteLayout.LayoutFlags="All"
                 Spacing="10"
                 VerticalOptions="End">
 
@@ -81,7 +51,7 @@
                     VerticalTextAlignment="Center"
                     WidthRequest="200" />
                 <controls:ButtonContentView
-                    ButtonCommand="{Binding SaveCommand}"
+                    ButtonCommand="{Binding SignUpCommand}"
                     ButtonText="Save"
                     ButtonTextColor="Black" />
             </VerticalStackLayout>

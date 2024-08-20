@@ -25,7 +25,7 @@
 
     <ShellContent ContentTemplate="{DataTemplate splash:FirstSplashScreen}" Route="ThirdSplashScreen" />-->
 
-    <!--<ShellContent ContentTemplate="{DataTemplate authentication:Register}" Route="Register" />-->
+    <ShellContent ContentTemplate="{DataTemplate authentication:Login}" Route="Login" />
 
     <TabBar>
         <Tab Title="Home" Icon="/TabBarIcons/home.png">
@@ -44,5 +44,4 @@
             <ShellContent ContentTemplate="{DataTemplate views:HomePage}" Route="MainPage" />
         </Tab>
     </TabBar>
-
 </Shell>

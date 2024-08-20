@@ -1,5 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
+using Firebase.Auth;
+using Firebase.Auth.Providers;
+using FlavorHub.ViewModel;
+using FlavorHub.Views.Authentication;
+using FlavorHub.Models;
+using FlavorHub.Views;
 
 namespace FlavorHub
 {
@@ -16,6 +22,23 @@ namespace FlavorHub
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
+            builder.Services.AddSingleton(new FirebaseAuthClient(new FirebaseAuthConfig(){
+                ApiKey= "AIzaSyBQBIS3Z8z6ENR9j1YNsDXdA4JtfAAL1fI",
+                AuthDomain = "flavorhub-authentication.firebaseapp.com",
+                Providers = [new EmailProvider()]
+            }));
+
+            //viewModels
+            builder.Services.AddSingleton<RegisterViewModel>();
+            builder.Services.AddSingleton<LoginViewModel>();
+            builder.Services.AddSingleton<HomePageViewModel>();
+
+            //pages
+            builder.Services.AddSingleton<Register>();
+            builder.Services.AddSingleton<Login>();
+            builder.Services.AddSingleton<HomePage>();
+
             Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping(nameof(Entry), (handler, view) =>
             {
 #if ANDROID

@@ -10,7 +10,7 @@
         <vm:AddRecipeViewModel />
     </ContentPage.BindingContext>
     <Shell.TitleView>
-        <Grid Padding="20,10,20,0" HorizontalOptions="FillAndExpand">
+        <Grid Padding="20,5,20,0" HorizontalOptions="FillAndExpand">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <!--  Takes available space  -->
@@ -38,7 +38,7 @@
             </Border>
         </Grid>
     </Shell.TitleView>
-    <VerticalStackLayout Padding="20" Spacing="20">
+    <VerticalStackLayout Padding="20,50,20,0" Spacing="20">
         <Label Style="{StaticResource Header}" Text="Information" />
 
         <!--  Grid with 3 rows and 2 columns  -->
@@ -57,17 +57,43 @@
                 Text="Cooking Time"
                 VerticalOptions="Center" />
 
-            <Border
+            <FlexLayout
                 Grid.Row="0"
                 Grid.Column="1"
-                BackgroundColor="{DynamicResource SecondaryColor}"
-                StrokeShape="RoundRectangle 10"
-                StrokeThickness="0">
-                <TimePicker
-                    HorizontalOptions="Center"
-                    Time="{Binding PreparationTime}"
-                    VerticalOptions="Center" />
-            </Border>
+                HorizontalOptions="FillAndExpand"
+                JustifyContent="SpaceBetween">
+                <!--  Border for Hours Picker  -->
+                <Border
+                    BackgroundColor="{DynamicResource SecondaryColor}"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="0"
+                    WidthRequest="50">
+                    <Entry
+                        x:Name="HoursPicker"
+                        HorizontalOptions="Center"
+                        Keyboard="Numeric"
+                        VerticalOptions="Center" />
+                </Border>
+
+                <!--  Label for Hours  -->
+                <Label Text="hrs" VerticalOptions="End" />
+
+                <!--  Border for Minutes Picker  -->
+                <Border
+                    BackgroundColor="{DynamicResource SecondaryColor}"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="0"
+                    WidthRequest="50">
+                    <Entry
+                        x:Name="MinutesPicker"
+                        HorizontalOptions="Center"
+                        Keyboard="Numeric"
+                        VerticalOptions="Center" />
+                </Border>
+
+                <!--  Label for Minutes  -->
+                <Label Text="mins" VerticalOptions="End" />
+            </FlexLayout>
 
             <!--  Second Row  -->
             <Label

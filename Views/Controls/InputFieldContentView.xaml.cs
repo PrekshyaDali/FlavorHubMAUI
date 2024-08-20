@@ -6,7 +6,7 @@ namespace FlavorHub.Views.Controls
     {
         // Bindable property for entry fields
         public static readonly BindableProperty EntryDataProperty = BindableProperty.Create(
-            nameof(EntryData), typeof(string), typeof(InputFieldContentView), string.Empty);
+            nameof(EntryData), typeof(string), typeof(InputFieldContentView), string.Empty, BindingMode.TwoWay);
 
         public static readonly BindableProperty IsPasswordProperty =
            BindableProperty.Create(nameof(IsPassword), typeof(bool), typeof(InputFieldContentView), false);

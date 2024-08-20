@@ -18,7 +18,7 @@ namespace FlavorHub.ViewModel
         [RelayCommand]
         public async void NavigateToLogin()
         {
-            await _Navigation.PushAsync(new Login());
+            await Shell.Current.GoToAsync("Login");
 
         }
     }

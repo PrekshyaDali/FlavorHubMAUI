@@ -51,6 +51,7 @@
             Margin="0,0,0,10"
             StrokeThickness="0"
             WidthRequest="120">
+            <!--<controls:ButtonContentView ButtonCommand="{Binding NavigateToLogin}" ButtonText="Move to Login" />-->
             <controls:ButtonContentView ButtonCommand="{Binding NavigateToLogin}" ButtonText="Move to Login" />
         </Border>
     </Grid>

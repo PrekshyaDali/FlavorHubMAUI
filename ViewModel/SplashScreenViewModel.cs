@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace FlavorHub.ViewModel
 {
-    public class SplashScreenViewModel
+    public partial class SplashScreenViewModel
     {
         public ICommand NavigateToLogin { get; }
         public ICommand NavigateToSecondSplashScreen { get; }
@@ -19,11 +19,10 @@ namespace FlavorHub.ViewModel
             NavigateToSecondSplashScreen = new AsyncRelayCommand(SecondSplashScreenNavigate);
             NavigateToThirdSplashScreen = new AsyncRelayCommand(ThirdSplashScreenNavigate);
         }
-
-        // Navigate to the login page
+      
         private async Task LoginNavigate()
         {
-            await Shell.Current.GoToAsync("Login");
+            await Shell.Current.GoToAsync("///Login");
         }
 
         // Navigate to the second splash screen

@@ -6,22 +6,9 @@
     xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
     xmlns:vm="clr-namespace:FlavorHub.ViewModel">
 
-    <ContentPage.BindingContext>
-        <vm:LoginViewModel />
-    </ContentPage.BindingContext>
-
-    <AbsoluteLayout Padding="20">
-        <!--  Background Image  -->
-        <Image
-            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
-            AbsoluteLayout.LayoutFlags="All"
-            Source="background.png" />
+    <VerticalStackLayout Padding="20">
         <!--  Register Label positioned at the top right  -->
-        <Label
-            AbsoluteLayout.LayoutBounds="0.95, 0, AutoSize, AutoSize"
-            AbsoluteLayout.LayoutFlags="PositionProportional"
-            HorizontalOptions="End"
-            Text="Register">
+        <Label HorizontalOptions="End" Text="Register">
             <Label.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding NavigateToRegisterCommand}" />
             </Label.GestureRecognizers>
@@ -29,8 +16,6 @@
 
         <!--  Main Content  -->
         <VerticalStackLayout
-            AbsoluteLayout.LayoutBounds="0, 0.1, 1, Autosize"
-            AbsoluteLayout.LayoutFlags="All"
             BackgroundColor="Transparent"
             Spacing="10"
             VerticalOptions="FillAndExpand">
@@ -42,19 +27,18 @@
             </VerticalStackLayout>
 
             <!--  form  -->
-            <VerticalStackLayout
-                AbsoluteLayout.LayoutBounds="0, 200, 1, 400"
-                AbsoluteLayout.LayoutFlags="WidthProportional,PositionProportional"
-                Spacing="10">
+            <VerticalStackLayout Spacing="10">
                 <controls:InputFieldContentView
-                    EntryData="{Binding Email}"
+                    x:Name="Email"
+                    EntryData="{Binding LoginModel.Email}"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Text"
                     Placeholder="Enter Email" />
 
                 <VerticalStackLayout Spacing="10">
                     <controls:InputFieldContentView
-                        EntryData="{Binding Password}"
+                        x:Name="Password"
+                        EntryData="{Binding LoginModel.Password}"
                         HorizontalOptions="FillAndExpand"
                         IsPassword="True"
                         Keyboard="Text"
@@ -64,9 +48,9 @@
                         HorizontalOptions="End"
                         Text="Forgot Password?" />
                     <!--  loginbutton  -->
-                    <controls:ButtonContentView ButtonText="Login" />
+                    <controls:ButtonContentView ButtonCommand="{Binding SignInCommand}" ButtonText="Login" />
                 </VerticalStackLayout>
             </VerticalStackLayout>
         </VerticalStackLayout>
-    </AbsoluteLayout>
+    </VerticalStackLayout>
 </ContentPage>

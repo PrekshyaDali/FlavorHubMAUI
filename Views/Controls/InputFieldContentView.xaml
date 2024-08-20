@@ -17,6 +17,7 @@
                 HeightRequest="60"
                 HorizontalOptions="FillAndExpand"
                 IsPassword="{Binding IsPassword}"
+                IsReadOnly="False"
                 Keyboard="{Binding Keyboard}"
                 Placeholder="{Binding Placeholder, FallbackValue='Enter here'}"
                 Text="{Binding EntryData, Mode=TwoWay}" />
