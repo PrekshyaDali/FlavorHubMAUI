@@ -1,4 +1,4 @@
-using FlavorHub.Models;
+using FlavorHub.ViewModel;
 
 namespace FlavorHub.Views;
 

@@ -38,7 +38,7 @@
             <ShellContent ContentTemplate="{DataTemplate views:HomePage}" Route="MainPage" />
         </Tab>
         <Tab Title="Notification" Icon="/TabBarIcons/notification.png">
-            <ShellContent ContentTemplate="{DataTemplate views:HomePage}" Route="MainPage" />
+            <ShellContent ContentTemplate="{DataTemplate views:Gallery}" Route="Gallery" />
         </Tab>
         <Tab Title="Recipes" Icon="/TabBarIcons/profile.png">
             <ShellContent ContentTemplate="{DataTemplate views:HomePage}" Route="MainPage" />
