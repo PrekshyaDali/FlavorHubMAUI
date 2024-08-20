@@ -24,13 +24,15 @@ namespace FlavorHub.ViewModel
         private bool _IsRefreshing;
 
         //commands
-        private ICommand SearchFoodCommand { get; }
-        private ICommand RefreshFoodCommand { get; }
+        public ICommand SearchFoodCommand { get; set; }
+        public ICommand RefreshFoodCommand { get; set; }
         
-        public GalleryViewModel()
+        public GalleryViewModel(PexelsService pexelsService)
         {
+            _PexelsService = pexelsService;
             SearchFoodCommand = new AsyncRelayCommand(SearchPhotosAsync);
             RefreshFoodCommand = new AsyncRelayCommand(RefreshPhotosAsync);
+            Photos = new ObservableCollection<PhotoModel>();
             LoadDefaultPhotos();
         }
 

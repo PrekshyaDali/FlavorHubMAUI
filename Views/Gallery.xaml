@@ -12,7 +12,8 @@
             Text="{Binding SearchQuery}" />
 
         <!--  Refresh Button  -->
-        <Button Command="{Binding RefreshFoodCommand}" Text="Refresh" />
+        <!--
+        <Button Command="{Binding RefreshFoodCommand}" Text="Refresh" />-->
         <!--  RefreshView to enable pull-to-refresh  -->
         <RefreshView Command="{Binding RefreshFoodCommand}" IsRefreshing="{Binding IsRefreshing}">
 
@@ -20,7 +21,7 @@
             <CollectionView ItemsSource="{Binding Photos}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ImageCell Height="150" ImageSource="{Binding Url}" />
+                        <Image HeightRequest="150" Source="{Binding Url}" />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

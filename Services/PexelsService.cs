@@ -10,7 +10,7 @@ namespace FlavorHub.Services
     public class PexelsService
     {
         private readonly PexelsClient _PexelsClient;
-        public PexelsService(string apiKey) { 
+       public PexelsService(string apiKey) { 
         
         _PexelsClient = new PexelsClient(apiKey);
 
@@ -25,7 +25,9 @@ namespace FlavorHub.Services
 
                 if (result != null && result.photos != null && result.photos.Count > 0) 
                 {
-                    return result.photos.Select(photo => photo.source.original).ToList();
+                    // Ensure the expected types
+                    var urls = result.photos.Select(photo => photo.source?.original ?? "default_url").ToList();
+                    return urls;
                 }
                 else
                 {
