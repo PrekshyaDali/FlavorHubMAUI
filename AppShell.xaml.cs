@@ -17,6 +17,8 @@ namespace FlavorHub
             Routing.RegisterRoute("AddUploads", typeof(AddUploads));
 
 
+            //pages
+            Routing.RegisterRoute("Gallery", typeof(Gallery));
             Routing.RegisterRoute("SecondSplashScreen", typeof(SecondSplashScreen));
             Routing.RegisterRoute("ThirdSplashScreen", typeof(ThirdSplashScreen));
             Routing.RegisterRoute("Register", typeof(Register));

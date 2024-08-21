@@ -30,7 +30,7 @@ namespace FlavorHub.ViewModel
         private LoginModel _LoginModel = new();
 
         [RelayCommand]
-        private async void SignIn()
+        private async Task SignIn()
         {
             try
             {

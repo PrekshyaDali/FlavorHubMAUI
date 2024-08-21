@@ -6,6 +6,9 @@ using FlavorHub.ViewModel;
 using FlavorHub.Views.Authentication;
 using FlavorHub.Models;
 using FlavorHub.Views;
+using Microsoft.Extensions.Configuration;
+using System.Reflection;
+using FlavorHub.Services;
 
 namespace FlavorHub
 {
@@ -33,11 +36,32 @@ namespace FlavorHub
             builder.Services.AddSingleton<RegisterViewModel>();
             builder.Services.AddSingleton<LoginViewModel>();
             builder.Services.AddSingleton<HomePageViewModel>();
+            builder.Services.AddSingleton<GalleryViewModel>();
 
             //pages
             builder.Services.AddSingleton<Register>();
             builder.Services.AddSingleton<Login>();
             builder.Services.AddSingleton<HomePage>();
+            builder.Services.AddSingleton<Gallery>();
+
+            // Load configuration
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = "FlavorHub.appsettings.json"; 
+
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                if (stream == null)
+                {
+                    throw new FileNotFoundException("The configuration file 'appsettings.json' was not found.");
+                }
+
+                var configuration = new ConfigurationBuilder()
+                    .AddJsonStream(stream)
+                    .Build();
+
+                var pexelsApiKey = configuration["PexelsApiKey"];
+                builder.Services.AddSingleton(new PexelsService(pexelsApiKey));
+            }
 
             Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping(nameof(Entry), (handler, view) =>
             {

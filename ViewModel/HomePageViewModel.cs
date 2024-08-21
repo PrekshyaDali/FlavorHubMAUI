@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlavorHub.Models
+namespace FlavorHub.ViewModel
 {
     public partial class HomePageViewModel
     {
