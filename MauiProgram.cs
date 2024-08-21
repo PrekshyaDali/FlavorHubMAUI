@@ -46,7 +46,7 @@ namespace FlavorHub
 
             // Load configuration
             var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = "FlavorHub.appsettings.json"; // Adjust the path based on your file's namespace and location
+            var resourceName = "FlavorHub.appsettings.json"; 
 
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             {

@@ -44,10 +44,8 @@ namespace FlavorHub.Services
                 }
             }
 
-            // Ensure to take only the desired number of photos
             _CachedPhotos = allPhotos.Take(count).ToList();
         }
-
 
         //shuffling the cached photos
         public List<string> GetShuffledCachedPhotos()
@@ -55,32 +53,7 @@ namespace FlavorHub.Services
             return _CachedPhotos.OrderBy(x=> _random.Next()).ToList();
         }
 
-        //fetching the user query data from the pexel api
-        //public async Task<List<string>> SearchPhotosAsync(string query)
-        //{
-        //    try
-        //    {
-        //        var result = await _PexelsClient.SearchPhotosAsync(query);
-
-        //        if (result != null && result.photos != null && result.photos.Count > 0) 
-        //        {
-        //            // Ensure the expected types
-        //            var urls = result.photos.Select(photo => photo.source?.original ?? "default_url").ToList();
-        //            return urls;
-        //        }
-        //        else
-        //        {
-        //            Console.WriteLine("No photos of this query");
-        //            return new List<string>();
-        //        }
-
-        //    }catch (Exception ex)
-        //    {
-        //        Console.WriteLine($"Error fetching data:{ex.Message}");
-        //        return new List<string>();
-        //    }
-        //}
-        public async Task<List<string>> SearchPhotosAsync(string query, int count = 100)
+        public async Task<List<string>> SearchPhotosAsync(string query, int count = 80)
         {
             try
             {
@@ -88,7 +61,6 @@ namespace FlavorHub.Services
 
                 if (result != null && result.photos != null && result.photos.Count > 0)
                 {
-                    // Take up to the specified count of photos (default 100)
                     var urls = result.photos
                         .Select(photo => photo.source?.original)
                         .Where(url => url != null)
@@ -110,7 +82,5 @@ namespace FlavorHub.Services
                 return new List<string>();
             }
         }
-
-
     }
 }

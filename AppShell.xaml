@@ -10,20 +10,8 @@
     Title="FlavorHub"
     Shell.FlyoutBehavior="Disabled">
 
-    <!--<ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />-->
-    <!--<ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate views:HomePage}"
-        Route="MainPage" />-->
 
     <ShellContent ContentTemplate="{DataTemplate splash:FirstSplashScreen}" Route="FirstSplashScreen" />
-
-    <!--<ShellContent ContentTemplate="{DataTemplate splash:FirstSplashScreen}" Route="SecondSplashScreen" />
-
-    <ShellContent ContentTemplate="{DataTemplate splash:FirstSplashScreen}" Route="ThirdSplashScreen" />-->
 
     <ShellContent ContentTemplate="{DataTemplate authentication:Login}" Route="Login" />
 

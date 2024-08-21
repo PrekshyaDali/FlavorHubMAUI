@@ -72,6 +72,5 @@ namespace FlavorHub.ViewModel
 
             IsRefreshing = false;
         }
-
     }
 }
