@@ -30,6 +30,7 @@ namespace FlavorHub.ViewModel
         public GalleryViewModel(PexelsService pexelsService)
         {
             _PexelsService = pexelsService;
+            _SearchQuery = string.Empty;
             SearchFoodCommand = new AsyncRelayCommand(SearchPhotosAsync);
             RefreshFoodCommand = new AsyncRelayCommand(RefreshPhotosAsync);
             Photos = new ObservableCollection<PhotoModel>();
@@ -52,8 +53,23 @@ namespace FlavorHub.ViewModel
         public async Task RefreshPhotosAsync()
         {
             IsRefreshing = true;
-            var photoUrls = await _PexelsService.SearchPhotosAsync(SearchQuery);
-            Photos = new ObservableCollection<PhotoModel>(photoUrls.Select(url => new PhotoModel { Url = url }));
+
+            if (string.IsNullOrWhiteSpace(SearchQuery))
+            {
+                // Fetch and cache default photos if no search query is provided
+                await _PexelsService.FetchAndCachePhotosAsync("Food");
+            }
+            else
+            {
+                // Fetch and cache new photos based on the search query
+                await _PexelsService.FetchAndCachePhotosAsync(SearchQuery);
+            }
+
+            // Update the photos collection with the newly fetched photos
+            Photos = new ObservableCollection<PhotoModel>(
+                _PexelsService.GetShuffledCachedPhotos().Select(url => new PhotoModel { Url = url })
+            );
+
             IsRefreshing = false;
         }
 

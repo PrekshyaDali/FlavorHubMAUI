@@ -11,17 +11,22 @@
             SearchCommand="{Binding SearchFoodCommand}"
             Text="{Binding SearchQuery}" />
 
-        <!--  Refresh Button  -->
-        <!--
-        <Button Command="{Binding RefreshFoodCommand}" Text="Refresh" />-->
-        <!--  RefreshView to enable pull-to-refresh  -->
         <RefreshView Command="{Binding RefreshFoodCommand}" IsRefreshing="{Binding IsRefreshing}">
-
-            <!--  CollectionView to display photos  -->
+            <!--  showing it in grid mode  -->
             <CollectionView ItemsSource="{Binding Photos}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        HorizontalItemSpacing="10"
+                        Orientation="Vertical"
+                        Span="2"
+                        VerticalItemSpacing="10" />
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Image HeightRequest="150" Source="{Binding Url}" />
+                        <Image
+                            Aspect="AspectFill"
+                            HeightRequest="150"
+                            Source="{Binding Url}" />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
