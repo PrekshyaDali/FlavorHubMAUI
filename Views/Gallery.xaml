@@ -13,7 +13,7 @@
 
         <RefreshView Command="{Binding RefreshFoodCommand}" IsRefreshing="{Binding IsRefreshing}">
             <!--  showing it in grid mode  -->
-            <CollectionView ItemsSource="{Binding Photos}">
+            <CollectionView ItemsSource="{Binding Photos}" SelectionMode="None">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout
                         HorizontalItemSpacing="10"

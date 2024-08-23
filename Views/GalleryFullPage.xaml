@@ -3,11 +3,17 @@
     x:Class="FlavorHub.Views.GalleryFullPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="GalleryFullPage">
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel"
+    Title="GalleryFullPage"
+    x:DataType="vm:GalleryFullPageViewModel">
+    <ContentPage.BindingContext>
+        <vm:GalleryFullPageViewModel />
+    </ContentPage.BindingContext>
     <VerticalStackLayout>
-        <Label
-            HorizontalOptions="Center"
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" />
+        <Image
+            x:Name="FullPhotoImage"
+            Aspect="AspectFit"
+            Source="{Binding PhotoUrl}" />
+        <ImageButton Command="{Binding SavePhotoCommand}" Source="/TabBarIcons/profile.png" />
     </VerticalStackLayout>
 </ContentPage>

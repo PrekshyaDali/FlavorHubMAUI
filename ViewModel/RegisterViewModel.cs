@@ -10,21 +10,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using FlavorHub.Models.AuthModels;
+using FlavorHub.Repositories.Interfaces;
 
 namespace FlavorHub.ViewModel
 {
     public partial class RegisterViewModel: ObservableObject
     {
         private readonly FirebaseAuthClient _FirebaseAuthClient;
+        private readonly IUserRepository _UserRepository;
 
-        public RegisterViewModel(FirebaseAuthClient firebaseAuthClient)
+        public RegisterViewModel(FirebaseAuthClient firebaseAuthClient, IUserRepository userRepository)
         {
             _FirebaseAuthClient = firebaseAuthClient;
+            _UserRepository = userRepository;
         }
 
         [ObservableProperty]
         private RegisterModel _RegisterModel = new();
-
         [ObservableProperty]
         private string _EmailErrorMessage;
         [ObservableProperty]
@@ -48,12 +50,21 @@ namespace FlavorHub.ViewModel
                 if (!string.IsNullOrWhiteSpace(result?.User?.Info?.Email))
                 {
                     await Shell.Current.GoToAsync("Login");
+                    var user = new Models.SQLiteModels.User
+                    {
+                        FirebaseUID = result.User.Uid,
+                        UserName = _RegisterModel.UserName,
+                        Email = _RegisterModel?.Email,
+                        CreatedDate = DateTime.UtcNow
+                    };
+                    await _UserRepository.CreateUserAysnc(user);
+                    await Application.Current.MainPage.DisplayAlert("Success", "You are registered successfully", "oks");
+                    await Shell.Current.GoToAsync("//Login");
                 }
             }
             catch (Exception ex)
             {
                 var _d = ex.Data;
-                //await Application.Current.MainPage.DisplayAlert("")
                 Console.WriteLine($"Signup failed, {ex.ToString()}");
             }
         }

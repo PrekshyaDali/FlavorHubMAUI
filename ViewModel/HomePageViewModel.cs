@@ -47,7 +47,6 @@ namespace FlavorHub.ViewModel
                 _LoginModel = new LoginModel();
                 _UserRepository.ClearCachedUser();
                 await Shell.Current.GoToAsync("//Login");
-                
             }
         }
     }

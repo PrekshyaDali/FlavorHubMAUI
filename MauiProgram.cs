@@ -11,6 +11,8 @@ using System.Reflection;
 using FlavorHub.Services;
 using FlavorHub.Views.Profile;
 using FlavorHub.ViewModel.ProfileSection;
+using SQLite;
+using FlavorHub.Data;
 
 namespace FlavorHub
 {
@@ -50,7 +52,17 @@ namespace FlavorHub
 
             // Load configuration
             var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = "FlavorHub.appsettings.json"; 
+            var resourceName = "FlavorHub.appsettings.json";
+
+            //SQLLite
+            builder.Services.AddSingleton(_ =>
+            {
+                var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FlavorHub.db3");
+                return new SQLiteAsyncConnection(dbPath);
+            });
+
+            builder.Services.AddSingleton<AppDbContext>();
+            builder.Services.AddSingleton<Repositories.Interfaces.IUserRepository, UserRepository>();
 
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             {
