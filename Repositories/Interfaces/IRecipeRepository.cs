@@ -11,8 +11,8 @@ namespace FlavorHub.Repositories.Interfaces
     {
         Task<Recipe> GetRecipeByIdAsync(Guid recipeId);
         Task<IEnumerable<Recipe>> GetAllRecipesAsync();
-        Task<Recipe> AddRecipeAsync(Recipe recipe);
+        Task AddRecipeAsync(Recipe recipe);
         Task DeleteRecipeAsync(Guid recipeId);
-        Task<Recipe> UpdateRecipeAsync(Guid recipeId);
+        Task UpdateRecipeAsync(Recipe recipe);
     }
 }

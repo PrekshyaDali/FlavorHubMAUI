@@ -4,9 +4,9 @@ namespace FlavorHub.Views;
 
 public partial class AddRecipe : ContentPage
 {
-	public AddRecipe()
+	public AddRecipe(AddRecipeViewModel addRecipeViewModel)
 	{
 		InitializeComponent();
-        BindingContext = new AddRecipeViewModel();
+		BindingContext = addRecipeViewModel;
     }
 }

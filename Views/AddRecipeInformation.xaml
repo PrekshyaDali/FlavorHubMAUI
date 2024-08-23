@@ -4,11 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
-    xmlns:vm="clr-namespace:FlavorHub.ViewModel"
-    x:DataType="vm:AddRecipeViewModel">
-    <ContentPage.BindingContext>
-        <vm:AddRecipeViewModel />
-    </ContentPage.BindingContext>
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel.RecipeFormViewModels"
+    x:DataType="vm:InfomationViewModel">
     <Shell.TitleView>
         <Grid Padding="20,5,20,0" HorizontalOptions="FillAndExpand">
             <Grid.ColumnDefinitions>
@@ -62,7 +59,6 @@
                 Grid.Column="1"
                 HorizontalOptions="FillAndExpand"
                 JustifyContent="SpaceBetween">
-                <!--  Border for Hours Picker  -->
                 <Border
                     BackgroundColor="{DynamicResource SecondaryColor}"
                     StrokeShape="RoundRectangle 10"
@@ -72,13 +68,13 @@
                         x:Name="HoursPicker"
                         HorizontalOptions="Center"
                         Keyboard="Numeric"
+                        Text="{Binding HoursPicker, Mode=TwoWay}"
                         VerticalOptions="Center" />
                 </Border>
 
                 <!--  Label for Hours  -->
                 <Label Text="hrs" VerticalOptions="End" />
 
-                <!--  Border for Minutes Picker  -->
                 <Border
                     BackgroundColor="{DynamicResource SecondaryColor}"
                     StrokeShape="RoundRectangle 10"
@@ -88,6 +84,7 @@
                         x:Name="MinutesPicker"
                         HorizontalOptions="Center"
                         Keyboard="Numeric"
+                        Text="{Binding MinutesPicker, Mode=TwoWay}"
                         VerticalOptions="Center" />
                 </Border>
 
@@ -114,7 +111,7 @@
                             HeightRequest="15"
                             Source="/Icons/plus.png" />
                     </Border>
-                    <Label Text="20s" VerticalOptions="Center" />
+                    <Label Text="{Binding Servings}" VerticalOptions="Center" />
                     <Border StrokeThickness="0">
                         <ImageButton
                             Command="{Binding ServingSizeDecrease}"
@@ -139,6 +136,7 @@
                 <Picker
                     Title="Select difficulty level"
                     HorizontalOptions="Center"
+                    SelectedItem="{Binding DifficultyLevel}"
                     VerticalOptions="Center">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">

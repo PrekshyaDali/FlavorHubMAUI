@@ -4,7 +4,9 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
-    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel"
+    x:DataType="vm:AddRecipeViewModel">
     <Shell.TitleView>
         <Grid Padding="20,5,20,0" HorizontalOptions="FillAndExpand">
             <Grid.ColumnDefinitions>
@@ -34,25 +36,27 @@
             </Border>
         </Grid>
     </Shell.TitleView>
-    <VerticalStackLayout Padding="20,50,20,0" Spacing="20">
+    <VerticalStackLayout
+        Padding="20,50,20,0"
+        x:DataType="vm:AddRecipeViewModel"
+        Spacing="20">
         <Label Style="{StaticResource Header}" Text="Title" />
         <controls:InputFieldContentView EntryData="{Binding Title}" Placeholder="Title" />
         <Border
             Padding="10,5,10,5"
-            BindingContext="{x:Reference this}"
             HorizontalOptions="FillAndExpand"
             StrokeShape="RoundRectangle 10"
             StrokeThickness="0"
             Style="{DynamicResource EntryField}"
             VerticalOptions="Center">
-            <Editor
+            <Entry
                 HeightRequest="200"
                 HorizontalOptions="FillAndExpand"
                 MaxLength="250"
                 Placeholder="Short description here"
-                PlaceholderColor="{StaticResource PrimaryTextColor}"
-                Text="{Binding RecipeImage, Mode=TwoWay}" />
+                Text="{Binding Description}" />
         </Border>
+        <Label Text="{Binding Description}" />
         <controls:ButtonContentView ButtonCommand="{Binding NavigateToAddRecipeInformation}" ButtonText="Next" />
     </VerticalStackLayout>
 </ContentPage>
