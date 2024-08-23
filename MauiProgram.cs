@@ -13,6 +13,7 @@ using FlavorHub.Views.Profile;
 using FlavorHub.ViewModel.ProfileSection;
 using SQLite;
 using FlavorHub.Data;
+using FlavorHub.Repositories;
 
 namespace FlavorHub
 {

@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:model="clr-namespace:FlavorHub.Models.SQLiteModels"
     Title="ProfilePage">
-    <VerticalStackLayout Padding="10" Spacing="20">
+    <VerticalStackLayout Padding="20" Spacing="20">
         <FlexLayout Margin="0,0,0,20" JustifyContent="SpaceBetween">
             <Border
                 HeightRequest="100"
@@ -13,20 +13,26 @@
                 WidthRequest="100">
                 <Image Source="dotnet_bot.png" />
             </Border>
-            <VerticalStackLayout x:DataType="model:User" VerticalOptions="Center">
-                <Label Text="{Binding UserName}" />
-                <Label Text="{Binding Email}" />
-                <Label Text="hello" />
-            </VerticalStackLayout>
+            <Border>
+                <VerticalStackLayout
+                    Padding="20,0,0,0"
+                    x:DataType="model:User"
+                    VerticalOptions="Center"
+                    WidthRequest="200">
+                    <Label Style="{StaticResource SubHeader}" Text="{Binding UserName}" />
+                    <Label Text="{Binding Email}" />
+                </VerticalStackLayout>
+            </Border>
             <ImageButton Clicked="ImageButton_Clicked" Source="/TabBarIcons/profile.png" />
         </FlexLayout>
         <Border Padding="10" StrokeShape="RoundRectangle 10">
-            <FlexLayout JustifyContent="SpaceBetween" VerticalOptions="Center">
+            <FlexLayout JustifyContent="SpaceBetween">
                 <Label
                     FontAttributes="Bold"
                     FontSize="Medium"
-                    Text="Dark Mode" />
-                <ImageButton Source="/TabBarIcons/profile.png" />
+                    Text="Dark Mode"
+                    VerticalOptions="Center" />
+                <ImageButton Source="/TabBarIcons/profile.png" VerticalOptions="Center" />
             </FlexLayout>
         </Border>
         <Border Padding="10" StrokeShape="RoundRectangle 10">
@@ -34,7 +40,8 @@
                 <Label
                     FontAttributes="Bold"
                     FontSize="Medium"
-                    Text="Log Out" />
+                    Text="Log Out"
+                    VerticalOptions="Center" />
                 <ImageButton Source="/TabBarIcons/profile.png" />
             </FlexLayout>
         </Border>

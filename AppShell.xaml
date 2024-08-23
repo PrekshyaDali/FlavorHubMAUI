@@ -26,7 +26,7 @@
         <Tab Title="Add" Icon="/Icons/plus.png">
             <ShellContent ContentTemplate="{DataTemplate views:HomePage}" Route="MainPage" />
         </Tab>
-        <Tab Title="Notification" Icon="/TabBarIcons/notification.png">
+        <Tab Title="Gallery" Icon="/TabBarIcons/notification.png">
             <ShellContent ContentTemplate="{DataTemplate views:Gallery}" Route="Gallery" />
         </Tab>
         <Tab Title="Profile" Icon="/TabBarIcons/profile.png">
