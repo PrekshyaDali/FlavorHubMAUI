@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
 using FlavorHub.Models.AuthModels;
+using FlavorHub.Repositories.Interfaces;
 using FlavorHub.Views.Authentication;
 using System;
 using System.Collections.Generic;
@@ -19,10 +20,12 @@ namespace FlavorHub.ViewModel
     {
         public ICommand NavigateToRegisterCommand { get; set; }
         private readonly FirebaseAuthClient _FireBaseAuthClient;
-       
-        public LoginViewModel(FirebaseAuthClient firebaseAuthClient)
+        private readonly IUserRepository _UserRepository;
+
+        public LoginViewModel(FirebaseAuthClient firebaseAuthClient, IUserRepository userRepository)
         {
             _FireBaseAuthClient = firebaseAuthClient;
+            _UserRepository = userRepository;
             NavigateToRegisterCommand = new RelayCommand(NavigateToRegister);
         }
      
@@ -38,9 +41,13 @@ namespace FlavorHub.ViewModel
 
                 if (!string.IsNullOrWhiteSpace(result?.User?.Info?.Email))
                 {
-                    ClearLoginModel();
-                    await Shell.Current.GoToAsync("//HomePage");
-                    await Application.Current.MainPage.DisplayAlert("ok", "You have successfully logged in", "ok");
+                    var user = await _UserRepository.GetUserByFirebaseUidAsync(result.User.Uid);
+                    if (user != null)
+                    {
+                        ClearLoginModel();
+                        await Shell.Current.GoToAsync("//HomePage");
+                        await Application.Current.MainPage.DisplayAlert("ok", "You have successfully logged in", "ok");
+                    }
                 }
             }
             catch (Exception ex)

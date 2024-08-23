@@ -3,6 +3,7 @@
     x:Class="FlavorHub.Views.Gallery"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel"
     Title="Galleries">
     <StackLayout Padding="10">
         <!--  Search Bar  -->
@@ -13,7 +14,7 @@
 
         <RefreshView Command="{Binding RefreshFoodCommand}" IsRefreshing="{Binding IsRefreshing}">
             <!--  showing it in grid mode  -->
-            <CollectionView ItemsSource="{Binding Photos}">
+            <CollectionView ItemsSource="{Binding Photos}" SelectionMode="None">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout
                         HorizontalItemSpacing="10"
@@ -26,7 +27,11 @@
                         <Image
                             Aspect="AspectFill"
                             HeightRequest="150"
-                            Source="{Binding Url}" />
+                            Source="{Binding Url}">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:GalleryViewModel}}, Path=PhotoSelectCommand}" CommandParameter="{Binding Url}" />
+                            </Image.GestureRecognizers>
+                        </Image>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
