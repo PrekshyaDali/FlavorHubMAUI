@@ -7,6 +7,7 @@
     xmlns:local="clr-namespace:FlavorHub"
     xmlns:splash="clr-namespace:FlavorHub.Views.SplashScreens"
     xmlns:views="clr-namespace:FlavorHub.Views"
+    xmlns:viewsProfile="clr-namespace:FlavorHub.Views.Profile"
     Title="FlavorHub"
     Shell.FlyoutBehavior="Disabled">
 
@@ -28,8 +29,8 @@
         <Tab Title="Notification" Icon="/TabBarIcons/notification.png">
             <ShellContent ContentTemplate="{DataTemplate views:Gallery}" Route="Gallery" />
         </Tab>
-        <Tab Title="Recipes" Icon="/TabBarIcons/profile.png">
-            <ShellContent ContentTemplate="{DataTemplate views:HomePage}" Route="MainPage" />
+        <Tab Title="Profile" Icon="/TabBarIcons/profile.png">
+            <ShellContent ContentTemplate="{DataTemplate viewsProfile:ProfilePage}" Route="ProfilePage" />
         </Tab>
     </TabBar>
 </Shell>

@@ -1,6 +1,7 @@
 ﻿using FlavorHub.ViewModel;
 using FlavorHub.Views;
 using FlavorHub.Views.Authentication;
+using FlavorHub.Views.Profile;
 using FlavorHub.Views.SplashScreens;
 
 namespace FlavorHub
@@ -19,9 +20,13 @@ namespace FlavorHub
 
             //pages
             Routing.RegisterRoute("Gallery", typeof(Gallery));
+            Routing.RegisterRoute("GalleryFullPage", typeof(GalleryFullPage));
             Routing.RegisterRoute("SecondSplashScreen", typeof(SecondSplashScreen));
             Routing.RegisterRoute("ThirdSplashScreen", typeof(ThirdSplashScreen));
             Routing.RegisterRoute("Register", typeof(Register));
+
+            //profile
+            Routing.RegisterRoute("EditProfile", typeof(EditProfile));
 
         }
     }

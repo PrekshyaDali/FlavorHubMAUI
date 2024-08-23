@@ -9,6 +9,8 @@ using FlavorHub.Views;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
 using FlavorHub.Services;
+using FlavorHub.Views.Profile;
+using FlavorHub.ViewModel.ProfileSection;
 
 namespace FlavorHub
 {
@@ -37,12 +39,14 @@ namespace FlavorHub
             builder.Services.AddSingleton<LoginViewModel>();
             builder.Services.AddSingleton<HomePageViewModel>();
             builder.Services.AddSingleton<GalleryViewModel>();
+            builder.Services.AddSingleton<ProfilePageViewModel>();
 
             //pages
             builder.Services.AddSingleton<Register>();
             builder.Services.AddSingleton<Login>();
             builder.Services.AddSingleton<HomePage>();
             builder.Services.AddSingleton<Gallery>();
+            builder.Services.AddSingleton<ProfilePage>();
 
             // Load configuration
             var assembly = Assembly.GetExecutingAssembly();
