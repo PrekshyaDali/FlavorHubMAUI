@@ -1,5 +1,8 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
+using FlavorHub.Models.AuthModels;
+using FlavorHub.Repositories.Interfaces;
 using FlavorHub.ViewModel;
 using FlavorHub.Views.Authentication;
 using System;
@@ -10,13 +13,18 @@ using System.Threading.Tasks;
 
 namespace FlavorHub.ViewModel
 {
-    public partial class HomePageViewModel
+    public partial class HomePageViewModel: ObservableObject
     {
         private readonly FirebaseAuthClient _FirebaseAuthClient;
 
-        public HomePageViewModel(FirebaseAuthClient firebaseAuthClient)
+        private readonly IUserRepository _UserRepository;
+        [ObservableProperty]
+        private LoginModel _LoginModel = new();
+
+        public HomePageViewModel(FirebaseAuthClient firebaseAuthClient, IUserRepository userRepository)
         {
             _FirebaseAuthClient = firebaseAuthClient;
+            _UserRepository = userRepository;
         }
         [RelayCommand]
         private async Task LogOut()
@@ -36,6 +44,8 @@ namespace FlavorHub.ViewModel
             {
                 // Sign out the user
                 _FirebaseAuthClient.SignOut();
+                _LoginModel = new LoginModel();
+                _UserRepository.ClearCachedUser();
                 await Shell.Current.GoToAsync("//Login");
                 
             }

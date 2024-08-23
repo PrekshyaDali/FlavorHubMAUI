@@ -86,7 +86,6 @@ namespace FlavorHub.Repositories
             try
             {
                 await _Database.UpdateAsync(user);
-                // Optionally update the cached user if needed
                 _CachedUser = user;
             }
             catch (Exception ex)

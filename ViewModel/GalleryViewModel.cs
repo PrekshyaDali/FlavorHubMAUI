@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using FlavorHub.Models;
 using FlavorHub.Services;
+using FlavorHub.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,6 +16,8 @@ namespace FlavorHub.ViewModel
     public partial class GalleryViewModel: ObservableObject
     {
         private readonly PexelsService _PexelsService;
+        [ObservableProperty]
+        private string _PhotoUrl;
 
         [ObservableProperty]
         private ObservableCollection<PhotoModel> _Photos;
@@ -26,15 +29,29 @@ namespace FlavorHub.ViewModel
         //commands
         public ICommand SearchFoodCommand { get; set; }
         public ICommand RefreshFoodCommand { get; set; }
-        
+        public ICommand PhotoSelectCommand { get; set; }
+
         public GalleryViewModel(PexelsService pexelsService)
         {
             _PexelsService = pexelsService;
             _SearchQuery = string.Empty;
+            PhotoSelectCommand = new RelayCommand<string>(SelectPhotoAsync);
             SearchFoodCommand = new AsyncRelayCommand(SearchPhotosAsync);
             RefreshFoodCommand = new AsyncRelayCommand(RefreshPhotosAsync);
             Photos = new ObservableCollection<PhotoModel>();
             LoadDefaultPhotos();
+        }
+
+        [RelayCommand]
+        private async void SelectPhotoAsync(string photoUrl)
+        {
+            if (!string.IsNullOrEmpty(photoUrl))
+            {
+                await Shell.Current.GoToAsync(nameof(GalleryFullPage), true, new Dictionary<string, object>
+            {
+                { "PhotoUrl", photoUrl }
+            });
+            }
         }
 
         //Loading default photos without quering
