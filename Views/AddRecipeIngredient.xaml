@@ -6,12 +6,8 @@
     xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
     xmlns:models="clr-namespace:FlavorHub.Models.RecipeFormModels"
     xmlns:vm="clr-namespace:FlavorHub.ViewModel.RecipeFormViewModels"
-    Title="AddRecipeIngredient">
-
-    <ContentPage.BindingContext>
-        <vm:IngredientViewModel />
-    </ContentPage.BindingContext>
-
+    Title="AddRecipeIngredient"
+    x:DataType="vm:IngredientViewModel">
     <Shell.TitleView>
         <Grid Padding="20,5,20,0" HorizontalOptions="FillAndExpand">
             <Grid.ColumnDefinitions>

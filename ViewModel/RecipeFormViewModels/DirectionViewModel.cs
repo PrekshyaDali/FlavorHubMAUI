@@ -1,42 +1,130 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FlavorHub.Models.RecipeFormModels;
+using FlavorHub.Models.SQLiteModels;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FlavorHub.ViewModel.RecipeFormViewModels
 {
-    public partial class DirectionViewModel : ObservableObject
+    public partial class DirectionViewModel : ObservableObject, IQueryAttributable
     {
         [ObservableProperty]
         private ObservableCollection<DirectionModel> _Directions = new ObservableCollection<DirectionModel>();
 
-        //commands
+        [ObservableProperty]
+        private string? _Title;
+
+        [ObservableProperty]
+        private string? _Description;
+
+        [ObservableProperty]
+        private int _CookingTime;
+
+        [ObservableProperty]
+        private int _Servings;
+
+        [ObservableProperty]
+        private string? _DifficultyLevel;
+
+        [ObservableProperty]
+        private string? _IngredientsJson;
+
+        [ObservableProperty]
+        private string? _StepsJson;
+
+        // Commands
         public IAsyncRelayCommand AddDirectionCommand => new AsyncRelayCommand(AddDirectionsAsync);
         public IAsyncRelayCommand<DirectionModel> RemoveDirectionCommand => new AsyncRelayCommand<DirectionModel>(RemoveDirectionsAsync);
         public IAsyncRelayCommand NavigateToAddUploads => new AsyncRelayCommand(NavigateToAddUploadsPage);
 
-        public async Task NavigateToAddUploadsPage()
+        // Apply Query Attributes
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            await Shell.Current.GoToAsync("AddUploads");
+            try
+            {
+                if (query.ContainsKey("RecipeData"))
+                {
+                    var recipe = query["RecipeData"] as Recipe;
+                    if (recipe != null)
+                    {
+                        Title = recipe.Title;
+                        Description = recipe.Description;
+                        CookingTime = recipe.CookingTime;
+                        Servings = recipe.Servings;
+                        DifficultyLevel = recipe.DifficultyLevel;
+                        IngredientsJson = recipe.IngredientsJson;
+                        StepsJson = recipe.StepsJson;
+                        LoadDirectionsFromJson(StepsJson);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
-        public DirectionViewModel() { }
 
-        //Methods
+        // Methods
         private async Task AddDirectionsAsync()
         {
             _Directions.Add(new DirectionModel());
-            await Task.CompletedTask; 
+            await Task.CompletedTask;
         }
 
         private async Task RemoveDirectionsAsync(DirectionModel direction)
         {
             _Directions.Remove(direction);
-            await Task.CompletedTask; 
+            await Task.CompletedTask;
+        }
+
+        public async Task NavigateToAddUploadsPage()
+        {
+            try
+            {
+                UpdateDirectionsJson();
+                var recipe = new Recipe
+                {
+                    Title = Title,
+                    Description = Description,
+                    CookingTime = CookingTime,
+                    Servings = Servings,
+                    DifficultyLevel = DifficultyLevel,
+                    IngredientsJson = IngredientsJson,
+                    StepsJson = StepsJson, 
+                };
+
+                // Passing data to the next page
+                await Shell.Current.GoToAsync("AddUploads", new Dictionary<string, object>
+                {
+                    { "RecipeData", recipe }
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+        private void UpdateDirectionsJson()
+        {
+            StepsJson = JsonConvert.SerializeObject(Directions);
+        }
+
+       private void LoadDirectionsFromJson(string? json)
+       {
+          if (!string.IsNullOrEmpty(json))
+          {
+             var directions = JsonConvert.DeserializeObject<ObservableCollection<DirectionModel>>(json);
+             if (directions != null)
+             {
+                Directions = directions;
+             }
+          }
+
         }
     }
 }
