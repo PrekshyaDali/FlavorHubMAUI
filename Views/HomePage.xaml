@@ -98,36 +98,25 @@
                 </HorizontalStackLayout>
             </ScrollView>
 
+            <!--  for recent recipies  -->
             <Border Grid.Row="3" StrokeThickness="0">
                 <VerticalStackLayout Spacing="20">
                     <FlexLayout JustifyContent="SpaceBetween">
-                        <Label Style="{DynamicResource SubHeader}" Text="Popular Recipes" />
+                        <Label Style="{DynamicResource SubHeader}" Text="Recent Recipes" />
                         <Label Text="view all" />
                     </FlexLayout>
-                    <controls:RecipeUIContentView
-                        ContentWidth="330"
-                        ProfileImage="/TabBarIcons/profile.png"
-                        RecipeFoodName="Sandwich"
-                        RecipeImage="/HomePage/food.png"
-                        UserName="Bitisha" />
-                    <controls:RecipeUIContentView
-                        ContentWidth="330"
-                        ProfileImage="/TabBarIcons/profile.png"
-                        RecipeFoodName="Sandwich"
-                        RecipeImage="/HomePage/food.png"
-                        UserName="Bitisha" />
-                    <controls:RecipeUIContentView
-                        ContentWidth="330"
-                        ProfileImage="/TabBarIcons/profile.png"
-                        RecipeFoodName="Sandwich"
-                        RecipeImage="/HomePage/food.png"
-                        UserName="Bitisha" />
-                    <controls:RecipeUIContentView
-                        ContentWidth="330"
-                        ProfileImage="/TabBarIcons/profile.png"
-                        RecipeFoodName="Sandwich"
-                        RecipeImage="/HomePage/food.png"
-                        UserName="Bitisha" />
+                    <CollectionView ItemsSource="{Binding Recipes}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <controls:RecipeUIContentView
+                                    ContentWidth="330"
+                                    ProfileImage="{Binding FirstImageUrl}"
+                                    RecipeFoodName="{Binding Title}"
+                                    RecipeImage="{Binding FirstImageUrl}"
+                                    UserName="{Binding UserName}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </VerticalStackLayout>
             </Border>
         </Grid>
