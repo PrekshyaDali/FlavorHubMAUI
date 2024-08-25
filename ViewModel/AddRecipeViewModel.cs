@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using FlavorHub.Models;
 using FlavorHub.Models.SQLiteModels;
 using FlavorHub.Views;
 using System;
@@ -28,7 +30,18 @@ namespace FlavorHub.ViewModel
         {
             Console.WriteLine("I am here");
             NavigateToAddRecipeInformation = new AsyncRelayCommand(NavigateRecipeInformation);
+            WeakReferenceMessenger.Default.Register<ClearDataMessage>(this, (r, message) =>
+            {
+                ClearData();
+            });
         }
+
+        private void ClearData()
+        {
+            Title = null;
+            Description = null;
+        }
+
         [RelayCommand]
         public async Task NavigateRecipeInformation()
         {

@@ -24,7 +24,8 @@ namespace FlavorHub.Repositories
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException();
+                Console.WriteLine($"Error adding recipe: {ex.Message}");
+                throw;
             }
         }
 

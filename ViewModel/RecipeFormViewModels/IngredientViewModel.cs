@@ -1,7 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using FlavorHub.Models;
 using FlavorHub.Models.RecipeFormModels;
 using FlavorHub.Models.SQLiteModels;
+using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -50,10 +53,29 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
                 }
             }
         }
+     
 
         public IAsyncRelayCommand AddIngredientCommand => new AsyncRelayCommand(AddIngredientAsync);
         public IAsyncRelayCommand NavigateToDirections => new AsyncRelayCommand(NavigateToRecipeDirections);
         public IAsyncRelayCommand<IngredientModel> RemoveIngredientCommand => new AsyncRelayCommand<IngredientModel>(RemoveIngredientAsync);
+
+        public IngredientViewModel()
+        {
+            WeakReferenceMessenger.Default.Register<ClearDataMessage>(this, (r, message) =>
+            {
+                ClearData();
+            });
+        }
+
+        public void ClearData()
+        {
+            Title = null;
+            Description = null;
+            CookingTime = 0;
+            Servings = 0;
+            DifficultyLevel = null;
+            IngredientsJson = null;
+        }
 
         private async Task AddIngredientAsync()
         {

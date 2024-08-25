@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using FlavorHub.Models;
 using FlavorHub.Models.RecipeFormModels;
 using FlavorHub.Models.SQLiteModels;
 using Newtonsoft.Json;
@@ -41,6 +43,23 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
         public IAsyncRelayCommand AddDirectionCommand => new AsyncRelayCommand(AddDirectionsAsync);
         public IAsyncRelayCommand<DirectionModel> RemoveDirectionCommand => new AsyncRelayCommand<DirectionModel>(RemoveDirectionsAsync);
         public IAsyncRelayCommand NavigateToAddUploads => new AsyncRelayCommand(NavigateToAddUploadsPage);
+
+        public DirectionViewModel()
+        {
+            WeakReferenceMessenger.Default.Register<ClearDataMessage>(this, (r, message) =>
+            {
+                ClearData();
+            });
+        }
+        private void ClearData() {
+            Title = null;
+            Description = null;
+            CookingTime = 0;
+            Servings = 0;
+            DifficultyLevel = null;
+            IngredientsJson = null;
+            StepsJson = null;
+        }
 
         // Apply Query Attributes
         public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -124,7 +143,6 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
                 Directions = directions;
              }
           }
-
-        }
+       }
     }
 }

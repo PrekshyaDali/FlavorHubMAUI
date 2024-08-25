@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.Input;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,6 @@ namespace FlavorHub.Models.RecipeFormModels
         public string FilePath { get; set; }  
         public string FileName { get; set; } 
         public string FileType { get; set; }
+        public IRelayCommand DeleteCommand { get; set; }
     }
 }

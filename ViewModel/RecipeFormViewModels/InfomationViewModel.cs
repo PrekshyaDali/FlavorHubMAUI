@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using FlavorHub.Models;
 using FlavorHub.Models.SQLiteModels;
 using System;
 using System.Collections.Generic;
@@ -52,10 +54,24 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
 
         public InfomationViewModel()
         {
+           
             NavigateToIngredientsPage = new AsyncRelayCommand(NavigateRecipeIngredient);
             ServingSizeIncrease = new RelayCommand(IncreaseServingSize);
             ServingSizeDecrease = new RelayCommand(DecreaseServingSize);
             PropertyChanged += OnPropertyChanged;
+            WeakReferenceMessenger.Default.Register<ClearDataMessage>(this, (r, message) =>
+            {
+                ClearData();
+            });
+        }
+
+        private void ClearData()
+        {
+            Title = null;
+            Description = null;
+            CookingTime = 0;
+            Servings = 0;
+            DifficultyLevel = null;
         }
 
         private void IncreaseServingSize()
