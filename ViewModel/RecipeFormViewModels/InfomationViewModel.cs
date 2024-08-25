@@ -22,7 +22,7 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
         private string? _Description;
 
         [ObservableProperty]
-        private int _CookingTime; // Changed to int
+        private int _CookingTime; 
 
         [ObservableProperty]
         private int _Servings = 1;
@@ -134,6 +134,5 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
             }
         }
 
-      
     }
 }

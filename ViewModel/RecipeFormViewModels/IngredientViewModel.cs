@@ -48,13 +48,13 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
                     DifficultyLevel = recipe.DifficultyLevel;
                     IngredientsJson = recipe.IngredientsJson;
 
-                    // Load ingredients from JSON
+                    // Loading ingredients from JSON
                     LoadIngredientsFromJson(IngredientsJson);
                 }
             }
         }
-     
 
+        //commands
         public IAsyncRelayCommand AddIngredientCommand => new AsyncRelayCommand(AddIngredientAsync);
         public IAsyncRelayCommand NavigateToDirections => new AsyncRelayCommand(NavigateToRecipeDirections);
         public IAsyncRelayCommand<IngredientModel> RemoveIngredientCommand => new AsyncRelayCommand<IngredientModel>(RemoveIngredientAsync);
@@ -123,7 +123,6 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
                 }
             }
         }
-
         private void UpdateIngredientsJson()
         {
             IngredientsJson = JsonConvert.SerializeObject(Ingredients);

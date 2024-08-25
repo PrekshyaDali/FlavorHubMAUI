@@ -23,5 +23,4 @@ namespace FlavorHub.Models.SQLiteModels
         public string? Bio { get; set; }
         public DateTime? CreatedDate { get; set; }
     }
-
 }
