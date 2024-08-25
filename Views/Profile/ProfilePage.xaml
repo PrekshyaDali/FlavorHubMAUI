@@ -20,7 +20,7 @@
                 HeightRequest="100"
                 StrokeShape="RoundRectangle 80"
                 WidthRequest="100">
-                <Image Source="dotnet_bot.png" />
+                <Image Aspect="AspectFill" Source="{Binding ProfilePicture, FallbackValue='dotnet_bot.png'}" />
             </Border>
             <VerticalStackLayout
                 Grid.Row="2"

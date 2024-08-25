@@ -2,11 +2,10 @@
 using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
 using FlavorHub.Repositories.Interfaces;
+using Microsoft.Maui.Storage;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace FlavorHub.ViewModel.ProfileSection
 {
@@ -14,12 +13,13 @@ namespace FlavorHub.ViewModel.ProfileSection
     {
         private readonly IUserRepository _UserRepository;
         private readonly FirebaseAuthClient _FirebaseAuthClient;
-        private readonly string _FirebaseUid;
+        public ICommand SaveProfileDetailsCommand { get; set; }
 
         public ProfilePageViewModel(IUserRepository UserRepository, FirebaseAuthClient firebaseAuthClient)
         {
             _UserRepository = UserRepository;
             _FirebaseAuthClient = firebaseAuthClient;
+            SaveProfileDetailsCommand = new AsyncRelayCommand(SaveProfile);
             LoadUserProfile();
         }
 
@@ -38,11 +38,13 @@ namespace FlavorHub.ViewModel.ProfileSection
         [ObservableProperty]
         private string _Email;
 
+        // Method to refresh the profile
         public async Task RefreshProfile()
         {
             await LoadUserProfile();
         }
 
+        // Method to load the user's profile
         private async Task LoadUserProfile()
         {
             try
@@ -54,7 +56,10 @@ namespace FlavorHub.ViewModel.ProfileSection
                     if (user != null)
                     {
                         UserName = user.UserName;
-                        Email = user?.Email;
+                        Email = user.Email;
+                        Bio = user.Bio;
+                        ProfilePicture = user.ProfilePicture;
+                        User = user;
                     }
                 }
             }
@@ -64,13 +69,51 @@ namespace FlavorHub.ViewModel.ProfileSection
             }
         }
 
+        // Command to save the user's profile
         [RelayCommand]
         private async Task SaveProfile()
         {
-            if (_user != null)
+            try
             {
-                await _UserRepository.UpdateUserAsync(_user);
-                await Application.Current.MainPage.DisplayAlert("Success", "Profile updated", "OK");
+                if (_user != null)
+                {
+                    _user.UserName = UserName;
+                    _user.Bio = Bio;
+                    _user.Email = Email;
+                    _user.ProfilePicture = ProfilePicture;
+
+                    await _UserRepository.UpdateUserAsync(_user);
+                    await Application.Current.MainPage.DisplayAlert("Success", "Profile updated", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving profile: {ex}");
+            }
+        }
+
+        // Command to select a profile picture
+        [RelayCommand]
+        private async Task SelectProfilePicture()
+        {
+            try
+            {
+                var result = await FilePicker.PickAsync(new PickOptions
+                {
+                    FileTypes = FilePickerFileType.Images,
+                    PickerTitle = "Pick a profile picture"
+                });
+
+                if (result != null)
+                {
+                    // Save the file path returned by the file picker
+                    ProfilePicture = result.FullPath;
+                    User.ProfilePicture = ProfilePicture;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error selecting profile picture: {ex}");
             }
         }
     }
