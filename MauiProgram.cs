@@ -15,6 +15,7 @@ using SQLite;
 using FlavorHub.Data;
 using FlavorHub.Repositories;
 using FlavorHub.ViewModel.RecipeFormViewModels;
+using FlavorHub.Repositories.Interfaces;
 
 namespace FlavorHub
 {
@@ -65,6 +66,8 @@ namespace FlavorHub
             builder.Services.AddSingleton<AddRecipeIngredient>();
             builder.Services.AddSingleton<AddUploads>();
 
+            //services
+            builder.Services.AddSingleton<IUserService, UserService>();
             // Load configuration
             var assembly = Assembly.GetExecutingAssembly();
             var resourceName = "FlavorHub.appsettings.json";

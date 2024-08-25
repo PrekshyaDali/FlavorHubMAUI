@@ -75,6 +75,7 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
             Servings = 0;
             DifficultyLevel = null;
             IngredientsJson = null;
+            Ingredients.Clear();
         }
 
         private async Task AddIngredientAsync()

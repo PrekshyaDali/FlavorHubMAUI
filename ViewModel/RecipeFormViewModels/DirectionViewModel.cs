@@ -48,6 +48,7 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
         {
             WeakReferenceMessenger.Default.Register<ClearDataMessage>(this, (r, message) =>
             {
+                Console.WriteLine("Clear data message recienved in direction");
                 ClearData();
             });
         }
@@ -59,6 +60,7 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
             DifficultyLevel = null;
             IngredientsJson = null;
             StepsJson = null;
+            Directions.Clear();
         }
 
         // Apply Query Attributes

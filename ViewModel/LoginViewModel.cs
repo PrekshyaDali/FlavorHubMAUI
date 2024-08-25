@@ -21,11 +21,13 @@ namespace FlavorHub.ViewModel
         public ICommand NavigateToRegisterCommand { get; set; }
         private readonly FirebaseAuthClient _FireBaseAuthClient;
         private readonly IUserRepository _UserRepository;
+        private readonly IUserService _UserService;
 
-        public LoginViewModel(FirebaseAuthClient firebaseAuthClient, IUserRepository userRepository)
+        public LoginViewModel(FirebaseAuthClient firebaseAuthClient, IUserRepository userRepository, IUserService userService)
         {
             _FireBaseAuthClient = firebaseAuthClient;
             _UserRepository = userRepository;
+            _UserService = userService;
             NavigateToRegisterCommand = new RelayCommand(NavigateToRegister);
         }
      
@@ -45,6 +47,7 @@ namespace FlavorHub.ViewModel
                     if (user != null)
                     {
                         ClearLoginModel();
+                        await  _UserService.StoreUserIdAsync(user.UserId);
                         await Shell.Current.GoToAsync("//HomePage");
                         await Application.Current.MainPage.DisplayAlert("ok", "You have successfully logged in", "ok");
                     }

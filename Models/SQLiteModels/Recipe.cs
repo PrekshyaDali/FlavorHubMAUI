@@ -12,7 +12,7 @@ namespace FlavorHub.Models.SQLiteModels
     {
         [PrimaryKey, AutoIncrement]
         public Guid RecipeId { get; set; } = Guid.NewGuid();
-        public Guid UserID { get; set; }
+        public Guid UserId { get; set; }
         public string? Title { get; set; }
         public string? Description { get; set; }
         public string? IngredientsJson { get; set; }

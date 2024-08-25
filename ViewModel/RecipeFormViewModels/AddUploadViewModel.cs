@@ -27,6 +27,7 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
         public IAsyncRelayCommand CompleteCommand => new AsyncRelayCommand(SaveRecipeToDatabaseAsync);
 
         private readonly IRecipeRepository _RecipeRepository;
+        private readonly IUserService _UserService;
 
         [ObservableProperty]
         private string? _Title;
@@ -55,9 +56,13 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
         [ObservableProperty]
         private string? _VideoUrlJson;
 
-        public AddUploadViewModel(IRecipeRepository recipeRepository)
+        [ObservableProperty]
+        private Guid? _UserId;
+
+        public AddUploadViewModel(IRecipeRepository recipeRepository, IUserService userService)
         {
             _RecipeRepository = recipeRepository;
+            _UserService = userService;
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -232,6 +237,7 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
                 // Log the JSON strings
                 Console.WriteLine($"Images JSON: {imagesJson}");
                 Console.WriteLine($"Videos JSON: {videosJson}");
+                await LoadUserId();
                 var recipe = new Recipe
                 {
                     Title = Title,
@@ -242,11 +248,13 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
                     IngredientsJson = IngredientsJson,
                     StepsJson = StepsJson,
                     ImageUrlsJson = imagesJson,
-                    VideoUrlJson = videosJson
+                    VideoUrlJson = videosJson,
+                    UserId = UserId.Value
                 };
 
                 await _RecipeRepository.AddRecipeAsync(recipe);
                 await Application.Current.MainPage.DisplayAlert("Success", "Recipe saved successfully!", "OK");
+                await Shell.Current.GoToAsync("///AddRecipe");
 
                 //using messenger to clear all the input fields in all form pages
                 WeakReferenceMessenger.Default.Send(new ClearDataMessage());
@@ -266,6 +274,11 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
                 Console.WriteLine(ex.ToString());
                 await Application.Current.MainPage.DisplayAlert("Error", "Failed to save the recipe. Please try again.", "OK");
             }
+        }
+
+        private async Task LoadUserId()
+        {
+            _UserId = await _UserService.GetUserIdAsync();
         }
     }
 }
