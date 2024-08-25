@@ -12,7 +12,7 @@ namespace FlavorHub.Models.SQLiteModels
     {
         [PrimaryKey, AutoIncrement]
         public Guid RecipeId { get; set; } = Guid.NewGuid();
-        public Guid UserID { get; set; }
+        public Guid UserId { get; set; }
         public string? Title { get; set; }
         public string? Description { get; set; }
         public string? IngredientsJson { get; set; }
@@ -20,9 +20,9 @@ namespace FlavorHub.Models.SQLiteModels
         public int CookingTime { get; set; }
         public string? DifficultyLevel { get; set; }
         public int Servings { get; set; }
-        public Guid CategoryID { get; set; }
         public string ImageUrlsJson { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string VideoUrlJson { get; set; }
 
         [Ignore] 
         //this will tell SQLite to not map this property into a column in database table
@@ -51,6 +51,15 @@ namespace FlavorHub.Models.SQLiteModels
                    ? new List<string>()
                    : JsonSerializer.Deserialize<List<string>>(ImageUrlsJson) ?? new List<string>();
             set => ImageUrlsJson = JsonSerializer.Serialize(value);
+        }
+
+        [Ignore]
+        public List<string> VideoUrl
+        {
+            get => string.IsNullOrEmpty(VideoUrlJson)
+                   ? new List<string>()
+                   : JsonSerializer.Deserialize<List<string>>(VideoUrlJson) ?? new List<string>();
+            set => VideoUrlJson = JsonSerializer.Serialize(value);
         }
     }
 }

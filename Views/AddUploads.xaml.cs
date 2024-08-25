@@ -1,9 +1,12 @@
+using FlavorHub.ViewModel.RecipeFormViewModels;
+
 namespace FlavorHub.Views;
 
 public partial class AddUploads : ContentPage
 {
-	public AddUploads()
+	public AddUploads(AddUploadViewModel addUploadViewModel)
 	{
 		InitializeComponent();
+		BindingContext = addUploadViewModel;
 	}
 }

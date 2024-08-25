@@ -10,6 +10,6 @@ namespace FlavorHub.Models.RecipeFormModels
     public partial class DirectionModel: ObservableObject
     {
         [ObservableProperty]
-        private string? _DirectionDescription;
+        private string? _Steps;
     }
 }

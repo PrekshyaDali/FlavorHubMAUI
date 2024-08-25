@@ -7,9 +7,6 @@
     xmlns:models="clr-namespace:FlavorHub.Models.RecipeFormModels"
     xmlns:vm="clr-namespace:FlavorHub.ViewModel.RecipeFormViewModels"
     Title="AddRecipeDirections">
-    <ContentPage.BindingContext>
-        <vm:DirectionViewModel />
-    </ContentPage.BindingContext>
     <Shell.TitleView>
         <Grid Padding="20,5,20,0" HorizontalOptions="FillAndExpand">
             <Grid.ColumnDefinitions>
@@ -53,7 +50,7 @@
                 <DataTemplate x:DataType="models:DirectionModel">
                     <FlexLayout Margin="0,0,0,10" JustifyContent="SpaceBetween">
                         <controls:InputFieldContentView
-                            EntryData="{Binding DirectionDescription}"
+                            EntryData="{Binding Steps}"
                             Placeholder="Ingredient Name"
                             WidthRequest="300" />
                         <ImageButton

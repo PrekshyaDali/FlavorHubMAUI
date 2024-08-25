@@ -11,9 +11,7 @@
     Title="FlavorHub"
     Shell.FlyoutBehavior="Disabled">
 
-
     <ShellContent ContentTemplate="{DataTemplate splash:FirstSplashScreen}" Route="FirstSplashScreen" />
-
     <ShellContent ContentTemplate="{DataTemplate authentication:Login}" Route="Login" />
 
     <TabBar>
@@ -24,7 +22,7 @@
             <ShellContent ContentTemplate="{DataTemplate views:AddRecipe}" Route="AddRecipe" />
         </Tab>
         <Tab Title="Add" Icon="/Icons/plus.png">
-            <ShellContent ContentTemplate="{DataTemplate views:HomePage}" Route="MainPage" />
+            <ShellContent ContentTemplate="{DataTemplate views:RecipeDetailPage}" Route="RecipeDetailPage" />
         </Tab>
         <Tab Title="Gallery" Icon="/TabBarIcons/notification.png">
             <ShellContent ContentTemplate="{DataTemplate views:Gallery}" Route="Gallery" />

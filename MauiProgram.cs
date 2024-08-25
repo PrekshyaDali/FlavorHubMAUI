@@ -14,6 +14,8 @@ using FlavorHub.ViewModel.ProfileSection;
 using SQLite;
 using FlavorHub.Data;
 using FlavorHub.Repositories;
+using FlavorHub.ViewModel.RecipeFormViewModels;
+using FlavorHub.Repositories.Interfaces;
 
 namespace FlavorHub
 {
@@ -43,6 +45,12 @@ namespace FlavorHub
             builder.Services.AddSingleton<HomePageViewModel>();
             builder.Services.AddSingleton<GalleryViewModel>();
             builder.Services.AddSingleton<ProfilePageViewModel>();
+            builder.Services.AddSingleton<AddRecipeViewModel>();
+            builder.Services.AddSingleton<AddUploadViewModel>();
+            builder.Services.AddSingleton<DirectionViewModel>();
+            builder.Services.AddSingleton<IngredientViewModel>();
+            builder.Services.AddSingleton<InfomationViewModel>();
+
 
             //pages
             builder.Services.AddSingleton<Register>();
@@ -50,7 +58,16 @@ namespace FlavorHub
             builder.Services.AddSingleton<HomePage>();
             builder.Services.AddSingleton<Gallery>();
             builder.Services.AddSingleton<ProfilePage>();
+            //recipe pages
 
+            builder.Services.AddSingleton<AddRecipe>();
+            builder.Services.AddSingleton<AddRecipeInformation>();
+            builder.Services.AddSingleton<AddRecipeDirections>();
+            builder.Services.AddSingleton<AddRecipeIngredient>();
+            builder.Services.AddSingleton<AddUploads>();
+
+            //services
+            builder.Services.AddSingleton<IUserService, UserService>();
             // Load configuration
             var assembly = Assembly.GetExecutingAssembly();
             var resourceName = "FlavorHub.appsettings.json";
@@ -64,6 +81,7 @@ namespace FlavorHub
 
             builder.Services.AddSingleton<AppDbContext>();
             builder.Services.AddSingleton<Repositories.Interfaces.IUserRepository, UserRepository>();
+            builder.Services.AddSingleton<Repositories.Interfaces.IRecipeRepository, RecipeRepository>();
 
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             {

@@ -7,12 +7,9 @@
     xmlns:models="clr-namespace:FlavorHub.Models.RecipeFormModels"
     xmlns:vm="clr-namespace:FlavorHub.ViewModel.RecipeFormViewModels"
     Title="AddUploads">
-    <ContentPage.BindingContext>
-        <vm:AddUploadViewModel />
-    </ContentPage.BindingContext>
     <ScrollView>
-        <StackLayout>
-            <HorizontalStackLayout>
+        <StackLayout Padding="20" Spacing="20">
+            <HorizontalStackLayout Spacing="10">
                 <controls:ButtonContentView ButtonCommand="{Binding SelectImagesCommand}" ButtonText="Select Images" />
                 <controls:ButtonContentView ButtonCommand="{Binding SelectVideosCommand}" ButtonText="select Videos" />
             </HorizontalStackLayout>
@@ -20,6 +17,11 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:AddUploadModel">
                         <StackLayout Orientation="Vertical" Spacing="10">
+                            <controls:ButtonContentView
+                                ButtonCommand="{Binding DeleteCommand}"
+                                ButtonText="Delete"
+                                HorizontalOptions="End"
+                                WidthRequest="100" />
                             <Image
                                 HeightRequest="200"
                                 IsVisible="{Binding FileType, Converter={StaticResource ImageFileTypeConverter}}"
@@ -30,6 +32,10 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            <controls:ButtonContentView
+                ButtonCommand="{Binding CompleteCommand}"
+                ButtonText="Finish"
+                VerticalOptions="End" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

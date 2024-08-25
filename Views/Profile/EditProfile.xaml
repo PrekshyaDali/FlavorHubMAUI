@@ -3,35 +3,77 @@
     x:Class="FlavorHub.Views.Profile.EditProfile"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
     Title="EditProfile">
     <VerticalStackLayout Padding="20" Spacing="20">
-        <VerticalStackLayout Margin="0,0,0,20">
-            <Grid
-                ColumnDefinitions="*"
+        <Grid RowDefinitions=".2*,*,*" RowSpacing="20">
+            <Border
+                Grid.Row="1"
                 HeightRequest="100"
-                RowDefinitions="*,.1*"
+                StrokeShape="RoundRectangle 80"
                 WidthRequest="100">
-                <Border
-                    Grid.Row="0"
-                    Grid.RowSpan="1"
-                    Grid.Column="0"
-                    HeightRequest="100"
+                <Image Source="dotnet_bot.png">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SelectProfilePictureCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </Border>
+            <VerticalStackLayout
+                Grid.Row="2"
+                Padding="20,0,0,0"
+                HorizontalOptions="FillAndExpand"
+                Spacing="10"
+                VerticalOptions="Center">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Medium"
                     HorizontalOptions="Center"
-                    StrokeShape="RoundRectangle 80"
-                    WidthRequest="100">
-                    <Image
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        HeightRequest="20"
-                        HorizontalOptions="End"
-                        Source="dotnet_bot.png"
-                        WidthRequest="10" />
-                </Border>
-            </Grid>
-            <VerticalStackLayout VerticalOptions="Center">
-                <Label Text="gekki" />
-                <Label Text="prekshya@gmail.com" />
+                    Text="{Binding UserName, FallbackValue='Prekshya'}" />
+                <Label
+                    FontSize="Small"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding Email, FallbackValue='prekshya@gmail.com'}"
+                    TextColor="{StaticResource SecondaryTextColor}" />
+
+                <Label HorizontalTextAlignment="Center" Text="Life is too short to live just end it." />
             </VerticalStackLayout>
-        </VerticalStackLayout>
+        </Grid>
+
+        <!--  line  -->
+        <BoxView
+            BackgroundColor="{StaticResource SecondaryTextColor}"
+            HeightRequest="1"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="End" />
+
+
+        <!--  //inputFields  -->
+        <FlexLayout HorizontalOptions="FillAndExpand" JustifyContent="SpaceBetween">
+            <Border
+                Padding="10"
+                HeightRequest="80"
+                HorizontalOptions="FillAndExpand"
+                StrokeShape="RoundRectangle 10"
+                WidthRequest="160">
+                <Entry Placeholder="UserName" />
+            </Border>
+            <Border
+                Padding="10"
+                HeightRequest="80"
+                HorizontalOptions="FillAndExpand"
+                StrokeShape="RoundRectangle 10"
+                WidthRequest="160">
+                <Entry Placeholder="Email" />
+            </Border>
+        </FlexLayout>
+        <Border
+            Padding="10"
+            HeightRequest="100"
+            HorizontalOptions="FillAndExpand"
+            StrokeShape="RoundRectangle 10">
+            <Editor Placeholder="Bio" />
+        </Border>
+        <controls:ButtonContentView ButtonCommand="{Binding SaveProfileDetailsCommand}" ButtonText="Save Changes" />
     </VerticalStackLayout>
 </ContentPage>

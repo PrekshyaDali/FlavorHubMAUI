@@ -4,28 +4,52 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:model="clr-namespace:FlavorHub.Models.SQLiteModels"
-    Title="ProfilePage">
+    Title="My profile">
     <VerticalStackLayout Padding="20" Spacing="20">
-        <FlexLayout Margin="0,0,0,20" JustifyContent="SpaceBetween">
+        <Grid
+            Margin="0,0,0,20"
+            RowDefinitions=".2*,*,*"
+            RowSpacing="20">
+            <ImageButton
+                Grid.Row="0"
+                Clicked="ImageButton_Clicked"
+                HorizontalOptions="End"
+                Source="/TabBarIcons/profile.png" />
             <Border
+                Grid.Row="1"
                 HeightRequest="100"
                 StrokeShape="RoundRectangle 80"
                 WidthRequest="100">
                 <Image Source="dotnet_bot.png" />
             </Border>
-            <Border>
-                <VerticalStackLayout
-                    Padding="20,0,0,0"
-                    x:DataType="model:User"
-                    VerticalOptions="Center"
-                    WidthRequest="200">
-                    <Label Style="{StaticResource SubHeader}" Text="{Binding UserName}" />
-                    <Label Text="{Binding Email}" />
-                </VerticalStackLayout>
-            </Border>
-            <ImageButton Clicked="ImageButton_Clicked" Source="/TabBarIcons/profile.png" />
-        </FlexLayout>
-        <Border Padding="10" StrokeShape="RoundRectangle 10">
+            <VerticalStackLayout
+                Grid.Row="2"
+                Padding="20,0,0,0"
+                x:DataType="model:User"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Center">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    HorizontalOptions="Center"
+                    Text="{Binding UserName}" />
+                <Label
+                    FontSize="Small"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding Email}"
+                    TextColor="{StaticResource SecondaryTextColor}" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <!--  line  -->
+        <BoxView
+            BackgroundColor="{StaticResource SecondaryTextColor}"
+            HeightRequest="1"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="End" />
+
+        <Border Padding="10" StrokeShape="RoundRectangle ">
             <FlexLayout JustifyContent="SpaceBetween">
                 <Label
                     FontAttributes="Bold"
@@ -35,7 +59,7 @@
                 <ImageButton Source="/TabBarIcons/profile.png" VerticalOptions="Center" />
             </FlexLayout>
         </Border>
-        <Border Padding="10" StrokeShape="RoundRectangle 10">
+        <Border Padding="10" StrokeShape="RoundRectangle 0">
             <FlexLayout JustifyContent="SpaceBetween" VerticalOptions="Center">
                 <Label
                     FontAttributes="Bold"

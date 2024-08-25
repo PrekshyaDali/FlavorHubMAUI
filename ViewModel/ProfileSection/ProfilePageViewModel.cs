@@ -26,7 +26,6 @@ namespace FlavorHub.ViewModel.ProfileSection
         [ObservableProperty]
         private Models.SQLiteModels.User _user;
 
-
         [ObservableProperty]
         private string _UserName;
 
