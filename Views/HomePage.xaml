@@ -120,7 +120,6 @@
                                             <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=SelectionCommand}" CommandParameter="{Binding .}" />
                                         </controls:RecipeUIContentView.GestureRecognizers>
                                     </controls:RecipeUIContentView>
-
                                 </Border>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>

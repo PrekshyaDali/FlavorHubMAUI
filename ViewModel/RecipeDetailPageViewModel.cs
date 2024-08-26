@@ -22,7 +22,6 @@ namespace FlavorHub.ViewModel
                 SelectedRecipe = query["SelectedRecipe"] as RecipeViewModel;
                 Console.WriteLine(SelectedRecipe.ImageUrls);
                 Console.WriteLine(SelectedRecipe.Ingredients);
-                // Debug output
                 Console.WriteLine("Ingredients Count: " + SelectedRecipe.Ingredients.Count);
             }
         }
