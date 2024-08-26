@@ -30,6 +30,8 @@ namespace FlavorHub.Views.Controls
                 typeof(RecipeUIContentView),
                 default(string));
 
+       
+
         public static readonly BindableProperty RecipeFoodNameProperty =
             BindableProperty.Create(
                 nameof(RecipeFoodName),
@@ -37,6 +39,19 @@ namespace FlavorHub.Views.Controls
                 typeof(RecipeUIContentView),
                 default(string));
 
+        public static readonly BindableProperty CookingTimeProperty =
+            BindableProperty.Create(
+                nameof(CookingTime),
+                typeof(int),
+                typeof(RecipeUIContentView),
+                default(int));
+
+        public static readonly BindableProperty DifficultyLevelProperty =
+            BindableProperty.Create(
+                nameof(DifficultyLevel),
+                typeof(string),
+                typeof(RecipeUIContentView),
+                default(string));
         // Properties for binding
         public int ContentWidth
         {
@@ -66,6 +81,18 @@ namespace FlavorHub.Views.Controls
         {
             get => (string)GetValue(RecipeFoodNameProperty);
             set => SetValue(RecipeFoodNameProperty, value);
+        }
+
+        public int CookingTime
+        {
+            get => (int)GetValue(CookingTimeProperty);
+            set => SetValue(CookingTimeProperty, value);
+        }
+
+        public string DifficultyLevel
+        {
+            get => (string)GetValue(DifficultyLevelProperty);
+            set => SetValue(DifficultyLevelProperty, value);
         }
 
         public RecipeUIContentView()

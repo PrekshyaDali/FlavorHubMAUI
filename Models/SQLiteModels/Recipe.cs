@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using FlavorHub.Models.RecipeFormModels;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,18 +22,49 @@ namespace FlavorHub.Models.SQLiteModels
         public string? DifficultyLevel { get; set; }
         public int Servings { get; set; }
         public string ImageUrlsJson { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
         public string VideoUrlJson { get; set; }
 
-        [Ignore] 
-        //this will tell SQLite to not map this property into a column in database table
-        public List<string> Ingredients
-        {
-            get => string.IsNullOrEmpty(IngredientsJson) 
-                ? new List<string>()
-                : JsonSerializer.Deserialize<List<string>>(IngredientsJson) ?? new List<string>();
+        //[Ignore] 
+        ////this will tell SQLite to not map this property into a column in database table
+        //public List<string> Ingredients
+        //{
+        //    get => string.IsNullOrEmpty(IngredientsJson) 
+        //        ? new List<string>()
+        //        : JsonSerializer.Deserialize<List<string>>(IngredientsJson) ?? new List<string>();
 
-            set => IngredientsJson = JsonSerializer.Serialize(value);
+        //    set => IngredientsJson = JsonSerializer.Serialize(value);
+        //}
+        [Ignore]
+        public List<IngredientModel> Ingredients
+        {
+            get
+            {
+                try
+                {
+                    return string.IsNullOrEmpty(IngredientsJson)
+                        ? new List<IngredientModel>()
+                        : JsonSerializer.Deserialize<List<IngredientModel>>(IngredientsJson) ?? new List<IngredientModel>();
+                }
+                catch (JsonException ex)
+                {
+                    // Log or handle deserialization error
+                    Console.WriteLine($"Deserialization error: {ex.Message}");
+                    return new List<IngredientModel>();
+                }
+            }
+            set
+            {
+                try
+                {
+                    IngredientsJson = JsonSerializer.Serialize(value);
+                }
+                catch (JsonException ex)
+                {
+                    // Log or handle serialization error
+                    Console.WriteLine($"Serialization error: {ex.Message}");
+                }
+            }
         }
 
         [Ignore]

@@ -3,7 +3,8 @@
     x:Class="FlavorHub.Views.RecipeDetailPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:controls="clr-namespace:FlavorHub.Views.Controls">
+    xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel">
     <Shell.TitleView>
         <Grid
             Padding="20,5,20,0"
@@ -53,11 +54,11 @@
                         HeightRequest="50"
                         StrokeShape="RoundRectangle 40 "
                         WidthRequest="50">
-                        <Image Source="/TabBarIcons/profile.png" />
+                        <Image Aspect="AspectFill" Source="{Binding SelectedRecipe.FirstImageUrl}" />
                     </Border>
                     <Label
                         FontAttributes="Bold"
-                        Text="Amelia Melanes"
+                        Text="{Binding SelectedRecipe.UserName}"
                         VerticalOptions="Center" />
                 </HorizontalStackLayout>
                 <Border
@@ -74,86 +75,69 @@
             </FlexLayout>
 
             <!--  //picture  -->
-            <ScrollView Grid.Row="2" Orientation="Horizontal">
-                <HorizontalStackLayout Spacing="10">
-                    <Image
-                        HeightRequest="300"
-                        HorizontalOptions="FillAndExpand"
-                        Source="food.png" />
+            <CollectionView ItemsSource="{Binding SelectedRecipe.ImageUrls}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Image
+                            Aspect="AspectFill"
+                            HeightRequest="300"
+                            HorizontalOptions="FillAndExpand"
+                            Source="{Binding .}"
+                            WidthRequest="500" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal" />
+                </CollectionView.ItemsLayout>
+            </CollectionView>
 
-                    <Image
-                        HeightRequest="300"
-                        HorizontalOptions="FillAndExpand"
-                        Source="food.png" />
-
-                    <Image
-                        HeightRequest="300"
-                        HorizontalOptions="FillAndExpand"
-                        Source="food.png" />
-
-                </HorizontalStackLayout>
-            </ScrollView>
-            <FlexLayout JustifyContent="SpaceBetween">
+            <VerticalStackLayout Spacing="20">
                 <Label Style="{StaticResource SubHeader}" Text="Ingredients" />
-                <Border
-                    BackgroundColor="{DynamicResource PrimaryColor}"
-                    HeightRequest="40"
-                    StrokeShape="RoundRectangle 15"
-                    StrokeThickness="0"
-                    WidthRequest="100">
-                    <Label
-                        HorizontalOptions="Center"
-                        Text="4 serving"
-                        VerticalOptions="Center" />
-                </Border>
-            </FlexLayout>
+                <CollectionView ItemsSource="{Binding SelectedRecipe.Ingredients}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                                Margin="0,0,0,10"
+                                Padding="10"
+                                HeightRequest="80"
+                                StrokeShape="RoundRectangle 10">
+                                <FlexLayout Padding="10" JustifyContent="SpaceBetween">
+                                    <Label
+                                        FontSize="18"
+                                        Text="{Binding IngredientName}"
+                                        VerticalOptions="Center"
+                                        WidthRequest="200" />
+                                    <Label
+                                        FontSize="18"
+                                        Text="{Binding Measurement}"
+                                        VerticalOptions="Center" />
+                                </FlexLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
 
             <VerticalStackLayout Spacing="10">
                 <Label Style="{StaticResource SubHeader}" Text="Directions" />
-                <Border
-                    Padding="10"
-                    BackgroundColor="{DynamicResource SecondaryColor}"
-                    HeightRequest="80"
-                    StrokeShape="RoundRectangle 20"
-                    StrokeThickness="0">
-                    <HorizontalStackLayout Spacing="20" VerticalOptions="Center">
-                        <Label Style="{StaticResource SubHeader}" Text="1" />
-                        <Label Text="Chop eggs" VerticalOptions="Center" />
-                    </HorizontalStackLayout>
-                </Border>
-                <Border
-                    Padding="10"
-                    BackgroundColor="{DynamicResource SecondaryColor}"
-                    HeightRequest="80"
-                    StrokeShape="RoundRectangle 20"
-                    StrokeThickness="0">
-                    <HorizontalStackLayout Spacing="20" VerticalOptions="Center">
-                        <Label Style="{StaticResource SubHeader}" Text="1" />
-                        <Label Text="Chop eggs" VerticalOptions="Center" />
-                    </HorizontalStackLayout>
-                </Border>
-                <Border
-                    Padding="10"
-                    BackgroundColor="{DynamicResource SecondaryColor}"
-                    HeightRequest="80"
-                    StrokeShape="RoundRectangle 20"
-                    StrokeThickness="0">
-                    <HorizontalStackLayout Spacing="20" VerticalOptions="Center">
-                        <Label Style="{StaticResource SubHeader}" Text="1" />
-                        <Label Text="Chop eggs" VerticalOptions="Center" />
-                    </HorizontalStackLayout>
-                </Border>
-                <Border
-                    Padding="10"
-                    BackgroundColor="{DynamicResource SecondaryColor}"
-                    HeightRequest="80"
-                    StrokeShape="RoundRectangle 20"
-                    StrokeThickness="0">
-                    <HorizontalStackLayout Spacing="20" VerticalOptions="Center">
-                        <Label Style="{StaticResource SubHeader}" Text="1" />
-                        <Label Text="Chop eggs" VerticalOptions="Center" />
-                    </HorizontalStackLayout>
-                </Border>
+                <!--<CollectionView ItemsSource="{Binding SelectedRecipe.Steps}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                                Padding="10"
+                                BackgroundColor="{DynamicResource SecondaryColor}"
+                                HeightRequest="80"
+                                StrokeShape="RoundRectangle 20"
+                                StrokeThickness="0">
+                                <HorizontalStackLayout Spacing="20" VerticalOptions="Center">
+                                    <Label Style="{StaticResource SubHeader}" Text="1" />
+                                    <Label Text="{Binding .}" VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>-->
+
             </VerticalStackLayout>
 
             <!--  //comments  -->
