@@ -15,19 +15,6 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Border
-                Grid.Column="0"
-                BackgroundColor="{DynamicResource SecondaryColor}"
-                HeightRequest="50"
-                HorizontalOptions="End"
-                StrokeShape="RoundRectangle 10"
-                StrokeThickness="0"
-                WidthRequest="60">
-                <Label
-                    HorizontalOptions="Center"
-                    Text="3/5"
-                    VerticalOptions="Center" />
-            </Border>
-            <Border
                 Grid.Column="1"
                 BackgroundColor="{DynamicResource SecondaryColor}"
                 HeightRequest="50"
@@ -35,10 +22,7 @@
                 StrokeShape="RoundRectangle 10"
                 StrokeThickness="0"
                 WidthRequest="60">
-                <Label
-                    HorizontalOptions="Center"
-                    Text="3/5"
-                    VerticalOptions="Center" />
+                <ImageButton HeightRequest="20" Source="/TabBarIcons/profile.png" />
             </Border>
         </Grid>
     </Shell.TitleView>
@@ -56,10 +40,10 @@
                         WidthRequest="50">
                         <Image Aspect="AspectFill" Source="{Binding SelectedRecipe.FirstImageUrl}" />
                     </Border>
-                    <Label
-                        FontAttributes="Bold"
-                        Text="{Binding SelectedRecipe.UserName}"
-                        VerticalOptions="Center" />
+                    <VerticalStackLayout VerticalOptions="Center">
+                        <Label FontAttributes="Bold" Text="{Binding SelectedRecipe.UserName}" />
+                        <Label FontSize="Micro" Text="{Binding SelectedRecipe.CreatedDate, StringFormat='{0:MMMM d, yyyy}'}" />
+                    </VerticalStackLayout>
                 </HorizontalStackLayout>
                 <Border
                     BackgroundColor="{DynamicResource PrimaryColor}"
@@ -91,8 +75,46 @@
                 </CollectionView.ItemsLayout>
             </CollectionView>
 
+            <VerticalStackLayout Spacing="10">
+                <Label
+                    HorizontalOptions="Center"
+                    Style="{StaticResource SubHeader}"
+                    Text="{Binding SelectedRecipe.Title}" />
+                <Label
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding SelectedRecipe.Description}" />
+            </VerticalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
+                <HorizontalStackLayout>
+                    <Image Source="/HomePage/clock.png" />
+                    <Label Text="{Binding SelectedRecipe.CookingTime, StringFormat='{0} mins'}" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Image Source="/HomePage/level.png" />
+                    <Label Text="{Binding SelectedRecipe.DifficultyLevel}" />
+                </HorizontalStackLayout>
+            </HorizontalStackLayout>
+
+            <!--  for the ingredients  -->
             <VerticalStackLayout Spacing="20">
-                <Label Style="{StaticResource SubHeader}" Text="Ingredients" />
+                <FlexLayout JustifyContent="SpaceBetween">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Style="{StaticResource SubHeader}" Text="Ingredients" />
+                    </VerticalStackLayout>
+                    <Border
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        HeightRequest="50"
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="0"
+                        WidthRequest="100">
+                        <Label
+                            HorizontalOptions="Center"
+                            Text="{Binding SelectedRecipe.Servings, StringFormat='{0} Servings'}"
+                            VerticalOptions="Center" />
+                    </Border>
+                </FlexLayout>
+
                 <CollectionView ItemsSource="{Binding SelectedRecipe.Ingredients}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
@@ -103,14 +125,10 @@
                                 StrokeShape="RoundRectangle 10">
                                 <FlexLayout Padding="10" JustifyContent="SpaceBetween">
                                     <Label
-                                        FontSize="18"
                                         Text="{Binding IngredientName}"
                                         VerticalOptions="Center"
                                         WidthRequest="200" />
-                                    <Label
-                                        FontSize="18"
-                                        Text="{Binding Measurement}"
-                                        VerticalOptions="Center" />
+                                    <Label Text="{Binding Measurement}" VerticalOptions="Center" />
                                 </FlexLayout>
                             </Border>
                         </DataTemplate>
@@ -118,12 +136,14 @@
                 </CollectionView>
             </VerticalStackLayout>
 
+            <!--  for the directions  -->
             <VerticalStackLayout Spacing="10">
                 <Label Style="{StaticResource SubHeader}" Text="Directions" />
                 <CollectionView ItemsSource="{Binding SelectedRecipe.Steps}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Border
+                                Margin="0,0,0,10"
                                 Padding="10"
                                 BackgroundColor="{DynamicResource SecondaryColor}"
                                 HeightRequest="80"

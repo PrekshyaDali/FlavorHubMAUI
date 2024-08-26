@@ -25,16 +25,6 @@ namespace FlavorHub.Models.SQLiteModels
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public string VideoUrlJson { get; set; }
 
-        //[Ignore] 
-        ////this will tell SQLite to not map this property into a column in database table
-        //public List<string> Ingredients
-        //{
-        //    get => string.IsNullOrEmpty(IngredientsJson) 
-        //        ? new List<string>()
-        //        : JsonSerializer.Deserialize<List<string>>(IngredientsJson) ?? new List<string>();
-
-        //    set => IngredientsJson = JsonSerializer.Serialize(value);
-        //}
         [Ignore]
         public List<IngredientModel> Ingredients
         {
