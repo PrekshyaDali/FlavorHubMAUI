@@ -68,8 +68,14 @@
 	  <None Remove="Resources\Images\HomePage\heart.png" />
 	  <None Remove="Resources\Images\HomePage\Ingredients.png" />
 	  <None Remove="Resources\Images\HomePage\level.png" />
+	  <None Remove="Resources\Images\HomePage\logout.png" />
 	  <None Remove="Resources\Images\HomePage\pasta.jpg" />
 	  <None Remove="Resources\Images\HomePage\sandwich.jpg" />
+	  <None Remove="Resources\Images\Icons\delete.png" />
+	  <None Remove="Resources\Images\Icons\edit_text.png" />
+	  <None Remove="Resources\Images\Icons\heart_filled.png" />
+	  <None Remove="Resources\Images\Splashes\splashfirst.png" />
+	  <None Remove="Resources\Images\TabBarIcons\activity.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -99,6 +105,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\CustomStyles.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ActivityPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\AddRecipe.xaml">

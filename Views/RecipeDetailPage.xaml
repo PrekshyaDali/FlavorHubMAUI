@@ -86,12 +86,12 @@
                     Text="{Binding SelectedRecipe.Description}" />
             </VerticalStackLayout>
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
-                <HorizontalStackLayout>
-                    <Image Source="/HomePage/clock.png" />
+                <HorizontalStackLayout Spacing="10">
+                    <Image HeightRequest="20" Source="/HomePage/clock.png" />
                     <Label Text="{Binding SelectedRecipe.CookingTime, StringFormat='{0} mins'}" />
                 </HorizontalStackLayout>
-                <HorizontalStackLayout>
-                    <Image Source="/HomePage/level.png" />
+                <HorizontalStackLayout Spacing="10">
+                    <Image HeightRequest="20" Source="/HomePage/level.png" />
                     <Label Text="{Binding SelectedRecipe.DifficultyLevel}" />
                 </HorizontalStackLayout>
             </HorizontalStackLayout>
@@ -170,8 +170,11 @@
                 StrokeShape="RoundRectangle 10"
                 StrokeThickness="0">
                 <FlexLayout JustifyContent="SpaceBetween" VerticalOptions="Center">
-                    <Entry Placeholder="Discuss here" VerticalOptions="Center" />
-                    <ImageButton Source="/TabBarIcons/profile.png" />
+                    <Entry
+                        Placeholder="Discuss here"
+                        Text="{Binding CommentText}"
+                        VerticalOptions="Center" />
+                    <ImageButton Command="{Binding SaveCommentCommand}" Source="/TabBarIcons/profile.png" />
                 </FlexLayout>
             </Border>
         </VerticalStackLayout>

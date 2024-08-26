@@ -52,7 +52,10 @@
                                 WidthRequest="30">
                                 <Image Aspect="AspectFill" Source="{Binding ProfileImage}" />
                             </Border>
-                            <Label Text="{Binding UserName}" TextColor="{StaticResource White}" />
+                            <Label
+                                Text="{Binding UserName}"
+                                TextColor="{StaticResource White}"
+                                VerticalOptions="Center" />
                         </HorizontalStackLayout>
                     </Border>
                     <Border
@@ -78,17 +81,20 @@
                             HorizontalOptions="Center"
                             Spacing="10"
                             VerticalOptions="Center">
-                            <Image Source="/HomePage/clock.png" VerticalOptions="Center" />
+                            <Image
+                                HeightRequest="15"
+                                Source="/HomePage/clock.png"
+                                VerticalOptions="Center" />
                             <Label
                                 FontSize="Micro"
-                                Text="{Binding CookingTime}"
+                                Text="{Binding CookingTime, StringFormat='{0} mins'}"
                                 TextColor="white" />
                         </HorizontalStackLayout>
                         <HorizontalStackLayout
                             HorizontalOptions="Center"
                             Spacing="10"
                             VerticalOptions="Center">
-                            <Image Source="/HomePage/level.png" />
+                            <Image HeightRequest="15" Source="/HomePage/level.png" />
                             <Label
                                 FontSize="Micro"
                                 Text="{Binding DifficultyLevel}"
@@ -98,7 +104,7 @@
                             HorizontalOptions="Center"
                             Spacing="10"
                             VerticalOptions="Center">
-                            <Image Source="/HomePage/ingredients.png" />
+                            <Image HeightRequest="15" Source="/HomePage/ingredients.png" />
                             <Label
                                 FontSize="Micro"
                                 Text="Ingredients"

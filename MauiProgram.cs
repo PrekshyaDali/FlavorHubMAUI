@@ -51,6 +51,7 @@ namespace FlavorHub
             builder.Services.AddSingleton<IngredientViewModel>();
             builder.Services.AddSingleton<InfomationViewModel>();
             builder.Services.AddSingleton<RecipeViewModel>();
+            builder.Services.AddSingleton<RecipeDetailPageViewModel>();
 
 
             //pages
@@ -60,6 +61,8 @@ namespace FlavorHub
             builder.Services.AddSingleton<Gallery>();
             builder.Services.AddSingleton<ProfilePage>();
             builder.Services.AddSingleton<EditProfile>();
+            builder.Services.AddSingleton<RecipeDetailPage>();
+
             //recipe pages
 
             builder.Services.AddSingleton<AddRecipe>();
@@ -84,6 +87,7 @@ namespace FlavorHub
             builder.Services.AddSingleton<AppDbContext>();
             builder.Services.AddSingleton<Repositories.Interfaces.IUserRepository, UserRepository>();
             builder.Services.AddSingleton<Repositories.Interfaces.IRecipeRepository, RecipeRepository>();
+            builder.Services.AddSingleton<Repositories.Interfaces.ICommentsRepository, CommentRepository>();
 
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             {

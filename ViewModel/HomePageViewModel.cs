@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Firebase.Auth;
 using FlavorHub.Models;
 using FlavorHub.Models.AuthModels;
@@ -25,6 +26,9 @@ namespace FlavorHub.ViewModel
         private readonly IUserRepository _UserRepository;
         private readonly IUserService _UserService;
         private readonly IRecipeRepository _RecipeRepository;
+        [ObservableProperty]
+        private ObservableCollection<RecipeViewModel> _recipes;
+        private ObservableCollection<RecipeViewModel> _cachedRecipes;
 
         [ObservableProperty]
         private string? _ProfilePictureUrl;
@@ -43,54 +47,8 @@ namespace FlavorHub.ViewModel
             _RecipeRepository = recipeRepository;
             RefreshCommand = new AsyncRelayCommand(RefreshRecipes);
             SelectionCommand = new AsyncRelayCommand<RecipeViewModel>(OnRecipeSelected);
-            
-        }
 
-        public async Task LoadProfilePictureAsync()
-        {
-            try
-            {
-                var userIdString = await SecureStorage.GetAsync("UserId");
-
-                if (!string.IsNullOrEmpty(userIdString) && Guid.TryParse(userIdString, out Guid userId))
-                {
-                    var userDetails = await _UserRepository.GetUserByIdAsync(userId);
-
-                    if (userDetails != null)
-                    {
-                        ProfilePictureUrl = userDetails.ProfilePicture;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Invalid or missing user ID.");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error loading profile picture: {ex}");
-            }
-        }
-
-
-        [RelayCommand]
-        private async Task OnRecipeSelected(RecipeViewModel selectedRecipe)
-        {
-            if (selectedRecipe != null)
-            {
-                // Navigate to the RecipeDetailPage, passing the selected recipe as a parameter
-                await Shell.Current.GoToAsync("RecipeDetailPage", true, new Dictionary<string, object>
-            {
-                { "SelectedRecipe", selectedRecipe }
-            });
-            }
-        }
-
-        [ObservableProperty]
-        private ObservableCollection<RecipeViewModel> _recipes;
-        private ObservableCollection<RecipeViewModel> _cachedRecipes;
-
-        //loading the recipes from the database
+        }   //loading the recipes from the database
         public async Task LoadRecipes()
         {
             try
@@ -126,6 +84,45 @@ namespace FlavorHub.ViewModel
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+            }
+        }
+
+        public async Task LoadProfilePictureAsync()
+        {
+            try
+            {
+                var userIdString = await SecureStorage.GetAsync("UserId");
+
+                if (!string.IsNullOrEmpty(userIdString) && Guid.TryParse(userIdString, out Guid userId))
+                {
+                    var userDetails = await _UserRepository.GetUserByIdAsync(userId);
+
+                    if (userDetails != null)
+                    {
+                        ProfilePictureUrl = userDetails.ProfilePicture;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid or missing user ID.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading profile picture: {ex}");
+            }
+        }
+
+        [RelayCommand]
+        private async Task OnRecipeSelected(RecipeViewModel selectedRecipe)
+        {
+            if (selectedRecipe != null)
+            {
+                // Navigate to the RecipeDetailPage, passing the selected recipe as a parameter
+                await Shell.Current.GoToAsync("RecipeDetailPage", true, new Dictionary<string, object>
+            {
+                { "SelectedRecipe", selectedRecipe }
+            });
             }
         }
 
