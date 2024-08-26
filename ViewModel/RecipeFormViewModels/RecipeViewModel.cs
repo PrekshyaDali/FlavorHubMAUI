@@ -49,7 +49,7 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
         public Guid RecipeId => _Recipe.RecipeId;
 
         public List<IngredientModel> Ingredients => _Recipe.Ingredients;
-        public List<string> Steps => _Recipe.Steps;
+        public List<DirectionModel> Steps => _Recipe.Steps;
         public List<string> ImageUrls => _Recipe.ImageUrls;
         public List<string> VideoUrls => _Recipe.VideoUrl;
         public DateTime CreatedDate => _Recipe.CreatedDate;

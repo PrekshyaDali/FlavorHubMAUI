@@ -68,11 +68,11 @@ namespace FlavorHub.Models.SQLiteModels
         }
 
         [Ignore]
-        public List<string> Steps
+        public List<DirectionModel> Steps
         {
             get => string.IsNullOrEmpty(StepsJson)
-                ? new List<string>()
-                : JsonSerializer.Deserialize<List<string>>(StepsJson) ?? new List<string>();
+                ? new List<DirectionModel>()
+                : JsonSerializer.Deserialize<List<DirectionModel>>(StepsJson) ?? new List<DirectionModel>();
             set => StepsJson = JsonSerializer.Serialize(value);
         }
 

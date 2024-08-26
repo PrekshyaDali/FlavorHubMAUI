@@ -120,7 +120,7 @@
 
             <VerticalStackLayout Spacing="10">
                 <Label Style="{StaticResource SubHeader}" Text="Directions" />
-                <!--<CollectionView ItemsSource="{Binding SelectedRecipe.Steps}">
+                <CollectionView ItemsSource="{Binding SelectedRecipe.Steps}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Border
@@ -130,14 +130,16 @@
                                 StrokeShape="RoundRectangle 20"
                                 StrokeThickness="0">
                                 <HorizontalStackLayout Spacing="20" VerticalOptions="Center">
-                                    <Label Style="{StaticResource SubHeader}" Text="1" />
-                                    <Label Text="{Binding .}" VerticalOptions="Center" />
+                                    <Label
+                                        HorizontalOptions="Center"
+                                        Style="{StaticResource Header}"
+                                        Text="." />
+                                    <Label Text="{Binding Steps}" VerticalOptions="Center" />
                                 </HorizontalStackLayout>
                             </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
-                </CollectionView>-->
-
+                </CollectionView>
             </VerticalStackLayout>
 
             <!--  //comments  -->
