@@ -6,20 +6,18 @@
     xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
     xmlns:vm="clr-namespace:FlavorHub.ViewModel">
     <Shell.TitleView>
-        <Border>
-            <Grid>
-                <FlexLayout AlignItems="Center" JustifyContent="SpaceBetween">
-                    <Border
-                        Margin="0,0,10,0"
-                        HeightRequest="50"
-                        StrokeShape="RoundRectangle 50,50,50,50"
-                        WidthRequest="50">
-                        <Image Aspect="AspectFill" Source="Resources/Images/TabBarIcons/profile.png" />
-                    </Border>
-                    <ImageButton Command="{Binding LogOutCommand}" Source="/TabBarIcons/profile.png" />
-                </FlexLayout>
-            </Grid>
-        </Border>
+        <Grid>
+            <FlexLayout AlignItems="Center" JustifyContent="SpaceBetween">
+                <Border
+                    Margin="0,0,10,0"
+                    HeightRequest="50"
+                    StrokeShape="RoundRectangle 50,50,50,50"
+                    WidthRequest="50">
+                    <Image Aspect="AspectFill" Source="{Binding ProfilePictureUrl}" />
+                </Border>
+                <ImageButton Command="{Binding LogOutCommand}" Source="/TabBarIcons/profile.png" />
+            </FlexLayout>
+        </Grid>
     </Shell.TitleView>
     <ScrollView Padding="30">
         <Grid RowDefinitions=".4*,.4*,*,*" RowSpacing="20">
@@ -114,7 +112,7 @@
                                         ContentWidth="330"
                                         CookingTime="{Binding CookingTime}"
                                         DifficultyLevel="{Binding DifficultyLevel}"
-                                        ProfileImage="{Binding FirstImageUrl}"
+                                        ProfileImage="{Binding ProfilePicture}"
                                         RecipeFoodName="{Binding Title}"
                                         RecipeImage="{Binding FirstImageUrl}"
                                         UserName="{Binding UserName}">

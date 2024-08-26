@@ -1,9 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Firebase.Auth;
+using FlavorHub.Models;
 using FlavorHub.Repositories.Interfaces;
 using Microsoft.Maui.Storage;
 using System;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Windows.Input;
 

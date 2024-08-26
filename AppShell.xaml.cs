@@ -16,6 +16,7 @@ namespace FlavorHub
             Routing.RegisterRoute("AddRecipeIngredient", typeof(AddRecipeIngredient));
             Routing.RegisterRoute("AddRecipeDirections", typeof(AddRecipeDirections));
             Routing.RegisterRoute("AddUploads", typeof(AddUploads));
+            Routing.RegisterRoute("RecipeDetailPage", typeof(RecipeDetailPage));
 
 
             //pages

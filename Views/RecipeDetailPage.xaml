@@ -38,7 +38,7 @@
                         HeightRequest="50"
                         StrokeShape="RoundRectangle 40 "
                         WidthRequest="50">
-                        <Image Aspect="AspectFill" Source="{Binding SelectedRecipe.FirstImageUrl}" />
+                        <Image Aspect="AspectFill" Source="{Binding SelectedRecipe.ProfilePicture}" />
                     </Border>
                     <VerticalStackLayout VerticalOptions="Center">
                         <Label FontAttributes="Bold" Text="{Binding SelectedRecipe.UserName}" />

@@ -13,6 +13,7 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
         private readonly IUserService _UserService;
         private readonly IUserRepository _UserRepository;
         private string? _UserName;
+        private string? _ProfilePicture;
 
         public RecipeViewModel(Recipe recipe, IUserService userService, IUserRepository userRepository)
         {
@@ -24,6 +25,7 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
         public async Task InitializeAsync()
         {
             await LoadUserName();
+            await LoadProfilePicture();
         }
 
         private async Task LoadUserName()
@@ -35,7 +37,15 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
                 UserName = user?.UserName;
             }
         }
-
+        private async Task LoadProfilePicture()
+        {
+            var userId = await _UserService.GetUserIdAsync();
+            if (userId != null)
+            {
+                var user = await _UserRepository.GetUserByIdAsync(userId.Value);
+                _ProfilePicture = user?.ProfilePicture;
+            }
+        }
         public string Title => _Recipe.Title;
 
         public string Description => _Recipe.Description;
@@ -59,7 +69,11 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
             get => _UserName;
             private set => SetProperty(ref _UserName, value);
         }
-
+        public string ProfilePicture
+        {
+            get => _ProfilePicture;
+            private set => SetProperty(ref _ProfilePicture, value);
+        }
         public string FirstImageUrl => _Recipe.ImageUrls.FirstOrDefault() ?? "dotnet_bot.png";
     }
 }
