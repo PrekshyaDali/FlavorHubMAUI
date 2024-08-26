@@ -3,22 +3,21 @@
     x:Class="FlavorHub.Views.HomePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:controls="clr-namespace:FlavorHub.Views.Controls">
+    xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel">
     <Shell.TitleView>
-        <Border>
-            <Grid>
-                <FlexLayout AlignItems="Center" JustifyContent="SpaceBetween">
-                    <Border
-                        Margin="0,0,10,0"
-                        HeightRequest="50"
-                        StrokeShape="RoundRectangle 50,50,50,50"
-                        WidthRequest="50">
-                        <Image Aspect="AspectFill" Source="Resources/Images/TabBarIcons/profile.png" />
-                    </Border>
-                    <ImageButton Command="{Binding LogOutCommand}" Source="/TabBarIcons/profile.png" />
-                </FlexLayout>
-            </Grid>
-        </Border>
+        <Grid>
+            <FlexLayout AlignItems="Center" JustifyContent="SpaceBetween">
+                <Border
+                    Margin="0,0,10,0"
+                    HeightRequest="50"
+                    StrokeShape="RoundRectangle 50,50,50,50"
+                    WidthRequest="50">
+                    <Image Aspect="AspectFill" Source="{Binding ProfilePictureUrl}" />
+                </Border>
+                <ImageButton Command="{Binding LogOutCommand}" Source="/TabBarIcons/profile.png" />
+            </FlexLayout>
+        </Grid>
     </Shell.TitleView>
     <ScrollView Padding="30">
         <Grid RowDefinitions=".4*,.4*,*,*" RowSpacing="20">
@@ -98,36 +97,33 @@
                 </HorizontalStackLayout>
             </ScrollView>
 
+            <!--  for recent recipies  -->
             <Border Grid.Row="3" StrokeThickness="0">
                 <VerticalStackLayout Spacing="20">
                     <FlexLayout JustifyContent="SpaceBetween">
-                        <Label Style="{DynamicResource SubHeader}" Text="Popular Recipes" />
+                        <Label Style="{DynamicResource SubHeader}" Text="Recent Recipes" />
                         <Label Text="view all" />
                     </FlexLayout>
-                    <controls:RecipeUIContentView
-                        ContentWidth="330"
-                        ProfileImage="/TabBarIcons/profile.png"
-                        RecipeFoodName="Sandwich"
-                        RecipeImage="/HomePage/food.png"
-                        UserName="Bitisha" />
-                    <controls:RecipeUIContentView
-                        ContentWidth="330"
-                        ProfileImage="/TabBarIcons/profile.png"
-                        RecipeFoodName="Sandwich"
-                        RecipeImage="/HomePage/food.png"
-                        UserName="Bitisha" />
-                    <controls:RecipeUIContentView
-                        ContentWidth="330"
-                        ProfileImage="/TabBarIcons/profile.png"
-                        RecipeFoodName="Sandwich"
-                        RecipeImage="/HomePage/food.png"
-                        UserName="Bitisha" />
-                    <controls:RecipeUIContentView
-                        ContentWidth="330"
-                        ProfileImage="/TabBarIcons/profile.png"
-                        RecipeFoodName="Sandwich"
-                        RecipeImage="/HomePage/food.png"
-                        UserName="Bitisha" />
+                    <CollectionView Margin="0,0,0,10" ItemsSource="{Binding Recipes}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="0,0,0,10" StrokeThickness="0">
+                                    <controls:RecipeUIContentView
+                                        ContentWidth="330"
+                                        CookingTime="{Binding CookingTime}"
+                                        DifficultyLevel="{Binding DifficultyLevel}"
+                                        ProfileImage="{Binding ProfilePicture}"
+                                        RecipeFoodName="{Binding Title}"
+                                        RecipeImage="{Binding FirstImageUrl}"
+                                        UserName="{Binding UserName}">
+                                        <controls:RecipeUIContentView.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=SelectionCommand}" CommandParameter="{Binding .}" />
+                                        </controls:RecipeUIContentView.GestureRecognizers>
+                                    </controls:RecipeUIContentView>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </VerticalStackLayout>
             </Border>
         </Grid>

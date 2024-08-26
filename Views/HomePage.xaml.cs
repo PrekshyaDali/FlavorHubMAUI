@@ -10,4 +10,15 @@ public partial class HomePage : ContentPage
 		InitializeComponent();
 		BindingContext = _HomePageViewModel = homePageViewModel;
     }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        // Ensure recipes are loaded when the page appears
+        if (_HomePageViewModel != null)
+        {
+            await _HomePageViewModel.LoadRecipes();
+        }
+    }
 }

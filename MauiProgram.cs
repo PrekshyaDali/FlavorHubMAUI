@@ -50,6 +50,7 @@ namespace FlavorHub
             builder.Services.AddSingleton<DirectionViewModel>();
             builder.Services.AddSingleton<IngredientViewModel>();
             builder.Services.AddSingleton<InfomationViewModel>();
+            builder.Services.AddSingleton<RecipeViewModel>();
 
 
             //pages
@@ -58,6 +59,7 @@ namespace FlavorHub
             builder.Services.AddSingleton<HomePage>();
             builder.Services.AddSingleton<Gallery>();
             builder.Services.AddSingleton<ProfilePage>();
+            builder.Services.AddSingleton<EditProfile>();
             //recipe pages
 
             builder.Services.AddSingleton<AddRecipe>();

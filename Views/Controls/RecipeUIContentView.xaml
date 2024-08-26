@@ -46,8 +46,11 @@
                             Padding="5,3,5,3"
                             Spacing="3"
                             VerticalOptions="Center">
-                            <Border StrokeShape="RoundRectangle 30">
-                                <Image Source="{Binding ProfileImage}" />
+                            <Border
+                                HeightRequest="30"
+                                StrokeShape="RoundRectangle 30"
+                                WidthRequest="30">
+                                <Image Aspect="AspectFill" Source="{Binding ProfileImage}" />
                             </Border>
                             <Label Text="{Binding UserName}" TextColor="{StaticResource White}" />
                         </HorizontalStackLayout>
@@ -78,7 +81,7 @@
                             <Image Source="/HomePage/clock.png" VerticalOptions="Center" />
                             <Label
                                 FontSize="Micro"
-                                Text="12 min"
+                                Text="{Binding CookingTime}"
                                 TextColor="white" />
                         </HorizontalStackLayout>
                         <HorizontalStackLayout
@@ -88,7 +91,7 @@
                             <Image Source="/HomePage/level.png" />
                             <Label
                                 FontSize="Micro"
-                                Text="Easy"
+                                Text="{Binding DifficultyLevel}"
                                 TextColor="white" />
                         </HorizontalStackLayout>
                         <HorizontalStackLayout

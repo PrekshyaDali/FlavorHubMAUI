@@ -4,7 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
-    Title="EditProfile">
+    Title="Edit Profile">
     <VerticalStackLayout Padding="20" Spacing="20">
         <Grid RowDefinitions=".2*,*,*" RowSpacing="20">
             <Border
@@ -12,7 +12,7 @@
                 HeightRequest="100"
                 StrokeShape="RoundRectangle 80"
                 WidthRequest="100">
-                <Image Source="dotnet_bot.png">
+                <Image Aspect="AspectFill" Source="{Binding ProfilePicture, FallbackValue='dotnet_bot.png'}">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding SelectProfilePictureCommand}" />
                     </Image.GestureRecognizers>
@@ -36,7 +36,7 @@
                     Text="{Binding Email, FallbackValue='prekshya@gmail.com'}"
                     TextColor="{StaticResource SecondaryTextColor}" />
 
-                <Label HorizontalTextAlignment="Center" Text="Life is too short to live just end it." />
+                <Label HorizontalTextAlignment="Center" Text="{Binding Bio, FallbackValue='Life is too short to live just end it'}" />
             </VerticalStackLayout>
         </Grid>
 
@@ -56,7 +56,7 @@
                 HorizontalOptions="FillAndExpand"
                 StrokeShape="RoundRectangle 10"
                 WidthRequest="160">
-                <Entry Placeholder="UserName" />
+                <Entry Placeholder="UserName" Text="{Binding UserName}" />
             </Border>
             <Border
                 Padding="10"
@@ -64,7 +64,7 @@
                 HorizontalOptions="FillAndExpand"
                 StrokeShape="RoundRectangle 10"
                 WidthRequest="160">
-                <Entry Placeholder="Email" />
+                <Entry Placeholder="Email" Text="{Binding Email}" />
             </Border>
         </FlexLayout>
         <Border
@@ -72,7 +72,7 @@
             HeightRequest="100"
             HorizontalOptions="FillAndExpand"
             StrokeShape="RoundRectangle 10">
-            <Editor Placeholder="Bio" />
+            <Editor Placeholder="Bio" Text="{Binding Bio}" />
         </Border>
         <controls:ButtonContentView ButtonCommand="{Binding SaveProfileDetailsCommand}" ButtonText="Save Changes" />
     </VerticalStackLayout>
