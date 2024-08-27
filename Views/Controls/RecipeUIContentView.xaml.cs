@@ -1,3 +1,5 @@
+using System.Windows.Input;
+
 namespace FlavorHub.Views.Controls
 {
     public partial class RecipeUIContentView : ContentView
@@ -52,7 +54,34 @@ namespace FlavorHub.Views.Controls
                 typeof(string),
                 typeof(RecipeUIContentView),
                 default(string));
+
+        public static readonly BindableProperty FavoritesProperty =
+         BindableProperty.Create(
+             nameof(Favorites),
+             typeof(bool),
+             typeof(RecipeUIContentView),
+             default(bool),
+             defaultBindingMode: BindingMode.TwoWay);
+
+        public static readonly BindableProperty FavoritesCommandProperty =
+           BindableProperty.Create(
+               nameof(FavoritesCommand),
+               typeof(ICommand),
+               typeof(RecipeUIContentView),
+               null);
+
         // Properties for binding
+        public ICommand FavoritesCommand
+        {
+            get => (ICommand)GetValue(FavoritesCommandProperty);
+            set => SetValue(FavoritesCommandProperty, value);
+        }
+        public bool Favorites
+        {
+            get => (bool)GetValue(FavoritesProperty);
+            set => SetValue(FavoritesProperty, value);
+        }
+
         public int ContentWidth
         {
             get => (int)GetValue(ContentWidthProperty);

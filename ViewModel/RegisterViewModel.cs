@@ -49,16 +49,15 @@ namespace FlavorHub.ViewModel
 
                 if (!string.IsNullOrWhiteSpace(result?.User?.Info?.Email))
                 {
-                    await Shell.Current.GoToAsync("Login");
                     var user = new Models.SQLiteModels.User
                     {
                         FirebaseUID = result.User.Uid,
                         UserName = _RegisterModel.UserName,
-                        Email = _RegisterModel?.Email,
+                        Email = _RegisterModel.Email,
                         CreatedDate = DateTime.UtcNow
                     };
                     await _UserRepository.CreateUserAysnc(user);
-                    await Application.Current.MainPage.DisplayAlert("Success", "You are registered successfully", "oks");
+                    await Application.Current.MainPage.DisplayAlert("Success", "You are registered successfully", "ok");
                     await Shell.Current.GoToAsync("//Login");
                 }
             }
@@ -66,6 +65,7 @@ namespace FlavorHub.ViewModel
             {
                 var _d = ex.Data;
                 Console.WriteLine($"Signup failed, {ex.ToString()}");
+                await Application.Current.MainPage.DisplayAlert("Failed", "Failed creating your account", "ok");
             }
         }
 

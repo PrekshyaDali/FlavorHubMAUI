@@ -11,10 +11,11 @@
         StrokeShape="RoundRectangle 20"
         WidthRequest="{Binding ContentWidth}">
         <AbsoluteLayout>
-            <Image
+            <ImageButton
                 AbsoluteLayout.LayoutBounds="0,0,1,1"
                 AbsoluteLayout.LayoutFlags="All"
                 Aspect="AspectFill"
+                Command="{Binding FavoritesCommand}"
                 Source="{Binding RecipeImage}" />
             <RoundRectangle
                 AbsoluteLayout.LayoutBounds="0,0,1,1"
@@ -69,7 +70,7 @@
                         <Image
                             Aspect="AspectFill"
                             HorizontalOptions="Center"
-                            Source="/Homepage/heart.png"
+                            Source="{Binding Favorites}"
                             VerticalOptions="Center" />
                     </Border>
                 </FlexLayout>

@@ -88,6 +88,8 @@ namespace FlavorHub
             builder.Services.AddSingleton<Repositories.Interfaces.IUserRepository, UserRepository>();
             builder.Services.AddSingleton<Repositories.Interfaces.IRecipeRepository, RecipeRepository>();
             builder.Services.AddSingleton<Repositories.Interfaces.ICommentsRepository, CommentRepository>();
+            builder.Services.AddSingleton<Repositories.Interfaces.IFavoritesRepository, FavoritesRepository>();
+
 
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             {

@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Firebase.Auth.Repository;
 using FlavorHub.Models.SQLiteModels;
 using FlavorHub.Repositories.Interfaces;
 using FlavorHub.ViewModel.RecipeFormViewModels;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,19 +31,46 @@ namespace FlavorHub.ViewModel
         [ObservableProperty]
         private Guid _UserId;
 
+        [ObservableProperty]
+        private string? _IndividualComments;
+
+        [ObservableProperty]
+        private string? _CommentUserUserName;
+
+        [ObservableProperty]
+        private string? _CommentUserProfile;
+
+
         private readonly ICommentsRepository _CommentRepository;
 
         private readonly IUserService _UserService;
+        private readonly Repositories.Interfaces.IUserRepository _UserRepository;
 
+
+        [ObservableProperty]
         private ObservableCollection<Comments> _CommentCollection = new ObservableCollection<Comments>();
         public ICommand SaveCommentCommand { get; set; }
 
-        public RecipeDetailPageViewModel(ICommentsRepository commentsRepository, IUserService userService)
+        public RecipeDetailPageViewModel(ICommentsRepository commentsRepository, IUserService userService, Repositories.Interfaces.IUserRepository userRepository)
         {
-            LoadComments();
             SaveCommentCommand = new AsyncRelayCommand(SaveComments);
             _CommentRepository = commentsRepository;
             _UserService = userService;
+            _UserRepository = userRepository;
+
+        }
+
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            if (query.ContainsKey("SelectedRecipe"))
+            {
+                SelectedRecipe = query["SelectedRecipe"] as RecipeViewModel;
+
+                if (SelectedRecipe != null)
+                {
+                    LoadComments(); 
+                }
+            }
         }
 
         public async Task SaveComments()
@@ -66,6 +95,7 @@ namespace FlavorHub.ViewModel
                 await _CommentRepository.AddCommentAsync(comments);
                 Application.Current.MainPage.DisplayAlert("Success", "Comments added successfully", "ok");
                 CommentText = string.Empty;
+                await LoadComments();
 
             }
             catch (Exception ex)
@@ -75,20 +105,26 @@ namespace FlavorHub.ViewModel
             }
         }
 
-        public async Task LoadComments() { 
-        
-        
-        }
-
-
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
-        {
-            if (query.ContainsKey("SelectedRecipe"))
+        public async Task LoadComments()
+        { 
+          if(SelectedRecipe == null) 
+          {
+             return;
+          }  
+            var comments = await _CommentRepository.GetCommentsByRecipeIdAsync(SelectedRecipe.RecipeId);
+            if (comments != null && comments.Any())
             {
-                SelectedRecipe = query["SelectedRecipe"] as RecipeViewModel;
-                Console.WriteLine(SelectedRecipe.ImageUrls);
-                Console.WriteLine(SelectedRecipe.Ingredients);
-                Console.WriteLine("Ingredients Count: " + SelectedRecipe.Ingredients.Count);
+                _CommentCollection.Clear();
+                foreach (var comment in comments)
+                {
+                    var user = await _UserRepository.GetUserByIdAsync(comment.UserId);
+                    if (user != null) 
+                    {
+                     comment.UserName = user.UserName;
+                     comment.UserProfileImage = user.ProfilePicture;
+                    }
+                    _CommentCollection.Add(comment);
+                }
             }
         }
     }

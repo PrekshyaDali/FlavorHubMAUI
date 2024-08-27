@@ -112,6 +112,8 @@
                             <DataTemplate>
                                 <Border Margin="0,0,0,10" StrokeThickness="0">
                                     <controls:RecipeUIContentView
+                                        Favorites="{Binding FavoriteImage}"
+                                        FavoritesCommand="{Binding FavoriteCommand}"
                                         ContentWidth="330"
                                         CookingTime="{Binding CookingTime}"
                                         DifficultyLevel="{Binding DifficultyLevel}"

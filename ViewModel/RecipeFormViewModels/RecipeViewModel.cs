@@ -30,20 +30,18 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
 
         private async Task LoadUserName()
         {
-            var userId = await _UserService.GetUserIdAsync();
-            if (userId != null)
+            var user = await _UserRepository.GetUserByIdAsync(_Recipe.UserId);
+            if (user != null)
             {
-                var user = await _UserRepository.GetUserByIdAsync(userId.Value);
-                UserName = user?.UserName;
+                UserName = user.UserName;
             }
         }
         private async Task LoadProfilePicture()
         {
-            var userId = await _UserService.GetUserIdAsync();
-            if (userId != null)
+            var user = await _UserRepository.GetUserByIdAsync(_Recipe.UserId);
+            if (user != null)
             {
-                var user = await _UserRepository.GetUserByIdAsync(userId.Value);
-                _ProfilePicture = user?.ProfilePicture;
+                ProfilePicture = user.ProfilePicture;
             }
         }
         public string Title => _Recipe.Title;

@@ -42,7 +42,7 @@ namespace FlavorHub.Repositories
             }
             catch (Exception ex) 
             {
-            throw new NotImplementedException();
+                throw new NotImplementedException();
             }
         }
 
