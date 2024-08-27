@@ -22,7 +22,10 @@
                 StrokeShape="RoundRectangle 10"
                 StrokeThickness="0"
                 WidthRequest="60">
-                <ImageButton HeightRequest="20" Source="/TabBarIcons/profile.png" />
+                <ImageButton
+                    Command="{Binding FavoriteCommand}"
+                    HeightRequest="20"
+                    Source="{Binding FavoriteIcon, FallbackValue='HomePage/heart.png'}" />
             </Border>
         </Grid>
     </Shell.TitleView>

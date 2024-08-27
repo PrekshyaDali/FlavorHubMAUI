@@ -32,34 +32,78 @@ namespace FlavorHub.ViewModel
         private Guid _UserId;
 
         [ObservableProperty]
-        private string? _IndividualComments;
+        private bool _IsFavorite;
 
         [ObservableProperty]
-        private string? _CommentUserUserName;
-
-        [ObservableProperty]
-        private string? _CommentUserProfile;
-
-
+        private string? _FavoriteIcon;
+        
+        public ICommand FavoriteCommand { get; set; }
         private readonly ICommentsRepository _CommentRepository;
-
         private readonly IUserService _UserService;
         private readonly Repositories.Interfaces.IUserRepository _UserRepository;
-
+        private readonly IFavoritesRepository _FavoritesRepostory;
 
         [ObservableProperty]
         private ObservableCollection<Comments> _CommentCollection = new ObservableCollection<Comments>();
         public ICommand SaveCommentCommand { get; set; }
 
-        public RecipeDetailPageViewModel(ICommentsRepository commentsRepository, IUserService userService, Repositories.Interfaces.IUserRepository userRepository)
+        public RecipeDetailPageViewModel(ICommentsRepository commentsRepository, IUserService userService, Repositories.Interfaces.IUserRepository userRepository, IFavoritesRepository favoritesRepository)
         {
-            SaveCommentCommand = new AsyncRelayCommand(SaveComments);
             _CommentRepository = commentsRepository;
             _UserService = userService;
             _UserRepository = userRepository;
+            _FavoritesRepostory = favoritesRepository;
+            SaveCommentCommand = new AsyncRelayCommand(SaveComments);
+            FavoriteCommand = new AsyncRelayCommand(ToggleFavorite);
 
         }
+        public async Task ToggleFavorite()
+        {
+            if (SelectedRecipe == null)
+            {
+                Console.WriteLine("No recipe selected.");
+                return;
+            }
 
+            // Retrieve the user ID from secure storage or service
+            var userIdString = await SecureStorage.GetAsync("UserId");
+            if (!string.IsNullOrEmpty(userIdString) && Guid.TryParse(userIdString, out Guid userId))
+            {
+                var favorites = new Favorites
+                {
+                    FavoritesId = Guid.NewGuid(),
+                    RecipeId = SelectedRecipe.RecipeId,
+                    UserId = userId,
+                };
+
+                try
+                {
+                    if (IsFavorite)
+                    {
+                        // Remove from favorites
+                        await _FavoritesRepostory.DeleteFavoritesByIdAsync(favorites.FavoritesId);
+                    }
+                    else
+                    {
+                        // Add to favorites
+                        await _FavoritesRepostory.AddFavoritesAsync(favorites);
+                    }
+
+                    // Update the favorite status and icon
+                    IsFavorite = !IsFavorite;
+                    FavoriteIcon = IsFavorite ? "/Icons/heart_filled.png" : "/HomePage/heart.png";
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error toggling favorite status: {ex}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("User ID is invalid or missing.");
+            }
+        }
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             if (query.ContainsKey("SelectedRecipe"))

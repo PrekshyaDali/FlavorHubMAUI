@@ -11,11 +11,10 @@
         StrokeShape="RoundRectangle 20"
         WidthRequest="{Binding ContentWidth}">
         <AbsoluteLayout>
-            <ImageButton
+            <Image
                 AbsoluteLayout.LayoutBounds="0,0,1,1"
                 AbsoluteLayout.LayoutFlags="All"
                 Aspect="AspectFill"
-                Command="{Binding FavoritesCommand}"
                 Source="{Binding RecipeImage}" />
             <RoundRectangle
                 AbsoluteLayout.LayoutBounds="0,0,1,1"
@@ -53,25 +52,8 @@
                                 WidthRequest="30">
                                 <Image Aspect="AspectFill" Source="{Binding ProfileImage}" />
                             </Border>
-                            <Label
-                                Text="{Binding UserName}"
-                                TextColor="{StaticResource White}"
-                                VerticalOptions="Center" />
+                            <Label Text="{Binding UserName}" TextColor="{StaticResource White}" />
                         </HorizontalStackLayout>
-                    </Border>
-                    <Border
-                        Padding="5"
-                        BackgroundColor="#807A5242"
-                        HeightRequest="35"
-                        Opacity="100"
-                        StrokeShape="RoundRectangle 30"
-                        StrokeThickness="0"
-                        WidthRequest="35">
-                        <Image
-                            Aspect="AspectFill"
-                            HorizontalOptions="Center"
-                            Source="{Binding Favorites}"
-                            VerticalOptions="Center" />
                     </Border>
                 </FlexLayout>
 
@@ -83,33 +65,36 @@
                             Spacing="10"
                             VerticalOptions="Center">
                             <Image
-                                HeightRequest="15"
+                                HeightRequest="20"
                                 Source="/HomePage/clock.png"
                                 VerticalOptions="Center" />
                             <Label
                                 FontSize="Micro"
-                                Text="{Binding CookingTime, StringFormat='{0} mins'}"
-                                TextColor="white" />
+                                Text="{Binding CookingTime}"
+                                TextColor="white"
+                                VerticalOptions="Center" />
                         </HorizontalStackLayout>
                         <HorizontalStackLayout
                             HorizontalOptions="Center"
                             Spacing="10"
                             VerticalOptions="Center">
-                            <Image HeightRequest="15" Source="/HomePage/level.png" />
+                            <Image HeightRequest="20" Source="/HomePage/level.png" />
                             <Label
                                 FontSize="Micro"
                                 Text="{Binding DifficultyLevel}"
-                                TextColor="white" />
+                                TextColor="white"
+                                VerticalOptions="Center" />
                         </HorizontalStackLayout>
                         <HorizontalStackLayout
                             HorizontalOptions="Center"
                             Spacing="10"
                             VerticalOptions="Center">
-                            <Image HeightRequest="15" Source="/HomePage/ingredients.png" />
+                            <Image HeightRequest="20" Source="/HomePage/ingredients.png" />
                             <Label
                                 FontSize="Micro"
                                 Text="Ingredients"
-                                TextColor="white" />
+                                TextColor="white"
+                                VerticalOptions="Center" />
                         </HorizontalStackLayout>
                     </HorizontalStackLayout>
                     <Label
