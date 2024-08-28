@@ -49,7 +49,6 @@ namespace FlavorHub.ViewModel
 
                 if (!string.IsNullOrWhiteSpace(result?.User?.Info?.Email))
                 {
-                    await Shell.Current.GoToAsync("Login");
                     var user = new Models.SQLiteModels.User
                     {
                         FirebaseUID = result.User.Uid,

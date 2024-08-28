@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="FlavorHub.Views.FavoritesPage"
+    x:Class="FlavorHub.Views.RecipeListPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
-    xmlns:vm="clr-namespace:FlavorHub.ViewModel"
-    Title="FavoritesPage">
+    xmlns:cvm="clr-namespace:FlavorHub.ViewModel"
+    Title="RecipeListPage">
     <ScrollView Padding="20">
-        <CollectionView Margin="0,0,0,10" ItemsSource="{Binding FavoritesCollection}">
+        <CollectionView Margin="0,0,0,10" ItemsSource="{Binding Recipes}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border Margin="0,0,0,10" StrokeThickness="0">
@@ -21,7 +21,7 @@
                             RecipeImage="{Binding FirstImageUrl}"
                             UserName="{Binding UserName}">
                             <controls:RecipeUIContentView.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:FavoritesViewModel}}, Path=SelectionCommand}" CommandParameter="{Binding .}" />
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type cvm:RecipeListViewModel}}, Path=SelectionCommand}" CommandParameter="{Binding .}" />
                             </controls:RecipeUIContentView.GestureRecognizers>
                         </controls:RecipeUIContentView>
                     </Border>

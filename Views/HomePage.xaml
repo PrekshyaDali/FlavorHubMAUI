@@ -77,32 +77,44 @@
                 </ScrollView>
             </Border>
 
-            <ScrollView Grid.Row="2" Orientation="Horizontal">
-                <HorizontalStackLayout Spacing="10">
-                    <controls:RecipeUIContentView
-                        ProfileImage="/TabBarIcons/profile.png"
-                        RecipeFoodName="White Bread Naan"
-                        RecipeImage="/HomePage/food.png"
-                        UserName="Prekshya" />
-                    <controls:RecipeUIContentView
-                        ProfileImage="/TabBarIcons/profile.png"
-                        RecipeFoodName="Pasta"
-                        RecipeImage="/HomePage/food.png"
-                        UserName="Avantika" />
-                    <controls:RecipeUIContentView
-                        ProfileImage="/TabBarIcons/profile.png"
-                        RecipeFoodName="Sandwich"
-                        RecipeImage="/HomePage/food.png"
-                        UserName="Bitisha" />
-                </HorizontalStackLayout>
-            </ScrollView>
+            <VerticalStackLayout Grid.Row="2">
+                <Label Style="{StaticResource SubHeader}" Text="Popular Recipe" />
+                <CollectionView Margin="0,0,0,10" ItemsSource="{Binding Recipes}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Margin="0,0,0,10" StrokeThickness="0">
+                                <controls:RecipeUIContentView
+                                    ContentWidth="330"
+                                    CookingTime="{Binding CookingTime}"
+                                    DifficultyLevel="{Binding DifficultyLevel}"
+                                    FavoriteCount="{Binding FavoriteCount}"
+                                    ProfileImage="{Binding ProfilePicture}"
+                                    RecipeFoodName="{Binding Title}"
+                                    RecipeImage="{Binding FirstImageUrl}"
+                                    UserName="{Binding UserName}">
+                                    <controls:RecipeUIContentView.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=SelectionCommand}" CommandParameter="{Binding .}" />
+                                    </controls:RecipeUIContentView.GestureRecognizers>
+                                </controls:RecipeUIContentView>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal" />
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
+            </VerticalStackLayout>
 
             <!--  for recent recipies  -->
             <Border Grid.Row="3" StrokeThickness="0">
                 <VerticalStackLayout Spacing="20">
                     <FlexLayout JustifyContent="SpaceBetween">
                         <Label Style="{DynamicResource SubHeader}" Text="Recent Recipes" />
-                        <Label Text="view all" />
+                        <Label Text="view all">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=NavigateToViewAllCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
                     </FlexLayout>
                     <CollectionView Margin="0,0,0,10" ItemsSource="{Binding Recipes}">
                         <CollectionView.ItemTemplate>

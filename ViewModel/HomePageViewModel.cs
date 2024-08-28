@@ -42,6 +42,8 @@ namespace FlavorHub.ViewModel
         public ICommand RefreshCommand { get; set; }
         public ICommand SelectionCommand { get; set; }
 
+        public ICommand NavigateToViewAllCommand { get; set; }
+
         [ObservableProperty]
         private LoginModel _LoginModel = new();
 
@@ -55,9 +57,11 @@ namespace FlavorHub.ViewModel
             _FavoritesRepository = favoritesRepository;
             RefreshCommand = new AsyncRelayCommand(RefreshRecipes);
             SelectionCommand = new AsyncRelayCommand<RecipeViewModel>(OnRecipeSelected);
+            NavigateToViewAllCommand = new AsyncRelayCommand(ViewAllRecipes);
             _FavoritesRepository = favoritesRepository;
-        }   //loading the recipes from the database
+        }
 
+        //loading the recipes from the database
         public async Task LoadRecipes()
         {
             try
@@ -80,6 +84,22 @@ namespace FlavorHub.ViewModel
                 Console.WriteLine(ex.ToString());
             }
         }
+
+
+        [RelayCommand]
+        private async Task ViewAllRecipes()
+        {
+            // Load and sort the recipes
+            var recipes = await _RecipeRepository.GetAllRecipesAsync();
+            var sortedRecipes = recipes.OrderByDescending(r => r.CreatedDate).ToList();
+
+            // Pass the sorted list to the RecipeListPage
+            await Shell.Current.GoToAsync("RecipeListPage", true, new Dictionary<string, object>
+    {
+        { "Recipes", sortedRecipes }
+        });
+        }
+
 
         public async Task LoadProfilePictureAsync()
         {

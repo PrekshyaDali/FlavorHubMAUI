@@ -3,9 +3,11 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Firebase.Auth;
 using FlavorHub.Models;
+using FlavorHub.NewFolder;
 using FlavorHub.Repositories.Interfaces;
 using Microsoft.Maui.Storage;
 using System;
+using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -17,14 +19,7 @@ namespace FlavorHub.ViewModel.ProfileSection
         private readonly IUserRepository _UserRepository;
         private readonly FirebaseAuthClient _FirebaseAuthClient;
         public ICommand SaveProfileDetailsCommand { get; set; }
-
-        public ProfilePageViewModel(IUserRepository UserRepository, FirebaseAuthClient firebaseAuthClient)
-        {
-            _UserRepository = UserRepository;
-            _FirebaseAuthClient = firebaseAuthClient;
-            SaveProfileDetailsCommand = new AsyncRelayCommand(SaveProfile);
-            LoadUserProfile();
-        }
+        public ICommand SwitchThemeCommand { get; set; }
 
         [ObservableProperty]
         private Models.SQLiteModels.User _user;
@@ -40,6 +35,34 @@ namespace FlavorHub.ViewModel.ProfileSection
 
         [ObservableProperty]
         private string _Email;
+
+        [ObservableProperty]
+        private bool _IsDarkMode;
+
+        //private readonly App _app;
+
+        public ProfilePageViewModel(IUserRepository UserRepository, FirebaseAuthClient firebaseAuthClient)
+        {
+            _UserRepository = UserRepository;
+            _FirebaseAuthClient = firebaseAuthClient;
+            SaveProfileDetailsCommand = new AsyncRelayCommand(SaveProfile);
+            //SwitchThemeCommand = new RelayCommand<bool>(SwitchTheme);
+            //PropertyChanged += OnPropertyChanged;
+            //_app = Application.Current as App;
+            LoadUserProfile();
+            //SwitchTheme(true);
+        }
+
+        //private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        //{
+        //    if (e.PropertyName == nameof(IsDarkMode))
+        //    {
+        //        SwitchTheme(IsDarkMode);
+        //    }
+        //}
+        //public void SwitchTheme(bool isDarkMode)
+        //{
+        //    _app.SwitchTheme(IsDarkMode);       }
 
         // Method to refresh the profile
         public async Task RefreshProfile()

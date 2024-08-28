@@ -55,7 +55,6 @@ namespace FlavorHub.ViewModel
             _FavoritesRepostory = favoritesRepository;
             SaveCommentCommand = new AsyncRelayCommand(SaveComments);
             FavoriteCommand = new AsyncRelayCommand(ToggleFavorite);
-
         }
 
         public async Task ToggleFavorite()

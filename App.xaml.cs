@@ -1,4 +1,5 @@
-﻿using FlavorHub.Views;
+﻿using FlavorHub.NewFolder;
+using FlavorHub.Views;
 using FlavorHub.Views.Authentication;
 using FlavorHub.Views.SplashScreens;
 
@@ -11,13 +12,29 @@ namespace FlavorHub
             InitializeComponent();
 
             MainPage = new AppShell();
-            //MainPage = new NavigationPage(new HomePage());
+            //LoadTheme();
         }
-
+        //private void LoadTheme()
+        //{
+        //    bool isDarkMode = Preferences.Get("IsDarkMode", false);
+        //    SwitchTheme(isDarkMode);
+        //}
+        //public void SwitchTheme(bool isDarkMode)
+        //{
+        //    Application.Current.Resources.MergedDictionaries.Clear();
+        //    if (isDarkMode)
+        //    {
+        //        Application.Current.Resources.MergedDictionaries.Add(new DarkTheme());
+        //    }
+        //    else
+        //    {
+        //        Application.Current.Resources.MergedDictionaries.Add(new LightTheme());
+        //    }
+        //    Preferences.Set("IsDarkMode", isDarkMode);
+        //}
         protected override async void OnStart()
         {
             base.OnStart();
-            // Ensure the Shell has been fully initialized before navigating
             if (Shell.Current != null)
             {
                 await Shell.Current.GoToAsync("//FirstSplashScreen");
