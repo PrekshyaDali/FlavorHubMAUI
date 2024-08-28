@@ -162,6 +162,37 @@
                 </CollectionView>
             </VerticalStackLayout>
 
+            <!--  //for comments  -->
+            <VerticalStackLayout Spacing="10">
+                <Label Style="{StaticResource SubHeader}" Text="Discussion" />
+                <CollectionView ItemsSource="{Binding CommentCollection}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+
+                            <VerticalStackLayout Margin="0,0,0,20">
+                                <HorizontalStackLayout Spacing="20" VerticalOptions="StartAndExpand">
+                                    <Border
+                                        HeightRequest="40"
+                                        StrokeShape="RoundRectangle 40"
+                                        WidthRequest="40">
+                                        <Image Aspect="AspectFill" Source="{Binding UserProfileImage}" />
+                                    </Border>
+                                    <VerticalStackLayout Spacing="5" VerticalOptions="StartAndExpand">
+                                        <Label FontAttributes="Bold" Text="{Binding UserName}" />
+                                        <Label
+                                            LineBreakMode="WordWrap"
+                                            MaxLines="5"
+                                            Text="{Binding CommentText}"
+                                            VerticalOptions="Center" />
+                                    </VerticalStackLayout>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+
             <!--  //comments  -->
             <Border
                 Padding="10"
@@ -169,10 +200,18 @@
                 HeightRequest="80"
                 StrokeShape="RoundRectangle 10"
                 StrokeThickness="0">
-                <FlexLayout JustifyContent="SpaceBetween" VerticalOptions="Center">
-                    <Entry Placeholder="Discuss here" VerticalOptions="Center" />
-                    <ImageButton Source="/TabBarIcons/profile.png" />
-                </FlexLayout>
+                <Grid ColumnDefinitions="*,.1*" VerticalOptions="Center">
+                    <Entry
+                        Grid.Column="0"
+                        Placeholder="Discuss here"
+                        Text="{Binding CommentText}"
+                        VerticalOptions="Center" />
+                    <ImageButton
+                        Grid.Column="1"
+                        Command="{Binding SaveCommentCommand}"
+                        HorizontalOptions="End"
+                        Source="/TabBarIcons/profile.png" />
+                </Grid>
             </Border>
         </VerticalStackLayout>
     </ScrollView>

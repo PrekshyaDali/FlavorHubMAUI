@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Firebase.Auth;
 using FlavorHub.Models;
 using FlavorHub.Models.AuthModels;
@@ -8,6 +9,7 @@ using FlavorHub.Repositories.Interfaces;
 using FlavorHub.ViewModel;
 using FlavorHub.ViewModel.RecipeFormViewModels;
 using FlavorHub.Views.Authentication;
+using Microsoft.Maui.Controls.Internals;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,7 +20,7 @@ using System.Windows.Input;
 
 namespace FlavorHub.ViewModel
 {
-    public partial class HomePageViewModel: ObservableObject
+    public partial class HomePageViewModel : ObservableObject
     {
         private readonly FirebaseAuthClient _FirebaseAuthClient;
 
@@ -26,8 +28,16 @@ namespace FlavorHub.ViewModel
         private readonly IUserService _UserService;
         private readonly IRecipeRepository _RecipeRepository;
 
+        public ICommand FavoriteCommand { get; set; }
+        [ObservableProperty]
+        private ObservableCollection<RecipeViewModel> _recipes;
+        private ObservableCollection<RecipeViewModel> _cachedRecipes;
+
         [ObservableProperty]
         private string? _ProfilePictureUrl;
+
+        [ObservableProperty]
+        private RecipeViewModel? _SelectedRecipe;
         public ICommand RefreshCommand { get; set; }
         public ICommand SelectionCommand { get; set; }
 
@@ -43,7 +53,30 @@ namespace FlavorHub.ViewModel
             _RecipeRepository = recipeRepository;
             RefreshCommand = new AsyncRelayCommand(RefreshRecipes);
             SelectionCommand = new AsyncRelayCommand<RecipeViewModel>(OnRecipeSelected);
-            
+
+        }   //loading the recipes from the database
+
+        public async Task LoadRecipes()
+        {
+            try
+            {
+                // Retrieve and sorting recipes in descending order by CreatedDate
+                var recipes = await _RecipeRepository.GetAllRecipesAsync();
+                var sortedRecipes = recipes.OrderByDescending(r => r.CreatedDate);
+
+                var recipeViewModels = await Task.WhenAll(sortedRecipes.Take(10).Select(async recipe =>
+                {
+                    var recipeViewModel = new RecipeViewModel(recipe, _UserService, _UserRepository);
+                    await recipeViewModel.InitializeAsync();
+                    return recipeViewModel;
+                }));
+
+                Recipes = new ObservableCollection<RecipeViewModel>(recipeViewModels);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
 
         public async Task LoadProfilePictureAsync()
@@ -72,12 +105,12 @@ namespace FlavorHub.ViewModel
             }
         }
 
-
         [RelayCommand]
         private async Task OnRecipeSelected(RecipeViewModel selectedRecipe)
         {
             if (selectedRecipe != null)
             {
+                SelectedRecipe = selectedRecipe;
                 // Navigate to the RecipeDetailPage, passing the selected recipe as a parameter
                 await Shell.Current.GoToAsync("RecipeDetailPage", true, new Dictionary<string, object>
             {
@@ -86,48 +119,7 @@ namespace FlavorHub.ViewModel
             }
         }
 
-        [ObservableProperty]
-        private ObservableCollection<RecipeViewModel> _recipes;
-        private ObservableCollection<RecipeViewModel> _cachedRecipes;
 
-        //loading the recipes from the database
-        public async Task LoadRecipes()
-        {
-            try
-            {
-                var recipes = await _RecipeRepository.GetAllRecipesAsync();
-                foreach (var recipe in recipes)
-                {
-                    Console.WriteLine($"{recipe.Title} - {recipe.CreatedDate}");
-                }
-
-                // Sort recipes in descending order by CreatedDate
-                var sortedRecipes = recipes.OrderByDescending(r => r.CreatedDate).ToList();
-
-                var recipeViewModels = new List<RecipeViewModel>();
-
-                foreach (var recipe in sortedRecipes)
-                {
-                    var recipeViewModel = new RecipeViewModel(recipe, _UserService, _UserRepository);
-                    await recipeViewModel.InitializeAsync();
-                    recipeViewModels.Add(recipeViewModel);
-                }
-
-                // Cache the top 10 recipes in descending order
-                Recipes = new ObservableCollection<RecipeViewModel>(recipeViewModels.Take(10));
-
-                // Log the cached recipes
-                Console.WriteLine("Cached recipes:");
-                foreach (var viewModel in _cachedRecipes)
-                {
-                    Console.WriteLine($"{viewModel.Title} - {viewModel.CreatedDate}");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
 
         [RelayCommand]
         private async Task RefreshRecipes()

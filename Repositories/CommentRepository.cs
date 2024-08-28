@@ -62,7 +62,7 @@ namespace FlavorHub.Repositories
 
         }
 
-        public Task<IEnumerable<Comments>> GetCommentsByUserIdAsync(Guid userId)
+        public async Task<IEnumerable<Comments>> GetCommentsByUserIdAsync(Guid userId)
         {
             try
             {
