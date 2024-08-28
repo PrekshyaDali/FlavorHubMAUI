@@ -22,7 +22,10 @@
                 StrokeShape="RoundRectangle 10"
                 StrokeThickness="0"
                 WidthRequest="60">
-                <ImageButton HeightRequest="20" Source="/TabBarIcons/profile.png" />
+                <Image HeightRequest="20" Source="{Binding FavoriteIcon, FallbackValue='Icons/heart.png'}" />
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding FavoriteCommand}" />
+                </Border.GestureRecognizers>
             </Border>
         </Grid>
     </Shell.TitleView>

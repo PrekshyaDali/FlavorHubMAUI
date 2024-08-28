@@ -31,34 +31,110 @@ namespace FlavorHub.ViewModel
         [ObservableProperty]
         private Guid _UserId;
 
+        [ObservableProperty]
+        private bool _IsFavorite = false;
+
+        [ObservableProperty]
+        private string? _FavoriteIcon;
+
+        public ICommand FavoriteCommand { get; set; }
         private readonly ICommentsRepository _CommentRepository;
         private readonly IUserService _UserService;
+        private readonly IFavoritesRepository _FavoritesRepostory;
         private readonly Repositories.Interfaces.IUserRepository _UserRepository;
 
         [ObservableProperty]
         private ObservableCollection<Comments> _CommentCollection = new ObservableCollection<Comments>();
         public ICommand SaveCommentCommand { get; set; }
 
-        public RecipeDetailPageViewModel(ICommentsRepository commentsRepository, IUserService userService, Repositories.Interfaces.IUserRepository userRepository)
+        public RecipeDetailPageViewModel(ICommentsRepository commentsRepository, IUserService userService, Repositories.Interfaces.IUserRepository userRepository, IFavoritesRepository favoritesRepository)
         {
             _CommentRepository = commentsRepository;
             _UserService = userService;
             _UserRepository = userRepository;
+            _FavoritesRepostory = favoritesRepository;
             SaveCommentCommand = new AsyncRelayCommand(SaveComments);
+            FavoriteCommand = new AsyncRelayCommand(ToggleFavorite);
 
         }
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
+
+        public async Task ToggleFavorite()
+        {
+            if (SelectedRecipe == null)
+            {
+                Console.WriteLine("No recipe selected.");
+                return;
+            }
+
+            // Retrieve the user ID from secure storage or service
+            var userIdString = await SecureStorage.GetAsync("UserId");
+            if (!string.IsNullOrEmpty(userIdString) && Guid.TryParse(userIdString, out Guid userId))
+            {
+                var favorites = new Favorites
+                {
+                    FavoritesId = Guid.NewGuid(),
+                    RecipeId = SelectedRecipe.RecipeId,
+                    UserId = userId,
+                };
+
+                try
+                {
+                    if (IsFavorite)
+                    {
+                        // Remove from favorites
+                        await _FavoritesRepostory.DeleteFavoritesByIdAsync(favorites.FavoritesId);
+                    }
+                    else
+                    {
+                        // Add to favorites
+                        await _FavoritesRepostory.AddFavoritesAsync(favorites);
+                    }
+
+                    // Update the favorite status and icon
+                    IsFavorite = !IsFavorite;
+                    FavoriteIcon = IsFavorite ? "/Icons/heart_filled.png" : "/HomePage/heart.png";
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error toggling favorite status: {ex}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("User ID is invalid or missing.");
+            }
+        }
+
+        public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             if (query.ContainsKey("SelectedRecipe"))
             {
                 SelectedRecipe = query["SelectedRecipe"] as RecipeViewModel;
+                var userIdResult = await _UserService.GetUserIdAsync();
+                if (userIdResult != null)
+                {
+                    var userId = userIdResult.Value;
+                    var favorite = await _FavoritesRepostory.GetFavoriteByRecipeAndUserAsync(SelectedRecipe.RecipeId, userId);
+                    if (favorite != null)
+                    {
+                        IsFavorite = true;
+                        FavoriteIcon = "/Icons/heart_filled.png";
 
+                    }
+                    else
+                    {
+                        IsFavorite = false;
+                        FavoriteIcon = "/Icons/heart.png";
+                    }
+                }
                 if (SelectedRecipe != null)
                 {
                     LoadComments();
                 }
             }
         }
+
 
         public async Task SaveComments()
         {
