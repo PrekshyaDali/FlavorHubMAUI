@@ -70,7 +70,7 @@
                                 VerticalOptions="Center" />
                             <Label
                                 FontSize="Micro"
-                                Text="{Binding CookingTime}"
+                                Text="{Binding CookingTime, StringFormat='{0} mins'}"
                                 TextColor="white"
                                 VerticalOptions="Center" />
                         </HorizontalStackLayout>

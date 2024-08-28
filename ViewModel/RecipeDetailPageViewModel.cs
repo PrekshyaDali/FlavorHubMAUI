@@ -107,18 +107,6 @@ namespace FlavorHub.ViewModel
                 Console.WriteLine("User ID is invalid or missing.");
             }
         }
-
-
-        //private async Task UpdateFavoriteStatus()
-        //{
-        //    var userIdString = await SecureStorage.GetAsync("UserId");
-        //    if (!string.IsNullOrEmpty(userIdString) && Guid.TryParse(userIdString, out Guid userId))
-        //    {
-        //        var favorite = await _FavoritesRepostory.GetFavoriteByRecipeAndUserAsync(SelectedRecipe.RecipeId, userId);
-        //        IsFavorite = favorite != null;
-        //        FavoriteIcon = IsFavorite ? "/Icons/heart_filled.png" : "/Icons/heart_outline.png";
-        //    }
-        //}
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             if (query.ContainsKey("SelectedRecipe"))
@@ -131,13 +119,14 @@ namespace FlavorHub.ViewModel
                     var favorite = await _FavoritesRepostory.GetFavoriteByRecipeAndUserAsync(SelectedRecipe.RecipeId, userId);
                     if (favorite != null)
                     {
-                        IsFavorite = false;
-                        FavoriteIcon = "/Icons/heart.png";
+                        IsFavorite = true;
+                        FavoriteIcon = "/Icons/heart_filled.png";
+                        
                     }
                     else
                     {
-                        IsFavorite = true;
-                        FavoriteIcon = "/Icons/heart_filled.png";
+                        IsFavorite = false;
+                        FavoriteIcon = "/Icons/heart.png";
                     }
                 }
                 if (SelectedRecipe != null)

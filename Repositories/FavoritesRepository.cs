@@ -69,6 +69,20 @@ namespace FlavorHub.Repositories
             }
         }
 
+        public async Task<int> GetFavoriteCountByRecipeIdAsync(Guid recipeId)
+        {
+            try
+            {
+                var count = await _Database.Table<Favorites>().CountAsync(f => f.RecipeId == recipeId);
+                return count;
+            }
+            catch (Exception ex) 
+            { 
+                Console.WriteLine($"{ex.Message}");
+                return 0;
+            }
+        }
+
         public async Task<Favorites> GetFavoritesById(Guid favoritesId)
         {
             try
