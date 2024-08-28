@@ -10,6 +10,7 @@ namespace FlavorHub.Repositories.Interfaces
     public interface IFavoritesRepository
     {
         Task<Favorites> GetFavoritesById(Guid favoritesId);
+        Task<Favorites> GetFavoriteByRecipeAndUserAsync(Guid recipeId, Guid userId);
         Task<IEnumerable<Favorites>> GetFavoritesByRecipeId(Guid recipeId);
         Task<IEnumerable<Favorites>> GetFavoritesByUserId(Guid userId);
         Task AddFavoritesAsync(Favorites favorites);

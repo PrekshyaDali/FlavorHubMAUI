@@ -23,14 +23,6 @@
                 Title="activity"
                 ContentTemplate="{DataTemplate views:ActivityPage}"
                 Route="ActivityPage" />
-            <ShellContent
-                Title="activity"
-                ContentTemplate="{DataTemplate views:ActivityPage}"
-                Route="ActivityPage" />
-            <ShellContent
-                Title="activity"
-                ContentTemplate="{DataTemplate views:ActivityPage}"
-                Route="ActivityPage" />
         </Tab>
         <Tab Title="Add" Icon="/Icons/plus.png">
             <ShellContent ContentTemplate="{DataTemplate views:AddRecipe}" Route="AddRecipe" />

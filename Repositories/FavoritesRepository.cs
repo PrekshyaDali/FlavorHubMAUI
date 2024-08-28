@@ -34,13 +34,38 @@ namespace FlavorHub.Repositories
         {
             try
             {
-                await _Database.DeleteAsync(favoritesId);
+                var favorite = await _Database.FindAsync<Favorites>(favoritesId);
 
+                if (favorite != null)
+                {
+                    await _Database.DeleteAsync(favorite);
+                }
+                else
+                {
+                    Console.WriteLine($"Favorite with ID {favoritesId} not found.");
+                }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                Console.WriteLine($"Error deleting favorite: {ex}");
+            }
+        }
 
+        public async Task<Favorites> GetFavoriteByRecipeAndUserAsync(Guid recipeId, Guid userId)
+        {
+            try
+            {
+                // Query the database to find a favorite by RecipeId and UserId
+                var favorite = await _Database.Table<Favorites>()
+                    .Where(f => f.RecipeId == recipeId && f.UserId == userId)
+                    .FirstOrDefaultAsync();
+
+                return favorite;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving favorite: {ex.Message}");
+                return null;
             }
         }
 

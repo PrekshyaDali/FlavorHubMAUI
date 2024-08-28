@@ -4,6 +4,7 @@ using Firebase.Auth.Repository;
 using FlavorHub.Models.SQLiteModels;
 using FlavorHub.Repositories.Interfaces;
 using FlavorHub.ViewModel.RecipeFormViewModels;
+using FlavorHub.Views.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -32,7 +33,7 @@ namespace FlavorHub.ViewModel
         private Guid _UserId;
 
         [ObservableProperty]
-        private bool _IsFavorite;
+        private bool _IsFavorite = false;
 
         [ObservableProperty]
         private string? _FavoriteIcon;
@@ -65,34 +66,36 @@ namespace FlavorHub.ViewModel
                 return;
             }
 
-            // Retrieve the user ID from secure storage or service
-            var userIdString = await SecureStorage.GetAsync("UserId");
-            if (!string.IsNullOrEmpty(userIdString) && Guid.TryParse(userIdString, out Guid userId))
+            // Await the asynchronous method and handle the nullable result
+            var userIdResult = await _UserService.GetUserIdAsync();
+            if (userIdResult != null)
             {
-                var favorites = new Favorites
-                {
-                    FavoritesId = Guid.NewGuid(),
-                    RecipeId = SelectedRecipe.RecipeId,
-                    UserId = userId,
-                };
+                var userId = userIdResult.Value; 
+                var favorite = await _FavoritesRepostory.GetFavoriteByRecipeAndUserAsync(SelectedRecipe.RecipeId, userId);
 
                 try
                 {
-                    if (IsFavorite)
+                    if (favorite != null)
                     {
-                        // Remove from favorites
-                        await _FavoritesRepostory.DeleteFavoritesByIdAsync(favorites.FavoritesId);
+                        await _FavoritesRepostory.DeleteFavoritesByIdAsync(favorite.FavoritesId);
+                        IsFavorite = false;
+                        FavoriteIcon = "/Icons/heart.png";
+
                     }
                     else
                     {
-                        // Add to favorites
-                        await _FavoritesRepostory.AddFavoritesAsync(favorites);
+                        var newFavorite = new Favorites
+                        {
+                            FavoritesId = Guid.NewGuid(),
+                            RecipeId = SelectedRecipe.RecipeId,
+                            UserId = userId,
+                        };
+
+                        IsFavorite = true;
+                        FavoriteIcon = "/Icons/heart_filled.png";
+                        var popup = new HeartPopUp();
+                        await _FavoritesRepostory.AddFavoritesAsync(newFavorite);
                     }
-
-                    // Update the favorite status and icon
-                    IsFavorite = !IsFavorite;
-                    FavoriteIcon = IsFavorite ? "/Icons/heart_filled.png" : "/HomePage/heart.png";
-
                 }
                 catch (Exception ex)
                 {
@@ -104,12 +107,39 @@ namespace FlavorHub.ViewModel
                 Console.WriteLine("User ID is invalid or missing.");
             }
         }
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
+
+
+        //private async Task UpdateFavoriteStatus()
+        //{
+        //    var userIdString = await SecureStorage.GetAsync("UserId");
+        //    if (!string.IsNullOrEmpty(userIdString) && Guid.TryParse(userIdString, out Guid userId))
+        //    {
+        //        var favorite = await _FavoritesRepostory.GetFavoriteByRecipeAndUserAsync(SelectedRecipe.RecipeId, userId);
+        //        IsFavorite = favorite != null;
+        //        FavoriteIcon = IsFavorite ? "/Icons/heart_filled.png" : "/Icons/heart_outline.png";
+        //    }
+        //}
+        public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             if (query.ContainsKey("SelectedRecipe"))
             {
                 SelectedRecipe = query["SelectedRecipe"] as RecipeViewModel;
-
+                var userIdResult = await _UserService.GetUserIdAsync();
+                if (userIdResult != null)
+                {
+                    var userId = userIdResult.Value;
+                    var favorite = await _FavoritesRepostory.GetFavoriteByRecipeAndUserAsync(SelectedRecipe.RecipeId, userId);
+                    if (favorite != null)
+                    {
+                        IsFavorite = false;
+                        FavoriteIcon = "/Icons/heart.png";
+                    }
+                    else
+                    {
+                        IsFavorite = true;
+                        FavoriteIcon = "/Icons/heart_filled.png";
+                    }
+                }
                 if (SelectedRecipe != null)
                 {
                     LoadComments(); 
@@ -137,14 +167,14 @@ namespace FlavorHub.ViewModel
                 Console.WriteLine($"UserId string: {userId}");
                 Console.WriteLine($"RecipeId string: {SelectedRecipe.RecipeId}");
                 await _CommentRepository.AddCommentAsync(comments);
-                Application.Current.MainPage.DisplayAlert("Success", "Comments added successfully", "ok");
+                await Application.Current.MainPage.DisplayAlert("Success", "Comments added successfully", "ok");
                 CommentText = string.Empty;
                 await LoadComments();
 
             }
             catch (Exception ex)
             {
-                Application.Current.MainPage.DisplayAlert("Failed", "Failed adding comments", "ok");
+              await Application.Current.MainPage.DisplayAlert("Failed", "Failed adding comments", "ok");
                 Console.WriteLine(ex.ToString());      
             }
         }
@@ -154,11 +184,11 @@ namespace FlavorHub.ViewModel
           if(SelectedRecipe == null) 
           {
              return;
-          }  
+          }
+            _CommentCollection.Clear();
             var comments = await _CommentRepository.GetCommentsByRecipeIdAsync(SelectedRecipe.RecipeId);
             if (comments != null && comments.Any())
             {
-                _CommentCollection.Clear();
                 foreach (var comment in comments)
                 {
                     var user = await _UserRepository.GetUserByIdAsync(comment.UserId);

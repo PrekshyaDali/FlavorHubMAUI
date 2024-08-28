@@ -1,6 +1,6 @@
 namespace FlavorHub.Views;
 
-public partial class ActivityPage : ContentPage
+public partial class ActivityPage : TabbedPage
 {
 	public ActivityPage()
 	{
