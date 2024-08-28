@@ -161,7 +161,10 @@
                                         HorizontalOptions="Center"
                                         Style="{StaticResource Header}"
                                         Text="." />
-                                    <Label Text="{Binding Steps}" VerticalOptions="Center" />
+                                    <Label
+                                        Text="{Binding Steps}"
+                                        VerticalOptions="Center"
+                                        WidthRequest="300" />
                                 </HorizontalStackLayout>
                             </Border>
                         </DataTemplate>

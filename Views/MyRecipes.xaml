@@ -6,13 +6,13 @@
     xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
     xmlns:vm="clr-namespace:FlavorHub.ViewModel"
     Title="MyRecipes">
-    <ScrollView>
-        <CollectionView Margin="0,0,0,10" ItemsSource="{Binding Recipes}">
+    <ScrollView Padding="20">
+        <CollectionView Margin="0,0,0,10" ItemsSource="{Binding RecipeCollection}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border Margin="0,0,0,10" StrokeThickness="0">
                         <controls:RecipeUIContentView
-                            ContentWidth="330"
+                            ContentWidth="300"
                             CookingTime="{Binding CookingTime}"
                             DifficultyLevel="{Binding DifficultyLevel}"
                             FavoriteCount="{Binding FavoriteCount}"

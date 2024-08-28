@@ -20,11 +20,11 @@
         </Tab>
         <Tab Title="Activity" Icon="/TabBarIcons/search.png">
             <ShellContent
-                Title="hello"
+                Title="My Favorites"
                 ContentTemplate="{DataTemplate views:FavoritesPage}"
                 Route="FavoritesPage" />
             <ShellContent
-                Title="hello"
+                Title="My Recipes"
                 ContentTemplate="{DataTemplate views:MyRecipes}"
                 Route="MyRecipes" />
         </Tab>
