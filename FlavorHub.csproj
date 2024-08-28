@@ -65,11 +65,12 @@
 	  <None Remove="Resources\Images\HomePage\clock.png" />
 	  <None Remove="Resources\Images\HomePage\food.png" />
 	  <None Remove="Resources\Images\HomePage\fullscreen.png" />
-	  <None Remove="Resources\Images\HomePage\heart.png" />
 	  <None Remove="Resources\Images\HomePage\Ingredients.png" />
 	  <None Remove="Resources\Images\HomePage\level.png" />
 	  <None Remove="Resources\Images\HomePage\pasta.jpg" />
 	  <None Remove="Resources\Images\HomePage\sandwich.jpg" />
+	  <None Remove="Resources\Images\Icons\heart.png" />
+	  <None Remove="Resources\Images\Icons\heart_filled.png" />
 	</ItemGroup>
 
 	<ItemGroup>
