@@ -27,6 +27,7 @@ namespace FlavorHub.ViewModel
         private readonly IUserRepository _UserRepository;
         private readonly IUserService _UserService;
         private readonly IRecipeRepository _RecipeRepository;
+        private readonly IFavoritesRepository _FavoritesRepository;
 
         public ICommand FavoriteCommand { get; set; }
         [ObservableProperty]
@@ -44,16 +45,17 @@ namespace FlavorHub.ViewModel
         [ObservableProperty]
         private LoginModel _LoginModel = new();
 
-        public HomePageViewModel(FirebaseAuthClient firebaseAuthClient, IUserRepository userRepository, IRecipeRepository recipeRepository, IUserService userService)
+        public HomePageViewModel(FirebaseAuthClient firebaseAuthClient, IUserRepository userRepository, IRecipeRepository recipeRepository, IUserService userService, IFavoritesRepository favoritesRepository)
         {
             LoadProfilePictureAsync();
             _FirebaseAuthClient = firebaseAuthClient;
             _UserRepository = userRepository;
             _UserService = userService;
             _RecipeRepository = recipeRepository;
+            _FavoritesRepository = favoritesRepository;
             RefreshCommand = new AsyncRelayCommand(RefreshRecipes);
             SelectionCommand = new AsyncRelayCommand<RecipeViewModel>(OnRecipeSelected);
-
+            _FavoritesRepository = favoritesRepository;
         }   //loading the recipes from the database
 
         public async Task LoadRecipes()
@@ -66,7 +68,7 @@ namespace FlavorHub.ViewModel
 
                 var recipeViewModels = await Task.WhenAll(sortedRecipes.Take(10).Select(async recipe =>
                 {
-                    var recipeViewModel = new RecipeViewModel(recipe, _UserService, _UserRepository);
+                    var recipeViewModel = new RecipeViewModel(recipe, _UserService, _UserRepository, _FavoritesRepository);
                     await recipeViewModel.InitializeAsync();
                     return recipeViewModel;
                 }));

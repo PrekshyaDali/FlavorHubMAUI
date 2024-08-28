@@ -112,6 +112,7 @@
                                         ContentWidth="330"
                                         CookingTime="{Binding CookingTime}"
                                         DifficultyLevel="{Binding DifficultyLevel}"
+                                        FavoriteCount="{Binding FavoriteCount}"
                                         ProfileImage="{Binding ProfilePicture}"
                                         RecipeFoodName="{Binding Title}"
                                         RecipeImage="{Binding FirstImageUrl}"

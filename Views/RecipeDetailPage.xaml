@@ -77,6 +77,10 @@
                     <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal" />
                 </CollectionView.ItemsLayout>
             </CollectionView>
+            <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
+                <Image Source="Icons/heart_filled.png" />
+                <Label Text="{Binding FavoriteCount, StringFormat='{0} likes', Mode=TwoWay}" />
+            </HorizontalStackLayout>
 
             <VerticalStackLayout Spacing="10">
                 <Label

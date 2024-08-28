@@ -67,45 +67,50 @@ namespace FlavorHub.ViewModel
             }
 
             // Retrieve the user ID from secure storage or service
-            var userIdString = await SecureStorage.GetAsync("UserId");
-            if (!string.IsNullOrEmpty(userIdString) && Guid.TryParse(userIdString, out Guid userId))
+            var userIdString = await _UserService.GetUserIdAsync();
+            if (userIdString != null)
             {
-                var favorites = new Favorites
-                {
-                    FavoritesId = Guid.NewGuid(),
-                    RecipeId = SelectedRecipe.RecipeId,
-                    UserId = userId,
-                };
+                var userId = userIdString.Value;
+                var favorite = await _FavoritesRepostory.GetFavoriteByRecipeAndUserAsync(SelectedRecipe.RecipeId, userId);
 
                 try
                 {
-                    if (IsFavorite)
+                    if (favorite != null)
                     {
-                        // Remove from favorites
-                        await _FavoritesRepostory.DeleteFavoritesByIdAsync(favorites.FavoritesId);
+                        await _FavoritesRepostory.DeleteFavoritesByIdAsync(favorite.FavoritesId);
+                        IsFavorite = false;
+                        FavoriteIcon = "/Icons/heart.png";
+                        SelectedRecipe.FavoriteCount--;
+
                     }
                     else
                     {
-                        // Add to favorites
-                        await _FavoritesRepostory.AddFavoritesAsync(favorites);
+                        var newFavorite = new Favorites
+                        {
+                            FavoritesId = Guid.NewGuid(),
+                            RecipeId = SelectedRecipe.RecipeId,
+                            UserId = userId,
+                        };
+
+                        IsFavorite = true;
+                        FavoriteIcon = "/Icons/heart_filled.png";
+                        await _FavoritesRepostory.AddFavoritesAsync(newFavorite);
+                        SelectedRecipe.FavoriteCount++;
                     }
-
-                    // Update the favorite status and icon
-                    IsFavorite = !IsFavorite;
-                    FavoriteIcon = IsFavorite ? "/Icons/heart_filled.png" : "/HomePage/heart.png";
-
+                    OnPropertyChanged(nameof(FavoriteCount));
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Error toggling favorite status: {ex}");
                 }
+
             }
             else
             {
                 Console.WriteLine("User ID is invalid or missing.");
             }
         }
-
+        public int FavoriteCount => SelectedRecipe?.FavoriteCount ?? 0;
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             if (query.ContainsKey("SelectedRecipe"))
@@ -128,6 +133,8 @@ namespace FlavorHub.ViewModel
                         FavoriteIcon = "/Icons/heart.png";
                     }
                 }
+                OnPropertyChanged(nameof(SelectedRecipe));
+                OnPropertyChanged(nameof(FavoriteCount));
                 if (SelectedRecipe != null)
                 {
                     LoadComments();

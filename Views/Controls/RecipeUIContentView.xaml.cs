@@ -52,7 +52,19 @@ namespace FlavorHub.Views.Controls
                 typeof(string),
                 typeof(RecipeUIContentView),
                 default(string));
+
+        public static readonly BindableProperty FavoriteCountProperty =
+           BindableProperty.Create(
+               nameof(FavoriteCount),
+               typeof(int),
+               typeof(RecipeUIContentView),
+               default(int));
         // Properties for binding
+        public int FavoriteCount
+        {
+            get => (int)GetValue(FavoriteCountProperty);
+            set => SetValue(FavoriteCountProperty, value);
+        }
         public int ContentWidth
         {
             get => (int)GetValue(ContentWidthProperty);

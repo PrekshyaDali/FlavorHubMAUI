@@ -16,6 +16,7 @@ namespace FlavorHub.Repositories.Interfaces
         Task AddFavoritesAsync(Favorites favorites);
         Task UpdateCommentAsync(Favorites favorites);
         Task DeleteFavoritesByIdAsync(Guid favoritesId);
+        Task<int> GetFavoriteCountByRecipeIdAsync(Guid recipeId);
     }
 
 }
