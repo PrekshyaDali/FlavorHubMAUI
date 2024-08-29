@@ -15,15 +15,5 @@ namespace FlavorHub.ViewModel
         [ObservableProperty]
         private string _PhotoUrl;
         public ICommand SavePhotoCommand { get; set; }
-        public GalleryFullPageViewModel()
-        {
-            SavePhotoCommand = new AsyncRelayCommand(PhotoDownload);
-        }
-
-        [RelayCommand]
-        private async Task PhotoDownload()
-        {
-
-        }
     }
 }

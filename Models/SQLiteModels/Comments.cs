@@ -1,9 +1,4 @@
 ﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlavorHub.Models.SQLiteModels
 {
@@ -22,4 +17,3 @@ namespace FlavorHub.Models.SQLiteModels
         public string? UserProfileImage { get; set; }
     }
 }
-

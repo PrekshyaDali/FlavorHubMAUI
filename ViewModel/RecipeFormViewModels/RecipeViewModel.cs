@@ -30,7 +30,6 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
             await LoadProfilePicture();
             await LoadFavoriteCount();
         }
-
         private async Task LoadUserName()
         {
             var user = await _UserRepository.GetUserByIdAsync(_Recipe.UserId);

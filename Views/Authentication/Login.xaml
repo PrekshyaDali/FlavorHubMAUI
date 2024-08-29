@@ -7,7 +7,6 @@
     xmlns:vm="clr-namespace:FlavorHub.ViewModel">
 
     <VerticalStackLayout Padding="20" Spacing="20">
-
         <!--  Main Content  -->
         <VerticalStackLayout
             BackgroundColor="Transparent"

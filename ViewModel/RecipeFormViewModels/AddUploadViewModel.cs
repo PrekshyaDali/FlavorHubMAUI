@@ -234,9 +234,6 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
             try
             {
                 var (imagesJson, videosJson) = SerializeMediaFilesToJson();
-                // Log the JSON strings
-                Console.WriteLine($"Images JSON: {imagesJson}");
-                Console.WriteLine($"Videos JSON: {videosJson}");
                 await LoadUserId();
                 var recipe = new Recipe
                 {
@@ -275,7 +272,6 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
                 await Application.Current.MainPage.DisplayAlert("Error", "Failed to save the recipe. Please try again.", "OK");
             }
         }
-
         private async Task LoadUserId()
         {
             _UserId = await _UserService.GetUserIdAsync();
