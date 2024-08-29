@@ -53,7 +53,10 @@
             HorizontalOptions="FillAndExpand"
             VerticalOptions="End" />
 
-        <Border Padding="10" StrokeShape="RoundRectangle ">
+        <Border
+            Padding="10"
+            HeightRequest="80"
+            StrokeShape="RoundRectangle 10 ">
             <FlexLayout JustifyContent="SpaceBetween">
                 <Label
                     FontAttributes="Bold"
@@ -62,10 +65,18 @@
                     TextColor="{AppThemeBinding Light={StaticResource LightPrimaryTextColor},
                                                 Dark={StaticResource DarkSecondaryTextColor}}"
                     VerticalOptions="Center" />
-                <ImageButton Command="{Binding SwitchThemeCommand}" Source="/TabBarIcons/profile.png" />
+                <ImageButton
+                    Margin="0,10,0,0"
+                    Command="{Binding SwitchThemeCommand}"
+                    HeightRequest="30"
+                    Source="{Binding Icon}"
+                    VerticalOptions="Center" />
             </FlexLayout>
         </Border>
-        <Border Padding="10" StrokeShape="RoundRectangle 0">
+        <Border
+            Padding="10"
+            HeightRequest="80"
+            StrokeShape="RoundRectangle 10">
             <FlexLayout JustifyContent="SpaceBetween" VerticalOptions="Center">
                 <Label
                     FontAttributes="Bold"
@@ -74,7 +85,12 @@
                     TextColor="{AppThemeBinding Light={StaticResource LightPrimaryTextColor},
                                                 Dark={StaticResource DarkSecondaryTextColor}}"
                     VerticalOptions="Center" />
-                <ImageButton HeightRequest="30" Source="/Icons/logout.png" />
+                <ImageButton
+                    Margin="0,10,0,0"
+                    Command="{Binding LogoutCommand}"
+                    HeightRequest="30"
+                    Source="/Icons/logout.png"
+                    VerticalOptions="Center" />
             </FlexLayout>
         </Border>
     </VerticalStackLayout>
