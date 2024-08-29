@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FlavorHub.Views.HomePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel">
+    <Shell.TitleView>
+        <Grid>
+            <FlexLayout AlignItems="Center" JustifyContent="SpaceBetween">
+                <HorizontalStackLayout>
+                    <Label Text="Welcome Back," />
+                    <Label Text="{Binding Users}" />
+                </HorizontalStackLayout>
+
+                <ImageButton
+                    Margin="0,0,5,0"
+                    Command="{Binding LogOutCommand}"
+                    HeightRequest="30"
+                    Source="/Icons/logout.png" />
+            </FlexLayout>
+        </Grid>
+    </Shell.TitleView>
+    <ScrollView Padding="30">
+        <Grid RowDefinitions=".4*,.4*,*,*" RowSpacing="20">
+            <!--  for sub heading  -->
+            <Border Grid.Row="0" StrokeThickness="0">
+                <Label Style="{StaticResource SubHeader}" Text="What do you want to cook today?" />
+            </Border>
+
+            <VerticalStackLayout Grid.Row="2">
+                <Label Style="{StaticResource SubHeader}" Text="Popular Recipe" />
+                <CollectionView Margin="0,0,0,10" ItemsSource="{Binding Recipes}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Margin="0,0,0,10" StrokeThickness="0">
+                                <controls:RecipeUIContentView
+                                    ContentWidth="330"
+                                    CookingTime="{Binding CookingTime}"
+                                    DifficultyLevel="{Binding DifficultyLevel}"
+                                    FavoriteCount="{Binding FavoriteCount}"
+                                    ProfileImage="{Binding ProfilePicture}"
+                                    RecipeFoodName="{Binding Title}"
+                                    RecipeImage="{Binding FirstImageUrl}"
+                                    UserName="{Binding UserName}">
+                                    <controls:RecipeUIContentView.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=SelectionCommand}" CommandParameter="{Binding .}" />
+                                    </controls:RecipeUIContentView.GestureRecognizers>
+                                </controls:RecipeUIContentView>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal" />
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
+            </VerticalStackLayout>
+
+            <!--  for recent recipies  -->
+            <Border Grid.Row="3" StrokeThickness="0">
+                <VerticalStackLayout Spacing="20">
+                    <FlexLayout JustifyContent="SpaceBetween">
+                        <Label Style="{StaticResource SubHeader}" Text="Recent Recipes" />
+                        <Label
+                            Text="view all"
+                            TextColor="{StaticResource Tertiary}"
+                            TextDecorations="Underline"
+                            VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=NavigateToViewAllCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </FlexLayout>
+                    <CollectionView Margin="0,0,0,10" ItemsSource="{Binding Recipes}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="0,0,0,10" StrokeThickness="0">
+                                    <controls:RecipeUIContentView
+                                        ContentWidth="330"
+                                        CookingTime="{Binding CookingTime}"
+                                        DifficultyLevel="{Binding DifficultyLevel}"
+                                        FavoriteCount="{Binding FavoriteCount}"
+                                        ProfileImage="{Binding ProfilePicture}"
+                                        RecipeFoodName="{Binding Title}"
+                                        RecipeImage="{Binding FirstImageUrl}"
+                                        UserName="{Binding UserName}">
+                                        <controls:RecipeUIContentView.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=SelectionCommand}" CommandParameter="{Binding .}" />
+                                        </controls:RecipeUIContentView.GestureRecognizers>
+                                    </controls:RecipeUIContentView>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+    </ScrollView>
+</ContentPage>

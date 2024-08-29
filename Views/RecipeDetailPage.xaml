@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FlavorHub.Views.RecipeDetailPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel">
+    <Shell.TitleView>
+        <Grid
+            Padding="20,5,20,0"
+            ColumnSpacing="10"
+            HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Border
+                Grid.Column="1"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                                  Dark={StaticResource DarkSecondaryColor}}"
+                HeightRequest="50"
+                HorizontalOptions="End"
+                StrokeShape="RoundRectangle 10"
+                StrokeThickness="0"
+                WidthRequest="60">
+                <Image HeightRequest="20" Source="{Binding FavoriteIcon, FallbackValue='Icons/heart.png'}" />
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding FavoriteCommand}" />
+                </Border.GestureRecognizers>
+            </Border>
+        </Grid>
+    </Shell.TitleView>
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <!--  //uppersection  -->
+            <FlexLayout JustifyContent="SpaceBetween">
+                <HorizontalStackLayout
+                    HorizontalOptions="Center"
+                    Spacing="10"
+                    VerticalOptions="Center">
+                    <Border
+                        HeightRequest="50"
+                        StrokeShape="RoundRectangle 40 "
+                        WidthRequest="50">
+                        <Image Aspect="AspectFill" Source="{Binding SelectedRecipe.ProfilePicture}" />
+                    </Border>
+                    <VerticalStackLayout VerticalOptions="Center">
+                        <Label FontAttributes="Bold" Text="{Binding SelectedRecipe.UserName}" />
+                        <Label FontSize="Micro" Text="{Binding SelectedRecipe.CreatedDate, StringFormat='{0:MMMM d, yyyy}'}" />
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+                <Border
+                    BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                                      Dark={StaticResource DarkSecondaryColor}}"
+                    HeightRequest="50"
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="0"
+                    WidthRequest="80">
+                    <Label
+                        HorizontalOptions="Center"
+                        Text="4.5"
+                        VerticalOptions="Center" />
+                </Border>
+            </FlexLayout>
+
+            <!--  //picture  -->
+            <CollectionView ItemsSource="{Binding SelectedRecipe.ImageUrls}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Image
+                            Aspect="AspectFill"
+                            HeightRequest="300"
+                            HorizontalOptions="FillAndExpand"
+                            IsVisible="{Binding HasImage}"
+                            Source="{Binding .}"
+                            WidthRequest="500" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal" />
+                </CollectionView.ItemsLayout>
+            </CollectionView>
+            <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
+                <Image Source="Icons/heart_filled.png" />
+                <Label Text="{Binding FavoriteCount, StringFormat='{0} likes', Mode=TwoWay}" />
+            </HorizontalStackLayout>
+
+            <VerticalStackLayout Spacing="10">
+                <Label
+                    HorizontalOptions="Center"
+                    Style="{StaticResource SubHeader}"
+                    Text="{Binding SelectedRecipe.Title}" />
+                <Label
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding SelectedRecipe.Description}" />
+            </VerticalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
+                <HorizontalStackLayout Spacing="10">
+                    <Image HeightRequest="20" Source="/HomePage/clock.png" />
+                    <Label Text="{Binding SelectedRecipe.CookingTime, StringFormat='{0} mins'}" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="10">
+                    <Image HeightRequest="20" Source="/HomePage/level.png" />
+                    <Label Text="{Binding SelectedRecipe.DifficultyLevel}" />
+                </HorizontalStackLayout>
+            </HorizontalStackLayout>
+
+            <!--  for the ingredients  -->
+            <VerticalStackLayout Spacing="20">
+                <FlexLayout JustifyContent="SpaceBetween">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Style="{StaticResource SubHeader}" Text="Ingredients" />
+                    </VerticalStackLayout>
+                    <Border
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        HeightRequest="50"
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="0"
+                        WidthRequest="100">
+                        <Label
+                            HorizontalOptions="Center"
+                            Text="{Binding SelectedRecipe.Servings, StringFormat='{0} Servings'}"
+                            VerticalOptions="Center" />
+                    </Border>
+                </FlexLayout>
+
+                <CollectionView ItemsSource="{Binding SelectedRecipe.Ingredients}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                                Margin="0,0,0,10"
+                                Padding="10"
+                                HeightRequest="80"
+                                StrokeShape="RoundRectangle 10">
+                                <FlexLayout Padding="10" JustifyContent="SpaceBetween">
+                                    <Label
+                                        Text="{Binding IngredientName}"
+                                        VerticalOptions="Center"
+                                        WidthRequest="200" />
+                                    <Label Text="{Binding Measurement}" VerticalOptions="Center" />
+                                </FlexLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+            <!--  for the directions  -->
+            <VerticalStackLayout Spacing="10">
+                <Label Style="{StaticResource SubHeader}" Text="Directions" />
+                <CollectionView ItemsSource="{Binding SelectedRecipe.Steps}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                                Margin="0,0,0,10"
+                                Padding="10"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                                                  Dark={StaticResource DarkSecondaryColor}}"
+                                HeightRequest="80"
+                                StrokeShape="RoundRectangle 20"
+                                StrokeThickness="0">
+                                <HorizontalStackLayout Spacing="20" VerticalOptions="Center">
+                                    <Label
+                                        HorizontalOptions="Center"
+                                        Style="{StaticResource Header}"
+                                        Text="." />
+                                    <Label
+                                        Text="{Binding Steps}"
+                                        VerticalOptions="Center"
+                                        WidthRequest="300" />
+                                </HorizontalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+            <!--  //for comments  -->
+            <VerticalStackLayout Spacing="10">
+                <Label Style="{StaticResource SubHeader}" Text="Discussion" />
+                <CollectionView ItemsSource="{Binding CommentCollection}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+
+                            <VerticalStackLayout Margin="0,0,0,20">
+                                <HorizontalStackLayout Spacing="20" VerticalOptions="StartAndExpand">
+                                    <Border
+                                        HeightRequest="40"
+                                        StrokeShape="RoundRectangle 40"
+                                        WidthRequest="40">
+                                        <Image Aspect="AspectFill" Source="{Binding UserProfileImage}" />
+                                    </Border>
+                                    <VerticalStackLayout Spacing="5" VerticalOptions="StartAndExpand">
+                                        <Label FontAttributes="Bold" Text="{Binding UserName}" />
+                                        <Label
+                                            LineBreakMode="WordWrap"
+                                            MaxLines="5"
+                                            Text="{Binding CommentText}"
+                                            VerticalOptions="Center" />
+                                    </VerticalStackLayout>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+
+            <!--  //comments  -->
+            <Border
+                Padding="10"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                                  Dark={StaticResource DarkSecondaryColor}}"
+                HeightRequest="80"
+                StrokeShape="RoundRectangle 10"
+                StrokeThickness="0">
+                <Grid ColumnDefinitions="*,.1*" VerticalOptions="Center">
+                    <Entry
+                        Grid.Column="0"
+                        Placeholder="Discuss here"
+                        Text="{Binding CommentText}"
+                        VerticalOptions="Center" />
+                    <ImageButton
+                        Grid.Column="1"
+                        Command="{Binding SaveCommentCommand}"
+                        HeightRequest="20"
+                        HorizontalOptions="End"
+                        Source="/Icons/send.png" />
+                </Grid>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
