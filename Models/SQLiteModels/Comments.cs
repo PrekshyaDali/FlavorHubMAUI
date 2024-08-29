@@ -12,7 +12,7 @@ namespace FlavorHub.Models.SQLiteModels
 
         [MaxLength(1000)]
         public string? CommentText { get; set; }
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime CreatedDate  { get; set; } = DateTime.Now;
         public string? UserName { get; set; }
         public string? UserProfileImage { get; set; }
     }
