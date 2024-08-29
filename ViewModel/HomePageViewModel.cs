@@ -27,46 +27,53 @@ namespace FlavorHub.ViewModel
         private readonly IUserRepository _UserRepository;
         private readonly IUserService _UserService;
         private readonly IRecipeRepository _RecipeRepository;
+        private readonly IFavoritesRepository _FavoritesRepository;
 
         public ICommand FavoriteCommand { get; set; }
         [ObservableProperty]
         private ObservableCollection<RecipeViewModel> _recipes;
         private ObservableCollection<RecipeViewModel> _cachedRecipes;
+        [ObservableProperty]
+        private ObservableCollection<RecipeViewModel> _popularRecipes;
 
         [ObservableProperty]
-        private string? _ProfilePictureUrl;
+        private string? _Users;
 
         [ObservableProperty]
         private RecipeViewModel? _SelectedRecipe;
         public ICommand RefreshCommand { get; set; }
         public ICommand SelectionCommand { get; set; }
 
+        public ICommand NavigateToViewAllCommand { get; set; }
+
         [ObservableProperty]
         private LoginModel _LoginModel = new();
 
-        public HomePageViewModel(FirebaseAuthClient firebaseAuthClient, IUserRepository userRepository, IRecipeRepository recipeRepository, IUserService userService)
+        public HomePageViewModel(FirebaseAuthClient firebaseAuthClient, IUserRepository userRepository, IRecipeRepository recipeRepository, IUserService userService, IFavoritesRepository favoritesRepository)
         {
-            LoadProfilePictureAsync();
+            LoadUserName();
             _FirebaseAuthClient = firebaseAuthClient;
             _UserRepository = userRepository;
             _UserService = userService;
             _RecipeRepository = recipeRepository;
+            _FavoritesRepository = favoritesRepository;
             RefreshCommand = new AsyncRelayCommand(RefreshRecipes);
             SelectionCommand = new AsyncRelayCommand<RecipeViewModel>(OnRecipeSelected);
+            NavigateToViewAllCommand = new AsyncRelayCommand(ViewAllRecipes);
+            _FavoritesRepository = favoritesRepository;
+        }
 
-        }   //loading the recipes from the database
-
+        //loading the recipes from the database
         public async Task LoadRecipes()
         {
             try
             {
-                // Retrieve and sorting recipes in descending order by CreatedDate
                 var recipes = await _RecipeRepository.GetAllRecipesAsync();
                 var sortedRecipes = recipes.OrderByDescending(r => r.CreatedDate);
 
                 var recipeViewModels = await Task.WhenAll(sortedRecipes.Take(10).Select(async recipe =>
                 {
-                    var recipeViewModel = new RecipeViewModel(recipe, _UserService, _UserRepository);
+                    var recipeViewModel = new RecipeViewModel(recipe, _UserService, _UserRepository, _FavoritesRepository);
                     await recipeViewModel.InitializeAsync();
                     return recipeViewModel;
                 }));
@@ -79,25 +86,30 @@ namespace FlavorHub.ViewModel
             }
         }
 
-        public async Task LoadProfilePictureAsync()
+
+        [RelayCommand]
+        private async Task ViewAllRecipes()
+        {
+            // Load and sort the recipes
+            var recipes = await _RecipeRepository.GetAllRecipesAsync();
+            var sortedRecipes = recipes.OrderByDescending(r => r.CreatedDate).ToList();
+
+            // Pass the sorted list to the RecipeListPage
+            await Shell.Current.GoToAsync("RecipeListPage", true, new Dictionary<string, object>
+    {
+        { "Recipes", sortedRecipes }
+        });
+        }
+
+
+        public async Task LoadUserName()
         {
             try
             {
-                var userIdString = await SecureStorage.GetAsync("UserId");
 
-                if (!string.IsNullOrEmpty(userIdString) && Guid.TryParse(userIdString, out Guid userId))
-                {
-                    var userDetails = await _UserRepository.GetUserByIdAsync(userId);
-
-                    if (userDetails != null)
-                    {
-                        ProfilePictureUrl = userDetails.ProfilePicture;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Invalid or missing user ID.");
-                }
+                Guid? userId = await _UserService.GetUserIdAsync();
+                var user = await _UserRepository.GetUserByIdAsync(userId.Value);
+                _Users = user.UserName;
             }
             catch (Exception ex)
             {
@@ -147,6 +159,7 @@ namespace FlavorHub.ViewModel
                 _FirebaseAuthClient.SignOut();
                 _LoginModel = new LoginModel();
                 _UserRepository.ClearCachedUser();
+                SecureStorage.RemoveAll();
                 await Shell.Current.GoToAsync("//Login");
             }
         }

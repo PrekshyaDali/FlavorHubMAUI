@@ -4,7 +4,9 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:model="clr-namespace:FlavorHub.Models.SQLiteModels"
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel.ProfileSection"
     Title="My profile">
+
     <VerticalStackLayout Padding="20" Spacing="20">
         <Grid
             Margin="0,0,0,20"
@@ -14,13 +16,13 @@
                 Grid.Row="0"
                 Clicked="ImageButton_Clicked"
                 HorizontalOptions="End"
-                Source="/Icons/edit_text.png" />
+                Source="/TabBarIcons/edit.png" />
             <Border
                 Grid.Row="1"
                 HeightRequest="100"
                 StrokeShape="RoundRectangle 80"
                 WidthRequest="100">
-                <Image Aspect="AspectFill" Source="{Binding ProfilePicture, FallbackValue='dotnet_bot.png'}" />
+                <Image Aspect="AspectFill" Source="{Binding ProfilePicture}" />
             </Border>
             <VerticalStackLayout
                 Grid.Row="2"
@@ -32,7 +34,8 @@
                     FontAttributes="Bold"
                     FontSize="Medium"
                     HorizontalOptions="Center"
-                    Text="{Binding UserName}" />
+                    Text="{Binding UserName}"
+                    TextColor="{AppThemeBinding Light={StaticResource LightPrimaryTextColor}, Dark={StaticResource DarkSecondaryTextColor}}" />
                 <Label
                     FontSize="Small"
                     HorizontalOptions="FillAndExpand"
@@ -55,8 +58,13 @@
                     FontAttributes="Bold"
                     FontSize="Medium"
                     Text="Dark Mode"
+                    TextColor="{AppThemeBinding Light={StaticResource LightPrimaryTextColor}, Dark={StaticResource DarkSecondaryTextColor}}"
                     VerticalOptions="Center" />
-                <ImageButton Source="/TabBarIcons/profile.png" VerticalOptions="Center" />
+                <!--<Switch
+                    x:Name="ThemeSwitch"
+                    IsToggled="{Binding IsDarkMode, Mode=TwoWay}"
+                    VerticalOptions="Center" />-->
+                <ImageButton Command="{Binding SwitchThemeCommand}" Source="/TabBarIcons/profile.png" />
             </FlexLayout>
         </Border>
         <Border Padding="10" StrokeShape="RoundRectangle 0">
@@ -65,8 +73,9 @@
                     FontAttributes="Bold"
                     FontSize="Medium"
                     Text="Log Out"
+                    TextColor="{AppThemeBinding Light={StaticResource LightPrimaryTextColor}, Dark={StaticResource DarkSecondaryTextColor}}"
                     VerticalOptions="Center" />
-                <ImageButton Source="/TabBarIcons/profile.png" />
+                <ImageButton HeightRequest="30" Source="/Icons/logout.png" />
             </FlexLayout>
         </Border>
     </VerticalStackLayout>

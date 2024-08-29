@@ -7,7 +7,7 @@
 
     <Border
         BindingContext="{x:Reference this}"
-        HeightRequest="250"
+        HeightRequest="{Binding ContentHeight}"
         StrokeShape="RoundRectangle 20"
         WidthRequest="{Binding ContentWidth}">
         <AbsoluteLayout>
@@ -52,9 +52,19 @@
                                 WidthRequest="30">
                                 <Image Aspect="AspectFill" Source="{Binding ProfileImage}" />
                             </Border>
-                            <Label Text="{Binding UserName}" TextColor="{StaticResource White}" />
+                            <Label
+                                Text="{Binding UserName}"
+                                TextColor="{StaticResource White}"
+                                VerticalOptions="Center" />
                         </HorizontalStackLayout>
                     </Border>
+                    <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
+                        <Image Source="Icons/heart_filled.png" />
+                        <Label
+                            FontSize="Micro"
+                            Text="{Binding FavoriteCount, StringFormat='{0} likes'}"
+                            TextColor="{StaticResource White}" />
+                    </HorizontalStackLayout>
                 </FlexLayout>
 
                 <!--  for the cooking details  -->
@@ -86,6 +96,7 @@
                                 VerticalOptions="Center" />
                         </HorizontalStackLayout>
                         <HorizontalStackLayout
+                            HeightRequest="20"
                             HorizontalOptions="Center"
                             Spacing="10"
                             VerticalOptions="Center">
@@ -98,9 +109,9 @@
                         </HorizontalStackLayout>
                     </HorizontalStackLayout>
                     <Label
-                        Style="{DynamicResource SubHeader}"
+                        Style="{StaticResource SubHeader}"
                         Text="{Binding RecipeFoodName}"
-                        TextColor="{StaticResource SecondaryColor}" />
+                        TextColor="{StaticResource white}" />
                 </VerticalStackLayout>
 
 

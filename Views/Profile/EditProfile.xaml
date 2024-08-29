@@ -47,26 +47,21 @@
             HorizontalOptions="FillAndExpand"
             VerticalOptions="End" />
 
-
         <!--  //inputFields  -->
-        <FlexLayout HorizontalOptions="FillAndExpand" JustifyContent="SpaceBetween">
-            <Border
-                Padding="10"
-                HeightRequest="80"
-                HorizontalOptions="FillAndExpand"
-                StrokeShape="RoundRectangle 10"
-                WidthRequest="160">
-                <Entry Placeholder="UserName" Text="{Binding UserName}" />
-            </Border>
-            <Border
-                Padding="10"
-                HeightRequest="80"
-                HorizontalOptions="FillAndExpand"
-                StrokeShape="RoundRectangle 10"
-                WidthRequest="160">
-                <Entry Placeholder="Email" Text="{Binding Email}" />
-            </Border>
-        </FlexLayout>
+        <Border
+            Padding="10"
+            HeightRequest="80"
+            HorizontalOptions="FillAndExpand"
+            StrokeShape="RoundRectangle 10">
+            <Entry Placeholder="UserName" Text="{Binding UserName}" />
+        </Border>
+        <Border
+            Padding="10"
+            HeightRequest="80"
+            HorizontalOptions="FillAndExpand"
+            StrokeShape="RoundRectangle 10">
+            <Entry Placeholder="Email" Text="{Binding Email}" />
+        </Border>
         <Border
             Padding="10"
             HeightRequest="100"

@@ -16,20 +16,7 @@ namespace FlavorHub.Data
             _Database = database;
             _Database.CreateTableAsync<Models.SQLiteModels.User>().Wait();
             _Database.CreateTableAsync<Models.SQLiteModels.Recipe>().Wait();
-            _Database.CreateTableAsync<Models.SQLiteModels.Comments>().Wait();
             _Database.CreateTableAsync<Models.SQLiteModels.Favorites>().Wait();
-        }
-
-        private async Task InitializeDatabaseAsync()
-        {
-            try
-            {
-                // Create the Users table if it doesn't exist
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error initializing database: {ex.Message}");
-            }
 
         }
 
@@ -38,5 +25,4 @@ namespace FlavorHub.Data
             return _Database;
         }
     }
-
 }

@@ -16,16 +16,17 @@
             </Grid.ColumnDefinitions>
             <Border
                 Grid.Column="1"
-                BackgroundColor="{DynamicResource SecondaryColor}"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                                  Dark={StaticResource DarkSecondaryColor}}"
                 HeightRequest="50"
                 HorizontalOptions="End"
                 StrokeShape="RoundRectangle 10"
                 StrokeThickness="0"
                 WidthRequest="60">
-                <ImageButton
-                    Command="{Binding FavoriteCommand}"
-                    HeightRequest="20"
-                    Source="{Binding FavoriteIcon, FallbackValue='HomePage/heart.png'}" />
+                <Image HeightRequest="20" Source="{Binding FavoriteIcon, FallbackValue='Icons/heart.png'}" />
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding FavoriteCommand}" />
+                </Border.GestureRecognizers>
             </Border>
         </Grid>
     </Shell.TitleView>
@@ -49,7 +50,8 @@
                     </VerticalStackLayout>
                 </HorizontalStackLayout>
                 <Border
-                    BackgroundColor="{DynamicResource PrimaryColor}"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                                      Dark={StaticResource DarkSecondaryColor}}"
                     HeightRequest="50"
                     StrokeShape="RoundRectangle 20"
                     StrokeThickness="0"
@@ -69,6 +71,7 @@
                             Aspect="AspectFill"
                             HeightRequest="300"
                             HorizontalOptions="FillAndExpand"
+                            IsVisible="{Binding HasImage}"
                             Source="{Binding .}"
                             WidthRequest="500" />
                     </DataTemplate>
@@ -77,6 +80,10 @@
                     <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal" />
                 </CollectionView.ItemsLayout>
             </CollectionView>
+            <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
+                <Image Source="Icons/heart_filled.png" />
+                <Label Text="{Binding FavoriteCount, StringFormat='{0} likes', Mode=TwoWay}" />
+            </HorizontalStackLayout>
 
             <VerticalStackLayout Spacing="10">
                 <Label
@@ -148,7 +155,8 @@
                             <Border
                                 Margin="0,0,0,10"
                                 Padding="10"
-                                BackgroundColor="{DynamicResource SecondaryColor}"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                                                  Dark={StaticResource DarkSecondaryColor}}"
                                 HeightRequest="80"
                                 StrokeShape="RoundRectangle 20"
                                 StrokeThickness="0">
@@ -157,7 +165,10 @@
                                         HorizontalOptions="Center"
                                         Style="{StaticResource Header}"
                                         Text="." />
-                                    <Label Text="{Binding Steps}" VerticalOptions="Center" />
+                                    <Label
+                                        Text="{Binding Steps}"
+                                        VerticalOptions="Center"
+                                        WidthRequest="300" />
                                 </HorizontalStackLayout>
                             </Border>
                         </DataTemplate>
@@ -199,7 +210,8 @@
             <!--  //comments  -->
             <Border
                 Padding="10"
-                BackgroundColor="{DynamicResource SecondaryColor}"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                                  Dark={StaticResource DarkSecondaryColor}}"
                 HeightRequest="80"
                 StrokeShape="RoundRectangle 10"
                 StrokeThickness="0">

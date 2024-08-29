@@ -15,7 +15,8 @@ namespace FlavorHub.Repositories.Interfaces
         Task<IEnumerable<Favorites>> GetFavoritesByUserId(Guid userId);
         Task AddFavoritesAsync(Favorites favorites);
         Task UpdateCommentAsync(Favorites favorites);
-        Task DeleteFavoritesByIdAsync(Guid favoritesId);
+        Task DeleteFavoritesByIdAsync(Favorites favorites);
         Task<int> GetFavoriteCountByRecipeIdAsync(Guid recipeId);
     }
+
 }

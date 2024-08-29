@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FlavorHub.Views.RecipeListPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
+    xmlns:cvm="clr-namespace:FlavorHub.ViewModel"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Title="All Recipes">
+
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="20">
+            <!--  Search Bar  -->
+            <Border
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkSecondaryColor}}" 
+                HeightRequest="80"
+                StrokeShape="RoundRectangle 10"
+                StrokeThickness="0">
+                <SearchBar
+                    Placeholder="Search recipes..."
+                    Text="{Binding SearchText}"
+                    VerticalOptions="Center">
+                    <SearchBar.Behaviors>
+                        <toolkit:EventToCommandBehavior Command="{Binding SearchCommand}" EventName="TextChanged" />
+                    </SearchBar.Behaviors>
+                </SearchBar>
+            </Border>
+
+            <ScrollView Orientation="Horizontal">
+                <HorizontalStackLayout Spacing="20">
+                    <Border
+                        BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkSecondaryColor}}" 
+                        HeightRequest="60"
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="0"
+                        WidthRequest="80">
+                        <Label Text="filter" />
+                    </Border>
+
+                    <!--  Difficulty Level Picker  -->
+                    <Border
+                        BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkSecondaryColor}}" 
+                        HeightRequest="60"
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="0"
+                        WidthRequest="150">
+                        <HorizontalStackLayout>
+                            <Picker
+                                Title="Difficulty Level"
+                                HorizontalOptions="Center"
+                                ItemsSource="{Binding DifficultyLevels}"
+                                SelectedItem="{Binding SelectedDifficultyLevel}"
+                                VerticalOptions="Center">
+                                <Picker.Behaviors>
+                                    <toolkit:EventToCommandBehavior Command="{Binding FilterCommand}" EventName="SelectedIndexChanged" />
+                                </Picker.Behaviors>
+                            </Picker>
+                            <!--  Clear Cooking Time Button  -->
+                            <ImageButton
+                                Margin="5,0,0,0"
+                                BackgroundColor="Transparent"
+                                Command="{Binding ClearDifficultyCommand}"
+                                HeightRequest="20"
+                                Source="Icons/heart.png"
+                                VerticalOptions="Center"
+                                WidthRequest="20" />
+                        </HorizontalStackLayout>
+                    </Border>
+
+                    <!--  cooking time picker  -->
+                    <Border
+                        BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkSecondaryColor}}" 
+                        HeightRequest="60"
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="0"
+                        WidthRequest="150">
+                        <HorizontalStackLayout>
+                            <Picker
+                                Title="Cooking Time"
+                                HorizontalOptions="Center"
+                                ItemsSource="{Binding CookingTimes}"
+                                SelectedItem="{Binding SelectedCookingTime}"
+                                VerticalOptions="Center">
+                                <Picker.Behaviors>
+                                    <toolkit:EventToCommandBehavior Command="{Binding FilterCommand}" EventName="SelectedIndexChanged" />
+                                </Picker.Behaviors>
+                            </Picker>
+                            <!--  Clear Cooking Time Button  -->
+                            <ImageButton
+                                Margin="5,0,0,0"
+                                BackgroundColor="Transparent"
+                                Command="{Binding ClearCookingTimeCommand}"
+                                HeightRequest="20"
+                                Source="Icons/heart.png"
+                                VerticalOptions="Center"
+                                WidthRequest="20" />
+                        </HorizontalStackLayout>
+                    </Border>
+                </HorizontalStackLayout>
+            </ScrollView>
+
+            <!--  Collection View for displaying recipes  -->
+            <CollectionView Margin="0,0,0,10" ItemsSource="{Binding Recipes}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0,0,0,10" StrokeThickness="0">
+                            <controls:RecipeUIContentView
+                                ContentWidth="300"
+                                CookingTime="{Binding CookingTime}"
+                                DifficultyLevel="{Binding DifficultyLevel}"
+                                FavoriteCount="{Binding FavoriteCount}"
+                                ProfileImage="{Binding ProfilePicture}"
+                                RecipeFoodName="{Binding Title}"
+                                RecipeImage="{Binding FirstImageUrl}"
+                                UserName="{Binding UserName}">
+                                <controls:RecipeUIContentView.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type cvm:RecipeListViewModel}}, Path=SelectionCommand}" CommandParameter="{Binding .}" />
+                                </controls:RecipeUIContentView.GestureRecognizers>
+                            </controls:RecipeUIContentView>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
