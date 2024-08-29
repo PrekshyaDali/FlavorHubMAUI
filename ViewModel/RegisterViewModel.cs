@@ -53,11 +53,11 @@ namespace FlavorHub.ViewModel
                     {
                         FirebaseUID = result.User.Uid,
                         UserName = _RegisterModel.UserName,
-                        Email = _RegisterModel?.Email,
+                        Email = _RegisterModel.Email,
                         CreatedDate = DateTime.UtcNow
                     };
                     await _UserRepository.CreateUserAysnc(user);
-                    await Application.Current.MainPage.DisplayAlert("Success", "You are registered successfully", "oks");
+                    await Application.Current.MainPage.DisplayAlert("Success", "You are registered successfully", "ok");
                     await Shell.Current.GoToAsync("//Login");
                 }
             }
