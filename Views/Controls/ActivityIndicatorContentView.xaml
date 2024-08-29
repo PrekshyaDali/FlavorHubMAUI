@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     IsVisible="{Binding IsLoading, Mode=TwoWay}">
     <ContentView.Content>
-        <Grid BackgroundColor="Black" Opacity="0.5">
+        <Grid BackgroundColor="Black" Opacity="0.1">
             <ActivityIndicator
                 HeightRequest="50"
                 HorizontalOptions="Center"

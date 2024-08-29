@@ -62,7 +62,9 @@
                 HorizontalOptions="FillAndExpand"
                 MaxLength="250"
                 Placeholder="Short description here"
-                Text="{Binding Description, Mode=TwoWay}">
+                Text="{Binding Description, Mode=TwoWay}"
+                TextColor="{AppThemeBinding Light={StaticResource LightPrimaryTextColor},
+                                            Dark={StaticResource DarkPrimaryTextColor}}">
                 <Entry.Behaviors>
                     <toolkit:EventToCommandBehavior Command="{Binding ValidateCommand}" EventName="TextChanged" />
                 </Entry.Behaviors>

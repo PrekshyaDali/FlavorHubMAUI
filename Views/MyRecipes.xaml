@@ -10,8 +10,8 @@
         <VerticalStackLayout>
             <Label
                 HorizontalOptions="Center"
-                IsVisible="{Binding NoFavorites}"
-                Text="No current favorites!!"
+                IsVisible="{Binding NoMyRecipes}"
+                Text="No current recipes!!"
                 VerticalOptions="Center" />
             <CollectionView Margin="0,0,0,10" ItemsSource="{Binding RecipeCollection}">
                 <CollectionView.ItemTemplate>

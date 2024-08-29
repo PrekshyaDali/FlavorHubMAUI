@@ -53,9 +53,16 @@ namespace FlavorHub.ViewModel
                     }
                 }
             }
-            catch (Exception ex)
+            catch (FirebaseAuthException ex)
             {
-                Console.WriteLine($"Login Failed,{ex.Message}");
+                if (ex.Message.Contains("INVALID_LOGIN_CREDENTIALS"))
+                {
+                    await Application.Current.MainPage.DisplayAlert("Login Error", "Invalid login credentials. Please check your email and password.", "OK");
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Login Error", "Something Went Wrong", "OK");
+                }
             }
         }
         private void ClearLoginModel() {

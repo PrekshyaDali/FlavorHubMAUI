@@ -12,7 +12,8 @@
         <VerticalStackLayout Spacing="20">
             <!--  Search Bar  -->
             <Border
-                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkSecondaryColor}}" 
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightSecondaryColor},
+                                                  Dark={StaticResource DarkSecondaryColor}}"
                 HeightRequest="80"
                 StrokeShape="RoundRectangle 10"
                 StrokeThickness="0">
@@ -29,17 +30,19 @@
             <ScrollView Orientation="Horizontal">
                 <HorizontalStackLayout Spacing="20">
                     <Border
-                        BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkSecondaryColor}}" 
+                        BackgroundColor="{AppThemeBinding Light={StaticResource LightSecondaryColor},
+                                                          Dark={StaticResource DarkSecondaryColor}}"
                         HeightRequest="60"
                         StrokeShape="RoundRectangle 10"
                         StrokeThickness="0"
-                        WidthRequest="80">
-                        <Label Text="filter" />
+                        WidthRequest="50">
+                        <Image HeightRequest="20" Source="/Icons/filter.png" />
                     </Border>
 
                     <!--  Difficulty Level Picker  -->
                     <Border
-                        BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkSecondaryColor}}" 
+                        BackgroundColor="{AppThemeBinding Light={StaticResource LightSecondaryColor},
+                                                          Dark={StaticResource DarkSecondaryColor}}"
                         HeightRequest="60"
                         StrokeShape="RoundRectangle 10"
                         StrokeThickness="0"
@@ -60,16 +63,17 @@
                                 Margin="5,0,0,0"
                                 BackgroundColor="Transparent"
                                 Command="{Binding ClearDifficultyCommand}"
-                                HeightRequest="20"
-                                Source="Icons/heart.png"
+                                HeightRequest="15"
+                                Source="Icons/close.png"
                                 VerticalOptions="Center"
-                                WidthRequest="20" />
+                                WidthRequest="15" />
                         </HorizontalStackLayout>
                     </Border>
 
                     <!--  cooking time picker  -->
                     <Border
-                        BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkSecondaryColor}}" 
+                        BackgroundColor="{AppThemeBinding Light={StaticResource LightSecondaryColor},
+                                                          Dark={StaticResource DarkSecondaryColor}}"
                         HeightRequest="60"
                         StrokeShape="RoundRectangle 10"
                         StrokeThickness="0"
@@ -90,10 +94,10 @@
                                 Margin="5,0,0,0"
                                 BackgroundColor="Transparent"
                                 Command="{Binding ClearCookingTimeCommand}"
-                                HeightRequest="20"
-                                Source="Icons/heart.png"
+                                HeightRequest="15"
+                                Source="Icons/close.png"
                                 VerticalOptions="Center"
-                                WidthRequest="20" />
+                                WidthRequest="15" />
                         </HorizontalStackLayout>
                     </Border>
                 </HorizontalStackLayout>
