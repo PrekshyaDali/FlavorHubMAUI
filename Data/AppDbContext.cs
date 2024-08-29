@@ -19,7 +19,6 @@ namespace FlavorHub.Data
             _Database.CreateTableAsync<Models.SQLiteModels.Favorites>().Wait();
 
         }
-
         public SQLiteAsyncConnection GetConnection()
         {
             return _Database;

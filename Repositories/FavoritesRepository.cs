@@ -48,7 +48,6 @@ namespace FlavorHub.Repositories
         {
             try
             {
-                // Query the database to find a favorite by RecipeId and UserId
                 var favorite = await _Database.Table<Favorites>()
                     .Where(f => f.RecipeId == recipeId && f.UserId == userId)
                     .FirstOrDefaultAsync();

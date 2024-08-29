@@ -13,7 +13,6 @@
         HorizontalOptions="FillAndExpand"
         RowDefinitions="*, .3*,.2*"
         VerticalOptions="FillAndExpand">
-
         <Image
             Grid.Row="0"
             Grid.RowSpan="3"
@@ -50,7 +49,6 @@
             Margin="0,0,0,10"
             StrokeThickness="0"
             WidthRequest="120">
-            <!--<controls:ButtonContentView ButtonCommand="{Binding NavigateToLogin}" ButtonText="Move to Login" />-->
             <controls:ButtonContentView ButtonCommand="{Binding NavigateToLogin}" ButtonText="Move to Login" />
         </Border>
     </Grid>

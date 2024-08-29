@@ -68,7 +68,6 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
             Directions.Clear();
         }
 
-        // Apply Query Attributes
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             try

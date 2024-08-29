@@ -6,6 +6,7 @@ using Firebase.Auth.Repository;
 using FlavorHub.Models.SQLiteModels;
 using FlavorHub.Repositories.Interfaces;
 using FlavorHub.ViewModel.RecipeFormViewModels;
+using FlavorHub.Views.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -44,6 +45,7 @@ namespace FlavorHub.ViewModel
         private readonly IUserService _UserService;
         private readonly IFavoritesRepository _FavoritesRepostory;
         private readonly Repositories.Interfaces.IUserRepository _UserRepository;
+        private readonly IFavoritesRepository _FavoritesRepostory;
 
         [ObservableProperty]
         private ObservableCollection<Comments> _CommentCollection = new ObservableCollection<Comments>();
@@ -139,7 +141,7 @@ namespace FlavorHub.ViewModel
                 OnPropertyChanged(nameof(FavoriteCount));
                 if (SelectedRecipe != null)
                 {
-                    LoadComments();
+                    LoadComments(); 
                 }
             }
         }
@@ -152,7 +154,7 @@ namespace FlavorHub.ViewModel
                 Application.Current.MainPage.DisplayAlert("Failed", "You cannot post empty comment", "ok");
                 return;
             }
-
+       
             try
             {
                 var userId = await _UserService.GetUserIdAsync();
@@ -165,35 +167,35 @@ namespace FlavorHub.ViewModel
                 Console.WriteLine($"UserId string: {userId}");
                 Console.WriteLine($"RecipeId string: {SelectedRecipe.RecipeId}");
                 await _CommentRepository.AddCommentAsync(comments);
-                Application.Current.MainPage.DisplayAlert("Success", "Comments added successfully", "ok");
+                await Application.Current.MainPage.DisplayAlert("Success", "Comments added successfully", "ok");
                 CommentText = string.Empty;
                 await LoadComments();
 
             }
             catch (Exception ex)
             {
-                Application.Current.MainPage.DisplayAlert("Failed", "Failed adding comments", "ok");
-                Console.WriteLine(ex.ToString());
+              await Application.Current.MainPage.DisplayAlert("Failed", "Failed adding comments", "ok");
+                Console.WriteLine(ex.ToString());      
             }
         }
 
         public async Task LoadComments()
-        {
-            if (SelectedRecipe == null)
-            {
-                return;
-            }
+        { 
+          if(SelectedRecipe == null) 
+          {
+             return;
+          }
+            _CommentCollection.Clear();
             var comments = await _CommentRepository.GetCommentsByRecipeIdAsync(SelectedRecipe.RecipeId);
             if (comments != null && comments.Any())
             {
-                _CommentCollection.Clear();
                 foreach (var comment in comments)
                 {
                     var user = await _UserRepository.GetUserByIdAsync(comment.UserId);
-                    if (user != null)
+                    if (user != null) 
                     {
-                        comment.UserName = user.UserName;
-                        comment.UserProfileImage = user.ProfilePicture;
+                     comment.UserName = user.UserName;
+                     comment.UserProfileImage = user.ProfilePicture;
                     }
                     _CommentCollection.Add(comment);
                 }
