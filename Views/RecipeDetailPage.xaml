@@ -16,7 +16,7 @@
             </Grid.ColumnDefinitions>
             <Border
                 Grid.Column="1"
-                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightSecondaryColor},
                                                   Dark={StaticResource DarkSecondaryColor}}"
                 HeightRequest="50"
                 HorizontalOptions="End"
@@ -49,18 +49,6 @@
                         <Label FontSize="Micro" Text="{Binding SelectedRecipe.CreatedDate, StringFormat='{0:MMMM d, yyyy}'}" />
                     </VerticalStackLayout>
                 </HorizontalStackLayout>
-                <Border
-                    BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
-                                                      Dark={StaticResource DarkSecondaryColor}}"
-                    HeightRequest="50"
-                    StrokeShape="RoundRectangle 20"
-                    StrokeThickness="0"
-                    WidthRequest="80">
-                    <Label
-                        HorizontalOptions="Center"
-                        Text="4.5"
-                        VerticalOptions="Center" />
-                </Border>
             </FlexLayout>
 
             <!--  //picture  -->
@@ -113,7 +101,8 @@
                         <Label Style="{StaticResource SubHeader}" Text="Ingredients" />
                     </VerticalStackLayout>
                     <Border
-                        BackgroundColor="{StaticResource PrimaryColor}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                                          Dark={StaticResource DarkPrimaryColor}}"
                         HeightRequest="50"
                         StrokeShape="RoundRectangle 10"
                         StrokeThickness="0"
@@ -155,7 +144,7 @@
                             <Border
                                 Margin="0,0,0,10"
                                 Padding="10"
-                                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                BackgroundColor="{AppThemeBinding Light={StaticResource LightSecondaryColor},
                                                                   Dark={StaticResource DarkSecondaryColor}}"
                                 HeightRequest="80"
                                 StrokeShape="RoundRectangle 20"
@@ -210,7 +199,7 @@
             <!--  //comments  -->
             <Border
                 Padding="10"
-                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightSecondaryColor},
                                                   Dark={StaticResource DarkSecondaryColor}}"
                 HeightRequest="80"
                 StrokeShape="RoundRectangle 10"
