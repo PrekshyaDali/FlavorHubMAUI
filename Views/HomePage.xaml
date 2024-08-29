@@ -8,14 +8,16 @@
     <Shell.TitleView>
         <Grid>
             <FlexLayout AlignItems="Center" JustifyContent="SpaceBetween">
-                <Border
-                    Margin="0,0,10,0"
-                    HeightRequest="50"
-                    StrokeShape="RoundRectangle 50,50,50,50"
-                    WidthRequest="50">
-                    <Image Aspect="AspectFill" Source="{Binding ProfilePictureUrl}" />
-                </Border>
-                <ImageButton Command="{Binding LogOutCommand}" Source="/TabBarIcons/profile.png" />
+                <HorizontalStackLayout>
+                    <Label Text="Welcome Back," />
+                    <Label Text="{Binding Users}" />
+                </HorizontalStackLayout>
+
+                <ImageButton
+                    Margin="0,0,5,0"
+                    Command="{Binding LogOutCommand}"
+                    HeightRequest="30"
+                    Source="/Icons/logout.png" />
             </FlexLayout>
         </Grid>
     </Shell.TitleView>
@@ -24,57 +26,6 @@
             <!--  for sub heading  -->
             <Border Grid.Row="0" StrokeThickness="0">
                 <Label Style="{StaticResource SubHeader}" Text="What do you want to cook today?" />
-            </Border>
-            <!--  for filters  -->
-            <Border Grid.Row="1" StrokeThickness="0">
-                <ScrollView Orientation="Horizontal" VerticalOptions="Center">
-                    <HorizontalStackLayout Spacing="10">
-                        <Border
-                            BackgroundColor="{DynamicResource SecondaryColor}"
-                            HeightRequest="60"
-                            StrokeShape="RoundRectangle 10"
-                            StrokeThickness="0"
-                            WidthRequest="120">
-                            <Label
-                                HorizontalOptions="Center"
-                                Text="Categories"
-                                VerticalOptions="Center" />
-                        </Border>
-                        <Border
-                            BackgroundColor="{DynamicResource SecondaryColor}"
-                            HeightRequest="60"
-                            StrokeShape="RoundRectangle 10"
-                            StrokeThickness="0"
-                            WidthRequest="120">
-                            <Label
-                                HorizontalOptions="Center"
-                                Text="Categories"
-                                VerticalOptions="Center" />
-                        </Border>
-                        <Border
-                            BackgroundColor="{DynamicResource SecondaryColor}"
-                            HeightRequest="60"
-                            StrokeShape="RoundRectangle 10"
-                            StrokeThickness="0"
-                            WidthRequest="120">
-                            <Label
-                                HorizontalOptions="Center"
-                                Text="Categories"
-                                VerticalOptions="Center" />
-                        </Border>
-                        <Border
-                            BackgroundColor="{DynamicResource SecondaryColor}"
-                            HeightRequest="60"
-                            StrokeShape="RoundRectangle 10"
-                            StrokeThickness="0"
-                            WidthRequest="120">
-                            <Label
-                                HorizontalOptions="Center"
-                                Text="Categories"
-                                VerticalOptions="Center" />
-                        </Border>
-                    </HorizontalStackLayout>
-                </ScrollView>
             </Border>
 
             <VerticalStackLayout Grid.Row="2">
@@ -109,8 +60,12 @@
             <Border Grid.Row="3" StrokeThickness="0">
                 <VerticalStackLayout Spacing="20">
                     <FlexLayout JustifyContent="SpaceBetween">
-                        <Label Style="{DynamicResource SubHeader}" Text="Recent Recipes" />
-                        <Label Text="view all">
+                        <Label Style="{StaticResource SubHeader}" Text="Recent Recipes" />
+                        <Label
+                            Text="view all"
+                            TextColor="{StaticResource Tertiary}"
+                            TextDecorations="Underline"
+                            VerticalOptions="Center">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=NavigateToViewAllCommand}" />
                             </Label.GestureRecognizers>

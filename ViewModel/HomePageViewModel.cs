@@ -33,9 +33,11 @@ namespace FlavorHub.ViewModel
         [ObservableProperty]
         private ObservableCollection<RecipeViewModel> _recipes;
         private ObservableCollection<RecipeViewModel> _cachedRecipes;
+        [ObservableProperty]
+        private ObservableCollection<RecipeViewModel> _popularRecipes;
 
         [ObservableProperty]
-        private string? _ProfilePictureUrl;
+        private string? _Users;
 
         [ObservableProperty]
         private RecipeViewModel? _SelectedRecipe;
@@ -49,7 +51,7 @@ namespace FlavorHub.ViewModel
 
         public HomePageViewModel(FirebaseAuthClient firebaseAuthClient, IUserRepository userRepository, IRecipeRepository recipeRepository, IUserService userService, IFavoritesRepository favoritesRepository)
         {
-            LoadProfilePictureAsync();
+            LoadUserName();
             _FirebaseAuthClient = firebaseAuthClient;
             _UserRepository = userRepository;
             _UserService = userService;
@@ -66,7 +68,6 @@ namespace FlavorHub.ViewModel
         {
             try
             {
-                // Retrieve and sorting recipes in descending order by CreatedDate
                 var recipes = await _RecipeRepository.GetAllRecipesAsync();
                 var sortedRecipes = recipes.OrderByDescending(r => r.CreatedDate);
 
@@ -101,25 +102,14 @@ namespace FlavorHub.ViewModel
         }
 
 
-        public async Task LoadProfilePictureAsync()
+        public async Task LoadUserName()
         {
             try
             {
-                var userIdString = await SecureStorage.GetAsync("UserId");
 
-                if (!string.IsNullOrEmpty(userIdString) && Guid.TryParse(userIdString, out Guid userId))
-                {
-                    var userDetails = await _UserRepository.GetUserByIdAsync(userId);
-
-                    if (userDetails != null)
-                    {
-                        ProfilePictureUrl = userDetails.ProfilePicture;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Invalid or missing user ID.");
-                }
+                Guid? userId = await _UserService.GetUserIdAsync();
+                var user = await _UserRepository.GetUserByIdAsync(userId.Value);
+                _Users = user.UserName;
             }
             catch (Exception ex)
             {
@@ -169,6 +159,7 @@ namespace FlavorHub.ViewModel
                 _FirebaseAuthClient.SignOut();
                 _LoginModel = new LoginModel();
                 _UserRepository.ClearCachedUser();
+                SecureStorage.RemoveAll();
                 await Shell.Current.GoToAsync("//Login");
             }
         }

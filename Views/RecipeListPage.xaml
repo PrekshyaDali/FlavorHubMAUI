@@ -9,34 +9,95 @@
     Title="All Recipes">
 
     <ScrollView Padding="20">
-        <VerticalStackLayout>
+        <VerticalStackLayout Spacing="20">
             <!--  Search Bar  -->
-            <SearchBar Placeholder="Search recipes..." Text="{Binding SearchText}">
-                <SearchBar.Behaviors>
-                    <toolkit:EventToCommandBehavior Command="{Binding SearchCommand}" EventName="TextChanged" />
-                </SearchBar.Behaviors>
-            </SearchBar>
+            <Border
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkSecondaryColor}}" 
+                HeightRequest="80"
+                StrokeShape="RoundRectangle 10"
+                StrokeThickness="0">
+                <SearchBar
+                    Placeholder="Search recipes..."
+                    Text="{Binding SearchText}"
+                    VerticalOptions="Center">
+                    <SearchBar.Behaviors>
+                        <toolkit:EventToCommandBehavior Command="{Binding SearchCommand}" EventName="TextChanged" />
+                    </SearchBar.Behaviors>
+                </SearchBar>
+            </Border>
 
-            <!--  Difficulty Level Picker  -->
-            <Picker
-                Title="Difficulty Level"
-                ItemsSource="{Binding DifficultyLevels}"
-                SelectedItem="{Binding SelectedDifficultyLevel}">
-                <Picker.Behaviors>
-                    <toolkit:EventToCommandBehavior Command="{Binding FilterCommand}" EventName="SelectedIndexChanged" />
-                </Picker.Behaviors>
-            </Picker>
+            <ScrollView Orientation="Horizontal">
+                <HorizontalStackLayout Spacing="20">
+                    <Border
+                        BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkSecondaryColor}}" 
+                        HeightRequest="60"
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="0"
+                        WidthRequest="80">
+                        <Label Text="filter" />
+                    </Border>
 
+                    <!--  Difficulty Level Picker  -->
+                    <Border
+                        BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkSecondaryColor}}" 
+                        HeightRequest="60"
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="0"
+                        WidthRequest="150">
+                        <HorizontalStackLayout>
+                            <Picker
+                                Title="Difficulty Level"
+                                HorizontalOptions="Center"
+                                ItemsSource="{Binding DifficultyLevels}"
+                                SelectedItem="{Binding SelectedDifficultyLevel}"
+                                VerticalOptions="Center">
+                                <Picker.Behaviors>
+                                    <toolkit:EventToCommandBehavior Command="{Binding FilterCommand}" EventName="SelectedIndexChanged" />
+                                </Picker.Behaviors>
+                            </Picker>
+                            <!--  Clear Cooking Time Button  -->
+                            <ImageButton
+                                Margin="5,0,0,0"
+                                BackgroundColor="Transparent"
+                                Command="{Binding ClearDifficultyCommand}"
+                                HeightRequest="20"
+                                Source="Icons/heart.png"
+                                VerticalOptions="Center"
+                                WidthRequest="20" />
+                        </HorizontalStackLayout>
+                    </Border>
 
-            <!--  cooking time picker  -->
-            <Picker
-                Title="Cooking Time"
-                ItemsSource="{Binding CookingTimes}"
-                SelectedItem="{Binding SelectedCookingTime}">
-                <Picker.Behaviors>
-                    <toolkit:EventToCommandBehavior Command="{Binding FilterCommand}" EventName="SelectedIndexChanged" />
-                </Picker.Behaviors>
-            </Picker>
+                    <!--  cooking time picker  -->
+                    <Border
+                        BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkSecondaryColor}}" 
+                        HeightRequest="60"
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="0"
+                        WidthRequest="150">
+                        <HorizontalStackLayout>
+                            <Picker
+                                Title="Cooking Time"
+                                HorizontalOptions="Center"
+                                ItemsSource="{Binding CookingTimes}"
+                                SelectedItem="{Binding SelectedCookingTime}"
+                                VerticalOptions="Center">
+                                <Picker.Behaviors>
+                                    <toolkit:EventToCommandBehavior Command="{Binding FilterCommand}" EventName="SelectedIndexChanged" />
+                                </Picker.Behaviors>
+                            </Picker>
+                            <!--  Clear Cooking Time Button  -->
+                            <ImageButton
+                                Margin="5,0,0,0"
+                                BackgroundColor="Transparent"
+                                Command="{Binding ClearCookingTimeCommand}"
+                                HeightRequest="20"
+                                Source="Icons/heart.png"
+                                VerticalOptions="Center"
+                                WidthRequest="20" />
+                        </HorizontalStackLayout>
+                    </Border>
+                </HorizontalStackLayout>
+            </ScrollView>
 
             <!--  Collection View for displaying recipes  -->
             <CollectionView Margin="0,0,0,10" ItemsSource="{Binding Recipes}">

@@ -19,6 +19,7 @@ namespace FlavorHub.ViewModel
         private readonly IRecipeRepository _RecipeRepository; 
         private readonly IUserService _UserService;
         private readonly IUserRepository _UserRepository;
+
         public ICommand SelectionCommand { get; set; }
 
         [ObservableProperty]
@@ -42,6 +43,8 @@ namespace FlavorHub.ViewModel
             try
             {
                 Guid? userId = await _UserService.GetUserIdAsync();
+                var user = await _UserRepository.GetUserByIdAsync(userId.Value);
+
                 if (userId.HasValue)
                 {
                     var favorites = await _FavoritesRepository.GetFavoritesByUserId(userId.Value);
@@ -51,9 +54,13 @@ namespace FlavorHub.ViewModel
                         foreach (var favorite in favorites)
                         {
                             var recipe = await _RecipeRepository.GetRecipeByIdAsync(favorite.RecipeId);
+                            var favoritecount = await _FavoritesRepository.GetFavoriteCountByRecipeIdAsync(recipe.RecipeId);
                             if (recipe != null)
                             {
                                var recipeviewmodel = new RecipeViewModel(recipe, _UserService, _UserRepository, _FavoritesRepository);
+                                recipeviewmodel.FavoriteCount = favoritecount;
+                                recipeviewmodel.UserName = user.UserName;
+                                recipeviewmodel.ProfilePicture = user.ProfilePicture;
                                 FavoritesCollection.Add(recipeviewmodel);
                             }
                         }

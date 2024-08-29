@@ -19,6 +19,7 @@ public partial class HomePage : ContentPage
         if (_HomePageViewModel != null)
         {
             await _HomePageViewModel.LoadRecipes();
+            await _HomePageViewModel.LoadUserName(); 
         }
     }
 }

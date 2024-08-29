@@ -30,11 +30,11 @@ namespace FlavorHub.Repositories
             }
         }
 
-        public async Task DeleteFavoritesByIdAsync(Guid favoritesId)
+        public async Task DeleteFavoritesByIdAsync(Favorites favorites)
         {
             try
             {
-                await _Database.DeleteAsync(favoritesId);
+                await _Database.DeleteAsync(favorites);
 
             }
             catch (Exception ex)
@@ -112,6 +112,7 @@ namespace FlavorHub.Repositories
         {
             try
             {
+                Console.WriteLine($"Fetching favorites for UserId: {userId}");
                 return await _Database.Table<Favorites>().Where(favorites => favorites.UserId == userId).ToListAsync();
 
             }

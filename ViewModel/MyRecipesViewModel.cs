@@ -42,6 +42,7 @@ namespace FlavorHub.ViewModel
             try
             {
                 Guid? userId = await _UserService.GetUserIdAsync();
+               var user = await _UserRepository.GetUserByIdAsync(userId.Value);
 
                 if (userId != null)
                 {
@@ -52,6 +53,10 @@ namespace FlavorHub.ViewModel
                         foreach (var recipe in recipes)
                         {
                             var recipeViewModel = new RecipeViewModel(recipe, _UserService, _UserRepository, _FavoritesRepository);
+                            var favoritecount = await _FavoritesRepository.GetFavoriteCountByRecipeIdAsync(recipe.RecipeId);
+                            recipeViewModel.FavoriteCount = favoritecount;
+                            recipeViewModel.UserName = user.UserName;
+                            recipeViewModel.ProfilePicture = user.ProfilePicture;
                             RecipeCollection.Add(recipeViewModel);
                         }
                     }

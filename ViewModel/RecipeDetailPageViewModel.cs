@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth.Repository;
 using FlavorHub.Models.SQLiteModels;
@@ -65,7 +67,6 @@ namespace FlavorHub.ViewModel
                 return;
             }
 
-            // Retrieve the user ID from secure storage or service
             var userIdString = await _UserService.GetUserIdAsync();
             if (userIdString != null)
             {
@@ -76,9 +77,10 @@ namespace FlavorHub.ViewModel
                 {
                     if (favorite != null)
                     {
-                        await _FavoritesRepostory.DeleteFavoritesByIdAsync(favorite.FavoritesId);
+                        await _FavoritesRepostory.DeleteFavoritesByIdAsync(favorite);
                         IsFavorite = false;
                         FavoriteIcon = "/Icons/heart.png";
+                        await Toast.Make("Removed from favorites", ToastDuration.Short).Show();
                         SelectedRecipe.FavoriteCount--;
 
                     }
@@ -94,6 +96,7 @@ namespace FlavorHub.ViewModel
                         IsFavorite = true;
                         FavoriteIcon = "/Icons/heart_filled.png";
                         await _FavoritesRepostory.AddFavoritesAsync(newFavorite);
+                        await Toast.Make("Added to favorites", ToastDuration.Short).Show();
                         SelectedRecipe.FavoriteCount++;
                     }
                     OnPropertyChanged(nameof(FavoriteCount));

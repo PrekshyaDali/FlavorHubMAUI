@@ -12,26 +12,8 @@ namespace FlavorHub
             InitializeComponent();
 
             MainPage = new AppShell();
-            //LoadTheme();
+            
         }
-        //private void LoadTheme()
-        //{
-        //    bool isDarkMode = Preferences.Get("IsDarkMode", false);
-        //    SwitchTheme(isDarkMode);
-        //}
-        //public void SwitchTheme(bool isDarkMode)
-        //{
-        //    Application.Current.Resources.MergedDictionaries.Clear();
-        //    if (isDarkMode)
-        //    {
-        //        Application.Current.Resources.MergedDictionaries.Add(new DarkTheme());
-        //    }
-        //    else
-        //    {
-        //        Application.Current.Resources.MergedDictionaries.Add(new LightTheme());
-        //    }
-        //    Preferences.Set("IsDarkMode", isDarkMode);
-        //}
         protected override async void OnStart()
         {
             base.OnStart();

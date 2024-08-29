@@ -40,8 +40,9 @@ namespace FlavorHub.ViewModel
         // Commands for Search and Filter
         public ICommand SearchCommand { get; }
         public ICommand FilterCommand { get; }
-
         public ICommand SelectionCommand  { get; }
+        public ICommand ClearDifficultyCommand { get; }
+        public ICommand ClearCookingTimeCommand { get; }
 
         public ObservableCollection<string> DifficultyLevels { get; }
         public ObservableCollection<string> CookingTimes { get; }
@@ -55,13 +56,14 @@ namespace FlavorHub.ViewModel
             _cachedRecipes = new List<RecipeViewModel>();
             Recipes = new ObservableCollection<RecipeViewModel>();
 
-            // Initialize filtering options
             DifficultyLevels = new ObservableCollection<string> { "Easy", "Medium", "Difficult" };
             CookingTimes = new ObservableCollection<string> { "Less than 1 hour", "Less than 2 hours", "2 hours or more" };
 
             SelectionCommand = new AsyncRelayCommand<RecipeViewModel>(OnRecipeSelected);
             SearchCommand = new RelayCommand(ApplySearchAndFilter);
             FilterCommand = new RelayCommand(ApplySearchAndFilter);
+            ClearDifficultyCommand = new RelayCommand(ClearDifficultyFilter);
+            ClearCookingTimeCommand = new RelayCommand(ClearCookingTimeFilter);
         }
 
         private void ApplySearchAndFilter()
@@ -75,6 +77,17 @@ namespace FlavorHub.ViewModel
             );
 
             Recipes = new ObservableCollection<RecipeViewModel>(filteredRecipes);
+        }
+        private void ClearDifficultyFilter()
+        {
+            SelectedDifficultyLevel = null;
+            ApplySearchAndFilter();
+        }
+
+        private void ClearCookingTimeFilter()
+        {
+            SelectedCookingTime = null;
+            ApplySearchAndFilter();
         }
 
         public async void ApplyQueryAttributes(IDictionary<string, object> query)

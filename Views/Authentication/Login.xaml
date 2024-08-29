@@ -6,20 +6,14 @@
     xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
     xmlns:vm="clr-namespace:FlavorHub.ViewModel">
 
-    <VerticalStackLayout Padding="20">
-        <!--  Register Label positioned at the top right  -->
-        <Label HorizontalOptions="End" Text="Register">
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding NavigateToRegisterCommand}" />
-            </Label.GestureRecognizers>
-        </Label>
+    <VerticalStackLayout Padding="20" Spacing="20">
 
         <!--  Main Content  -->
         <VerticalStackLayout
             BackgroundColor="Transparent"
             Spacing="10"
             VerticalOptions="FillAndExpand">
-
+            <Image HeightRequest="200" Source="flavorhub_black.svg" />
             <!--  header  -->
             <VerticalStackLayout Spacing="25">
                 <Label Style="{StaticResource Header}" Text="Login" />
@@ -52,5 +46,17 @@
                 </VerticalStackLayout>
             </VerticalStackLayout>
         </VerticalStackLayout>
+
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+            <Label Text="Dont have an account already?" />
+            <Label
+                Text="Register"
+                TextColor="{StaticResource Tertiary}"
+                TextDecorations="Underline">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateToRegisterCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

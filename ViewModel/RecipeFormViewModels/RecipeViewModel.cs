@@ -68,12 +68,12 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
         public string UserName
         {
             get => _UserName;
-            private set => SetProperty(ref _UserName, value);
+            set => SetProperty(ref _UserName, value);
         }
         public string ProfilePicture
         {
             get => _ProfilePicture;
-            private set => SetProperty(ref _ProfilePicture, value);
+            set => SetProperty(ref _ProfilePicture, value);
         }
         [ObservableProperty]
         private int _FavoriteCount;

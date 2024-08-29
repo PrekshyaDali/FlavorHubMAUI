@@ -18,7 +18,7 @@
         <Tab Title="Home" Icon="/TabBarIcons/home.png">
             <ShellContent ContentTemplate="{DataTemplate views:HomePage}" Route="HomePage" />
         </Tab>
-        <Tab Title="Activity" Icon="/TabBarIcons/search.png">
+        <Tab Title="Activity" Icon="/TabBarIcons/activity.png">
             <ShellContent
                 Title="My Favorites"
                 ContentTemplate="{DataTemplate views:FavoritesPage}"
@@ -31,7 +31,7 @@
         <Tab Title="Add" Icon="/Icons/plus.png">
             <ShellContent ContentTemplate="{DataTemplate views:AddRecipe}" Route="AddRecipe" />
         </Tab>
-        <Tab Title="Gallery" Icon="/TabBarIcons/notification.png">
+        <Tab Title="Gallery" Icon="/TabBarIcons/gallery.png">
             <ShellContent ContentTemplate="{DataTemplate views:Gallery}" Route="Gallery" />
         </Tab>
         <Tab Title="Profile" Icon="/TabBarIcons/profile.png">

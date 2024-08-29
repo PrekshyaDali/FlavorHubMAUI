@@ -62,15 +62,21 @@
 	<ItemGroup>
 	  <None Remove="appsettings.json" />
 	  <None Remove="Resources\Images\background.png" />
+	  <None Remove="Resources\Images\flavorHub_black.png" />
+	  <None Remove="Resources\Images\flavorHub_logo.png" />
 	  <None Remove="Resources\Images\HomePage\clock.png" />
 	  <None Remove="Resources\Images\HomePage\food.png" />
 	  <None Remove="Resources\Images\HomePage\fullscreen.png" />
-	  <None Remove="Resources\Images\HomePage\Ingredients.png" />
+	  <None Remove="Resources\Images\HomePage\ingredients.png" />
 	  <None Remove="Resources\Images\HomePage\level.png" />
-	  <None Remove="Resources\Images\HomePage\pasta.jpg" />
-	  <None Remove="Resources\Images\HomePage\sandwich.jpg" />
+	  <None Remove="Resources\Images\Icons\delete.png" />
+	  <None Remove="Resources\Images\Icons\edit.png" />
 	  <None Remove="Resources\Images\Icons\heart.png" />
 	  <None Remove="Resources\Images\Icons\heart_filled.png" />
+	  <None Remove="Resources\Images\Icons\logout.png" />
+	  <None Remove="Resources\Images\TabBarIcons\activity.png" />
+	  <None Remove="Resources\Images\TabBarIcons\gallery.png" />
+	  <None Remove="Resources\Images\vector.svg" />
 	</ItemGroup>
 
 	<ItemGroup>

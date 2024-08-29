@@ -28,7 +28,7 @@ namespace FlavorHub.ViewModel.ProfileSection
         private string _UserName;
 
         [ObservableProperty]
-        private string _ProfilePicture;
+        private string _ProfilePicture = "dot_net.png";
 
         [ObservableProperty]
         private string _Bio;
@@ -39,30 +39,28 @@ namespace FlavorHub.ViewModel.ProfileSection
         [ObservableProperty]
         private bool _IsDarkMode;
 
-        //private readonly App _app;
-
         public ProfilePageViewModel(IUserRepository UserRepository, FirebaseAuthClient firebaseAuthClient)
         {
             _UserRepository = UserRepository;
             _FirebaseAuthClient = firebaseAuthClient;
             SaveProfileDetailsCommand = new AsyncRelayCommand(SaveProfile);
-            //SwitchThemeCommand = new RelayCommand<bool>(SwitchTheme);
-            //PropertyChanged += OnPropertyChanged;
-            //_app = Application.Current as App;
+            SwitchThemeCommand = new RelayCommand(ToggleSwitch);
+            _IsDarkMode = Application.Current.RequestedTheme == AppTheme.Dark;
             LoadUserProfile();
-            //SwitchTheme(true);
         }
-
-        //private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
-        //{
-        //    if (e.PropertyName == nameof(IsDarkMode))
-        //    {
-        //        SwitchTheme(IsDarkMode);
-        //    }
-        //}
-        //public void SwitchTheme(bool isDarkMode)
-        //{
-        //    _app.SwitchTheme(IsDarkMode);       }
+        public void ToggleSwitch()
+        {
+            if (_IsDarkMode) 
+           {
+                Application.Current.UserAppTheme = AppTheme.Light;   
+                IsDarkMode = false;
+           }
+            else
+            {
+                Application.Current.UserAppTheme = AppTheme.Dark;
+                IsDarkMode = true;
+            }
+        }
 
         // Method to refresh the profile
         public async Task RefreshProfile()

@@ -74,11 +74,15 @@
                             HorizontalOptions="Center"
                             Spacing="10"
                             VerticalOptions="Center">
-                            <Image Source="/HomePage/clock.png" VerticalOptions="Center" />
+                            <Image
+                                HeightRequest="20"
+                                Source="/HomePage/clock.png"
+                                VerticalOptions="Center" />
                             <Label
                                 FontSize="Micro"
                                 Text="{Binding CookingTime, StringFormat='{0} mins'}"
-                                TextColor="white" />
+                                TextColor="white"
+                                VerticalOptions="Center" />
                         </HorizontalStackLayout>
                         <HorizontalStackLayout
                             HorizontalOptions="Center"
@@ -88,9 +92,11 @@
                             <Label
                                 FontSize="Micro"
                                 Text="{Binding DifficultyLevel}"
-                                TextColor="white" />
+                                TextColor="white"
+                                VerticalOptions="Center" />
                         </HorizontalStackLayout>
                         <HorizontalStackLayout
+                            HeightRequest="20"
                             HorizontalOptions="Center"
                             Spacing="10"
                             VerticalOptions="Center">
@@ -98,13 +104,14 @@
                             <Label
                                 FontSize="Micro"
                                 Text="Ingredients"
-                                TextColor="white" />
+                                TextColor="white"
+                                VerticalOptions="Center" />
                         </HorizontalStackLayout>
                     </HorizontalStackLayout>
                     <Label
-                        Style="{DynamicResource SubHeader}"
+                        Style="{StaticResource SubHeader}"
                         Text="{Binding RecipeFoodName}"
-                        TextColor="{StaticResource SecondaryColor}" />
+                        TextColor="{StaticResource white}" />
                 </VerticalStackLayout>
 
 

@@ -22,7 +22,7 @@
                 VerticalOptions="Center" />
             <Border
                 Grid.Column="1"
-                BackgroundColor="{DynamicResource SecondaryColor}"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkSecondaryColor}}" 
                 HeightRequest="50"
                 HorizontalOptions="End"
                 StrokeShape="RoundRectangle 20"
@@ -61,7 +61,7 @@
                         <ImageButton
                             Command="{Binding Source={RelativeSource AncestorType={x:Type vm:IngredientViewModel}}, Path=RemoveIngredientCommand}"
                             CommandParameter="{Binding .}"
-                            Source="/TabBarIcons/profile.png" />
+                            Source="/Icons/delete.png" />
                     </FlexLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

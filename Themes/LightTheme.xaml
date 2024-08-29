@@ -5,11 +5,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Color x:Key="PageBackgroundColor">white</Color>
     <!--  Light background color  -->
-    <Color x:Key="PrimaryColor">#3FB4B1</Color>
+    <Color x:Key="LightPrimaryColor">#3FB4B1</Color>
     <!--  Main color  -->
-    <Color x:Key="SecondaryColor">#D5EEEE</Color>
+    <Color x:Key="LightSecondaryColor">#D5EEEE</Color>
     <!--  Accent color  -->
-    <Color x:Key="PrimaryTextColor">Black</Color>
+    <Color x:Key="LightPrimaryTextColor">Black</Color>
     <!--  Main text color  -->
-    <Color x:Key="SecondaryTextColor">Gray</Color>
+    <Color x:Key="LightSecondaryTextColor">Gray</Color>
 </ResourceDictionary>
