@@ -17,7 +17,7 @@ using System.Windows.Input;
 
 namespace FlavorHub.ViewModel
 {
-    public partial class RecipeDetailPageViewModel : ObservableObject, IQueryAttributable 
+    public partial class RecipeDetailPageViewModel : ObservableObject, IQueryAttributable
     {
 
         [ObservableProperty]

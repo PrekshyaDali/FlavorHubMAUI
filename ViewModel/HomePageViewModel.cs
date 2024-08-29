@@ -20,7 +20,7 @@ using System.Windows.Input;
 
 namespace FlavorHub.ViewModel
 {
-    public partial class HomePageViewModel: ObservableObject
+    public partial class HomePageViewModel : ObservableObject
     {
         private readonly FirebaseAuthClient _FirebaseAuthClient;
 
