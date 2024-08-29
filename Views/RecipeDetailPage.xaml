@@ -224,10 +224,12 @@
                     <ImageButton
                         Grid.Column="1"
                         Command="{Binding SaveCommentCommand}"
+                        HeightRequest="20"
                         HorizontalOptions="End"
-                        Source="/TabBarIcons/profile.png" />
+                        Source="/Icons/send.png" />
                 </Grid>
             </Border>
         </VerticalStackLayout>
     </ScrollView>
+
 </ContentPage>

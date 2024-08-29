@@ -15,7 +15,6 @@ public partial class HomePage : ContentPage
     {
         base.OnAppearing();
 
-        // Ensure recipes are loaded when the page appears
         if (_HomePageViewModel != null)
         {
             await _HomePageViewModel.LoadRecipes();

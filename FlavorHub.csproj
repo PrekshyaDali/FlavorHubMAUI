@@ -141,6 +141,9 @@
 	  <MauiXaml Update="Views\Controls\ButtonContentView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Controls\HeartPopUp.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Controls\InputFieldContentView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

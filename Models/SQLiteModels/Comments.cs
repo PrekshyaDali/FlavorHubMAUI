@@ -1,6 +1,7 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,9 +18,8 @@ namespace FlavorHub.Models.SQLiteModels
 
         [MaxLength(1000)]
         public string? CommentText { get; set; }
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime CreatedDate  { get; set; } = DateTime.Now;
         public string? UserName { get; set; }
         public string? UserProfileImage { get; set; }
     }
 }
-

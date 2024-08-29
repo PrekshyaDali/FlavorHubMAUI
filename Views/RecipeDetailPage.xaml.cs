@@ -7,6 +7,6 @@ public partial class RecipeDetailPage : ContentPage
 	public RecipeDetailPage(RecipeDetailPageViewModel recipeDetailPageViewModel)
 	{
 		InitializeComponent();
-        BindingContext = recipeDetailPageViewModel;
+		BindingContext = recipeDetailPageViewModel;
     }
 }
