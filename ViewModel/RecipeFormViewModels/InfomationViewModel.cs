@@ -133,6 +133,5 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
                 Console.WriteLine(ex.ToString());
             }
         }
-
     }
 }

@@ -17,7 +17,7 @@ namespace FlavorHub.ViewModel
         private readonly IUserRepository _UserRepository;
         private readonly IFavoritesRepository _FavoritesRepository;
 
-        private List<RecipeViewModel> _cachedRecipes; // Cache for filtering
+        private List<RecipeViewModel> _cachedRecipes; 
 
         [ObservableProperty]
         private RecipeViewModel _selectedRecipe;
