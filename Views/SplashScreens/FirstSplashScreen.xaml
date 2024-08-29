@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FlavorHub.Views.SplashScreens.FirstSplashScreen"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel">
+    <ContentPage.BindingContext>
+        <vm:SplashScreenViewModel />
+    </ContentPage.BindingContext>
+    <Grid
+        ColumnDefinitions="*"
+        HorizontalOptions="FillAndExpand"
+        RowDefinitions="*, .3*,.2*"
+        VerticalOptions="FillAndExpand">
+
+        <Image
+            Grid.Row="0"
+            Grid.RowSpan="3"
+            Grid.Column="0"
+            Aspect="Fill"
+            Source="/Splashes/splashfirst" />
+        <RoundRectangle
+            Grid.Row="0"
+            Grid.RowSpan="3"
+            Grid.Column="0"
+            Opacity=".8">
+            <RoundRectangle.Fill>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Offset="0" Color="Transparent" />
+                    <GradientStop Offset="1" Color="#000000" />
+                </LinearGradientBrush>
+            </RoundRectangle.Fill>
+        </RoundRectangle>
+
+        <VerticalStackLayout Grid.Row="1" Padding="20">
+            <Label
+                Style="{StaticResource Header}"
+                Text="Share Your Recipes"
+                TextColor="{StaticResource White}" />
+            <Label
+                FontAttributes="Bold"
+                FontSize="Small"
+                Text="Every recipe is a story waiting to be told. Let’s create something delicious together."
+                TextColor="{StaticResource White}" />
+        </VerticalStackLayout>
+        <Border
+            Grid.Row="2"
+            Grid.Column="0"
+            Margin="0,0,0,10"
+            StrokeThickness="0">
+            <controls:ButtonContentView
+                ButtonCommand="{Binding NavigateToSecondSplashScreen}"
+                ButtonText="Get Started"
+                HorizontalOptions="Center" />
+        </Border>
+    </Grid>
+</ContentPage>

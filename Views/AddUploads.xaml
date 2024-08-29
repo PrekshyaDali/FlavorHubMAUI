@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FlavorHub.Views.AddUploads"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
+    xmlns:models="clr-namespace:FlavorHub.Models.RecipeFormModels"
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel.RecipeFormViewModels"
+    Title="AddUploads">
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="20">
+            <HorizontalStackLayout Spacing="10">
+                <controls:ButtonContentView ButtonCommand="{Binding SelectImagesCommand}" ButtonText="Select Images" />
+                <controls:ButtonContentView ButtonCommand="{Binding SelectVideosCommand}" ButtonText="select Videos" />
+            </HorizontalStackLayout>
+            <CollectionView ItemsSource="{Binding SelectedMediaFiles}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:AddUploadModel">
+                        <StackLayout Orientation="Vertical" Spacing="10">
+                            <controls:ButtonContentView
+                                ButtonCommand="{Binding DeleteCommand}"
+                                ButtonText="Delete"
+                                HorizontalOptions="End"
+                                WidthRequest="100" />
+                            <Image
+                                HeightRequest="200"
+                                IsVisible="{Binding FileType, Converter={StaticResource ImageFileTypeConverter}}"
+                                Source="{Binding FilePath}"
+                                WidthRequest="500" />
+                            <Label Text="{Binding FileName}" VerticalOptions="Center" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <controls:ButtonContentView
+                ButtonCommand="{Binding CompleteCommand}"
+                ButtonText="Finish"
+                VerticalOptions="End" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

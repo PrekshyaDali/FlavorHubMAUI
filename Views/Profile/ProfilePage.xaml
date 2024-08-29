@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FlavorHub.Views.Profile.ProfilePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:FlavorHub.Models.SQLiteModels"
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel.ProfileSection"
+    Title="My profile">
+
+    <VerticalStackLayout Padding="20" Spacing="20">
+        <Grid
+            Margin="0,0,0,20"
+            RowDefinitions=".2*,*,*"
+            RowSpacing="20">
+            <ImageButton
+                Grid.Row="0"
+                Clicked="ImageButton_Clicked"
+                HorizontalOptions="End"
+                Source="/TabBarIcons/edit.png" />
+            <Border
+                Grid.Row="1"
+                HeightRequest="100"
+                StrokeShape="RoundRectangle 80"
+                WidthRequest="100">
+                <Image Aspect="AspectFill" Source="{Binding ProfilePicture}" />
+            </Border>
+            <VerticalStackLayout
+                Grid.Row="2"
+                Padding="20,0,0,0"
+                x:DataType="model:User"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Center">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    HorizontalOptions="Center"
+                    Text="{Binding UserName}"
+                    TextColor="{AppThemeBinding Light={StaticResource LightPrimaryTextColor},
+                                                Dark={StaticResource DarkSecondaryTextColor}}" />
+                <Label
+                    FontSize="Small"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding Email}"
+                    TextColor="{StaticResource SecondaryTextColor}" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <!--  line  -->
+        <BoxView
+            BackgroundColor="{StaticResource SecondaryTextColor}"
+            HeightRequest="1"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="End" />
+
+        <Border Padding="10" StrokeShape="RoundRectangle ">
+            <FlexLayout JustifyContent="SpaceBetween">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    Text="Dark Mode"
+                    TextColor="{AppThemeBinding Light={StaticResource LightPrimaryTextColor},
+                                                Dark={StaticResource DarkSecondaryTextColor}}"
+                    VerticalOptions="Center" />
+                <ImageButton Command="{Binding SwitchThemeCommand}" Source="/TabBarIcons/profile.png" />
+            </FlexLayout>
+        </Border>
+        <Border Padding="10" StrokeShape="RoundRectangle 0">
+            <FlexLayout JustifyContent="SpaceBetween" VerticalOptions="Center">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    Text="Log Out"
+                    TextColor="{AppThemeBinding Light={StaticResource LightPrimaryTextColor},
+                                                Dark={StaticResource DarkSecondaryTextColor}}"
+                    VerticalOptions="Center" />
+                <ImageButton HeightRequest="30" Source="/Icons/logout.png" />
+            </FlexLayout>
+        </Border>
+    </VerticalStackLayout>
+</ContentPage>

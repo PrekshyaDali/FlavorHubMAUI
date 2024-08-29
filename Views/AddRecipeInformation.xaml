@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FlavorHub.Views.AddRecipeInformation"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel.RecipeFormViewModels"
+    x:DataType="vm:InfomationViewModel">
+    <Shell.TitleView>
+        <Grid Padding="20,5,20,0" HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Column="0"
+                HorizontalOptions="Center"
+                Style="{StaticResource SubHeader}"
+                Text="Add Recipe"
+                VerticalOptions="Center" />
+            <Border
+                Grid.Column="1"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                                  Dark={StaticResource DarkSecondaryColor}}"
+                HeightRequest="50"
+                HorizontalOptions="End"
+                StrokeShape="RoundRectangle 20"
+                StrokeThickness="0"
+                WidthRequest="80">
+                <Label
+                    HorizontalOptions="Center"
+                    Text="2/5"
+                    VerticalOptions="Center" />
+            </Border>
+        </Grid>
+    </Shell.TitleView>
+    <VerticalStackLayout Padding="20,50,20,0" Spacing="20">
+        <Label Style="{StaticResource Header}" Text="Information" />
+
+        <!--  Grid with 3 rows and 2 columns  -->
+        <Grid
+            ColumnDefinitions=".5*, .5*"
+            ColumnSpacing="10"
+            HeightRequest="250"
+            RowDefinitions="*, *, *"
+            RowSpacing="20"
+            VerticalOptions="FillAndExpand">
+
+            <!--  First Row  -->
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="Cooking Time"
+                VerticalOptions="Center" />
+
+            <FlexLayout
+                Grid.Row="0"
+                Grid.Column="1"
+                HorizontalOptions="FillAndExpand"
+                JustifyContent="SpaceBetween">
+                <Border
+                    BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                                      Dark={StaticResource DarkSecondaryColor}}"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="0"
+                    WidthRequest="50">
+                    <Entry
+                        x:Name="HoursPicker"
+                        HorizontalOptions="Center"
+                        Keyboard="Numeric"
+                        Text="{Binding HoursPicker, Mode=TwoWay}"
+                        VerticalOptions="Center" />
+                </Border>
+
+                <!--  Label for Hours  -->
+                <Label Text="hrs" VerticalOptions="End" />
+
+                <Border
+                    BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                                      Dark={StaticResource DarkSecondaryColor}}"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="0"
+                    WidthRequest="50">
+                    <Entry
+                        x:Name="MinutesPicker"
+                        HorizontalOptions="Center"
+                        Keyboard="Numeric"
+                        Text="{Binding MinutesPicker, Mode=TwoWay}"
+                        VerticalOptions="Center" />
+                </Border>
+
+                <!--  Label for Minutes  -->
+                <Label Text="mins" VerticalOptions="End" />
+            </FlexLayout>
+
+            <!--  Second Row  -->
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="Serving Size"
+                VerticalOptions="Center" />
+            <Border
+                Grid.Row="1"
+                Grid.Column="1"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                                  Dark={StaticResource DarkSecondaryColor}}"
+                StrokeShape="RoundRectangle 10"
+                StrokeThickness="0">
+                <FlexLayout JustifyContent="SpaceBetween" VerticalOptions="Center">
+                    <Border StrokeThickness="0">
+                        <ImageButton
+                            Command="{Binding ServingSizeIncrease}"
+                            HeightRequest="15"
+                            Source="/Icons/plus.png" />
+                    </Border>
+                    <Label Text="{Binding Servings}" VerticalOptions="Center" />
+                    <Border StrokeThickness="0">
+                        <ImageButton
+                            Command="{Binding ServingSizeDecrease}"
+                            HeightRequest="15"
+                            Source="/Icons/minus_sign.png" />
+                    </Border>
+                </FlexLayout>
+            </Border>
+
+            <!--  Third Row  -->
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Text="Difficulty"
+                VerticalOptions="Center" />
+            <Border
+                Grid.Row="2"
+                Grid.Column="1"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                                  Dark={StaticResource DarkSecondaryColor}}"
+                StrokeShape="RoundRectangle 10"
+                StrokeThickness="0">
+                <Picker
+                    Title="Select difficulty level"
+                    HorizontalOptions="Center"
+                    SelectedItem="{Binding DifficultyLevel}"
+                    VerticalOptions="Center">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Easy</x:String>
+                            <x:String>Medium</x:String>
+                            <x:String>Difficult</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </Border>
+        </Grid>
+        <controls:ButtonContentView ButtonCommand="{Binding NavigateToIngredientsPage}" ButtonText="Next" />
+    </VerticalStackLayout>
+</ContentPage>

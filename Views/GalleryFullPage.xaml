@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FlavorHub.Views.GalleryFullPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel"
+    Title="GalleryFullPage"
+    x:DataType="vm:GalleryFullPageViewModel">
+    <ContentPage.BindingContext>
+        <vm:GalleryFullPageViewModel />
+    </ContentPage.BindingContext>
+    <VerticalStackLayout>
+        <Image
+            x:Name="FullPhotoImage"
+            Aspect="AspectFit"
+            Source="{Binding PhotoUrl}" />
+        <ImageButton Command="{Binding SavePhotoCommand}" Source="/TabBarIcons/profile.png" />
+    </VerticalStackLayout>
+</ContentPage>

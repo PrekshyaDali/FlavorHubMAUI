@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FlavorHub.Views.Profile.EditProfile"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
+    Title="Edit Profile">
+    <VerticalStackLayout Padding="20" Spacing="20">
+        <Grid RowDefinitions=".2*,*,*" RowSpacing="20">
+            <Border
+                Grid.Row="1"
+                HeightRequest="100"
+                StrokeShape="RoundRectangle 80"
+                WidthRequest="100">
+                <Image Aspect="AspectFill" Source="{Binding ProfilePicture, FallbackValue='dotnet_bot.png'}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SelectProfilePictureCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </Border>
+            <VerticalStackLayout
+                Grid.Row="2"
+                Padding="20,0,0,0"
+                HorizontalOptions="FillAndExpand"
+                Spacing="10"
+                VerticalOptions="Center">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    HorizontalOptions="Center"
+                    Text="{Binding UserName, FallbackValue='Prekshya'}" />
+                <Label
+                    FontSize="Small"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding Email, FallbackValue='prekshya@gmail.com'}"
+                    TextColor="{StaticResource SecondaryTextColor}" />
+
+                <Label HorizontalTextAlignment="Center" Text="{Binding Bio, FallbackValue='Life is too short to live just end it'}" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <!--  line  -->
+        <BoxView
+            BackgroundColor="{StaticResource SecondaryTextColor}"
+            HeightRequest="1"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="End" />
+
+        <!--  //inputFields  -->
+        <Border
+            Padding="10"
+            HeightRequest="80"
+            HorizontalOptions="FillAndExpand"
+            StrokeShape="RoundRectangle 10">
+            <Entry Placeholder="UserName" Text="{Binding UserName}" />
+        </Border>
+        <Border
+            Padding="10"
+            HeightRequest="80"
+            HorizontalOptions="FillAndExpand"
+            StrokeShape="RoundRectangle 10">
+            <Entry Placeholder="Email" Text="{Binding Email}" />
+        </Border>
+        <Border
+            Padding="10"
+            HeightRequest="100"
+            HorizontalOptions="FillAndExpand"
+            StrokeShape="RoundRectangle 10">
+            <Editor Placeholder="Bio" Text="{Binding Bio}" />
+        </Border>
+        <controls:ButtonContentView ButtonCommand="{Binding SaveProfileDetailsCommand}" ButtonText="Save Changes" />
+    </VerticalStackLayout>
+</ContentPage>

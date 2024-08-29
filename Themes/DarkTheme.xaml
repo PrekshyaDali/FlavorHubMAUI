@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    x:Class="FlavorHub.NewFolder.DarkTheme"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Color x:Key="PageBackgroundColor">Black</Color>
+    <!--  Dark background color  -->
+    <Color x:Key="DarkPrimaryColor">Green</Color>
+    <Color x:Key="DarkSecondaryColor">White</Color>
+    <Color x:Key="DarkPrimaryTextColor">Yellow</Color>
+    <Color x:Key="DarkSecondaryTextColor">White</Color>
+</ResourceDictionary>

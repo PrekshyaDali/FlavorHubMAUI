@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FlavorHub.Views.AddRecipeDirections"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
+    xmlns:models="clr-namespace:FlavorHub.Models.RecipeFormModels"
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel.RecipeFormViewModels"
+    Title="AddRecipeDirections">
+    <Shell.TitleView>
+        <Grid Padding="20,5,20,0" HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Column="0"
+                HorizontalOptions="Center"
+                Style="{StaticResource SubHeader}"
+                Text="Add Recipe"
+                VerticalOptions="Center" />
+            <Border
+                Grid.Column="1"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                                  Dark={StaticResource DarkSecondaryColor}}"
+                HeightRequest="50"
+                HorizontalOptions="End"
+                StrokeShape="RoundRectangle 20"
+                StrokeThickness="0"
+                WidthRequest="80">
+                <Label
+                    HorizontalOptions="Center"
+                    Text="4/5"
+                    VerticalOptions="Center" />
+            </Border>
+        </Grid>
+    </Shell.TitleView>
+    <VerticalStackLayout Padding="20,50,20,0" Spacing="20">
+        <FlexLayout JustifyContent="SpaceBetween">
+            <Label Style="{StaticResource Header}" Text="Directions" />
+            <controls:ButtonContentView
+                ButtonCommand="{Binding AddDirectionCommand}"
+                ButtonText="Add more"
+                HorizontalOptions="End"
+                WidthRequest="100" />
+        </FlexLayout>
+        <CollectionView ItemsSource="{Binding Directions}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:DirectionModel">
+                    <FlexLayout Margin="0,0,0,10" JustifyContent="SpaceBetween">
+                        <controls:InputFieldContentView
+                            EntryData="{Binding Steps}"
+                            Placeholder="Ingredient Name"
+                            WidthRequest="300" />
+                        <ImageButton
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:DirectionViewModel}}, Path=RemoveDirectionCommand}"
+                            CommandParameter="{Binding .}"
+                            Source="/Icons/delete.png"
+                            WidthRequest="50" />
+                    </FlexLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <controls:ButtonContentView ButtonCommand="{Binding NavigateToAddUploads}" ButtonText="Next" />
+    </VerticalStackLayout>
+</ContentPage>

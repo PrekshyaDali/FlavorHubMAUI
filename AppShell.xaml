@@ -3,13 +3,39 @@
     x:Class="FlavorHub.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:authentication="clr-namespace:FlavorHub.Views.Authentication"
     xmlns:local="clr-namespace:FlavorHub"
-    Shell.FlyoutBehavior="Disabled"
-    Title="FlavorHub">
+    xmlns:splash="clr-namespace:FlavorHub.Views.SplashScreens"
+    xmlns:views="clr-namespace:FlavorHub.Views"
+    xmlns:viewsProfile="clr-namespace:FlavorHub.Views.Profile"
+    Title="FlavorHub"
+    Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <ShellContent ContentTemplate="{DataTemplate splash:FirstSplashScreen}" Route="FirstSplashScreen" />
+    <ShellContent ContentTemplate="{DataTemplate authentication:Login}" Route="Login" />
 
+    <TabBar>
+        <Tab Title="Home" Icon="/TabBarIcons/home.png">
+            <ShellContent ContentTemplate="{DataTemplate views:HomePage}" Route="HomePage" />
+        </Tab>
+        <Tab Title="Activity" Icon="/TabBarIcons/activity.png">
+            <ShellContent
+                Title="My Favorites"
+                ContentTemplate="{DataTemplate views:FavoritesPage}"
+                Route="FavoritesPage" />
+            <ShellContent
+                Title="My Recipes"
+                ContentTemplate="{DataTemplate views:MyRecipes}"
+                Route="MyRecipes" />
+        </Tab>
+        <Tab Title="Add" Icon="/Icons/plus.png">
+            <ShellContent ContentTemplate="{DataTemplate views:AddRecipe}" Route="AddRecipe" />
+        </Tab>
+        <Tab Title="Gallery" Icon="/TabBarIcons/gallery.png">
+            <ShellContent ContentTemplate="{DataTemplate views:Gallery}" Route="Gallery" />
+        </Tab>
+        <Tab Title="Profile" Icon="/TabBarIcons/profile.png">
+            <ShellContent ContentTemplate="{DataTemplate viewsProfile:ProfilePage}" Route="ProfilePage" />
+        </Tab>
+    </TabBar>
 </Shell>

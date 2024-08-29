@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FlavorHub.Views.AddRecipeIngredient"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
+    xmlns:models="clr-namespace:FlavorHub.Models.RecipeFormModels"
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel.RecipeFormViewModels"
+    Title="AddRecipeIngredient"
+    x:DataType="vm:IngredientViewModel">
+    <Shell.TitleView>
+        <Grid Padding="20,5,20,0" HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Column="0"
+                HorizontalOptions="Center"
+                Style="{StaticResource SubHeader}"
+                Text="Add Recipe"
+                VerticalOptions="Center" />
+            <Border
+                Grid.Column="1"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkSecondaryColor}}" 
+                HeightRequest="50"
+                HorizontalOptions="End"
+                StrokeShape="RoundRectangle 20"
+                StrokeThickness="0"
+                WidthRequest="80">
+                <Label
+                    HorizontalOptions="Center"
+                    Text="3/5"
+                    VerticalOptions="Center" />
+            </Border>
+        </Grid>
+    </Shell.TitleView>
+
+    <VerticalStackLayout Padding="20,50,20,0" Spacing="20">
+        <FlexLayout JustifyContent="SpaceBetween">
+            <Label Style="{StaticResource Header}" Text="Ingredients" />
+            <controls:ButtonContentView
+                ButtonCommand="{Binding AddIngredientCommand}"
+                ButtonText="Add more +"
+                HorizontalOptions="End"
+                WidthRequest="100" />
+        </FlexLayout>
+
+        <CollectionView ItemsSource="{Binding Ingredients}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:IngredientModel">
+                    <FlexLayout Margin="0,0,0,10" JustifyContent="SpaceBetween">
+                        <controls:InputFieldContentView
+                            EntryData="{Binding IngredientName}"
+                            Placeholder="Ingredient Name"
+                            WidthRequest="200" />
+                        <controls:InputFieldContentView
+                            EntryData="{Binding Measurement}"
+                            Placeholder="measurement"
+                            WidthRequest="70" />
+                        <ImageButton
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:IngredientViewModel}}, Path=RemoveIngredientCommand}"
+                            CommandParameter="{Binding .}"
+                            Source="/Icons/delete.png" />
+                    </FlexLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <controls:ButtonContentView ButtonCommand="{Binding NavigateToDirections}" ButtonText="Next" />
+    </VerticalStackLayout>
+</ContentPage>

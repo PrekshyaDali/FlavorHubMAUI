@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FlavorHub.Views.AddRecipe"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:FlavorHub.ViewModel"
+    x:DataType="vm:AddRecipeViewModel">
+    <Shell.TitleView>
+        <Grid Padding="20,5,20,0" HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Column="0"
+                HorizontalOptions="Center"
+                Style="{StaticResource SubHeader}"
+                Text="Add Recipe"
+                VerticalOptions="Center" />
+            <Border
+                Grid.Column="1"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                                  Dark={StaticResource DarkSecondaryColor}}"
+                HeightRequest="50"
+                HorizontalOptions="End"
+                StrokeShape="RoundRectangle 20"
+                StrokeThickness="0"
+                WidthRequest="80">
+                <Label
+                    HorizontalOptions="Center"
+                    Text="1/5"
+                    VerticalOptions="Center" />
+            </Border>
+        </Grid>
+    </Shell.TitleView>
+    <VerticalStackLayout
+        Padding="20,50,20,0"
+        x:DataType="vm:AddRecipeViewModel"
+        Spacing="20">
+        <Label Style="{StaticResource Header}" Text="Title" />
+        <controls:InputFieldContentView EntryData="{Binding Title}" Placeholder="Title" />
+        <Border
+            Padding="10,5,10,5"
+            HorizontalOptions="FillAndExpand"
+            StrokeShape="RoundRectangle 10"
+            StrokeThickness="0"
+            Style="{StaticResource EntryField}"
+            VerticalOptions="Center">
+            <Entry
+                HeightRequest="200"
+                HorizontalOptions="FillAndExpand"
+                MaxLength="250"
+                Placeholder="Short description here"
+                Text="{Binding Description}"
+                WidthRequest="300" />
+        </Border>
+        <Label Text="{Binding Description}" />
+        <controls:ButtonContentView ButtonCommand="{Binding NavigateToAddRecipeInformation}" ButtonText="Next" />
+    </VerticalStackLayout>
+</ContentPage>
