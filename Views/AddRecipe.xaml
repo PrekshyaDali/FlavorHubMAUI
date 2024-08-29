@@ -11,9 +11,7 @@
         <Grid Padding="20,5,20,0" HorizontalOptions="FillAndExpand">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <!--  Takes available space  -->
                 <ColumnDefinition Width="Auto" />
-                <!--  Content takes its natural size  -->
             </Grid.ColumnDefinitions>
             <Label
                 Grid.Column="0"
@@ -23,7 +21,8 @@
                 VerticalOptions="Center" />
             <Border
                 Grid.Column="1"
-                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkSecondaryColor}}" 
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                                  Dark={StaticResource DarkSecondaryColor}}"
                 HeightRequest="50"
                 HorizontalOptions="End"
                 StrokeShape="RoundRectangle 20"

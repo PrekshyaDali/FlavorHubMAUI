@@ -38,7 +38,6 @@ namespace FlavorHub.Models.SQLiteModels
                 }
                 catch (JsonException ex)
                 {
-                    // Log or handle deserialization error
                     Console.WriteLine($"Deserialization error: {ex.Message}");
                     return new List<IngredientModel>();
                 }
@@ -51,7 +50,6 @@ namespace FlavorHub.Models.SQLiteModels
                 }
                 catch (JsonException ex)
                 {
-                    // Log or handle serialization error
                     Console.WriteLine($"Serialization error: {ex.Message}");
                 }
             }
