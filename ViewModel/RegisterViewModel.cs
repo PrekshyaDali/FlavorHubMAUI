@@ -66,6 +66,7 @@ namespace FlavorHub.ViewModel
             {
                 var _d = ex.Data;
                 Console.WriteLine($"Signup failed, {ex.ToString()}");
+                await Application.Current.MainPage.DisplayAlert("Failed", "Failed creating your account", "ok");
             }
         }
 

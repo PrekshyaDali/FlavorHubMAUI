@@ -55,20 +55,6 @@
                             <Label Text="{Binding UserName}" TextColor="{StaticResource White}" />
                         </HorizontalStackLayout>
                     </Border>
-                    <Border
-                        Padding="5"
-                        BackgroundColor="#807A5242"
-                        HeightRequest="35"
-                        Opacity="100"
-                        StrokeShape="RoundRectangle 30"
-                        StrokeThickness="0"
-                        WidthRequest="35">
-                        <Image
-                            Aspect="AspectFill"
-                            HorizontalOptions="Center"
-                            Source="/Homepage/heart.png"
-                            VerticalOptions="Center" />
-                    </Border>
                 </FlexLayout>
 
                 <!--  for the cooking details  -->
