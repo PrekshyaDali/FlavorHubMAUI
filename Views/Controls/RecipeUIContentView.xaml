@@ -7,7 +7,7 @@
 
     <Border
         BindingContext="{x:Reference this}"
-        HeightRequest="250"
+        HeightRequest="{Binding ContentHeight}"
         StrokeShape="RoundRectangle 20"
         WidthRequest="{Binding ContentWidth}">
         <AbsoluteLayout>

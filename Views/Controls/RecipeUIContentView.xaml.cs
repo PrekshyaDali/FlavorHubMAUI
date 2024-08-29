@@ -23,6 +23,13 @@ namespace FlavorHub.Views.Controls
                typeof(RecipeUIContentView),
                300); // Default width set to 300
 
+        public static readonly BindableProperty ContentHeightProperty =
+         BindableProperty.Create(
+             nameof(ContentHeight),
+             typeof(int),
+             typeof(RecipeUIContentView),
+             250); // Default width set to 2500
+
         public static readonly BindableProperty UserNameProperty =
             BindableProperty.Create(
                 nameof(UserName),
@@ -69,6 +76,12 @@ namespace FlavorHub.Views.Controls
         {
             get => (int)GetValue(ContentWidthProperty);
             set => SetValue(ContentWidthProperty, value);
+        }
+
+        public int ContentHeight
+        {
+            get => (int)GetValue(ContentHeightProperty);
+            set => SetValue(ContentHeightProperty, value);
         }
 
         public ImageSource RecipeImage
