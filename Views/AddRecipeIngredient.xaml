@@ -61,7 +61,8 @@
                         <ImageButton
                             Command="{Binding Source={RelativeSource AncestorType={x:Type vm:IngredientViewModel}}, Path=RemoveIngredientCommand}"
                             CommandParameter="{Binding .}"
-                            Source="/TabBarIcons/profile.png" />
+                            Source="/Icons/delete.png"
+                            VerticalOptions="Center" />
                     </FlexLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

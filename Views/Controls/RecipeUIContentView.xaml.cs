@@ -1,3 +1,5 @@
+using System.Windows.Input;
+
 namespace FlavorHub.Views.Controls
 {
     public partial class RecipeUIContentView : ContentView
@@ -52,7 +54,8 @@ namespace FlavorHub.Views.Controls
                 typeof(string),
                 typeof(RecipeUIContentView),
                 default(string));
-        // Properties for binding
+
+
         public int ContentWidth
         {
             get => (int)GetValue(ContentWidthProperty);

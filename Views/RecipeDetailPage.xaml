@@ -22,7 +22,10 @@
                 StrokeShape="RoundRectangle 10"
                 StrokeThickness="0"
                 WidthRequest="60">
-                <ImageButton HeightRequest="20" Source="/TabBarIcons/profile.png" />
+                <ImageButton
+                    Command="{Binding FavoriteCommand}"
+                    HeightRequest="20"
+                    Source="{Binding FavoriteIcon, FallbackValue='HomePage/heart.png'}" />
             </Border>
         </Grid>
     </Shell.TitleView>
@@ -86,12 +89,12 @@
                     Text="{Binding SelectedRecipe.Description}" />
             </VerticalStackLayout>
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
-                <HorizontalStackLayout>
-                    <Image Source="/HomePage/clock.png" />
+                <HorizontalStackLayout Spacing="10">
+                    <Image HeightRequest="20" Source="/HomePage/clock.png" />
                     <Label Text="{Binding SelectedRecipe.CookingTime, StringFormat='{0} mins'}" />
                 </HorizontalStackLayout>
-                <HorizontalStackLayout>
-                    <Image Source="/HomePage/level.png" />
+                <HorizontalStackLayout Spacing="10">
+                    <Image HeightRequest="20" Source="/HomePage/level.png" />
                     <Label Text="{Binding SelectedRecipe.DifficultyLevel}" />
                 </HorizontalStackLayout>
             </HorizontalStackLayout>
@@ -209,10 +212,12 @@
                     <ImageButton
                         Grid.Column="1"
                         Command="{Binding SaveCommentCommand}"
+                        HeightRequest="20"
                         HorizontalOptions="End"
-                        Source="/TabBarIcons/profile.png" />
+                        Source="/Icons/send.png" />
                 </Grid>
             </Border>
         </VerticalStackLayout>
     </ScrollView>
+
 </ContentPage>

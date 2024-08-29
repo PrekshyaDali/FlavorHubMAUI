@@ -64,31 +64,37 @@
                             HorizontalOptions="Center"
                             Spacing="10"
                             VerticalOptions="Center">
-                            <Image Source="/HomePage/clock.png" VerticalOptions="Center" />
+                            <Image
+                                HeightRequest="20"
+                                Source="/HomePage/clock.png"
+                                VerticalOptions="Center" />
                             <Label
                                 FontSize="Micro"
-                                Text="{Binding CookingTime}"
-                                TextColor="white" />
+                                Text="{Binding CookingTime, StringFormat='{0} mins'}"
+                                TextColor="white"
+                                VerticalOptions="Center" />
                         </HorizontalStackLayout>
                         <HorizontalStackLayout
                             HorizontalOptions="Center"
                             Spacing="10"
                             VerticalOptions="Center">
-                            <Image Source="/HomePage/level.png" />
+                            <Image HeightRequest="20" Source="/HomePage/level.png" />
                             <Label
                                 FontSize="Micro"
                                 Text="{Binding DifficultyLevel}"
-                                TextColor="white" />
+                                TextColor="white"
+                                VerticalOptions="Center" />
                         </HorizontalStackLayout>
                         <HorizontalStackLayout
                             HorizontalOptions="Center"
                             Spacing="10"
                             VerticalOptions="Center">
-                            <Image Source="/HomePage/ingredients.png" />
+                            <Image HeightRequest="20" Source="/HomePage/ingredients.png" />
                             <Label
                                 FontSize="Micro"
                                 Text="Ingredients"
-                                TextColor="white" />
+                                TextColor="white"
+                                VerticalOptions="Center" />
                         </HorizontalStackLayout>
                     </HorizontalStackLayout>
                     <Label
