@@ -14,7 +14,7 @@ public partial class ProfilePage : ContentPage
         base.OnAppearing();
         if (BindingContext is ProfilePageViewModel profilePageViewModel)
         {
-            await profilePageViewModel.RefreshProfile();
+            await profilePageViewModel.LoadUserProfile();
         }
     }
     private async void ImageButton_Clicked(object sender, EventArgs e)

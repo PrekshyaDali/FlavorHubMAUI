@@ -69,11 +69,16 @@
 	  <None Remove="Resources\Images\HomePage\fullscreen.png" />
 	  <None Remove="Resources\Images\HomePage\ingredients.png" />
 	  <None Remove="Resources\Images\HomePage\level.png" />
+	  <None Remove="Resources\Images\Icons\close.png" />
 	  <None Remove="Resources\Images\Icons\delete.png" />
 	  <None Remove="Resources\Images\Icons\edit.png" />
+	  <None Remove="Resources\Images\Icons\filter.png" />
 	  <None Remove="Resources\Images\Icons\heart.png" />
 	  <None Remove="Resources\Images\Icons\heart_filled.png" />
 	  <None Remove="Resources\Images\Icons\logout.png" />
+	  <None Remove="Resources\Images\Icons\moon.png" />
+	  <None Remove="Resources\Images\Icons\send.png" />
+	  <None Remove="Resources\Images\Icons\sun.png" />
 	  <None Remove="Resources\Images\TabBarIcons\activity.png" />
 	  <None Remove="Resources\Images\TabBarIcons\gallery.png" />
 	  <None Remove="Resources\Images\vector.svg" />
@@ -106,6 +111,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\CustomStyles.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Controls\ActivityIndicatorContentView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Controls\LoadingContentView.xaml">

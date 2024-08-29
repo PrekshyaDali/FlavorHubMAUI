@@ -6,7 +6,7 @@
     <Color x:Key="PageBackgroundColor">Black</Color>
     <!--  Dark background color  -->
     <Color x:Key="DarkPrimaryColor">Green</Color>
-    <Color x:Key="DarkSecondaryColor">White</Color>
+    <Color x:Key="DarkSecondaryColor">#E8F6F6</Color>
     <Color x:Key="DarkPrimaryTextColor">Yellow</Color>
     <Color x:Key="DarkSecondaryTextColor">White</Color>
 </ResourceDictionary>
