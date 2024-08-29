@@ -49,7 +49,7 @@ namespace FlavorHub.ViewModel
                         ClearLoginModel();
                         await  _UserService.StoreUserIdAsync(user.UserId);
                         await Shell.Current.GoToAsync("//HomePage");
-                        await Application.Current.MainPage.DisplayAlert("ok", "You have successfully logged in", "ok");
+                        await Application.Current.MainPage.DisplayAlert("Success", "You have successfully logged in", "Ok");
                     }
                 }
             }

@@ -21,7 +21,6 @@
         Spacing="10"
         VerticalOptions="FillAndExpand">
         <Image HeightRequest="150" Source="flavorhub_black.svg" />
-        <controls:ActivityIndicatorContentView IsLoading="{Binding IsBusy}" />
         <VerticalStackLayout Margin="0,0,0,15" Spacing="15">
             <Label
                 Style="{StaticResource Header}"

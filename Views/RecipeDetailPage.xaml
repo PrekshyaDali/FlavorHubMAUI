@@ -49,18 +49,6 @@
                         <Label FontSize="Micro" Text="{Binding SelectedRecipe.CreatedDate, StringFormat='{0:MMMM d, yyyy}'}" />
                     </VerticalStackLayout>
                 </HorizontalStackLayout>
-                <Border
-                    BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
-                                                      Dark={StaticResource DarkSecondaryColor}}"
-                    HeightRequest="50"
-                    StrokeShape="RoundRectangle 20"
-                    StrokeThickness="0"
-                    WidthRequest="80">
-                    <Label
-                        HorizontalOptions="Center"
-                        Text="4.5"
-                        VerticalOptions="Center" />
-                </Border>
             </FlexLayout>
 
             <!--  //picture  -->
