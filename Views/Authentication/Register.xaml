@@ -102,17 +102,24 @@
                 TextColor="{StaticResource Tertiary}"
                 VerticalTextAlignment="Center" />
             <Button
+                BackgroundColor="{AppThemeBinding Light={DynamicResource LightPrimaryColor},
+                                                  Dark={DynamicResource DarkPrimaryColor}}"
                 Command="{Binding SignUpCommand}"
                 Text="Register"
-                TextColor="Black">
+                TextColor="{AppThemeBinding Light={DynamicResource LightPrimaryTextColor},
+                                            Dark={DynamicResource DarkPrimaryTextColor}}">
                 <Button.IsEnabled>
-                    <MultiBinding Converter="{StaticResource BooleanAndConverter}">
+                    <MultiBinding
+                        Converter="{StaticResource BooleanAndConverter}"
+                        FallbackValue="False"
+                        TargetNullValue="False">
                         <Binding Path="IsValid" Source="{x:Reference UsernameValidation}" />
                         <Binding Path="IsValid" Source="{x:Reference EmailValidation}" />
                         <Binding Path="IsValid" Source="{x:Reference PasswordValidation}" />
                     </MultiBinding>
                 </Button.IsEnabled>
             </Button>
+            <controls:ActivityIndicatorContentView IsLoading="{Binding IsBusy}" />
         </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

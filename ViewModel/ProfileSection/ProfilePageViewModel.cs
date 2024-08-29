@@ -1,16 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
 using Firebase.Auth;
-using FlavorHub.Models;
-using FlavorHub.NewFolder;
 using FlavorHub.Repositories.Interfaces;
-using Microsoft.Maui.Controls.Internals;
-using Microsoft.Maui.Storage;
-using System;
-using System.ComponentModel;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace FlavorHub.ViewModel.ProfileSection
@@ -42,7 +33,11 @@ namespace FlavorHub.ViewModel.ProfileSection
         [ObservableProperty]
         private bool _IsDarkMode;
 
-        public ICommand LogoutCommand;
+        [ObservableProperty]
+        private string? _Icon;
+
+
+        public ICommand LogoutCommand { get; set; }
 
         public ProfilePageViewModel(IUserRepository UserRepository, FirebaseAuthClient firebaseAuthClient, HomePageViewModel homePageViewModel, IUserService userService)
         {
@@ -62,22 +57,18 @@ namespace FlavorHub.ViewModel.ProfileSection
            {
                 Application.Current.UserAppTheme = AppTheme.Light;   
                 IsDarkMode = false;
+                Icon = "/Icons/moon.png";
            }
             else
             {
                 Application.Current.UserAppTheme = AppTheme.Dark;
                 IsDarkMode = true;
+                Icon = "/Icons/sun.png";
             }
         }
 
-        // Method to refresh the profile
-        public async Task RefreshProfile()
-        {
-            await LoadUserProfile();
-        }
-
         // Method to load the user's profile
-        private async Task LoadUserProfile()
+        public async Task LoadUserProfile()
         {
             try
             {
@@ -85,7 +76,7 @@ namespace FlavorHub.ViewModel.ProfileSection
                 var user = await _UserRepository.GetUserByIdAsync(userId.Value);
                 if (user != null)
                     {
-                        UserName = user.
+                        UserName = user.UserName;
                         Email = user.Email;
                         Bio = user.Bio;
                         ProfilePicture = user.ProfilePicture;
@@ -139,6 +130,7 @@ namespace FlavorHub.ViewModel.ProfileSection
                     ProfilePicture = result.FullPath;
                     User.ProfilePicture = ProfilePicture;
                 }
+                LoadUserProfile();
             }
             catch (Exception ex)
             {

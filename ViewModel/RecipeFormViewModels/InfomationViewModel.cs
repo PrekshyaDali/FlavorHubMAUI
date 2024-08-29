@@ -35,6 +35,17 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
 
         [ObservableProperty]
         private string? _MinutesPicker;
+
+        [ObservableProperty]
+        private string? _HoursPickerErrorMessage;
+
+        [ObservableProperty]
+        private string? _MinutesPickerErrorMessage;
+
+        [ObservableProperty]
+        private bool _IsButtonEnabled;
+
+        public ICommand ValidateCommand { get; set; }
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             if (query.ContainsKey("RecipeData"))
@@ -59,12 +70,21 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
             ServingSizeIncrease = new RelayCommand(IncreaseServingSize);
             ServingSizeDecrease = new RelayCommand(DecreaseServingSize);
             PropertyChanged += OnPropertyChanged;
+            ValidateCommand = new RelayCommand(ValidateInputs);
             WeakReferenceMessenger.Default.Register<ClearDataMessage>(this, (r, message) =>
             {
                 ClearData();
             });
         }
+        public void ValidateInputs()
+        {
+            bool isHoursValid = int.TryParse(HoursPicker, out var hours) && hours >= 0;
+            bool isMinutesValid = int.TryParse(MinutesPicker, out var minutes) && minutes >= 0 && minutes <= 60;
+            HoursPickerErrorMessage = isHoursValid ? string.Empty : "Hours cannot be negative or non-numeric.";
+            MinutesPickerErrorMessage = isMinutesValid ? string.Empty : "Minutes must be between 0 and 60, and numeric.";
 
+            IsButtonEnabled = isHoursValid && isMinutesValid;
+        }
         private void ClearData()
         {
             Title = null;

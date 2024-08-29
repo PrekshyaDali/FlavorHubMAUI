@@ -16,7 +16,7 @@
             </Grid.ColumnDefinitions>
             <Border
                 Grid.Column="1"
-                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightSecondaryColor},
                                                   Dark={StaticResource DarkSecondaryColor}}"
                 HeightRequest="50"
                 HorizontalOptions="End"
@@ -113,7 +113,8 @@
                         <Label Style="{StaticResource SubHeader}" Text="Ingredients" />
                     </VerticalStackLayout>
                     <Border
-                        BackgroundColor="{StaticResource PrimaryColor}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                                          Dark={StaticResource DarkPrimaryColor}}"
                         HeightRequest="50"
                         StrokeShape="RoundRectangle 10"
                         StrokeThickness="0"
@@ -155,7 +156,7 @@
                             <Border
                                 Margin="0,0,0,10"
                                 Padding="10"
-                                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                BackgroundColor="{AppThemeBinding Light={StaticResource LightSecondaryColor},
                                                                   Dark={StaticResource DarkSecondaryColor}}"
                                 HeightRequest="80"
                                 StrokeShape="RoundRectangle 20"
@@ -210,7 +211,7 @@
             <!--  //comments  -->
             <Border
                 Padding="10"
-                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightSecondaryColor},
                                                   Dark={StaticResource DarkSecondaryColor}}"
                 HeightRequest="80"
                 StrokeShape="RoundRectangle 10"
@@ -225,7 +226,7 @@
                         Grid.Column="1"
                         Command="{Binding SaveCommentCommand}"
                         HorizontalOptions="End"
-                        Source="/TabBarIcons/profile.png" />
+                        Source="/Icons/send.png" />
                 </Grid>
             </Border>
         </VerticalStackLayout>

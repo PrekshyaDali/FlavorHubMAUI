@@ -27,6 +27,9 @@ namespace FlavorHub.ViewModel
         [ObservableProperty]
         private RecipeViewModel? _SelectedRecipe;
 
+        [ObservableProperty]
+        private bool _NoMyRecipes;
+
         public MyRecipesViewModel(IRecipeRepository recipeRepository, IUserService userService, IFavoritesRepository favoritesRepository, IUserRepository userRepository )
         {
             _RecipeRepository = recipeRepository;
@@ -60,6 +63,11 @@ namespace FlavorHub.ViewModel
                             recipeViewModel.ProfilePicture = user.ProfilePicture;
                             RecipeCollection.Add(recipeViewModel);
                         }
+                        _NoMyRecipes = RecipeCollection.Count == 0;
+                    }
+                    else
+                    {
+                        _NoMyRecipes = true;
                     }
                 }
                 else

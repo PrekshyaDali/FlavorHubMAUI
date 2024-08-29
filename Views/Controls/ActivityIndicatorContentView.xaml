@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="FlavorHub.Views.Controls.ActivityIndicatorContentView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    IsVisible="{Binding IsLoading, Mode=TwoWay}">
+    <ContentView.Content>
+        <Grid BackgroundColor="Black" Opacity="0.5">
+            <ActivityIndicator
+                HeightRequest="50"
+                HorizontalOptions="Center"
+                IsRunning="True"
+                VerticalOptions="Center"
+                WidthRequest="50"
+                Color="White" />
+        </Grid>
+    </ContentView.Content>
+</ContentView>

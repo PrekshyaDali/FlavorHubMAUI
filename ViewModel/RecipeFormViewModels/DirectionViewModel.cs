@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace FlavorHub.ViewModel.RecipeFormViewModels
 {
@@ -39,6 +40,9 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
         [ObservableProperty]
         private string? _StepsJson;
 
+        [ObservableProperty]
+        private string _DirectionErrorMessage;
+
         // Commands
         public IAsyncRelayCommand AddDirectionCommand => new AsyncRelayCommand(AddDirectionsAsync);
         public IAsyncRelayCommand<DirectionModel> RemoveDirectionCommand => new AsyncRelayCommand<DirectionModel>(RemoveDirectionsAsync);
@@ -52,6 +56,7 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
                 ClearData();
             });
         }
+
         private void ClearData() {
             Title = null;
             Description = null;

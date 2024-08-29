@@ -32,6 +32,9 @@ namespace FlavorHub.ViewModel
         [ObservableProperty]
         private string _PasswordErrorMessage;
 
+        [ObservableProperty]
+        private bool _IsBusy;
+
         //Command for signup
         [RelayCommand]
         private async Task SignUp()
@@ -56,6 +59,7 @@ namespace FlavorHub.ViewModel
                         Email = _RegisterModel?.Email,
                         CreatedDate = DateTime.UtcNow
                     };
+                    IsBusy = true;
                     await _UserRepository.CreateUserAysnc(user);
                     await Application.Current.MainPage.DisplayAlert("Success", "You are registered successfully", "oks");
                     await Shell.Current.GoToAsync("//Login");
@@ -66,6 +70,10 @@ namespace FlavorHub.ViewModel
                 var _d = ex.Data;
                 Console.WriteLine($"Signup failed, {ex.ToString()}");
                 await Application.Current.MainPage.DisplayAlert("Failed", "Failed creating your account", "ok");
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 
