@@ -26,6 +26,9 @@ namespace FlavorHub.ViewModel
         private RecipeViewModel _SelectedRecipe;
 
         [ObservableProperty]
+        private bool _NoFavorites;
+
+        [ObservableProperty]
         private ObservableCollection<RecipeViewModel> _favoritesCollection; 
 
         public FavoritesViewModel(IFavoritesRepository favoritesRepository, IRecipeRepository recipeRepository, IUserService userService, IUserRepository userRepository)
@@ -64,6 +67,11 @@ namespace FlavorHub.ViewModel
                                 FavoritesCollection.Add(recipeviewmodel);
                             }
                         }
+                        NoFavorites = FavoritesCollection.Count == 0;
+                    }
+                    else
+                    {
+                        NoFavorites = true;
                     }
                 }
                 else

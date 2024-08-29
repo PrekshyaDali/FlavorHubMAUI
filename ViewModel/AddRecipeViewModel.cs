@@ -26,14 +26,35 @@ namespace FlavorHub.ViewModel
         [ObservableProperty]
         private string? _Description;
 
+        [ObservableProperty]
+        private bool _IsButtonEnabled;
+
+        [ObservableProperty]
+        private string? _TitleErrorMessage;
+
+        [ObservableProperty]
+        private string? _DescriptionErrorMessage;
+        public ICommand ValidateCommand {  get; set; }
+
         public AddRecipeViewModel()
         {
-            Console.WriteLine("I am here");
+            ValidateCommand = new RelayCommand(ValidateInputs);
             NavigateToAddRecipeInformation = new AsyncRelayCommand(NavigateRecipeInformation);
             WeakReferenceMessenger.Default.Register<ClearDataMessage>(this, (r, message) =>
             {
                 ClearData();
             });
+        }
+
+        private void ValidateInputs()
+        {
+            bool isTitleValid = !string.IsNullOrEmpty(Title);
+            bool isDescriptionValid = !string.IsNullOrEmpty(Description) && Description.Split(' ').Length >= 10;
+
+            TitleErrorMessage = isTitleValid ? string.Empty : "Title cannot be empty.";
+            DescriptionErrorMessage = isDescriptionValid ? string.Empty : "Description must be at least 10 words.";
+
+            IsButtonEnabled = isTitleValid && isDescriptionValid;
         }
 
         private void ClearData()

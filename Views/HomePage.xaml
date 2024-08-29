@@ -8,7 +8,7 @@
     <Shell.TitleView>
         <Grid>
             <FlexLayout AlignItems="Center" JustifyContent="SpaceBetween">
-                <HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="10">
                     <Label Text="Welcome Back," />
                     <Label Text="{Binding Users}" />
                 </HorizontalStackLayout>
