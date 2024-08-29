@@ -11,19 +11,11 @@ namespace FlavorHub.ViewModel
 {
     public partial class GalleryFullPageViewModel : ObservableObject
     {
-        //    Queryable property will tell the page that it should recieve a parameter named PhotoUrl from thenavigation dictionary
+        //    Queryable property will tell the page that it should recieve a parameter named PhotoUrl from the navigation dictionary
         [ObservableProperty]
         private string _PhotoUrl;
-        public ICommand SavePhotoCommand { get; set; }
         public GalleryFullPageViewModel()
         {
-            SavePhotoCommand = new AsyncRelayCommand(PhotoDownload);
-        }
-
-        [RelayCommand]
-        private async Task PhotoDownload()
-        {
-
         }
     }
 }

@@ -35,7 +35,8 @@
                     FontSize="Medium"
                     HorizontalOptions="Center"
                     Text="{Binding UserName}"
-                    TextColor="{AppThemeBinding Light={StaticResource LightPrimaryTextColor}, Dark={StaticResource DarkSecondaryTextColor}}" />
+                    TextColor="{AppThemeBinding Light={StaticResource LightPrimaryTextColor},
+                                                Dark={StaticResource DarkSecondaryTextColor}}" />
                 <Label
                     FontSize="Small"
                     HorizontalOptions="FillAndExpand"
@@ -58,13 +59,13 @@
                     FontAttributes="Bold"
                     FontSize="Medium"
                     Text="Dark Mode"
-                    TextColor="{AppThemeBinding Light={StaticResource LightPrimaryTextColor}, Dark={StaticResource DarkSecondaryTextColor}}"
+                    TextColor="{AppThemeBinding Light={StaticResource LightPrimaryTextColor},
+                                                Dark={StaticResource DarkSecondaryTextColor}}"
                     VerticalOptions="Center" />
-                <!--<Switch
-                    x:Name="ThemeSwitch"
-                    IsToggled="{Binding IsDarkMode, Mode=TwoWay}"
-                    VerticalOptions="Center" />-->
-                <ImageButton Command="{Binding SwitchThemeCommand}" Source="/TabBarIcons/profile.png" />
+                <ImageButton
+                    Command="{Binding SwitchThemeCommand}"
+                    HeightRequest="30"
+                    Source="/Icons/logout.png" />
             </FlexLayout>
         </Border>
         <Border Padding="10" StrokeShape="RoundRectangle 0">
@@ -73,9 +74,13 @@
                     FontAttributes="Bold"
                     FontSize="Medium"
                     Text="Log Out"
-                    TextColor="{AppThemeBinding Light={StaticResource LightPrimaryTextColor}, Dark={StaticResource DarkSecondaryTextColor}}"
+                    TextColor="{AppThemeBinding Light={StaticResource LightPrimaryTextColor},
+                                                Dark={StaticResource DarkSecondaryTextColor}}"
                     VerticalOptions="Center" />
-                <ImageButton HeightRequest="30" Source="/Icons/logout.png" />
+                <ImageButton
+                    Command="{Binding LogoutCommand}"
+                    HeightRequest="30"
+                    Source="/Icons/logout.png" />
             </FlexLayout>
         </Border>
     </VerticalStackLayout>

@@ -31,7 +31,7 @@ namespace FlavorHub.ViewModel
      
             try {
                 Debug.WriteLine("this is start");
-                await Shell.Current.GoToAsync("SecondSplashScreen");
+                await Shell.Current.GoToAsync("//SecondSplashScreen");
                 Debug.WriteLine("this is end");
             }
             catch (Exception ex)
@@ -43,7 +43,7 @@ namespace FlavorHub.ViewModel
         // Navigate to the third splash screen
         private async Task ThirdSplashScreenNavigate()
         {
-            await Shell.Current.GoToAsync("ThirdSplashScreen");
+            await Shell.Current.GoToAsync("//ThirdSplashScreen");
         }
     }
 }

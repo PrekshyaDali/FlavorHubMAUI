@@ -23,6 +23,7 @@ namespace FlavorHub.ViewModel
 
         [ObservableProperty]
         private ObservableCollection<RecipeViewModel> _RecipeCollection;
+
         [ObservableProperty]
         private RecipeViewModel? _SelectedRecipe;
 
@@ -44,7 +45,7 @@ namespace FlavorHub.ViewModel
                 Guid? userId = await _UserService.GetUserIdAsync();
                var user = await _UserRepository.GetUserByIdAsync(userId.Value);
 
-                if (userId != null)
+                if (user != null)
                 {
                     var recipes = await _RecipeRepository.GetRecipeByUserIdAsync(userId.Value);
                     if (recipes != null)
