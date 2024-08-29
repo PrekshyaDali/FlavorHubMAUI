@@ -11,7 +11,7 @@
             HorizontalOptions="FillAndExpand"
             StrokeShape="RoundRectangle 10"
             StrokeThickness="0"
-            Style="{DynamicResource EntryField}"
+            Style="{StaticResource EntryField}"
             VerticalOptions="Center">
             <Entry
                 HeightRequest="60"

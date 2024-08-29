@@ -70,6 +70,17 @@ namespace FlavorHub.Repositories
             }
         }
 
+        public async Task<IEnumerable<Recipe>> GetRecipeByUserIdAsync(Guid userId)
+        {
+            try
+            {
+                return await _Database.Table<Recipe>().Where(recipe => recipe.UserId == userId).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         public async Task UpdateRecipeAsync(Recipe recipe)
         {

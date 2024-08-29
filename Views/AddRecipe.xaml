@@ -23,7 +23,7 @@
                 VerticalOptions="Center" />
             <Border
                 Grid.Column="1"
-                BackgroundColor="{DynamicResource SecondaryColor}"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkSecondaryColor}}" 
                 HeightRequest="50"
                 HorizontalOptions="End"
                 StrokeShape="RoundRectangle 20"
@@ -47,14 +47,15 @@
             HorizontalOptions="FillAndExpand"
             StrokeShape="RoundRectangle 10"
             StrokeThickness="0"
-            Style="{DynamicResource EntryField}"
+            Style="{StaticResource EntryField}"
             VerticalOptions="Center">
             <Entry
                 HeightRequest="200"
                 HorizontalOptions="FillAndExpand"
                 MaxLength="250"
                 Placeholder="Short description here"
-                Text="{Binding Description}" />
+                Text="{Binding Description}"
+                WidthRequest="300" />
         </Border>
         <Label Text="{Binding Description}" />
         <controls:ButtonContentView ButtonCommand="{Binding NavigateToAddRecipeInformation}" ButtonText="Next" />

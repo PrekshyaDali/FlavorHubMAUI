@@ -23,31 +23,24 @@ namespace FlavorHub.Repositories
                 await _Database.InsertAsync(favorites);
 
             }
-            catch(Exception ex) 
-            { 
-             Console.WriteLine(ex);
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
 
             }
         }
 
-        public async Task DeleteFavoritesByIdAsync(Guid favoritesId)
+        public async Task DeleteFavoritesByIdAsync(Favorites favorites)
         {
             try
             {
-                var favorite = await _Database.FindAsync<Favorites>(favoritesId);
+                await _Database.DeleteAsync(favorites);
 
-                if (favorite != null)
-                {
-                    await _Database.DeleteAsync(favorite);
-                }
-                else
-                {
-                    Console.WriteLine($"Favorite with ID {favoritesId} not found.");
-                }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error deleting favorite: {ex}");
+                Console.WriteLine(ex);
+
             }
         }
 
@@ -67,6 +60,7 @@ namespace FlavorHub.Repositories
                 Console.WriteLine($"Error retrieving favorite: {ex.Message}");
                 return null;
             }
+
         }
 
         public async Task<int> GetFavoriteCountByRecipeIdAsync(Guid recipeId)
@@ -77,8 +71,8 @@ namespace FlavorHub.Repositories
                 return count;
             }
             catch (Exception ex) 
-            { 
-                Console.WriteLine($"{ex.Message}");
+            {
+                Console.WriteLine(ex);
                 return 0;
             }
         }
@@ -87,7 +81,7 @@ namespace FlavorHub.Repositories
         {
             try
             {
-               return await _Database.Table<Favorites>().Where(favorites => favorites.FavoritesId == favoritesId).FirstOrDefaultAsync();
+                return await _Database.Table<Favorites>().Where(favorites => favorites.FavoritesId == favoritesId).FirstOrDefaultAsync();
 
             }
             catch (Exception ex)
@@ -111,12 +105,14 @@ namespace FlavorHub.Repositories
                 return null;
 
             }
+
         }
 
         public async Task<IEnumerable<Favorites>> GetFavoritesByUserId(Guid userId)
         {
             try
             {
+                Console.WriteLine($"Fetching favorites for UserId: {userId}");
                 return await _Database.Table<Favorites>().Where(favorites => favorites.UserId == userId).ToListAsync();
 
             }

@@ -23,7 +23,7 @@
                 VerticalOptions="Center" />
             <Border
                 Grid.Column="1"
-                BackgroundColor="{DynamicResource SecondaryColor}"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkSecondaryColor}}" 
                 HeightRequest="50"
                 HorizontalOptions="End"
                 StrokeShape="RoundRectangle 20"

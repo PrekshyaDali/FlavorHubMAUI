@@ -62,23 +62,21 @@
 	<ItemGroup>
 	  <None Remove="appsettings.json" />
 	  <None Remove="Resources\Images\background.png" />
+	  <None Remove="Resources\Images\flavorHub_black.png" />
+	  <None Remove="Resources\Images\flavorHub_logo.png" />
 	  <None Remove="Resources\Images\HomePage\clock.png" />
 	  <None Remove="Resources\Images\HomePage\food.png" />
 	  <None Remove="Resources\Images\HomePage\fullscreen.png" />
-	  <None Remove="Resources\Images\HomePage\Ingredients.png" />
+	  <None Remove="Resources\Images\HomePage\ingredients.png" />
 	  <None Remove="Resources\Images\HomePage\level.png" />
-	  <None Remove="Resources\Images\HomePage\logout.png" />
-	  <None Remove="Resources\Images\HomePage\pasta.jpg" />
-	  <None Remove="Resources\Images\HomePage\sandwich.jpg" />
 	  <None Remove="Resources\Images\Icons\delete.png" />
-	  <None Remove="Resources\Images\Icons\edit_text.png" />
+	  <None Remove="Resources\Images\Icons\edit.png" />
 	  <None Remove="Resources\Images\Icons\heart.png" />
 	  <None Remove="Resources\Images\Icons\heart_filled.png" />
-	  <None Remove="Resources\Images\Icons\send.png" />
-	  <None Remove="Resources\Images\Icons\vector.svg" />
-	  <None Remove="Resources\Images\Splashes\splashfirst.png" />
+	  <None Remove="Resources\Images\Icons\logout.png" />
 	  <None Remove="Resources\Images\TabBarIcons\activity.png" />
 	  <None Remove="Resources\Images\TabBarIcons\gallery.png" />
+	  <None Remove="Resources\Images\vector.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -108,6 +106,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\CustomStyles.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Controls\LoadingContentView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\RecipeListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ActivityPage.xaml">
@@ -146,6 +150,9 @@
 	  <MauiXaml Update="Views\Controls\RecipeUIContentView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\FavoritesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Gallery.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -153,6 +160,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\HomePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MyRecipes.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Profile\EditProfile.xaml">

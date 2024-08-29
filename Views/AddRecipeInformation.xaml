@@ -22,7 +22,7 @@
                 VerticalOptions="Center" />
             <Border
                 Grid.Column="1"
-                BackgroundColor="{DynamicResource SecondaryColor}"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkSecondaryColor}}" 
                 HeightRequest="50"
                 HorizontalOptions="End"
                 StrokeShape="RoundRectangle 20"
@@ -60,7 +60,7 @@
                 HorizontalOptions="FillAndExpand"
                 JustifyContent="SpaceBetween">
                 <Border
-                    BackgroundColor="{DynamicResource SecondaryColor}"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkSecondaryColor}}" 
                     StrokeShape="RoundRectangle 10"
                     StrokeThickness="0"
                     WidthRequest="50">
@@ -76,7 +76,7 @@
                 <Label Text="hrs" VerticalOptions="End" />
 
                 <Border
-                    BackgroundColor="{DynamicResource SecondaryColor}"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkSecondaryColor}}" 
                     StrokeShape="RoundRectangle 10"
                     StrokeThickness="0"
                     WidthRequest="50">
@@ -101,7 +101,7 @@
             <Border
                 Grid.Row="1"
                 Grid.Column="1"
-                BackgroundColor="{DynamicResource SecondaryColor}"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkSecondaryColor}}" 
                 StrokeShape="RoundRectangle 10"
                 StrokeThickness="0">
                 <FlexLayout JustifyContent="SpaceBetween" VerticalOptions="Center">
@@ -130,7 +130,7 @@
             <Border
                 Grid.Row="2"
                 Grid.Column="1"
-                BackgroundColor="{DynamicResource SecondaryColor}"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkSecondaryColor}}" 
                 StrokeShape="RoundRectangle 10"
                 StrokeThickness="0">
                 <Picker

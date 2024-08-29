@@ -4,57 +4,115 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
+    xmlns:converter="clr-namespace:FlavorHub.Converters"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:vm="clr-namespace:FlavorHub.ViewModel"
     x:DataType="vm:RegisterViewModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanAndConverter x:Key="BooleanAndConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
-    <AbsoluteLayout Padding="20">
-        <!--  Background Image  -->
-        <VerticalStackLayout
-            HorizontalOptions="FillAndExpand"
-            Spacing="10"
-            VerticalOptions="FillAndExpand">
+    <!--  Background Image  -->
+    <VerticalStackLayout
+        Padding="20"
+        HorizontalOptions="FillAndExpand"
+        Spacing="10"
+        VerticalOptions="FillAndExpand">
+        <Image HeightRequest="200" Source="flavorhub_black.svg" />
 
-            <VerticalStackLayout Margin="0,0,0,15" Spacing="15">
-                <Label
-                    Style="{DynamicResource Header}"
-                    Text="Register"
-                    VerticalOptions="Center" />
-                <Label Text="Your culinary journey starts here—let's share our flavors!" />
-            </VerticalStackLayout>
-
-            <controls:InputFieldContentView
-                EntryData="{Binding RegisterModel.UserName}"
-                HorizontalOptions="FillAndExpand"
-                Keyboard="Text"
-                Placeholder="Enter Username" />
-
-            <controls:InputFieldContentView
-                EntryData="{Binding RegisterModel.Email}"
-                Keyboard="Text"
-                Placeholder="Enter Email" />
-            <controls:InputFieldContentView
-                EntryData="{Binding RegisterModel.Password}"
-                IsPassword="True"
-                Keyboard="Text"
-                Placeholder="Password" />
-
-            <VerticalStackLayout
-                Margin="0,30,0,0"
-                Spacing="10"
-                VerticalOptions="End">
-
-                <Label
-                    FontSize="Small"
-                    HorizontalTextAlignment="Center"
-                    Text="By registering you agree to our Terms and Conditions"
-                    TextColor="{DynamicResource SecondaryTextColor}"
-                    VerticalTextAlignment="Center"
-                    WidthRequest="200" />
-                <controls:ButtonContentView
-                    ButtonCommand="{Binding SignUpCommand}"
-                    ButtonText="Save"
-                    ButtonTextColor="Black" />
-            </VerticalStackLayout>
+        <VerticalStackLayout Margin="0,0,0,15" Spacing="15">
+            <Label
+                Style="{StaticResource Header}"
+                Text="Register"
+                VerticalOptions="Center" />
+            <Label Text="Your culinary journey starts here—let's share our flavors!" />
         </VerticalStackLayout>
-    </AbsoluteLayout>
+
+        <controls:InputFieldContentView
+            EntryData="{Binding RegisterModel.UserName}"
+            HorizontalOptions="FillAndExpand"
+            Keyboard="Text"
+            Placeholder="Enter Username">
+            <controls:InputFieldContentView.Behaviors>
+                <toolkit:MultiValidationBehavior x:Name="UsernameValidation" Flags="ValidateOnUnfocusing,ValidateOnValueChanged">
+                    <toolkit:CharactersValidationBehavior toolkit:MultiValidationBehavior.Error="Please enter an alphanumeric username of 2-15 characters." RegexPattern="^[a-zA-Z0-9]{2,15}$" />
+                </toolkit:MultiValidationBehavior>
+            </controls:InputFieldContentView.Behaviors>
+        </controls:InputFieldContentView>
+        <Label
+            FontSize="12"
+            IsVisible="{Binding Source={x:Reference UsernameValidation}, Path=IsValid, Converter={toolkit:InvertedBoolConverter}}"
+            Text="{Binding Source={x:Reference UsernameValidation}, Path=Errors[0]}" />
+
+        <controls:InputFieldContentView
+            EntryData="{Binding RegisterModel.Email}"
+            Keyboard="Text"
+            Placeholder="Enter Email">
+            <controls:InputFieldContentView.Behaviors>
+                <toolkit:EmailValidationBehavior x:Name="EmailValidation" Flags="ValidateOnValueChanged,ValidateOnUnfocusing" />
+            </controls:InputFieldContentView.Behaviors>
+        </controls:InputFieldContentView>
+        <Label
+            FontSize="12"
+            IsVisible="{Binding Source={x:Reference EmailValidation}, Path=IsValid, Converter={toolkit:InvertedBoolConverter}}"
+            Text="{Binding Source={x:Reference EmailValidation}, StringFormat='Please enter a valid email address.'}" />
+
+        <controls:InputFieldContentView
+            EntryData="{Binding RegisterModel.Password}"
+            IsPassword="True"
+            Keyboard="Text"
+            Placeholder="Password">
+            <controls:InputFieldContentView.Behaviors>
+                <toolkit:MultiValidationBehavior x:Name="PasswordValidation" Flags="ValidateOnValueChanged,ValidateOnUnfocusing">
+                    <toolkit:CharactersValidationBehavior
+                        x:Name="DigitValidation"
+                        toolkit:MultiValidationBehavior.Error="Password must contain at least 1 digit"
+                        CharacterType="Digit"
+                        MinimumCharacterTypeCount="1" />
+                    <toolkit:CharactersValidationBehavior
+                        x:Name="UpperValidation"
+                        toolkit:MultiValidationBehavior.Error="Password must contain at least 1 uppercase letter"
+                        CharacterType="UppercaseLetter"
+                        MinimumCharacterTypeCount="1" />
+                    <toolkit:CharactersValidationBehavior
+                        x:Name="SymbolValidation"
+                        toolkit:MultiValidationBehavior.Error="Password must contain at least 1 symbol"
+                        CharacterType="NonAlphanumericSymbol"
+                        MinimumCharacterTypeCount="1" />
+                    <toolkit:CharactersValidationBehavior
+                        x:Name="AnyValidation"
+                        toolkit:MultiValidationBehavior.Error="Password must be at least 8 characters long"
+                        CharacterType="Any"
+                        MinimumCharacterTypeCount="8" />
+                </toolkit:MultiValidationBehavior>
+            </controls:InputFieldContentView.Behaviors>
+        </controls:InputFieldContentView>
+
+        <VerticalStackLayout
+            Margin="0,30,0,0"
+            Spacing="10"
+            VerticalOptions="End">
+
+            <Label
+                FontSize="Micro"
+                HorizontalTextAlignment="Center"
+                Text="By registering you agree to our Terms and Conditions"
+                TextColor="{StaticResource Tertiary}"
+                VerticalTextAlignment="Center" />
+            <Button
+                Command="{Binding SignUpCommand}"
+                Text="Register"
+                TextColor="Black">
+                <Button.IsEnabled>
+                    <MultiBinding Converter="{StaticResource BooleanAndConverter}">
+                        <Binding Path="IsValid" Source="{x:Reference UsernameValidation}" />
+                        <Binding Path="IsValid" Source="{x:Reference EmailValidation}" />
+                        <Binding Path="IsValid" Source="{x:Reference PasswordValidation}" />
+                    </MultiBinding>
+                </Button.IsEnabled>
+            </Button>
+        </VerticalStackLayout>
+    </VerticalStackLayout>
 </ContentPage>

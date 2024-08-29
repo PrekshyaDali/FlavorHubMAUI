@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth.Repository;
 using FlavorHub.Models.SQLiteModels;
@@ -37,10 +39,11 @@ namespace FlavorHub.ViewModel
 
         [ObservableProperty]
         private string? _FavoriteIcon;
-        
+
         public ICommand FavoriteCommand { get; set; }
         private readonly ICommentsRepository _CommentRepository;
         private readonly IUserService _UserService;
+        private readonly IFavoritesRepository _FavoritesRepostory;
         private readonly Repositories.Interfaces.IUserRepository _UserRepository;
         private readonly IFavoritesRepository _FavoritesRepostory;
 
@@ -56,8 +59,8 @@ namespace FlavorHub.ViewModel
             _FavoritesRepostory = favoritesRepository;
             SaveCommentCommand = new AsyncRelayCommand(SaveComments);
             FavoriteCommand = new AsyncRelayCommand(ToggleFavorite);
-
         }
+
         public async Task ToggleFavorite()
         {
             if (SelectedRecipe == null)
@@ -66,20 +69,21 @@ namespace FlavorHub.ViewModel
                 return;
             }
 
-            // Await the asynchronous method and handle the nullable result
-            var userIdResult = await _UserService.GetUserIdAsync();
-            if (userIdResult != null)
+            var userIdString = await _UserService.GetUserIdAsync();
+            if (userIdString != null)
             {
-                var userId = userIdResult.Value; 
+                var userId = userIdString.Value;
                 var favorite = await _FavoritesRepostory.GetFavoriteByRecipeAndUserAsync(SelectedRecipe.RecipeId, userId);
 
                 try
                 {
                     if (favorite != null)
                     {
-                        await _FavoritesRepostory.DeleteFavoritesByIdAsync(favorite.FavoritesId);
+                        await _FavoritesRepostory.DeleteFavoritesByIdAsync(favorite);
                         IsFavorite = false;
                         FavoriteIcon = "/Icons/heart.png";
+                        await Toast.Make("Removed from favorites", ToastDuration.Short).Show();
+                        SelectedRecipe.FavoriteCount--;
 
                     }
                     else
@@ -93,20 +97,24 @@ namespace FlavorHub.ViewModel
 
                         IsFavorite = true;
                         FavoriteIcon = "/Icons/heart_filled.png";
-                        var popup = new HeartPopUp();
                         await _FavoritesRepostory.AddFavoritesAsync(newFavorite);
+                        await Toast.Make("Added to favorites", ToastDuration.Short).Show();
+                        SelectedRecipe.FavoriteCount++;
                     }
+                    OnPropertyChanged(nameof(FavoriteCount));
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Error toggling favorite status: {ex}");
                 }
+
             }
             else
             {
                 Console.WriteLine("User ID is invalid or missing.");
             }
         }
+        public int FavoriteCount => SelectedRecipe?.FavoriteCount ?? 0;
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             if (query.ContainsKey("SelectedRecipe"))
@@ -121,7 +129,7 @@ namespace FlavorHub.ViewModel
                     {
                         IsFavorite = true;
                         FavoriteIcon = "/Icons/heart_filled.png";
-                        
+
                     }
                     else
                     {
@@ -129,12 +137,15 @@ namespace FlavorHub.ViewModel
                         FavoriteIcon = "/Icons/heart.png";
                     }
                 }
+                OnPropertyChanged(nameof(SelectedRecipe));
+                OnPropertyChanged(nameof(FavoriteCount));
                 if (SelectedRecipe != null)
                 {
                     LoadComments(); 
                 }
             }
         }
+
 
         public async Task SaveComments()
         {

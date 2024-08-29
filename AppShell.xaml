@@ -20,14 +20,18 @@
         </Tab>
         <Tab Title="Activity" Icon="/TabBarIcons/activity.png">
             <ShellContent
-                Title="activity"
-                ContentTemplate="{DataTemplate views:ActivityPage}"
-                Route="ActivityPage" />
+                Title="My Favorites"
+                ContentTemplate="{DataTemplate views:FavoritesPage}"
+                Route="FavoritesPage" />
+            <ShellContent
+                Title="My Recipes"
+                ContentTemplate="{DataTemplate views:MyRecipes}"
+                Route="MyRecipes" />
         </Tab>
         <Tab Title="Add" Icon="/Icons/plus.png">
             <ShellContent ContentTemplate="{DataTemplate views:AddRecipe}" Route="AddRecipe" />
         </Tab>
-        <Tab Title="Gallery" Icon="/TabBarIcons/notification.png">
+        <Tab Title="Gallery" Icon="/TabBarIcons/gallery.png">
             <ShellContent ContentTemplate="{DataTemplate views:Gallery}" Route="Gallery" />
         </Tab>
         <Tab Title="Profile" Icon="/TabBarIcons/profile.png">

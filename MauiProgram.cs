@@ -52,7 +52,9 @@ namespace FlavorHub
             builder.Services.AddSingleton<InfomationViewModel>();
             builder.Services.AddSingleton<RecipeViewModel>();
             builder.Services.AddSingleton<RecipeDetailPageViewModel>();
-
+            builder.Services.AddSingleton<MyRecipesViewModel>();
+            builder.Services.AddSingleton<FavoritesViewModel>();
+            builder.Services.AddSingleton<RecipeListViewModel>();
 
             //pages
             builder.Services.AddSingleton<Register>();
@@ -62,7 +64,9 @@ namespace FlavorHub
             builder.Services.AddSingleton<ProfilePage>();
             builder.Services.AddSingleton<EditProfile>();
             builder.Services.AddSingleton<RecipeDetailPage>();
-
+            builder.Services.AddSingleton<MyRecipes>();
+            builder.Services.AddSingleton<FavoritesPage>();
+            builder.Services.AddSingleton<RecipeListPage>();
             //recipe pages
 
             builder.Services.AddSingleton<AddRecipe>();

@@ -3,9 +3,11 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Firebase.Auth;
 using FlavorHub.Models;
+using FlavorHub.NewFolder;
 using FlavorHub.Repositories.Interfaces;
 using Microsoft.Maui.Storage;
 using System;
+using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -17,14 +19,7 @@ namespace FlavorHub.ViewModel.ProfileSection
         private readonly IUserRepository _UserRepository;
         private readonly FirebaseAuthClient _FirebaseAuthClient;
         public ICommand SaveProfileDetailsCommand { get; set; }
-
-        public ProfilePageViewModel(IUserRepository UserRepository, FirebaseAuthClient firebaseAuthClient)
-        {
-            _UserRepository = UserRepository;
-            _FirebaseAuthClient = firebaseAuthClient;
-            SaveProfileDetailsCommand = new AsyncRelayCommand(SaveProfile);
-            LoadUserProfile();
-        }
+        public ICommand SwitchThemeCommand { get; set; }
 
         [ObservableProperty]
         private Models.SQLiteModels.User _user;
@@ -33,13 +28,39 @@ namespace FlavorHub.ViewModel.ProfileSection
         private string _UserName;
 
         [ObservableProperty]
-        private string _ProfilePicture;
+        private string _ProfilePicture = "dot_net.png";
 
         [ObservableProperty]
         private string _Bio;
 
         [ObservableProperty]
         private string _Email;
+
+        [ObservableProperty]
+        private bool _IsDarkMode;
+
+        public ProfilePageViewModel(IUserRepository UserRepository, FirebaseAuthClient firebaseAuthClient)
+        {
+            _UserRepository = UserRepository;
+            _FirebaseAuthClient = firebaseAuthClient;
+            SaveProfileDetailsCommand = new AsyncRelayCommand(SaveProfile);
+            SwitchThemeCommand = new RelayCommand(ToggleSwitch);
+            _IsDarkMode = Application.Current.RequestedTheme == AppTheme.Dark;
+            LoadUserProfile();
+        }
+        public void ToggleSwitch()
+        {
+            if (_IsDarkMode) 
+           {
+                Application.Current.UserAppTheme = AppTheme.Light;   
+                IsDarkMode = false;
+           }
+            else
+            {
+                Application.Current.UserAppTheme = AppTheme.Dark;
+                IsDarkMode = true;
+            }
+        }
 
         // Method to refresh the profile
         public async Task RefreshProfile()

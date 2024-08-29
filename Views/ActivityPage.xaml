@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<TabbedPage
+<ContentPage
     x:Class="FlavorHub.Views.ActivityPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:FlavorHub.Views"
-    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2021/maui/toolkit">
-    <ContentPage Title="Home">
-        <Label Text="Dummy text for Home Page" />
-    </ContentPage>
-    <ContentPage Title="News">
-        <Label Text="Dummy text for News Page" />
-    </ContentPage>
-    <ContentPage Title="Support">
-        <Label Text="Dummy text for Support Page" />
-    </ContentPage>
-</TabbedPage>
+    Title="ActivityPage" />

@@ -7,25 +7,28 @@ using System.Threading.Tasks;
 
 namespace FlavorHub.ViewModel.RecipeFormViewModels
 {
-    public class RecipeViewModel : ObservableObject
+    public partial class RecipeViewModel : ObservableObject
     {
         private readonly Recipe _Recipe;
         private readonly IUserService _UserService;
+        private readonly IFavoritesRepository _FavoritesRepository;
         private readonly IUserRepository _UserRepository;
         private string? _UserName;
         private string? _ProfilePicture;
 
-        public RecipeViewModel(Recipe recipe, IUserService userService, IUserRepository userRepository)
+        public RecipeViewModel(Recipe recipe, IUserService userService, IUserRepository userRepository, IFavoritesRepository favoritesRepository)
         {
             _Recipe = recipe;
             _UserService = userService;
             _UserRepository = userRepository;
+            _FavoritesRepository = favoritesRepository;
         }
 
         public async Task InitializeAsync()
         {
             await LoadUserName();
             await LoadProfilePicture();
+            await LoadFavoriteCount();
         }
 
         private async Task LoadUserName()
@@ -65,12 +68,18 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
         public string UserName
         {
             get => _UserName;
-            private set => SetProperty(ref _UserName, value);
+            set => SetProperty(ref _UserName, value);
         }
         public string ProfilePicture
         {
             get => _ProfilePicture;
-            private set => SetProperty(ref _ProfilePicture, value);
+            set => SetProperty(ref _ProfilePicture, value);
+        }
+        [ObservableProperty]
+        private int _FavoriteCount;
+        public async Task LoadFavoriteCount()
+        {
+            FavoriteCount = await _FavoritesRepository.GetFavoriteCountByRecipeIdAsync(_Recipe.RecipeId);
         }
         public string FirstImageUrl => _Recipe.ImageUrls.FirstOrDefault() ?? "dotnet_bot.png";
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace FlavorHub.Models.SQLiteModels
 {
     [SQLite.Table("Favorites")]
-    public  class Favorites
+    public class Favorites
     {
         [PrimaryKey]
         public Guid FavoritesId { get; set; } = Guid.NewGuid();
@@ -17,6 +17,6 @@ namespace FlavorHub.Models.SQLiteModels
 
         public Guid RecipeId { get; set; }
 
-        public DateTime CreatedDate {  get; set; } = DateTime.Now;
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
     }
 }
