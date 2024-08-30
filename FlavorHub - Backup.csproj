@@ -38,12 +38,9 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
-	  <AndroidPackageFormat>apk</AndroidPackageFormat>
-	</PropertyGroup>
-
 	<ItemGroup>
 		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splashscreenbackground.svg" Color="#3FB4B1" BaseSize="1024,1024" />
@@ -67,17 +64,21 @@
 	  <None Remove="Resources\Images\background.png" />
 	  <None Remove="Resources\Images\flavorHub_black.png" />
 	  <None Remove="Resources\Images\flavorHub_logo.png" />
-	  <None Remove="Resources\Images\flavorhuhicon.svg" />
 	  <None Remove="Resources\Images\HomePage\clock.png" />
 	  <None Remove="Resources\Images\HomePage\food.png" />
 	  <None Remove="Resources\Images\HomePage\fullscreen.png" />
 	  <None Remove="Resources\Images\HomePage\ingredients.png" />
 	  <None Remove="Resources\Images\HomePage\level.png" />
+	  <None Remove="Resources\Images\Icons\close.png" />
 	  <None Remove="Resources\Images\Icons\delete.png" />
 	  <None Remove="Resources\Images\Icons\edit.png" />
+	  <None Remove="Resources\Images\Icons\filter.png" />
 	  <None Remove="Resources\Images\Icons\heart.png" />
 	  <None Remove="Resources\Images\Icons\heart_filled.png" />
 	  <None Remove="Resources\Images\Icons\logout.png" />
+	  <None Remove="Resources\Images\Icons\moon.png" />
+	  <None Remove="Resources\Images\Icons\send.png" />
+	  <None Remove="Resources\Images\Icons\sun.png" />
 	  <None Remove="Resources\Images\TabBarIcons\activity.png" />
 	  <None Remove="Resources\Images\TabBarIcons\gallery.png" />
 	  <None Remove="Resources\Images\vector.svg" />
@@ -87,10 +88,6 @@
 	  <EmbeddedResource Include="appsettings.json">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </EmbeddedResource>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiImage Include="Resources\AppIcon\flavorhubicon.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -150,9 +147,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Controls\ButtonContentView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Controls\HeartPopUp.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Controls\InputFieldContentView.xaml">

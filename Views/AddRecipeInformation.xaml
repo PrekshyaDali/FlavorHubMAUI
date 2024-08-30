@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:vm="clr-namespace:FlavorHub.ViewModel.RecipeFormViewModels"
     x:DataType="vm:InfomationViewModel">
     <Shell.TitleView>
@@ -59,7 +60,7 @@
                 HorizontalOptions="FillAndExpand"
                 JustifyContent="SpaceBetween">
                 <Border
-                    BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                    BackgroundColor="{AppThemeBinding Light={StaticResource LightSecondaryColor},
                                                       Dark={StaticResource DarkSecondaryColor}}"
                     StrokeShape="RoundRectangle 10"
                     StrokeThickness="0"
@@ -69,14 +70,16 @@
                         HorizontalOptions="Center"
                         Keyboard="Numeric"
                         Text="{Binding HoursPicker, Mode=TwoWay}"
-                        VerticalOptions="Center" />
+                        VerticalOptions="Center">
+                        <Entry.Behaviors>
+                            <toolkit:EventToCommandBehavior Command="{Binding ValidateCommand}" EventName="TextChanged" />
+                        </Entry.Behaviors>
+                    </Entry>
                 </Border>
-
                 <!--  Label for Hours  -->
                 <Label Text="hrs" VerticalOptions="End" />
-
                 <Border
-                    BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                    BackgroundColor="{AppThemeBinding Light={StaticResource LightSecondaryColor},
                                                       Dark={StaticResource DarkSecondaryColor}}"
                     StrokeShape="RoundRectangle 10"
                     StrokeThickness="0"
@@ -86,12 +89,17 @@
                         HorizontalOptions="Center"
                         Keyboard="Numeric"
                         Text="{Binding MinutesPicker, Mode=TwoWay}"
-                        VerticalOptions="Center" />
+                        VerticalOptions="Center">
+                        <Entry.Behaviors>
+                            <toolkit:EventToCommandBehavior Command="{Binding ValidateCommand}" EventName="TextChanged" />
+                        </Entry.Behaviors>
+                    </Entry>
                 </Border>
 
                 <!--  Label for Minutes  -->
                 <Label Text="mins" VerticalOptions="End" />
             </FlexLayout>
+
 
             <!--  Second Row  -->
             <Label
@@ -102,7 +110,7 @@
             <Border
                 Grid.Row="1"
                 Grid.Column="1"
-                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightSecondaryColor},
                                                   Dark={StaticResource DarkSecondaryColor}}"
                 StrokeShape="RoundRectangle 10"
                 StrokeThickness="0">
@@ -132,7 +140,7 @@
             <Border
                 Grid.Row="2"
                 Grid.Column="1"
-                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightSecondaryColor},
                                                   Dark={StaticResource DarkSecondaryColor}}"
                 StrokeShape="RoundRectangle 10"
                 StrokeThickness="0">
@@ -151,6 +159,13 @@
                 </Picker>
             </Border>
         </Grid>
-        <controls:ButtonContentView ButtonCommand="{Binding NavigateToIngredientsPage}" ButtonText="Next" />
+        <Label Text="{Binding HoursPickerErrorMessage}" TextColor="Red" />
+        <Label Text="{Binding MinutesPickerErrorMessage}" TextColor="Red" />
+        <Button
+            BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                              Dark={StaticResource DarkPrimaryColor}}"
+            Command="{Binding NavigateToIngredientsPage}"
+            IsEnabled="{Binding IsButtonEnabled}"
+            Text="Next" />
     </VerticalStackLayout>
 </ContentPage>

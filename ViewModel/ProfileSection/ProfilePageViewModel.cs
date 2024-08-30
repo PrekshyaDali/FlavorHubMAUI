@@ -1,15 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
 using Firebase.Auth;
-using FlavorHub.Models;
-using FlavorHub.NewFolder;
 using FlavorHub.Repositories.Interfaces;
-using Microsoft.Maui.Storage;
-using System;
-using System.ComponentModel;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace FlavorHub.ViewModel.ProfileSection
@@ -18,6 +10,8 @@ namespace FlavorHub.ViewModel.ProfileSection
     {
         private readonly IUserRepository _UserRepository;
         private readonly FirebaseAuthClient _FirebaseAuthClient;
+        private readonly IUserService _UserService;
+        private HomePageViewModel _HomePageViewModel;
         public ICommand SaveProfileDetailsCommand { get; set; }
         public ICommand SwitchThemeCommand { get; set; }
 
@@ -39,14 +33,23 @@ namespace FlavorHub.ViewModel.ProfileSection
         [ObservableProperty]
         private bool _IsDarkMode;
 
-        public ProfilePageViewModel(IUserRepository UserRepository, FirebaseAuthClient firebaseAuthClient)
+        [ObservableProperty]
+        private string? _Icon;
+
+
+        public ICommand LogoutCommand { get; set; }
+
+        public ProfilePageViewModel(IUserRepository UserRepository, FirebaseAuthClient firebaseAuthClient, HomePageViewModel homePageViewModel, IUserService userService)
         {
             _UserRepository = UserRepository;
             _FirebaseAuthClient = firebaseAuthClient;
+            _HomePageViewModel = homePageViewModel;
+            _UserService = userService;
             SaveProfileDetailsCommand = new AsyncRelayCommand(SaveProfile);
             SwitchThemeCommand = new RelayCommand(ToggleSwitch);
+            LogoutCommand = new RelayCommand(SignOut);
             _IsDarkMode = Application.Current.RequestedTheme == AppTheme.Dark;
-            LoadUserProfile();
+            Icon = "Icons/sun.png";
         }
         public void ToggleSwitch()
         {
@@ -54,42 +57,13 @@ namespace FlavorHub.ViewModel.ProfileSection
            {
                 Application.Current.UserAppTheme = AppTheme.Light;   
                 IsDarkMode = false;
+                Icon = "/Icons/moon.png";
            }
             else
             {
                 Application.Current.UserAppTheme = AppTheme.Dark;
                 IsDarkMode = true;
-            }
-        }
-
-        // Method to refresh the profile
-        public async Task RefreshProfile()
-        {
-            await LoadUserProfile();
-        }
-
-        // Method to load the user's profile
-        private async Task LoadUserProfile()
-        {
-            try
-            {
-                var currentUser = _FirebaseAuthClient.User;
-                if (currentUser != null)
-                {
-                    var user = await _UserRepository.GetUserByFirebaseUidAsync(currentUser.Uid);
-                    if (user != null)
-                    {
-                        UserName = user.UserName;
-                        Email = user.Email;
-                        Bio = user.Bio;
-                        ProfilePicture = user.ProfilePicture;
-                        User = user;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
+                Icon = "/Icons/sun.png";
             }
         }
 
@@ -108,6 +82,7 @@ namespace FlavorHub.ViewModel.ProfileSection
 
                     await _UserRepository.UpdateUserAsync(_user);
                     await Application.Current.MainPage.DisplayAlert("Success", "Profile updated", "OK");
+                    LoadUserProfile();
                 }
             }
             catch (Exception ex)
@@ -116,6 +91,30 @@ namespace FlavorHub.ViewModel.ProfileSection
             }
         }
 
+
+        // Method to load the user's profile
+        public async Task LoadUserProfile()
+        {
+            try
+            {
+                Guid? userId = await _UserService.GetUserIdAsync();
+                var user = await _UserRepository.GetUserByIdAsync(userId.Value);
+                if (user != null)
+                {
+                    UserName = user.UserName;
+                    Email = user.Email;
+                    Bio = user.Bio;
+                    ProfilePicture = user.ProfilePicture;
+                    User = user;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
+  
         // Command to select a profile picture
         [RelayCommand]
         private async Task SelectProfilePicture()
@@ -134,11 +133,18 @@ namespace FlavorHub.ViewModel.ProfileSection
                     ProfilePicture = result.FullPath;
                     User.ProfilePicture = ProfilePicture;
                 }
+                LoadUserProfile();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error selecting profile picture: {ex}");
             }
+        }
+
+        //sign out
+        public void SignOut()
+        {
+            _HomePageViewModel.LogOutCommand.Execute(null);
         }
     }
 }

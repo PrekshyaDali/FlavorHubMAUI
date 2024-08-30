@@ -7,7 +7,7 @@
     <!--  Light background color  -->
     <Color x:Key="LightPrimaryColor">#3FB4B1</Color>
     <!--  Main color  -->
-    <Color x:Key="LightSecondaryColor">#D5EEEE</Color>
+    <Color x:Key="LightSecondaryColor">#E8F6F6</Color>
     <!--  Accent color  -->
     <Color x:Key="LightPrimaryTextColor">Black</Color>
     <!--  Main text color  -->

@@ -23,8 +23,12 @@ namespace FlavorHub.ViewModel
 
         [ObservableProperty]
         private ObservableCollection<RecipeViewModel> _RecipeCollection;
+
         [ObservableProperty]
         private RecipeViewModel? _SelectedRecipe;
+
+        [ObservableProperty]
+        private bool _NoMyRecipes;
 
         public MyRecipesViewModel(IRecipeRepository recipeRepository, IUserService userService, IFavoritesRepository favoritesRepository, IUserRepository userRepository )
         {
@@ -44,7 +48,7 @@ namespace FlavorHub.ViewModel
                 Guid? userId = await _UserService.GetUserIdAsync();
                var user = await _UserRepository.GetUserByIdAsync(userId.Value);
 
-                if (userId != null)
+                if (user != null)
                 {
                     var recipes = await _RecipeRepository.GetRecipeByUserIdAsync(userId.Value);
                     if (recipes != null)
@@ -59,6 +63,11 @@ namespace FlavorHub.ViewModel
                             recipeViewModel.ProfilePicture = user.ProfilePicture;
                             RecipeCollection.Add(recipeViewModel);
                         }
+                        _NoMyRecipes = RecipeCollection.Count == 0;
+                    }
+                    else
+                    {
+                        _NoMyRecipes = true;
                     }
                 }
                 else
