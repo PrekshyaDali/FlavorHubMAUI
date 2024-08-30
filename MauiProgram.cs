@@ -36,7 +36,7 @@ namespace FlavorHub
             builder.Services.AddSingleton(new FirebaseAuthClient(new FirebaseAuthConfig(){
                 ApiKey= "AIzaSyBQBIS3Z8z6ENR9j1YNsDXdA4JtfAAL1fI",
                 AuthDomain = "flavorhub-authentication.firebaseapp.com",
-                Providers = [new EmailProvider()]
+                Providers = new FirebaseAuthProvider[] { new EmailProvider() }
             }));
 
             //viewModels

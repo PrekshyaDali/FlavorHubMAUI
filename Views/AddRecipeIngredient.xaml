@@ -22,7 +22,8 @@
                 VerticalOptions="Center" />
             <Border
                 Grid.Column="1"
-                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkSecondaryColor}}" 
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                                  Dark={StaticResource DarkSecondaryColor}}"
                 HeightRequest="50"
                 HorizontalOptions="End"
                 StrokeShape="RoundRectangle 20"
@@ -36,37 +37,41 @@
         </Grid>
     </Shell.TitleView>
 
-    <VerticalStackLayout Padding="20,50,20,0" Spacing="20">
-        <FlexLayout JustifyContent="SpaceBetween">
-            <Label Style="{StaticResource Header}" Text="Ingredients" />
-            <controls:ButtonContentView
-                ButtonCommand="{Binding AddIngredientCommand}"
-                ButtonText="Add more +"
-                HorizontalOptions="End"
-                WidthRequest="100" />
-        </FlexLayout>
+    <ScrollView>
+        <VerticalStackLayout Padding="20,50,20,0" Spacing="20">
+            <FlexLayout JustifyContent="SpaceBetween">
+                <Label Style="{StaticResource Header}" Text="Ingredients" />
+                <controls:ButtonContentView
+                    ButtonCommand="{Binding AddIngredientCommand}"
+                    ButtonText="Add more +"
+                    HorizontalOptions="End"
+                    WidthRequest="100" />
+            </FlexLayout>
 
-        <CollectionView ItemsSource="{Binding Ingredients}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:IngredientModel">
-                    <FlexLayout Margin="0,0,0,10" JustifyContent="SpaceBetween">
-                        <controls:InputFieldContentView
-                            EntryData="{Binding IngredientName}"
-                            Placeholder="Ingredient Name"
-                            WidthRequest="200" />
-                        <controls:InputFieldContentView
-                            EntryData="{Binding Measurement}"
-                            Placeholder="measurement"
-                            WidthRequest="70" />
-                        <ImageButton
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:IngredientViewModel}}, Path=RemoveIngredientCommand}"
-                            CommandParameter="{Binding .}"
-                            Source="/Icons/delete.png" />
-                    </FlexLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
-        <controls:ButtonContentView ButtonCommand="{Binding NavigateToDirections}" ButtonText="Next" />
-    </VerticalStackLayout>
+            <CollectionView ItemsSource="{Binding Ingredients}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:IngredientModel">
+                        <VerticalStackLayout Spacing="10">
+                            <FlexLayout JustifyContent="SpaceBetween">
+                                <Label Text="Ingredients" />
+                                <Label Text="Measurements" />
+                            </FlexLayout>
+                            <FlexLayout Margin="0,0,0,10" JustifyContent="SpaceBetween">
+                                <controls:InputFieldContentView
+                                    EntryData="{Binding IngredientName}"
+                                    Placeholder="Ingredient Name"
+                                    WidthRequest="200" />
+                                <controls:InputFieldContentView EntryData="{Binding Measurement}" WidthRequest="70" />
+                                <ImageButton
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:IngredientViewModel}}, Path=RemoveIngredientCommand}"
+                                    CommandParameter="{Binding .}"
+                                    Source="/Icons/delete.png" />
+                            </FlexLayout>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <controls:ButtonContentView ButtonCommand="{Binding NavigateToDirections}" ButtonText="Next" />
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
