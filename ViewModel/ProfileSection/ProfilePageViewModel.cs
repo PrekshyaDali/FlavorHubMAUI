@@ -41,7 +41,6 @@ namespace FlavorHub.ViewModel.ProfileSection
 
         public ProfilePageViewModel(IUserRepository UserRepository, FirebaseAuthClient firebaseAuthClient, HomePageViewModel homePageViewModel, IUserService userService)
         {
-            LoadUserProfile();
             _UserRepository = UserRepository;
             _FirebaseAuthClient = firebaseAuthClient;
             _HomePageViewModel = homePageViewModel;
@@ -68,28 +67,6 @@ namespace FlavorHub.ViewModel.ProfileSection
             }
         }
 
-        // Method to load the user's profile
-        public async Task LoadUserProfile()
-        {
-            try
-            {
-                Guid? userId = await _UserService.GetUserIdAsync();
-                var user = await _UserRepository.GetUserByIdAsync(userId.Value);
-                if (user != null)
-                    {
-                        UserName = user.UserName;
-                        Email = user.Email;
-                        Bio = user.Bio;
-                        ProfilePicture = user.ProfilePicture;
-                        User = user;
-                    }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
-
         // Command to save the user's profile
         [RelayCommand]
         private async Task SaveProfile()
@@ -105,6 +82,7 @@ namespace FlavorHub.ViewModel.ProfileSection
 
                     await _UserRepository.UpdateUserAsync(_user);
                     await Application.Current.MainPage.DisplayAlert("Success", "Profile updated", "OK");
+                    LoadUserProfile();
                 }
             }
             catch (Exception ex)
@@ -113,6 +91,30 @@ namespace FlavorHub.ViewModel.ProfileSection
             }
         }
 
+
+        // Method to load the user's profile
+        public async Task LoadUserProfile()
+        {
+            try
+            {
+                Guid? userId = await _UserService.GetUserIdAsync();
+                var user = await _UserRepository.GetUserByIdAsync(userId.Value);
+                if (user != null)
+                {
+                    UserName = user.UserName;
+                    Email = user.Email;
+                    Bio = user.Bio;
+                    ProfilePicture = user.ProfilePicture;
+                    User = user;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
+  
         // Command to select a profile picture
         [RelayCommand]
         private async Task SelectProfilePicture()
