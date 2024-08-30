@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:FlavorHub.Views.Controls"
     xmlns:vm="clr-namespace:FlavorHub.ViewModel"
-    Title="SecondSplashScreen">
+>
     <ContentPage.BindingContext>
         <vm:SplashScreenViewModel />
     </ContentPage.BindingContext>

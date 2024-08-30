@@ -8,6 +8,6 @@ namespace FlavorHub.Models
 {
     public class ClearDataMessage
     {
-        //this is an empty class used as a source for messenger
+        //this is an empty model for the purpose of messenger
     }
 }

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="FlavorHub.Views.AddRecipe"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -35,12 +34,22 @@
             </Border>
         </Grid>
     </Shell.TitleView>
-    <VerticalStackLayout
-        Padding="20,50,20,0"
-        x:DataType="vm:AddRecipeViewModel"
-        Spacing="20">
+    <VerticalStackLayout Padding="20,50,20,0" Spacing="10">
         <Label Style="{StaticResource Header}" Text="Title" />
-        <controls:InputFieldContentView EntryData="{Binding Title}" Placeholder="Title" />
+        <Border
+            Padding="10"
+            BackgroundColor="{AppThemeBinding Light={StaticResource LightSecondaryColor},
+                                              Dark={StaticResource DarkSecondaryColor}}"
+            HeightRequest="80"
+            StrokeShape="RoundRectangle 10"
+            StrokeThickness="0">
+            <Entry Placeholder="Title" Text="{Binding Title}">
+                <Entry.Behaviors>
+                    <toolkit:EventToCommandBehavior Command="{Binding ValidateCommand}" EventName="TextChanged" />
+                </Entry.Behaviors>
+            </Entry>
+        </Border>
+        <Label Text="{Binding TitleErrorMessage}" TextColor="Red" />
         <Border
             Padding="10,5,10,5"
             HorizontalOptions="FillAndExpand"
@@ -53,10 +62,21 @@
                 HorizontalOptions="FillAndExpand"
                 MaxLength="250"
                 Placeholder="Short description here"
-                Text="{Binding Description}"
-                WidthRequest="300" />
+                Text="{Binding Description, Mode=TwoWay}"
+                TextColor="{AppThemeBinding Light={StaticResource LightPrimaryTextColor},
+                                            Dark={StaticResource DarkPrimaryTextColor}}">
+                <Entry.Behaviors>
+                    <toolkit:EventToCommandBehavior Command="{Binding ValidateCommand}" EventName="TextChanged" />
+                </Entry.Behaviors>
+            </Entry>
         </Border>
+        <Label Text="{Binding DescriptionErrorMessage}" TextColor="Red" />
         <Label Text="{Binding Description}" />
-        <controls:ButtonContentView ButtonCommand="{Binding NavigateToAddRecipeInformation}" ButtonText="Next" />
+        <Button
+            BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                              Dark={StaticResource DarkPrimaryColor}}"
+            Command="{Binding NavigateToAddRecipeInformation}"
+            IsEnabled="{Binding IsButtonEnabled}"
+            Text="Next" />
     </VerticalStackLayout>
 </ContentPage>

@@ -1,4 +1,5 @@
-﻿using FlavorHub.NewFolder;
+﻿using Firebase.Auth;
+using FlavorHub.NewFolder;
 using FlavorHub.Views;
 using FlavorHub.Views.Authentication;
 using FlavorHub.Views.SplashScreens;
@@ -10,14 +11,25 @@ namespace FlavorHub
         public App()
         {
             InitializeComponent();
-
             MainPage = new AppShell();
             
         }
         protected override async void OnStart()
         {
             base.OnStart();
-            if (Shell.Current != null)
+            await CheckUserSesssionAsync();
+        }
+
+        private async Task CheckUserSesssionAsync()
+        {
+            var userId = await SecureStorage.GetAsync("UserId");
+
+            if (!string.IsNullOrEmpty(userId))
+            {
+
+                await Shell.Current.GoToAsync("//HomePage");
+            }
+            else
             {
                 await Shell.Current.GoToAsync("//FirstSplashScreen");
             }
