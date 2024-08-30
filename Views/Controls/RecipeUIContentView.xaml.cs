@@ -1,3 +1,5 @@
+using System.Windows.Input;
+
 namespace FlavorHub.Views.Controls
 {
     public partial class RecipeUIContentView : ContentView

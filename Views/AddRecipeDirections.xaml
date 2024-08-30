@@ -12,9 +12,7 @@
         <Grid Padding="20,5,20,0" HorizontalOptions="FillAndExpand">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <!--  Takes available space  -->
                 <ColumnDefinition Width="Auto" />
-                <!--  Content takes its natural size  -->
             </Grid.ColumnDefinitions>
             <Label
                 Grid.Column="0"

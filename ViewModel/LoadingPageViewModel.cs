@@ -13,7 +13,6 @@ namespace FlavorHub.ViewModel
       public LoadingPageViewModel(FirebaseAuthClient firebaseAuthClient)
         {
             _FirebaseAuthClient = firebaseAuthClient;
-            //CheckUserLoginDetails();
         }
     }
 }

@@ -213,10 +213,12 @@
                     <ImageButton
                         Grid.Column="1"
                         Command="{Binding SaveCommentCommand}"
+                        HeightRequest="20"
                         HorizontalOptions="End"
                         Source="/Icons/send.png" />
                 </Grid>
             </Border>
         </VerticalStackLayout>
     </ScrollView>
+
 </ContentPage>
