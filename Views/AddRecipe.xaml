@@ -73,6 +73,8 @@
         <Label Text="{Binding DescriptionErrorMessage}" TextColor="Red" />
         <Label Text="{Binding Description}" />
         <Button
+            BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                              Dark={StaticResource DarkPrimaryColor}}"
             Command="{Binding NavigateToAddRecipeInformation}"
             IsEnabled="{Binding IsButtonEnabled}"
             Text="Next" />

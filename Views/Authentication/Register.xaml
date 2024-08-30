@@ -119,7 +119,11 @@
                 </Entry.Behaviors>
             </Entry>
         </Border>
-
+        <Label
+            FontSize="12"
+            IsVisible="{Binding Source={x:Reference PasswordValidation}, Path=IsValid, Converter={toolkit:InvertedBoolConverter}}"
+            Text="{Binding Source={x:Reference PasswordValidation}, StringFormat='Password must have one uppercase,one symbol and at leaset 8 characters long.'}"
+            TextColor="Red" />
         <VerticalStackLayout
             Margin="0,30,0,0"
             Spacing="10"

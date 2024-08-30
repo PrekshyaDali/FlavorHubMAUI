@@ -22,8 +22,6 @@ namespace FlavorHub.ViewModel
 {
     public partial class HomePageViewModel : ObservableObject
     {
-        private readonly FirebaseAuthClient _FirebaseAuthClient;
-
         private readonly IUserRepository _UserRepository;
         private readonly IUserService _UserService;
         private readonly IRecipeRepository _RecipeRepository;
@@ -43,16 +41,13 @@ namespace FlavorHub.ViewModel
         private RecipeViewModel? _SelectedRecipe;
         public ICommand RefreshCommand { get; set; }
         public ICommand SelectionCommand { get; set; }
-
         public ICommand NavigateToViewAllCommand { get; set; }
 
         [ObservableProperty]
         private LoginModel _LoginModel = new();
 
-        public HomePageViewModel(FirebaseAuthClient firebaseAuthClient, IUserRepository userRepository, IRecipeRepository recipeRepository, IUserService userService, IFavoritesRepository favoritesRepository)
+        public HomePageViewModel( IUserRepository userRepository, IRecipeRepository recipeRepository, IUserService userService, IFavoritesRepository favoritesRepository)
         {
-            LoadUserName();
-            _FirebaseAuthClient = firebaseAuthClient;
             _UserRepository = userRepository;
             _UserService = userService;
             _RecipeRepository = recipeRepository;
@@ -78,7 +73,11 @@ namespace FlavorHub.ViewModel
                     return recipeViewModel;
                 }));
 
+                var sortedByFavorites = recipeViewModels.OrderByDescending(rv => rv.FavoriteCount).Take(10);
+
+                PopularRecipes = new ObservableCollection<RecipeViewModel>(sortedByFavorites);
                 Recipes = new ObservableCollection<RecipeViewModel>(recipeViewModels);
+
             }
             catch (Exception ex)
             {
@@ -100,7 +99,6 @@ namespace FlavorHub.ViewModel
         { "Recipes", sortedRecipes }
         });
         }
-
 
         public async Task LoadUserName()
         {
@@ -131,8 +129,6 @@ namespace FlavorHub.ViewModel
             }
         }
 
-
-
         [RelayCommand]
         private async Task RefreshRecipes()
         {
@@ -156,7 +152,7 @@ namespace FlavorHub.ViewModel
             if (action == "Yes")
             {
                 // Sign out the user
-                _FirebaseAuthClient.SignOut();
+                //_FirebaseAuthClient.SignOut();
                 _LoginModel = new LoginModel();
                 _UserRepository.ClearCachedUser();
                 SecureStorage.RemoveAll();

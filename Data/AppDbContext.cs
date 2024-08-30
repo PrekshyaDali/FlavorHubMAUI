@@ -15,6 +15,7 @@ namespace FlavorHub.Data
         {
             _Database = database;
             _Database.CreateTableAsync<Models.SQLiteModels.User>().Wait();
+            _Database.CreateTableAsync<Models.SQLiteModels.Comments>().Wait();
             _Database.CreateTableAsync<Models.SQLiteModels.Recipe>().Wait();
             _Database.CreateTableAsync<Models.SQLiteModels.Favorites>().Wait();
 

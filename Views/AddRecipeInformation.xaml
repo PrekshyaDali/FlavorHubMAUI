@@ -62,7 +62,7 @@
                 HorizontalOptions="FillAndExpand"
                 JustifyContent="SpaceBetween">
                 <Border
-                    BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                    BackgroundColor="{AppThemeBinding Light={StaticResource LightSecondaryColor},
                                                       Dark={StaticResource DarkSecondaryColor}}"
                     StrokeShape="RoundRectangle 10"
                     StrokeThickness="0"
@@ -81,7 +81,7 @@
                 <!--  Label for Hours  -->
                 <Label Text="hrs" VerticalOptions="End" />
                 <Border
-                    BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                    BackgroundColor="{AppThemeBinding Light={StaticResource LightSecondaryColor},
                                                       Dark={StaticResource DarkSecondaryColor}}"
                     StrokeShape="RoundRectangle 10"
                     StrokeThickness="0"
@@ -112,7 +112,7 @@
             <Border
                 Grid.Row="1"
                 Grid.Column="1"
-                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightSecondaryColor},
                                                   Dark={StaticResource DarkSecondaryColor}}"
                 StrokeShape="RoundRectangle 10"
                 StrokeThickness="0">
@@ -142,7 +142,7 @@
             <Border
                 Grid.Row="2"
                 Grid.Column="1"
-                BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightSecondaryColor},
                                                   Dark={StaticResource DarkSecondaryColor}}"
                 StrokeShape="RoundRectangle 10"
                 StrokeThickness="0">
@@ -164,6 +164,8 @@
         <Label Text="{Binding HoursPickerErrorMessage}" TextColor="Red" />
         <Label Text="{Binding MinutesPickerErrorMessage}" TextColor="Red" />
         <Button
+            BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                              Dark={StaticResource DarkPrimaryColor}}"
             Command="{Binding NavigateToIngredientsPage}"
             IsEnabled="{Binding IsButtonEnabled}"
             Text="Next" />

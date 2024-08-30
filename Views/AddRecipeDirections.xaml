@@ -41,10 +41,10 @@
     <VerticalStackLayout Padding="20,50,20,0" Spacing="20">
         <FlexLayout JustifyContent="SpaceBetween">
             <Label Style="{StaticResource Header}" Text="Directions" />
-            <Button
-                Command="{Binding AddDirectionCommand}"
+            <controls:ButtonContentView
+                ButtonCommand="{Binding AddDirectionCommand}"
+                ButtonText="Add more"
                 HorizontalOptions="End"
-                Text="Add more"
                 WidthRequest="100" />
         </FlexLayout>
         <CollectionView ItemsSource="{Binding Directions}">
@@ -66,6 +66,10 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Button Command="{Binding NavigateToAddUploads}" Text="Next" />
+        <Button
+            BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
+                                              Dark={StaticResource DarkPrimaryColor}}"
+            Command="{Binding NavigateToAddUploads}"
+            Text="Next" />
     </VerticalStackLayout>
 </ContentPage>
