@@ -63,11 +63,11 @@ namespace FlavorHub.ViewModel
                             recipeViewModel.ProfilePicture = user.ProfilePicture;
                             RecipeCollection.Add(recipeViewModel);
                         }
-                        _NoMyRecipes = RecipeCollection.Count == 0;
+                        NoMyRecipes = RecipeCollection.Count == 0;
                     }
                     else
                     {
-                        _NoMyRecipes = true;
+                        NoMyRecipes = true;
                     }
                 }
                 else

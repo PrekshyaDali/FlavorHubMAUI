@@ -111,7 +111,7 @@
                     <Label
                         Style="{StaticResource SubHeader}"
                         Text="{Binding RecipeFoodName}"
-                        TextColor="{StaticResource white}" />
+                        TextColor="{StaticResource DarkPrimaryTextColor}" />
                 </VerticalStackLayout>
 
 

@@ -49,7 +49,7 @@ namespace FlavorHub.ViewModel.ProfileSection
             SwitchThemeCommand = new RelayCommand(ToggleSwitch);
             LogoutCommand = new RelayCommand(SignOut);
             _IsDarkMode = Application.Current.RequestedTheme == AppTheme.Dark;
-            Icon = "Icons/sun.png";
+            Icon = "Icons/moon.png";
         }
         public void ToggleSwitch()
         {

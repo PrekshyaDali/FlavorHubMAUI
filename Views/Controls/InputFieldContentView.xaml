@@ -20,7 +20,8 @@
                 IsReadOnly="False"
                 Keyboard="{Binding Keyboard}"
                 Placeholder="{Binding Placeholder, FallbackValue='Enter here'}"
-                Text="{Binding EntryData, Mode=TwoWay}" />
+                Text="{Binding EntryData, Mode=TwoWay}"
+                TextColor="{StaticResource LightPrimaryTextColor}" />
         </Border>
     </StackLayout>
 </ContentView>

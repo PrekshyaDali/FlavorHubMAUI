@@ -30,9 +30,14 @@ namespace FlavorHub.ViewModel
         public ICommand FavoriteCommand { get; set; }
         [ObservableProperty]
         private ObservableCollection<RecipeViewModel> _recipes;
+
         private ObservableCollection<RecipeViewModel> _cachedRecipes;
+
         [ObservableProperty]
         private ObservableCollection<RecipeViewModel> _popularRecipes;
+
+        [ObservableProperty]
+        private bool _IsBusy;
 
         [ObservableProperty]
         private string? _Users;
@@ -61,6 +66,7 @@ namespace FlavorHub.ViewModel
         //loading the recipes from the database
         public async Task LoadRecipes()
         {
+            IsBusy = true;
             try
             {
                 var recipes = await _RecipeRepository.GetAllRecipesAsync();
@@ -82,6 +88,10 @@ namespace FlavorHub.ViewModel
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 

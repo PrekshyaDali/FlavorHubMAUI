@@ -8,5 +8,5 @@
     <Color x:Key="DarkPrimaryColor">#3FB4B1</Color>
     <Color x:Key="DarkSecondaryColor">#E8F6F6</Color>
     <Color x:Key="DarkPrimaryTextColor">White</Color>
-    <Color x:Key="DarkSecondaryTextColor">black</Color>
+    <Color x:Key="DarkSecondaryTextColor">White</Color>
 </ResourceDictionary>

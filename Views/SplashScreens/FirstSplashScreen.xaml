@@ -11,6 +11,7 @@
         <CarouselView
             Grid.Row="0"
             Grid.RowSpan="3"
+            PositionChanged="CarouselView_PositionChanged"
             IndicatorView="IndicatorView"
             ItemsSource="{Binding SplashScreens}"
             Loop="False"
