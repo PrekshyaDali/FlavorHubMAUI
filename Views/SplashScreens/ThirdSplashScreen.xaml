@@ -32,7 +32,6 @@
                 </LinearGradientBrush>
             </RoundRectangle.Fill>
         </RoundRectangle>
-
         <VerticalStackLayout Grid.Row="1" Padding="20">
             <Label
                 Style="{StaticResource Header}"

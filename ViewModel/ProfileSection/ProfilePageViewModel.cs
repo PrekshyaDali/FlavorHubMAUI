@@ -67,31 +67,6 @@ namespace FlavorHub.ViewModel.ProfileSection
             }
         }
 
-        // Command to save the user's profile
-        [RelayCommand]
-        private async Task SaveProfile()
-        {
-            try
-            {
-                if (_user != null)
-                {
-                    _user.UserName = UserName;
-                    _user.Bio = Bio;
-                    _user.Email = Email;
-                    _user.ProfilePicture = ProfilePicture;
-
-                    await _UserRepository.UpdateUserAsync(_user);
-                    await Application.Current.MainPage.DisplayAlert("Success", "Profile updated", "OK");
-                    LoadUserProfile();
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error saving profile: {ex}");
-            }
-        }
-
-
         // Method to load the user's profile
         public async Task LoadUserProfile()
         {
@@ -131,15 +106,41 @@ namespace FlavorHub.ViewModel.ProfileSection
                 {
                     // Save the file path returned by the file picker
                     ProfilePicture = result.FullPath;
-                    User.ProfilePicture = ProfilePicture;
+                    _user.ProfilePicture = ProfilePicture;
                 }
-                LoadUserProfile();
+                SaveProfile();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error selecting profile picture: {ex}");
             }
         }
+
+        // Command to save the user's profile
+        [RelayCommand]
+        private async Task SaveProfile()
+        {
+            try
+            {
+
+                if (_user != null)
+                {
+                    _user.UserName = UserName;
+                    _user.Bio = Bio;
+                    _user.Email = Email;
+                    _user.ProfilePicture = ProfilePicture;
+
+                    await _UserRepository.UpdateUserAsync(_user);
+                    await Application.Current.MainPage.DisplayAlert("Success", "Profile updated", "OK");
+                    await LoadUserProfile();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving profile: {ex}");
+            }
+        }
+
 
         //sign out
         public void SignOut()
