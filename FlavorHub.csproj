@@ -188,12 +188,6 @@
 	  <MauiXaml Update="Views\SplashScreens\FirstSplashScreen.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\SplashScreens\SecondSplashScreen.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\SplashScreens\ThirdSplashScreen.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionFlavorHubHideInfoBar="True" /></VisualStudio></ProjectExtensions>
