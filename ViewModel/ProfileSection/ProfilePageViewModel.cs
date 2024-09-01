@@ -49,7 +49,7 @@ namespace FlavorHub.ViewModel.ProfileSection
             _IsDarkMode = Application.Current.RequestedTheme == AppTheme.Dark;
             Icon = "Icons/moon.png";
         }
-        public void ToggleSwitch()
+        public  void ToggleSwitch()
         {
             if (_IsDarkMode) 
            {
@@ -74,10 +74,10 @@ namespace FlavorHub.ViewModel.ProfileSection
                 var user = await _UserRepository.GetUserByIdAsync(userId.Value);
                 if (user != null)
                 {
-                    UserName = user.UserName;
-                    Email = user.Email;
-                    Bio = user.Bio;
-                    ProfilePicture = user.ProfilePicture;
+                    UserName = user?.UserName;
+                    Email = user?.Email;
+                    Bio = user?.Bio;
+                    ProfilePicture = user?.ProfilePicture;
                     User = user;
                 }
             }
@@ -86,7 +86,6 @@ namespace FlavorHub.ViewModel.ProfileSection
                 Console.WriteLine(ex.ToString());
             }
         }
-
   
         // Command to select a profile picture
         [RelayCommand]
@@ -106,7 +105,7 @@ namespace FlavorHub.ViewModel.ProfileSection
                     ProfilePicture = result.FullPath;
                     _user.ProfilePicture = ProfilePicture;
                 }
-                SaveProfile();
+                await SaveProfile();
             }
             catch (Exception ex)
             {
