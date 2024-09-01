@@ -165,14 +165,14 @@ namespace FlavorHub.ViewModel
                 Console.WriteLine($"UserId string: {userId}");
                 Console.WriteLine($"RecipeId string: {SelectedRecipe.RecipeId}");
                 await _CommentRepository.AddCommentAsync(comments);
-                Application.Current.MainPage.DisplayAlert("Success", "Comments added successfully", "ok");
+                await Application.Current.MainPage.DisplayAlert("Success", "Comments added successfully", "ok");
                 CommentText = string.Empty;
                 await LoadComments();
 
             }
             catch (Exception ex)
             {
-                Application.Current.MainPage.DisplayAlert("Failed", "Failed adding comments", "ok");
+                await Application.Current.MainPage.DisplayAlert("Failed", "Failed adding comments", "ok");
                 Console.WriteLine(ex.ToString());
             }
         }

@@ -114,7 +114,6 @@
                         TextColor="{StaticResource DarkPrimaryTextColor}" />
                 </VerticalStackLayout>
 
-
                 <!--  for full screen  -->
                 <Border
                     Grid.Row="2"

@@ -30,6 +30,7 @@
                 <Label
                     HorizontalOptions="Center"
                     Text="1/5"
+                    TextColor="{StaticResource LightPrimaryTextColor}"
                     VerticalOptions="Center" />
             </Border>
         </Grid>
@@ -43,7 +44,10 @@
             HeightRequest="80"
             StrokeShape="RoundRectangle 10"
             StrokeThickness="0">
-            <Entry Placeholder="Title" Text="{Binding Title}">
+            <Entry
+                Placeholder="Title"
+                Text="{Binding Title}"
+                TextColor="{StaticResource LightPrimaryTextColor}">
                 <Entry.Behaviors>
                     <toolkit:EventToCommandBehavior Command="{Binding ValidateCommand}" EventName="TextChanged" />
                 </Entry.Behaviors>
@@ -63,8 +67,7 @@
                 MaxLength="250"
                 Placeholder="Short description here"
                 Text="{Binding Description, Mode=TwoWay}"
-                TextColor="{AppThemeBinding Light={StaticResource LightPrimaryTextColor},
-                                            Dark={StaticResource DarkPrimaryTextColor}}">
+                TextColor="{StaticResource LightPrimaryTextColor}">
                 <Entry.Behaviors>
                     <toolkit:EventToCommandBehavior Command="{Binding ValidateCommand}" EventName="TextChanged" />
                 </Entry.Behaviors>

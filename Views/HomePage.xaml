@@ -12,7 +12,8 @@
                     <Label Text="Welcome Back," />
                     <Label
                         Text="{Binding Users}"
-                        TextColor="{StaticResource Tertiary}"
+                        TextColor="{AppThemeBinding Light={StaticResource Tertiary},
+                                                    Dark={StaticResource DarkPrimaryTextColor}}"
                         VerticalOptions="Center" />
                 </HorizontalStackLayout>
 
@@ -32,7 +33,10 @@
                     <Label Style="{StaticResource SubHeader}" Text="What do you want to cook today?" />
                 </Border>
                 <VerticalStackLayout Grid.Row="2">
-                    <Label Style="{StaticResource SubHeader}" Text="Popular Recipe" />
+                    <Label
+                        Margin="0,0,0,10"
+                        Style="{StaticResource SubHeader}"
+                        Text="Popular Recipe" />
                     <CollectionView Margin="0,0,0,10" ItemsSource="{Binding PopularRecipes}">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>

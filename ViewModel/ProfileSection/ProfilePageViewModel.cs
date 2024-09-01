@@ -35,8 +35,6 @@ namespace FlavorHub.ViewModel.ProfileSection
 
         [ObservableProperty]
         private string? _Icon;
-
-
         public ICommand LogoutCommand { get; set; }
 
         public ProfilePageViewModel(IUserRepository UserRepository, FirebaseAuthClient firebaseAuthClient, HomePageViewModel homePageViewModel, IUserService userService)

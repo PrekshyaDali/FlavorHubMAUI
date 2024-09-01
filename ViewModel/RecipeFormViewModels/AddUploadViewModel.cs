@@ -229,6 +229,12 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
             return (imagesJson, videosJson);
         }
 
+        private async Task LoadUserId()
+        {
+           var userId = await _UserService.GetUserIdAsync();
+            UserId = UserId.Value;
+        }
+
         public async Task SaveRecipeToDatabaseAsync()
         {
             try
@@ -275,10 +281,6 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
                 await Application.Current.MainPage.DisplayAlert("Error", "Failed to save the recipe. Please try again.", "OK");
             }
         }
-
-        private async Task LoadUserId()
-        {
-            _UserId = await _UserService.GetUserIdAsync();
-        }
+     
     }
 }

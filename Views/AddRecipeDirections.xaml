@@ -34,6 +34,7 @@
                 <Label
                     HorizontalOptions="Center"
                     Text="4/5"
+                    TextColor="{StaticResource LightPrimaryTextColor}"
                     VerticalOptions="Center" />
             </Border>
         </Grid>

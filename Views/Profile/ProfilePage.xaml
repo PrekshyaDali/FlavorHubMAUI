@@ -30,6 +30,7 @@
                 Padding="20,0,0,0"
                 x:DataType="model:User"
                 HorizontalOptions="FillAndExpand"
+                Spacing="5"
                 VerticalOptions="Center">
                 <Label
                     FontAttributes="Bold"
@@ -43,7 +44,13 @@
                     HorizontalOptions="FillAndExpand"
                     HorizontalTextAlignment="Center"
                     Text="{Binding Email}"
-                    TextColor="{StaticResource SecondaryTextColor}" />
+                    TextColor="{AppThemeBinding Light={StaticResource LightPrimaryTextColor},
+                                                Dark={StaticResource DarkSecondaryTextColor}}" />
+
+                <Label
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding Bio}"
+                    VerticalOptions="Center" />
             </VerticalStackLayout>
         </Grid>
 

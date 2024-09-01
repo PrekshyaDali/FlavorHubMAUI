@@ -33,6 +33,7 @@
                 <Label
                     HorizontalOptions="Center"
                     Text="2/5"
+                    TextColor="{StaticResource LightPrimaryTextColor}"
                     VerticalOptions="Center" />
             </Border>
         </Grid>
@@ -72,6 +73,7 @@
                         HorizontalOptions="Center"
                         Keyboard="Numeric"
                         Text="{Binding HoursPicker, Mode=TwoWay}"
+                        TextColor="{StaticResource LightPrimaryTextColor}"
                         VerticalOptions="Center">
                         <Entry.Behaviors>
                             <toolkit:EventToCommandBehavior Command="{Binding ValidateCommand}" EventName="TextChanged" />
@@ -91,6 +93,7 @@
                         HorizontalOptions="Center"
                         Keyboard="Numeric"
                         Text="{Binding MinutesPicker, Mode=TwoWay}"
+                        TextColor="{StaticResource LightPrimaryTextColor}"
                         VerticalOptions="Center">
                         <Entry.Behaviors>
                             <toolkit:EventToCommandBehavior Command="{Binding ValidateCommand}" EventName="TextChanged" />
@@ -123,7 +126,10 @@
                             HeightRequest="15"
                             Source="/Icons/plus.png" />
                     </Border>
-                    <Label Text="{Binding Servings}" VerticalOptions="Center" />
+                    <Label
+                        Text="{Binding Servings}"
+                        TextColor="{StaticResource LightPrimaryTextColor}"
+                        VerticalOptions="Center" />
                     <Border StrokeThickness="0">
                         <ImageButton
                             Command="{Binding ServingSizeDecrease}"
@@ -150,6 +156,7 @@
                     Title="Select difficulty level"
                     HorizontalOptions="Center"
                     SelectedItem="{Binding DifficultyLevel}"
+                    TextColor="{StaticResource LightPrimaryTextColor}"
                     VerticalOptions="Center">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">

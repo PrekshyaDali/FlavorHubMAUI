@@ -6,8 +6,7 @@
     x:Name="this">
     <VerticalStackLayout>
         <Button
-            BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimaryColor},
-                                              Dark={StaticResource DarkSecondaryColor}}"
+            BackgroundColor="{StaticResource LightPrimaryColor}"
             Command="{Binding Source={x:Reference this}, Path=ButtonCommand}"
             HorizontalOptions="FillAndExpand"
             Text="{Binding Source={x:Reference this}, Path=ButtonText}"

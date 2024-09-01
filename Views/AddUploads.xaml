@@ -32,10 +32,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <controls:ButtonContentView
-                ButtonCommand="{Binding CompleteCommand}"
-                ButtonText="Finish"
-                VerticalOptions="End" />
+            <controls:ButtonContentView ButtonCommand="{Binding CompleteCommand}" ButtonText="Finish" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

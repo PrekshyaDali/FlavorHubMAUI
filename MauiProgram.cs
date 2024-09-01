@@ -67,6 +67,7 @@ namespace FlavorHub
             builder.Services.AddSingleton<MyRecipes>();
             builder.Services.AddSingleton<FavoritesPage>();
             builder.Services.AddSingleton<RecipeListPage>();
+
             //recipe pages
 
             builder.Services.AddSingleton<AddRecipe>();

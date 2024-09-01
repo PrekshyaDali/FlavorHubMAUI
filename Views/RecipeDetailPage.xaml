@@ -153,9 +153,11 @@
                                     <Label
                                         HorizontalOptions="Center"
                                         Style="{StaticResource Header}"
-                                        Text="." />
+                                        Text="."
+                                        TextColor="{StaticResource LightPrimaryTextColor}" />
                                     <Label
                                         Text="{Binding Steps}"
+                                        TextColor="{StaticResource LightPrimaryTextColor}"
                                         VerticalOptions="Center"
                                         WidthRequest="300" />
                                 </HorizontalStackLayout>
@@ -209,6 +211,7 @@
                         Grid.Column="0"
                         Placeholder="Discuss here"
                         Text="{Binding CommentText}"
+                        TextColor="{StaticResource LightPrimaryTextColor}"
                         VerticalOptions="Center" />
                     <ImageButton
                         Grid.Column="1"

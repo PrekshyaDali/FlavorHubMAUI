@@ -41,6 +41,7 @@
                 Keyboard="Text"
                 Placeholder="Enter Username"
                 Text="{Binding RegisterModel.UserName}"
+                TextColor="{StaticResource LightPrimaryTextColor}"
                 VerticalOptions="Center">
                 <Entry.Behaviors>
                     <toolkit:MultiValidationBehavior x:Name="UsernameValidation" Flags="ValidateOnUnfocusing,ValidateOnValueChanged">
@@ -67,6 +68,7 @@
                 Keyboard="Text"
                 Placeholder="Enter Email"
                 Text="{Binding RegisterModel.Email}"
+                TextColor="{StaticResource LightPrimaryTextColor}"
                 VerticalOptions="Center">
                 <Entry.Behaviors>
                     <toolkit:EmailValidationBehavior x:Name="EmailValidation" Flags="ValidateOnValueChanged,ValidateOnUnfocusing" />
@@ -93,6 +95,7 @@
                 Keyboard="Text"
                 Placeholder="Password"
                 Text="{Binding RegisterModel.Password}"
+                TextColor="{StaticResource LightPrimaryTextColor}"
                 VerticalOptions="Center">
                 <Entry.Behaviors>
                     <toolkit:MultiValidationBehavior x:Name="PasswordValidation" Flags="ValidateOnValueChanged,ValidateOnUnfocusing">
