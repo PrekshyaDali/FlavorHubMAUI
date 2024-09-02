@@ -95,13 +95,13 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
 
         private async Task SelectImagesAsync()
         {
-            if (_SelectedMediaFiles.Any(f => f.FileType == "Video"))
+            if (SelectedMediaFiles.Any(f => f.FileType == "Video"))
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "You can only select either images or a video, not both.", "OK");
                 return;
             }
 
-            if (_SelectedMediaFiles.Count >= MaxImageCount)
+            if (SelectedMediaFiles.Count >= MaxImageCount)
             {
                 await Application.Current.MainPage.DisplayAlert("Error", $"You can only select up to {MaxImageCount} images.", "OK");
                 return;
@@ -120,7 +120,7 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
 
             if (results != null)
             {
-                var remainingSlots = MaxImageCount - _SelectedMediaFiles.Count;
+                var remainingSlots = MaxImageCount - SelectedMediaFiles.Count;
                 var filesToAdd = results.Take(remainingSlots);
 
                 foreach (var result in filesToAdd)
@@ -133,14 +133,14 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
                         DeleteCommand = new RelayCommand(() => DeleteMediaFile(result.FullPath))
                     };
 
-                    _SelectedMediaFiles.Add(mediaFile);
+                    SelectedMediaFiles.Add(mediaFile);
                 }
             }
         }
 
         private async Task SelectVideosAsync()
         {
-            if (_SelectedMediaFiles.Any(f => f.FileType == "Image"))
+            if (SelectedMediaFiles.Any(f => f.FileType == "Image"))
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "You can only select either images or a video, not both.", "OK");
                 return;
@@ -177,16 +177,16 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
                     DeleteCommand = new RelayCommand(() => DeleteMediaFile(result.FullPath))
                 };
 
-                _SelectedMediaFiles.Add(mediaFile);
+                SelectedMediaFiles.Add(mediaFile);
             }
         }
 
         private void DeleteMediaFile(string filePath)
         {
-            var mediaFile = _SelectedMediaFiles.FirstOrDefault(f => f.FilePath == filePath);
+            var mediaFile = SelectedMediaFiles.FirstOrDefault(f => f.FilePath == filePath);
             if (mediaFile != null)
             {
-                _SelectedMediaFiles.Remove(mediaFile);
+                SelectedMediaFiles.Remove(mediaFile);
             }
         }
 
@@ -199,7 +199,7 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
                 {
                     foreach (var imagePath in images)
                     {
-                        _SelectedMediaFiles.Add(new AddUploadModel
+                        SelectedMediaFiles.Add(new AddUploadModel
                         {
                             FilePath = imagePath,
                             FileType = "Image"
@@ -210,7 +210,7 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
 
             if (!string.IsNullOrEmpty(videoUrl))
             {
-                _SelectedMediaFiles.Add(new AddUploadModel
+                SelectedMediaFiles.Add(new AddUploadModel
                 {
                     FilePath = videoUrl,
                     FileType = "Video"
@@ -220,8 +220,8 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
 
         private (string imagesJson, string videosJson) SerializeMediaFilesToJson()
         {
-            var imagePaths = _SelectedMediaFiles.Where(f => f.FileType == "Image").Select(f => f.FilePath).ToList();
-            var videoPaths = _SelectedMediaFiles.Where(f => f.FileType == "Video").Select(f => f.FilePath).ToList();
+            var imagePaths = SelectedMediaFiles.Where(f => f.FileType == "Image").Select(f => f.FilePath).ToList();
+            var videoPaths = SelectedMediaFiles.Where(f => f.FileType == "Video").Select(f => f.FilePath).ToList();
 
             var imagesJson = JsonConvert.SerializeObject(imagePaths);
             var videosJson = JsonConvert.SerializeObject(videoPaths);
@@ -232,7 +232,7 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
         private async Task LoadUserId()
         {
            var userId = await _UserService.GetUserIdAsync();
-            UserId = UserId.Value;
+            UserId = userId.Value;
         }
 
         public async Task SaveRecipeToDatabaseAsync()
@@ -273,7 +273,7 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
                 DifficultyLevel = null;
                 IngredientsJson = null;
                 StepsJson = null;
-                _SelectedMediaFiles.Clear();
+                SelectedMediaFiles.Clear();
             }
             catch (Exception ex)
             {

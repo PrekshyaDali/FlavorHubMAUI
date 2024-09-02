@@ -16,47 +16,49 @@ namespace FlavorHub.ViewModel.ProfileSection
         public ICommand SwitchThemeCommand { get; set; }
 
         [ObservableProperty]
-        private Models.SQLiteModels.User _user;
+        private Models.SQLiteModels.User user;
 
         [ObservableProperty]
-        private string _UserName;
+        private string userName;
 
         [ObservableProperty]
-        private string _ProfilePicture = "dot_net.png";
+        private string profilePicture = "dot_net.png";
 
         [ObservableProperty]
-        private string _Bio;
+        private string bio;
 
         [ObservableProperty]
-        private string _Email;
+        private string email;
 
         [ObservableProperty]
-        private bool _IsDarkMode;
+        private bool isDarkMode;
 
         [ObservableProperty]
-        private string? _Icon;
+        private string? icon;
+
         public ICommand LogoutCommand { get; set; }
 
-        public ProfilePageViewModel(IUserRepository UserRepository, FirebaseAuthClient firebaseAuthClient, HomePageViewModel homePageViewModel, IUserService userService)
+        public ProfilePageViewModel(IUserRepository userRepository, FirebaseAuthClient firebaseAuthClient, HomePageViewModel homePageViewModel, IUserService userService)
         {
-            _UserRepository = UserRepository;
+            _UserRepository = userRepository;
             _FirebaseAuthClient = firebaseAuthClient;
             _HomePageViewModel = homePageViewModel;
             _UserService = userService;
             SaveProfileDetailsCommand = new AsyncRelayCommand(SaveProfile);
             SwitchThemeCommand = new RelayCommand(ToggleSwitch);
             LogoutCommand = new RelayCommand(SignOut);
-            _IsDarkMode = Application.Current.RequestedTheme == AppTheme.Dark;
+            IsDarkMode = Application.Current.RequestedTheme == AppTheme.Dark;
             Icon = "Icons/moon.png";
         }
-        public  void ToggleSwitch()
+
+        public void ToggleSwitch()
         {
-            if (_IsDarkMode) 
-           {
-                Application.Current.UserAppTheme = AppTheme.Light;   
+            if (IsDarkMode)
+            {
+                Application.Current.UserAppTheme = AppTheme.Light;
                 IsDarkMode = false;
                 Icon = "/Icons/moon.png";
-           }
+            }
             else
             {
                 Application.Current.UserAppTheme = AppTheme.Dark;
@@ -86,7 +88,7 @@ namespace FlavorHub.ViewModel.ProfileSection
                 Console.WriteLine(ex.ToString());
             }
         }
-  
+
         // Command to select a profile picture
         [RelayCommand]
         private async Task SelectProfilePicture()
@@ -103,7 +105,7 @@ namespace FlavorHub.ViewModel.ProfileSection
                 {
                     // Save the file path returned by the file picker
                     ProfilePicture = result.FullPath;
-                    _user.ProfilePicture = ProfilePicture;
+                    User.ProfilePicture = ProfilePicture;
                 }
                 await SaveProfile();
             }
@@ -119,15 +121,14 @@ namespace FlavorHub.ViewModel.ProfileSection
         {
             try
             {
-
-                if (_user != null)
+                if (User != null)
                 {
-                    _user.UserName = UserName;
-                    _user.Bio = Bio;
-                    _user.Email = Email;
-                    _user.ProfilePicture = ProfilePicture;
+                    User.UserName = UserName;
+                    User.Bio = Bio;
+                    User.Email = Email;
+                    User.ProfilePicture = ProfilePicture;
 
-                    await _UserRepository.UpdateUserAsync(_user);
+                    await _UserRepository.UpdateUserAsync(User);
                     await Application.Current.MainPage.DisplayAlert("Success", "Profile updated", "OK");
                     await LoadUserProfile();
                 }
@@ -138,8 +139,7 @@ namespace FlavorHub.ViewModel.ProfileSection
             }
         }
 
-
-        //sign out
+        // Sign out
         public void SignOut()
         {
             _HomePageViewModel.LogOutCommand.Execute(null);
