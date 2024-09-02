@@ -16,44 +16,44 @@ namespace FlavorHub.ViewModel.ProfileSection
         public ICommand SwitchThemeCommand { get; set; }
 
         [ObservableProperty]
-        private Models.SQLiteModels.User _user;
+        private Models.SQLiteModels.User user;
 
         [ObservableProperty]
-        private string _UserName;
+        private string userName;
 
         [ObservableProperty]
-        private string _ProfilePicture = "dot_net.png";
+        private string profilePicture = "dot_net.png";
 
         [ObservableProperty]
-        private string _Bio;
+        private string bio;
 
         [ObservableProperty]
-        private string _Email;
+        private string email;
 
         [ObservableProperty]
-        private bool _IsDarkMode;
+        private bool isDarkMode;
 
         [ObservableProperty]
         private string? _Icon;
 
         public ICommand LogoutCommand { get; set; }
 
-        public ProfilePageViewModel(IUserRepository UserRepository, FirebaseAuthClient firebaseAuthClient, HomePageViewModel homePageViewModel, IUserService userService)
+        public ProfilePageViewModel(IUserRepository userRepository, FirebaseAuthClient firebaseAuthClient, HomePageViewModel homePageViewModel, IUserService userService)
         {
-            _UserRepository = UserRepository;
+            _UserRepository = userRepository;
             _FirebaseAuthClient = firebaseAuthClient;
             _HomePageViewModel = homePageViewModel;
             _UserService = userService;
             SaveProfileDetailsCommand = new AsyncRelayCommand(SaveProfile);
             SwitchThemeCommand = new RelayCommand(ToggleSwitch);
             LogoutCommand = new RelayCommand(SignOut);
-            _IsDarkMode = Application.Current.RequestedTheme == AppTheme.Dark;
-            Icon = "Icons/sun.png";
+            IsDarkMode = Application.Current.RequestedTheme == AppTheme.Dark;
+            Icon = "Icons/moon.png";
         }
 
         public void ToggleSwitch()
         {
-            if (_IsDarkMode)
+            if (IsDarkMode)
             {
                 Application.Current.UserAppTheme = AppTheme.Light;
                 IsDarkMode = false;
@@ -100,10 +100,10 @@ namespace FlavorHub.ViewModel.ProfileSection
                 var user = await _UserRepository.GetUserByIdAsync(userId.Value);
                 if (user != null)
                 {
-                    UserName = user.UserName;
-                    Email = user.Email;
-                    Bio = user.Bio;
-                    ProfilePicture = user.ProfilePicture;
+                    UserName = user?.UserName;
+                    Email = user?.Email;
+                    Bio = user?.Bio;
+                    ProfilePicture = user?.ProfilePicture;
                     User = user;
                 }
             }
@@ -131,7 +131,7 @@ namespace FlavorHub.ViewModel.ProfileSection
                     ProfilePicture = result.FullPath;
                     User.ProfilePicture = ProfilePicture;
                 }
-                LoadUserProfile();
+                await SaveProfile();
             }
             catch (Exception ex)
             {

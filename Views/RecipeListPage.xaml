@@ -109,7 +109,6 @@
                     <DataTemplate>
                         <Border Margin="0,0,0,10" StrokeThickness="0">
                             <controls:RecipeUIContentView
-                                ContentWidth="300"
                                 CookingTime="{Binding CookingTime}"
                                 DifficultyLevel="{Binding DifficultyLevel}"
                                 FavoriteCount="{Binding FavoriteCount}"

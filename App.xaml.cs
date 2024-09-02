@@ -1,5 +1,6 @@
 ﻿using Firebase.Auth;
 using FlavorHub.NewFolder;
+using FlavorHub.ViewModel.ProfileSection;
 using FlavorHub.Views;
 using FlavorHub.Views.Authentication;
 using FlavorHub.Views.SplashScreens;
@@ -12,6 +13,7 @@ namespace FlavorHub
         {
             InitializeComponent();
             MainPage = new AppShell();
+
             
         }
         protected override async void OnStart()
@@ -26,7 +28,6 @@ namespace FlavorHub
 
             if (!string.IsNullOrEmpty(userId))
             {
-
                 await Shell.Current.GoToAsync("//HomePage");
             }
             else

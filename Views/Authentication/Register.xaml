@@ -41,7 +41,8 @@
                 Keyboard="Text"
                 Placeholder="Enter Username"
                 Text="{Binding RegisterModel.UserName}"
-                TextColor="Red">
+                TextColor="{StaticResource LightPrimaryTextColor}"
+                VerticalOptions="Center">
                 <Entry.Behaviors>
                     <toolkit:MultiValidationBehavior x:Name="UsernameValidation" Flags="ValidateOnUnfocusing,ValidateOnValueChanged">
                         <toolkit:CharactersValidationBehavior toolkit:MultiValidationBehavior.Error="Please enter an alphanumeric username of 2-15 characters." RegexPattern="^[a-zA-Z0-9]{2,15}$" />
@@ -49,7 +50,6 @@
                 </Entry.Behaviors>
             </Entry>
         </Border>
-
         <Label
             FontSize="12"
             IsVisible="{Binding Source={x:Reference UsernameValidation}, Path=IsValid, Converter={toolkit:InvertedBoolConverter}}"
@@ -67,7 +67,9 @@
             <Entry
                 Keyboard="Text"
                 Placeholder="Enter Email"
-                Text="{Binding RegisterModel.Email}">
+                Text="{Binding RegisterModel.Email}"
+                TextColor="{StaticResource LightPrimaryTextColor}"
+                VerticalOptions="Center">
                 <Entry.Behaviors>
                     <toolkit:EmailValidationBehavior x:Name="EmailValidation" Flags="ValidateOnValueChanged,ValidateOnUnfocusing" />
                 </Entry.Behaviors>
@@ -92,7 +94,9 @@
                 IsPassword="True"
                 Keyboard="Text"
                 Placeholder="Password"
-                Text="{Binding RegisterModel.Password}">
+                Text="{Binding RegisterModel.Password}"
+                TextColor="{StaticResource LightPrimaryTextColor}"
+                VerticalOptions="Center">
                 <Entry.Behaviors>
                     <toolkit:MultiValidationBehavior x:Name="PasswordValidation" Flags="ValidateOnValueChanged,ValidateOnUnfocusing">
                         <toolkit:CharactersValidationBehavior

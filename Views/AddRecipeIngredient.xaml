@@ -30,6 +30,7 @@
                 StrokeThickness="0"
                 WidthRequest="80">
                 <Label
+                               TextColor="{StaticResource LightPrimaryTextColor}"
                     HorizontalOptions="Center"
                     Text="3/5"
                     VerticalOptions="Center" />

@@ -10,7 +10,11 @@
             <FlexLayout AlignItems="Center" JustifyContent="SpaceBetween">
                 <HorizontalStackLayout Spacing="10">
                     <Label Text="Welcome Back," />
-                    <Label Text="{Binding Users}" />
+                    <Label
+                        Text="{Binding Users}"
+                        TextColor="{AppThemeBinding Light={StaticResource Tertiary},
+                                                    Dark={StaticResource DarkPrimaryTextColor}}"
+                        VerticalOptions="Center" />
                 </HorizontalStackLayout>
 
                 <ImageButton
@@ -22,16 +26,17 @@
         </Grid>
     </Shell.TitleView>
     <ScrollView Padding="30">
-        <VerticalStackLayout>
-            <RefreshView Command="{Binding RefreshCommand}" />
-            <Grid RowDefinitions=".4*,.4*,*,*" RowSpacing="20">
+        <Grid>
+            <Grid RowDefinitions="*,.4*,*,*" RowSpacing="20">
                 <!--  for sub heading  -->
                 <Border Grid.Row="0" StrokeThickness="0">
                     <Label Style="{StaticResource SubHeader}" Text="What do you want to cook today?" />
                 </Border>
-
                 <VerticalStackLayout Grid.Row="2">
-                    <Label Style="{StaticResource SubHeader}" Text="Popular Recipe" />
+                    <Label
+                        Margin="0,0,0,10"
+                        Style="{StaticResource SubHeader}"
+                        Text="Popular Recipe" />
                     <CollectionView Margin="0,0,0,10" ItemsSource="{Binding PopularRecipes}">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
@@ -97,6 +102,14 @@
                     </VerticalStackLayout>
                 </Border>
             </Grid>
-        </VerticalStackLayout>
+            <ActivityIndicator
+                HorizontalOptions="Center"
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"
+                Opacity="0.5"
+                VerticalOptions="Center"
+                WidthRequest="800"
+                Color="Gray" />
+        </Grid>
     </ScrollView>
 </ContentPage>
