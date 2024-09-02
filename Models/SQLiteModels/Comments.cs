@@ -1,13 +1,10 @@
 ﻿using SQLite;
-<<<<<<< HEAD
-=======
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
->>>>>>> c432d41c467b3bc301cc3aecd3a6bce4d12219b8
 
 namespace FlavorHub.Models.SQLiteModels
 {

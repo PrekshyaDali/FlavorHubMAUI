@@ -45,7 +45,6 @@ namespace FlavorHub.ViewModel
         private readonly IUserService _UserService;
         private readonly IFavoritesRepository _FavoritesRepostory;
         private readonly Repositories.Interfaces.IUserRepository _UserRepository;
-        private readonly IFavoritesRepository _FavoritesRepostory;
 
         [ObservableProperty]
         private ObservableCollection<Comments> _CommentCollection = new ObservableCollection<Comments>();
