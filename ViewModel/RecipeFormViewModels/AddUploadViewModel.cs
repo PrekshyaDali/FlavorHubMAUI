@@ -264,7 +264,7 @@ namespace FlavorHub.ViewModel.RecipeFormViewModels
                 DifficultyLevel = null;
                 IngredientsJson = null;
                 StepsJson = null;
-                _SelectedMediaFiles.Clear();
+                SelectedMediaFiles.Clear();
             }
             catch (Exception ex)
             {

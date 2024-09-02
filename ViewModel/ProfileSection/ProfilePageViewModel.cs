@@ -36,7 +36,6 @@ namespace FlavorHub.ViewModel.ProfileSection
         [ObservableProperty]
         private string? _Icon;
 
-
         public ICommand LogoutCommand { get; set; }
 
         public ProfilePageViewModel(IUserRepository UserRepository, FirebaseAuthClient firebaseAuthClient, HomePageViewModel homePageViewModel, IUserService userService)
@@ -51,14 +50,15 @@ namespace FlavorHub.ViewModel.ProfileSection
             _IsDarkMode = Application.Current.RequestedTheme == AppTheme.Dark;
             Icon = "Icons/sun.png";
         }
+
         public void ToggleSwitch()
         {
-            if (_IsDarkMode) 
-           {
-                Application.Current.UserAppTheme = AppTheme.Light;   
+            if (_IsDarkMode)
+            {
+                Application.Current.UserAppTheme = AppTheme.Light;
                 IsDarkMode = false;
                 Icon = "/Icons/moon.png";
-           }
+            }
             else
             {
                 Application.Current.UserAppTheme = AppTheme.Dark;
@@ -73,14 +73,14 @@ namespace FlavorHub.ViewModel.ProfileSection
         {
             try
             {
-                if (_user != null)
+                if (User != null)
                 {
-                    _user.UserName = UserName;
-                    _user.Bio = Bio;
-                    _user.Email = Email;
-                    _user.ProfilePicture = ProfilePicture;
+                    User.UserName = UserName;
+                    User.Bio = Bio;
+                    User.Email = Email;
+                    User.ProfilePicture = ProfilePicture;
 
-                    await _UserRepository.UpdateUserAsync(_user);
+                    await _UserRepository.UpdateUserAsync(User);
                     await Application.Current.MainPage.DisplayAlert("Success", "Profile updated", "OK");
                     LoadUserProfile();
                 }
@@ -90,7 +90,6 @@ namespace FlavorHub.ViewModel.ProfileSection
                 Console.WriteLine($"Error saving profile: {ex}");
             }
         }
-
 
         // Method to load the user's profile
         public async Task LoadUserProfile()
@@ -114,7 +113,6 @@ namespace FlavorHub.ViewModel.ProfileSection
             }
         }
 
-  
         // Command to select a profile picture
         [RelayCommand]
         private async Task SelectProfilePicture()
@@ -141,7 +139,7 @@ namespace FlavorHub.ViewModel.ProfileSection
             }
         }
 
-        //sign out
+        // Sign out
         public void SignOut()
         {
             _HomePageViewModel.LogOutCommand.Execute(null);
